@@ -38,13 +38,36 @@
 </head>
 
 
+
 <body>
 
     
     <div class="w3-border w3-border-blue" style="width: 100%; height: 7%">
-        <iframe src="header.html" frameborder="0" style="width: 100%;"></iframe>
+        <iframe src="header.jsp" frameborder="0" style="width: 100%;"></iframe>
     </div>
 
+    
+  <h1>Form Submission Confirmation</h1>
+    
+    
+
+    
+
+   
+
+    <p>Reason for Musibah: ${reason}</p>
+    <p>Total Cost of Loss: ${totalcost}</p>
+    <p>Musibah Date: ${dateStr}</p>
+
+    <p>Total Yuran: ${totalYuran}</p>
+
+    <p>Kolej: ${kolej}</p>
+    <p>Total Kolej: ${totalKolej}</p>
+
+    <p>Cafe: ${cafe}</p>
+
+
+    
     <div class="w3-container w3-row">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">
 
@@ -80,48 +103,110 @@
                     <div class="w3-col w3-margin-bottom">
                         <div class="w3-cell w3-panel">
                             <b>Sesi Tawaran</b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="applyID" id="" size="50%" value="OKT2024/FEB2025" disabled>
+                            <input class="w3-input w3-border w3-round-large" type="text" name="applyID" id="" size="50%" value="${applyID}" disabled>
                         </div> <!--applyID-->
                         <div class="w3-cell w3-panel">
                             <b>Semester Semasa <span style="color: red;">*</span></b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="currentSemester" id="" size="50%" required>
+                            <input class="w3-input w3-border w3-round-large" type="text" name="currentSemester" id="" size="50%" value="${currentSemester}" disabled>
                         </div>
                     </div>
                     <div class="w3-col w3-margin-bottom">
                         <div class="w3-cell w3-panel">
                             <b>Keputusan Terkini CGPA <span style="color: red;">*</span></b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="currentCgpa" id="" size="50%" required>
+                            <input class="w3-input w3-border w3-round-large" type="text" name="currentCgpa" id="" size="50%" value="${currentCgpa}" disabled>
                         </div>
                         <div class="w3-cell w3-panel">
                             <b>Keputusan Terkini GPA <span style="color: red;">*</span></b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="currentGpa" id="" size="50%" required>
+                            <input class="w3-input w3-border w3-round-large" type="text" name="currentGpa" id="" size="50%" value="${currentGpa}" disabled>
                         </div>
                     </div>
                     <div class="w3-col w3-margin-bottom">
 
                         <div class="w3-panel">
                             Adakah anda mendapat bantuan insentif Makanan UiTM (RM 120)<span style="color: red;">*</span>
-                            <input class="w3-radio" style="margin-left: 20px;" type="radio" name="insentifmakanan" value="Ya" id=""> Ya
-                            <input class="w3-radio" style="margin-left: 20px;" type="radio" name="insentifmakanan" value="Tidak" id=""> Tidak
+                            <%
+                                String insetifMakanan = (String) request.getAttribute("insetifMakanan");
+             
+                            %>
+                            <input 
+                                class="w3-radio" 
+                                style="margin-left: 20px;" 
+                                type="radio" 
+                                name="insentifmakanan" 
+                                value="Ya" 
+                                disabled
+                                <%
+                                    if("true".equals(request.getAttribute("insetifMakanan")))
+                                       out.print("checked");
+                                 %>   
+                            > Ya
+                            <input 
+                                class="w3-radio" 
+                                style="margin-left: 20px;" 
+                                type="radio" 
+                                name="insentifmakanan" 
+                                value="Tidak" 
+                                disabled
+                                <%
+                                    if("false".equals(request.getAttribute("insetifMakanan")))
+                                       out.print("checked");
+                                 %>  
+                            > Tidak
                         </div>
+
                         <div class="w3-panel">
                             Adakah anda mendapat bantuan kewangan (PTPTN, JPA, MARA dll)<span style="color: red;">*</span>
-                            <input class="w3-radio" style="margin-left: 10px;" onclick="toggleInputs()" type="radio" name="bantuan" value="Ya" id="yesBantuan"> Ya
-                            <input class="w3-radio" style="margin-left: 20px;" onclick="toggleInputs()" type="radio" name="bantuan" value="Tidak" id="noBantuan"> Tidak
+                            <%
+                                String bantuan = (String) request.getAttribute("bantuan");
+                            %>
+                            <input 
+                                class="w3-radio" 
+                                style="margin-left: 10px;" 
+                                onclick="toggleInputs()" 
+                                type="radio" 
+                                name="bantuan" 
+                                value="Ya" 
+                                id="yesBantuan" 
+                                disabled
+                                <%
+                                    if("true".equals(request.getAttribute("bantuan")))
+                                       out.print("checked");
+                                 %> 
+                            > Ya
+                            <input 
+                                class="w3-radio" 
+                                style="margin-left: 20px;" 
+                                onclick="toggleInputs()" 
+                                type="radio" 
+                                name="bantuan" 
+                                value="Tidak" 
+                                id="noBantuan" 
+                                disabled
+                                <%
+                                    if("false".equals(request.getAttribute("bantuan")))
+                                       out.print("checked");
+                                 %>
+                            > Tidak
                         </div>
 
+                        
+                            
+                        
+                        
                         <!--hidden menu-->
-                        <div id="bantuankewangan" class="w3-col">
-                            <div class="w3-cell w3-panel">
-                                <b>Jika ada, nyatakan dari mana: </b><br>
-                                <input class="w3-input w3-border w3-round-large" type="text" name="namaBantuan" id="" size="50%" required>
-                            </div>
-                            <div class="w3-cell w3-panel">
-                                <b>Jumlah per/sem: (RM) </b><br>
-                                <input class="w3-input w3-border w3-round-large" type="text" name="jumlahBantuan" id="" size="50%" required>
-                            </div>
+                        <c:if test="${bantuan == 'true'}">
+                            <div id="" class="w3-col">
+                                <div class="w3-cell w3-panel">
+                                    <b>Jika ada, nyatakan dari mana: </b><br>
+                                    <input class="w3-input w3-border w3-round-large" type="text" name="namaBantuan" id="" size="50%" value="${namaBantuan}" disabled>
+                                </div>
+                                <div class="w3-cell w3-panel">
+                                    <b>Jumlah per/sem: (RM) </b><br>
+                                    <input class="w3-input w3-border w3-round-large" type="text" name="jumlahBantuan" id="" size="50%" value="${jumlahBantuan}" disabled>
+                                </div>
 
-                        </div> 
+                            </div> 
+                        </c:if>
                         
                     </div>
 
@@ -135,14 +220,14 @@
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen <i>student letter</i></b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumentStudentLetter" accept=".pdf" required>
+                                    <input class="pad w3-input" type="file" name="dokumentStudentLetter" accept=".pdf" disabled>
                                 </div><br>
                             </div>
                             <div class="w3-cell" style="width:25px"></div>
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen transcript</b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumentTranscript" accept=".pdf" required>
+                                    <input class="pad w3-input" type="file" name="dokumentTranscript" accept=".pdf" disabled>
                                 </div><br>
                             </div>
                         
@@ -151,38 +236,30 @@
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen KP. depan & belakang</b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumenKP" accept=".pdf" required>
+                                    <input class="pad w3-input" type="file" name="dokumenKP" accept=".pdf" disabled>
                                 </div><br>
                             </div>
+                            
+                       
+                           
                             <div class="w3-col" style="">
                                 <div class="w3-cell">
                                     <b>Pilih tahun graduasi <span style="color: red;">*</span></b><br>
                                     <select class="w3-input" name='gradYear'>  <!--tukar dgn gradDate-->
-                                        <option value='2025'>2025</option>
-                                        <option value='2026'>2026</option>
-                                        <option value='2027'>2027</option>
-                                        <option value='2028'>2028</option>
-                                        <option value='2029'>2029</option>
-                                        <option value='2030'>2030</option>
+                                        <option value='2025'><%=request.getAttribute("year")%></option>
                                     </select>
                                 </div>
                                 <div class="w3-cell" style="width:30px"></div>
                                 <div class="w3-cell" >
                                         <b>Nama Bank: <span style="color: red;">*</span></b><br>
-                                        <select class="w3-input" name='bankName' required>  <!--tukar dgn gradDate-->
-                                            <option value='Maybank (Malayan Banking Berhad)'>Maybank (Malayan Banking Berhad)</option>
-                                            <option value='CIMB Bank'>CIMB Bank</option>
-                                            <option value='RHB Bank'>RHB Bank</option>
-                                            <option value='Hong Leong Bank'>Hong Leong Bank</option>
-                                            <option value='Bank Islam Malaysia Berhad'>Bank Islam Malaysia Berhad</option>
-                                            <option value='Ambank (AmBank Group)'>Ambank (AmBank Group)</option>
-                                            <option value='Affin Bank'>Affin Bank</option>
+                                        <select class="w3-input" name='bankName' disabled>  <!--tukar dgn gradDate-->
+                                            <option value='${bankName}'><%=request.getAttribute("bankName")%></option>
                                         </select>
                                 </div>
                                 <div class="w3-cell" style="width:30px"></div>
                                 <div class="w3-cell">
                                     <b>Nombor Bank <span style="color: red;">*</span></b><br>
-                                    <input class="w3-input w3-border w3-round-large" style="width: 300px;" type="text" name="bankNo" id="" size="50%" required>
+                                    <input class="w3-input w3-border w3-round-large" style="width: 300px;" value="${bankNo}" type="text" name="bankNo" id="" size="50%" disabled>
                                 </div>
                             </div>
                         </div>
@@ -223,15 +300,15 @@
                                 <div class="w3-col w3-margin-bottom">
                                     <div class="w3-cell">
                                         <b>Sila nyatakan sebab permohonan anda dibawah: <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="reason" id="" size="50%" required>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="reason" id="" size="50%" disabled>
                                     </div>
                                     <div class="w3-cell" style="padding-left: 25px;">
                                         <b>Jumlah kerosakkan (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalLost" id="" size="50%" required>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalLost" id="" size="50%" disabled>
                                     </div>
                                     <div class="w3-margin-top">
                                         <b>Tarikh berlaku musibah: <span style="color: red;">*</span></b>
-                                        <input class="w3-input w3-date" type="date" id="tarikhmusibah" name="tarikhmusibah" required>
+                                        <input class="w3-input w3-date" type="date" id="tarikhmusibah" name="tarikhmusibah" disabled>
                                     </div>
                                 </div>
                                 
@@ -239,13 +316,13 @@
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen kerugian dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="dokumenkerugian" accept=".pdf" required>
+                                        <input class="pad w3-input" type="file" name="dokumenkerugian" accept=".pdf" disabled>
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen sebab dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="dokumensebab" accept=".pdf" required>
+                                        <input class="pad w3-input" type="file" name="dokumensebab" accept=".pdf" disabled>
                                     </div><br>
                                 </div>
                             
@@ -262,7 +339,7 @@
                                     
                                     <div class="w3-cell" style="">
                                         <b>Jumlah yuran (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" id="" size="50%" required>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" id="" size="50%" disabled>
                                     </div>
 
                                 </div>
@@ -271,13 +348,13 @@
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan resit yuran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="resityuran" accept=".pdf" required>
+                                        <input class="pad w3-input" type="file" name="resityuran" accept=".pdf" disabled>
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen surat tawaran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="surattawaran" accept=".pdf" required>
+                                        <input class="pad w3-input" type="file" name="surattawaran" accept=".pdf" disabled>
                                     </div><br>
                                 </div>
                                    
@@ -299,7 +376,7 @@
                                     </div>
                                     <div class="w3-cell" style="padding-left: 25px;">
                                         <b>Jumlah bayaran kolej (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalKolej" id="" size="50%" required>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalKolej" id="" size="50%" disabled>
                                     </div>
                                     
                                 </div>
@@ -308,13 +385,13 @@
                                 <div class="w3-cell w3-panel w3-margin-top">
                                     <b>Sila masukkan borang elektrik</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="borangElektrik" accept=".pdf" required>
+                                        <input class="pad w3-input" type="file" name="borangElektrik" accept=".pdf" disabled>
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen permohonan kolej yang berjaya</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="permohonanKolej" accept=".pdf" required>
+                                        <input class="pad w3-input" type="file" name="permohonanKolej" accept=".pdf" disabled>
                                     </div><br>
                                 </div>
 
@@ -329,7 +406,7 @@
                                 <div class="w3-col w3-margin-bottom">
                                     <div class="w3-cell">
                                         <b>Pilih cafe berdekatan anda <span style="color: red;">*</span></b><br>
-                                        <select class="w3-input" name='cafe'>
+                                        <select class="w3-input" name='cafe' disabled>
                                             <option value='cafelestari'>Cafe Lestari</option>
                                             <option value='rrcafe'>RR Cafe (Kiosk)</option>
                                         </select>

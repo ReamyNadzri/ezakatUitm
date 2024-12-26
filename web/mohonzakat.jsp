@@ -125,7 +125,7 @@
                     <div class="w3-col w3-margin-bottom">
                         <div class="w3-cell w3-panel">
                             <b>Sesi Tawaran</b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="applyID" id="" size="50%" value="OKT2024/FEB2025" disabled>
+                            <input class="w3-input w3-border w3-round-large" type="text" value="OKT2024/FEB2025" name="applyID" id="" size="50%" value="OKT2024/FEB2025" disabled>
                         </div> <!--applyID-->
                         <div class="w3-cell w3-panel">
                             <b>Semester Semasa <span style="color: red;">*</span></b><br>
@@ -337,7 +337,7 @@
                                 <div class="w3-col w3-margin-bottom">
                                     <div class="w3-cell">
                                         <b>Pilih kolej anda <span style="color: red;">*</span></b><br>
-                                        <select class="w3-input" name='kolej' value="Tidak Memilih">
+                                        <select class="w3-input" name='kolej' value="Tidak Memilih" selected>
                                             <option value='kerawang'>Kerawang</option>
                                             <option value='sutera'>Sutera</option>
                                         </select>
