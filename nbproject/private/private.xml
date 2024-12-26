@@ -3,11 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatNew/src/java/com/zakat/controller/BayarServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatNew/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatNew/src/java/com/zakat/controller/addZakatApplicationServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatNew/web/mohonzakat.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatNew/web/mohonzakatconfirm.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakat/web/mohonzakatconfirm.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakat/web/mohonzakat.jsp</file>
         </group>
     </open-files>
 </project-private>
