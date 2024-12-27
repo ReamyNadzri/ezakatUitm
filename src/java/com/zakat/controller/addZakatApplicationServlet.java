@@ -114,7 +114,7 @@ public class addZakatApplicationServlet extends HttpServlet {
             String dateStr = request.getParameter("tarikhmusibah");
 
             // YURAN DETAILS
-            double totalYuran = Double.parseDouble(request.getParameter("totalLost"));
+            double totalYuran = Double.parseDouble(request.getParameter("yuran"));
 
             // KOLEJ DETAILS
             String kolej = request.getParameter("kolej");

@@ -268,7 +268,7 @@
                                 <div class="w3-col w3-margin-bottom">
                                     <div class="w3-cell">
                                         <b>Sila nyatakan sebab permohonan anda dibawah: <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="reason" value=" " id="" size="50%" required>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="reason" value="TIDAK MEMOHON" id="" size="50%" required>
                                     </div>
                                     <div class="w3-cell" style="padding-left: 25px;">
                                         <b>Jumlah kerosakkan (RM): <span style="color: red;">*</span></b><br>
@@ -375,6 +375,7 @@
                                     <div class="w3-cell">
                                         <b>Pilih cafe berdekatan anda <span style="color: red;">*</span></b><br>
                                         <select class="w3-input" name='cafe' value="Cafe" required>
+                                            <option value='TIDAK MEMOHON'>Sila Pilih</option>
                                             <option value='cafelestari'>Cafe Lestari</option>
                                             <option value='rrcafe'>RR Cafe (Kiosk)</option>
                                         </select>

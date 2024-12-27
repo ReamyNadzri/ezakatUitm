@@ -42,32 +42,11 @@
 <body>
 
     
-    <div class="w3-border w3-border-blue" style="width: 100%; height: 7%">
-        <iframe src="header.jsp" frameborder="0" style="width: 100%;"></iframe>
+    <div class="w3-border w3-border-blue" style="height:8%">
+        <jsp:include page="header.jsp"></jsp:include>
     </div>
 
-    
-  <h1>Form Submission Confirmation</h1>
-    
-    
-
-    
-
-   
-
-    <p>Reason for Musibah: ${reason}</p>
-    <p>Total Cost of Loss: ${totalcost}</p>
-    <p>Musibah Date: ${dateStr}</p>
-
-    <p>Total Yuran: ${totalYuran}</p>
-
-    <p>Kolej: ${kolej}</p>
-    <p>Total Kolej: ${totalKolej}</p>
-
-    <p>Cafe: ${cafe}</p>
-
-
-    
+  
     <div class="w3-container w3-row">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">
 
@@ -245,8 +224,8 @@
                             <div class="w3-col" style="">
                                 <div class="w3-cell">
                                     <b>Pilih tahun graduasi <span style="color: red;">*</span></b><br>
-                                    <select class="w3-input" name='gradYear'>  <!--tukar dgn gradDate-->
-                                        <option value='2025'><%=request.getAttribute("year")%></option>
+                                    <select class="w3-input" name='gradYear' disabled>  <!--tukar dgn gradDate-->
+                                        <option value='${year}'><%=request.getAttribute("year")%></option>
                                     </select>
                                 </div>
                                 <div class="w3-cell" style="width:30px"></div>
@@ -262,37 +241,28 @@
                                     <input class="w3-input w3-border w3-round-large" style="width: 300px;" value="${bankNo}" type="text" name="bankNo" id="" size="50%" disabled>
                                 </div>
                             </div>
-                        </div>
-
-
-              
-                        
+                        </div> 
                     </div>
 
 
 
                     <div class="w3-col w3-margin-bottom"><hr>
+                        
                         <div class="w3-panel">
-                            <h3>Tujuan memohon bantuan zakat UiTM</h3>
-                        </div>
-                        <div class="w3-panel">
-                            <div id="musibah" class="w3-border w3-round-large w3-hover-green box" onclick="selectBox('musibah')">Zakat Musibah
-                                
-                            </div>
-                            <div id="yuran" class="w3-border w3-round-large w3-hover-green box" onclick="selectBox('yuran')">Zakat Yuran
-
-                            </div>
-                            <div id="kolej" class="w3-border w3-round-large w3-hover-green box" onclick="selectBox('kolej')">Zakat Kolej
-
-                            </div>
-                            <div id="makan" class="w3-border w3-round-large w3-hover-green box" onclick="selectBox('makan')">Zakat Makan
-
-                            </div>
-
+                         
                             <!-- Additional Inputs -->
-                            <div id="musibahInputs" class="w3-margin-top hidden">
+                            <div id="" class="w3-margin-top ">
 
-                                <h3 for="musibahDetails">Zakat Musibah Details:</h3><hr>
+                                <h3 for="musibahDetails">Zakat Musibah Details:
+                                    <%
+                                        if("TIDAK MEMOHON".equals(request.getAttribute("reason"))){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK MEMOHON</b>
+                                            </span>
+                                            <%
+                                        }
+                                        %>
+                                </h3><hr>
                                 <div class="w3-panel w3-border w3-padding w3-card w3-small">
                                     <caption><i><b>Zakat musibah</b> merujuk kepada bantuan kewangan atau sumbangan bagi meringankan beban pelajar bencana seperti banjir, kebakaran, atau gempa bumi. Contohnya, bantuan diberikan kepada mangsa banjir yang kehilangan rumah, keluarga miskin akibat gempa bumi, atau menyediakan makanan dan pakaian kepada mangsa kebakaran.</caption></i>
                                 </div>
@@ -300,15 +270,15 @@
                                 <div class="w3-col w3-margin-bottom">
                                     <div class="w3-cell">
                                         <b>Sila nyatakan sebab permohonan anda dibawah: <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="reason" id="" size="50%" disabled>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="reason" id="" size="50%" value="${reason}" disabled>
                                     </div>
                                     <div class="w3-cell" style="padding-left: 25px;">
                                         <b>Jumlah kerosakkan (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalLost" id="" size="50%" disabled>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalLost" id="" size="50%" value="${totalcost}" disabled>
                                     </div>
                                     <div class="w3-margin-top">
                                         <b>Tarikh berlaku musibah: <span style="color: red;">*</span></b>
-                                        <input class="w3-input w3-date" type="date" id="tarikhmusibah" name="tarikhmusibah" disabled>
+                                        <input class="w3-input w3-date" type="date" id="tarikhmusibah" name="tarikhmusibah" disabled value="${dateStr}">
                                     </div>
                                 </div>
                                 
@@ -327,10 +297,21 @@
                                 </div>
                             
                             
-                            </div>
-                            <div id="yuranInputs" class="w3-margin-top hidden">
+                            </div><hr>
+                            <div id="" class="w3-margin-top ">
 
-                                <h3 for="musibahDetails">Zakat Yuran Details:</h3><hr>
+                                <h3 for="musibahDetails">Zakat Yuran Details:
+                                
+                                    <%
+                                        if(("0.0").equals(request.getAttribute("totalYuran"))){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK MEMOHON</b>
+                                            </span>
+                                            <%
+                                        }
+                                        %>
+                                
+                                </h3><hr>
                                 <div class="w3-panel w3-border w3-padding w3-card w3-small">
                                     <caption><i>Tujuan <b>Zakat Yuran</b> ini adalah membantu pelajar yang kurang berkemampuan menampung kos pendidikan, termasuk yuran universiti, atau keperluan akademik lain, agar mereka dapat meneruskan pembelajaran tanpa halangan kewangan.</i></caption>
                                 </div>
@@ -339,7 +320,7 @@
                                     
                                     <div class="w3-cell" style="">
                                         <b>Jumlah yuran (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" id="" size="50%" disabled>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" id="" size="50%" disabled value="${totalYuran}">
                                     </div>
 
                                 </div>
@@ -358,10 +339,21 @@
                                     </div><br>
                                 </div>
                                    
-                            </div>
-                            <div id="kolejInputs" class="w3-margin-top hidden">
+                            </div><hr>
+                            <div id="" class="w3-margin-top ">
 
-                                <h3 for="musibahDetails">Zakat Kolej Details:</h3>
+                                <h3 for="musibahDetails">Zakat Kolej Details:
+                                
+                                <%
+                                        if(("0.0").equals(request.getAttribute("totalKolej"))){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK MEMOHON</b>
+                                            </span>
+                                            <%
+                                        }
+                                        %>
+                                
+                                </h3>
                                 <hr>
                                 <div class="w3-panel w3-border w3-padding w3-card w3-small">
                                     <caption><i>Tujuan <b>Zakat Kolej</b> ini adalah membantu pelajar yang kurang berkemampuan menampung kos pendidikan, termasuk yuran universiti, atau keperluan akademik lain, agar mereka dapat meneruskan pembelajaran tanpa halangan kewangan.</i></caption>
@@ -369,14 +361,13 @@
                                 <div class="w3-col w3-margin-bottom">
                                     <div class="w3-cell">
                                         <b>Pilih kolej anda <span style="color: red;">*</span></b><br>
-                                        <select class="w3-input" name='kolej'>
-                                            <option value='kerawang'>Kerawang</option>
-                                            <option value='sutera'>Sutera</option>
+                                        <select class="w3-input" name='kolej' disabled>
+                                            <option value='${kolej}'><%=request.getAttribute("kolej")%></option>
                                         </select>
                                     </div>
                                     <div class="w3-cell" style="padding-left: 25px;">
                                         <b>Jumlah bayaran kolej (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalKolej" id="" size="50%" disabled>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalKolej" id="" size="50%" disabled value="${totalKolej}">
                                     </div>
                                     
                                 </div>
@@ -395,10 +386,20 @@
                                     </div><br>
                                 </div>
 
-                            </div>
-                            <div id="makanInputs" class="w3-margin-top hidden">
+                            </div><hr>
+                            <div id="" class="w3-margin-top ">
 
-                                <h3 for="musibahDetails">Zakat Makanan Details:</h3>
+                                <h3 for="musibahDetails">Zakat Makanan Details:
+                                <%
+                                        if("TIDAK MEMOHON".equals(request.getAttribute("cafe"))){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK MEMOHON</b>
+                                            </span>
+                                            <%
+                                        }
+                                        %>
+                                
+                                </h3>
                                 <hr>
                                 <div class="w3-panel w3-border w3-padding w3-card w3-small">
                                     <caption><i>Tujuan utamanya adalah untuk memastikan golongan pelajar dan mereka yang memerlukan tidak menghadapi kelaparan atau kekurangan makanan. Contohnya, bantuan zakat digunakan untuk menyediakan pek makanan kepada keluarga para pelajar atau memberi baucar makanan kepada mereka yang memerlukan.</i></caption>
@@ -407,8 +408,7 @@
                                     <div class="w3-cell">
                                         <b>Pilih cafe berdekatan anda <span style="color: red;">*</span></b><br>
                                         <select class="w3-input" name='cafe' disabled>
-                                            <option value='cafelestari'>Cafe Lestari</option>
-                                            <option value='rrcafe'>RR Cafe (Kiosk)</option>
+                                            <option value='${cafe}'><%=request.getAttribute("cafe")%></option>
                                         </select>
                                     </div>
                                     
