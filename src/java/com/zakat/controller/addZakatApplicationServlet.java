@@ -106,7 +106,7 @@ public class addZakatApplicationServlet extends HttpServlet {
                     try {
                         conn = DBConnection.getConnection();
                         
-                        String mainSQL = "INSERT INTO APPLICATION ("
+                        String mainSQL = "";
                         
                         if(!pilihMusibah){
                             String zakatMusibahSQL = "INSERT ";

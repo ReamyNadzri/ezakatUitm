@@ -8,7 +8,6 @@
             <web-module-libraries>
                 <library dirs="200">
                     <file>${file.reference.ojdbc8.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-fileupload2-2.0.0-M2-bin-commons-fileupload2-2.0.0-M2}</file>
