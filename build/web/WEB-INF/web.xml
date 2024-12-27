@@ -22,6 +22,10 @@
         <servlet-name>addZakatApplicationServlet</servlet-name>
         <servlet-class>com.zakat.controller.addZakatApplicationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginDonatorServlet</servlet-name>
+        <servlet-class>com.zakat.controller.loginDonatorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addZakatApplicationServlet</servlet-name>
         <url-pattern>/addZakat.do</url-pattern>
@@ -33,6 +37,10 @@
     <servlet-mapping>
         <servlet-name>BayarServlet</servlet-name>
         <url-pattern>/bayarZakat.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginDonatorServlet</servlet-name>
+        <url-pattern>/loginDonatorServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

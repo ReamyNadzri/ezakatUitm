@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form Student</title>
+    <title>Login Form Donator</title>
     <style>
         /* Styling for the modal */
         .modal {
@@ -92,10 +92,10 @@
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <h2 style="text-align:center;">Login Donitor</h2>
+            <h2 style="text-align:center;">Login Donator</h2>
             <!-- Login Form -->
-            <form action="login.jsp" method="post">
-                <input type="email" name="Email" placeholder="Email..." required>
+            <form action="loginDonatorServlet" method="post">
+                <input type="email" name="email" placeholder="Email..." required>
                 <input type="password" name="password" placeholder="Password..." required>
                 <div class="button-container">
                     <button type="button" class="close-btn" id="closeLoginModal">Kembali</button>
@@ -103,7 +103,7 @@
                 </div>
                 <!-- Link to Register Form -->
                 <div class="register-link">
-                    Anda Belum Mendaftar? <a href="RegisterDonitor.jsp" id="openRegisterForm">Daftar Sekarang</a>
+                    Anda Belum Mendaftar? <a href="RegisterDonator.jsp" id="openRegisterForm">Daftar Sekarang</a>
                 </div>
             </form>
         </div>
@@ -136,7 +136,7 @@
             loginModal.classList.remove('show');
             setTimeout(() => {
                 loginModal.style.display = 'none';
-                window.location.href = "RegisterDonitor.jsp"; // Redirect to register form (use JSP page)
+                window.location.href = "RegisterDonator.jsp"; // Redirect to register form (use JSP page)
             }, 300);
         };
     </script>
