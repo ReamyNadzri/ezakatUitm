@@ -36,7 +36,7 @@ public class loginDonatorServlet extends HttpServlet {
             if (rs.next()) {
                 // Successful login, set session attributes
                 HttpSession session = request.getSession();
-                session.setAttribute("id", rs.getInt("ID"));
+                session.setAttribute("id", rs.getInt("DONATORID"));
                 session.setAttribute("username", rs.getString("USERNAME"));
 
                 response.sendRedirect("index.jsp");
