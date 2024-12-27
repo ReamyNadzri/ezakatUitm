@@ -18,6 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/process")
 @MultipartConfig(
@@ -31,20 +36,16 @@ import java.io.FileNotFoundException;
  */
 public class addZakatApplicationServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private static final String UPLOAD_DIR = "uploads";
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        
             PrintWriter out = response.getWriter();
+            
             out.println("<head>");
         
             out.println("<title>AddZakatApplicationServlet</title>");
@@ -55,29 +56,13 @@ public class addZakatApplicationServlet extends HttpServlet {
         
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -86,6 +71,14 @@ public class addZakatApplicationServlet extends HttpServlet {
             response.setContentType("text/html");
 
             PrintWriter out = response.getWriter();
+            
+            // Prepare a directory to store uploaded files
+            String applicationPath = request.getServletContext().getRealPath("");
+            Path uploadPath = Paths.get(applicationPath, UPLOAD_DIR);
+
+            if(!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
         
             // Get all form parameters
             String applyID = request.getParameter("applyID");
@@ -122,6 +115,15 @@ public class addZakatApplicationServlet extends HttpServlet {
 
             // MAKAN
             String cafe = request.getParameter("cafe");
+            
+            String file1Name = handleFileUpload(request, "file1", uploadPath);
+            String file2Name = handleFileUpload(request, "file2", uploadPath);
+            String file3Name = handleFileUpload(request, "file3", uploadPath);
+            String file4Name = handleFileUpload(request, "file4", uploadPath);
+            String file5Name = handleFileUpload(request, "file5", uploadPath);
+            String file6Name = handleFileUpload(request, "file6", uploadPath);
+            String file7Name = handleFileUpload(request, "file7", uploadPath);
+            String file8Name = handleFileUpload(request, "file8", uploadPath);
 
             // Convert booleans to Strings for JSP
             request.setAttribute("insetifMakanan", String.valueOf(insetifMakanan));
@@ -143,14 +145,42 @@ public class addZakatApplicationServlet extends HttpServlet {
             request.setAttribute("totalKolej", String.valueOf(totalKolej));
             request.setAttribute("cafe", cafe);
 
-            // Forward the request to the JSP
+            
+            request.setAttribute("file1Name", file1Name);
+            request.setAttribute("file2Name", file2Name);
+            request.setAttribute("file3Name", file3Name);
+            request.setAttribute("file4Name", file4Name);
+            request.setAttribute("file5Name", file5Name);
+            request.setAttribute("file6Name", file6Name);
+            request.setAttribute("file7Name", file7Name);
+            request.setAttribute("file8Name", file8Name);
+            
+            //=====================================================================================================
+            
+            
             request.getRequestDispatcher("mohonzakatconfirm.jsp").forward(request, response);
+    }
+
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        for (String content : contentDisp.split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf("=") + 2, content.length() - 1);
+            }
         }
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+        return null;
+    }
+
+
+      
+        
+    
+            
+        
+    
+    
+    
+    
     @Override
     public String getServletInfo() {
         return "Short description";

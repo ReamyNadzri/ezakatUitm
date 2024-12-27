@@ -7,15 +7,15 @@
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
                 <library dirs="200">
-                    <file>${file.reference.Downloads-commons-io-2.18.0-bin}</file>
-                    <path-in-war>WEB-INF/classes</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.ojdbc8.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.Downloads-commons-fileupload2-2.0.0-M2-bin}</file>
+                    <file>${file.reference.commons-fileupload2-2.0.0-M2-bin-commons-fileupload2-2.0.0-M2}</file>
+                    <path-in-war>WEB-INF/classes</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-io-2.18.0-bin-commons-io-2.18.0}</file>
                     <path-in-war>WEB-INF/classes</path-in-war>
                 </library>
             </web-module-libraries>

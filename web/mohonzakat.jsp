@@ -180,14 +180,14 @@
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen <i>student letter</i></b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumentStudentLetter" accept=".pdf" required>
+                                    <input class="pad w3-input" type="file" name="file1" accept=".pdf" required>
                                 </div><br>
                             </div>
                             <div class="w3-cell" style="width:25px"></div>
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen transcript</b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumentTranscript" accept=".pdf" required>
+                                    <input class="pad w3-input" type="file" name="file2" accept=".pdf" required>
                                 </div><br>
                             </div>
                         
@@ -196,7 +196,7 @@
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen KP. depan & belakang</b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumenKP" accept=".pdf" required>
+                                    <input class="pad w3-input" type="file" name="file3" accept=".pdf" required>
                                 </div><br>
                             </div>
                             <div class="w3-col" style="">
@@ -284,13 +284,13 @@
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen kerugian dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="dokumenkerugian" accept=".pdf">
+                                        <input class="pad w3-input" type="file" name="file4" accept=".pdf">
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen sebab dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="dokumensebab" accept=".pdf">
+                                        <input class="pad w3-input" type="file" name="file5" accept=".pdf">
                                     </div><br>
                                 </div>
                             
@@ -316,13 +316,13 @@
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan resit yuran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="resityuran" accept=".pdf" >
+                                        <input class="pad w3-input" type="file" name="file6" accept=".pdf" >
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen surat tawaran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="surattawaran" accept=".pdf" >
+                                        <input class="pad w3-input" type="file" name="file7" accept=".pdf" >
                                     </div><br>
                                 </div>
                                    
@@ -353,13 +353,13 @@
                                 <div class="w3-cell w3-panel w3-margin-top">
                                     <b>Sila masukkan borang elektrik</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="borangElektrik" accept=".pdf">
+                                        <input class="pad w3-input" type="file" name="file7" accept=".pdf">
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen permohonan kolej yang berjaya</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="permohonanKolej" accept=".pdf">
+                                        <input class="pad w3-input" type="file" name="file8" accept=".pdf">
                                     </div><br>
                                 </div>
 

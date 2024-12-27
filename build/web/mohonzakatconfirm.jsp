@@ -1,3 +1,5 @@
+<%@page import="java.io.File"%>
+<%@page import="java.util.List"%>
 <head>
     <title>Permohonan Zakat</title>
     <meta name="viewport">
@@ -50,7 +52,38 @@
     <div class="w3-container w3-row">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">
 
-            
+            <h2>Uploaded Files</h2>
+                <%
+                    String uploadDir = application.getRealPath("") + File.separator + "uploads";
+                    File folder = new File(uploadDir);
+                    if (!folder.exists()) {
+                        out.println("No files uploaded yet.");
+                    } else {
+                        File[] files = folder.listFiles();
+                        if (files != null && files.length > 0) {
+                %>
+                <table border="1">
+                    <tr>
+                        <th>File Name</th>
+                        <th>Action</th>
+                    </tr>
+                    <%
+                        for (File file : files) {
+                    %>
+                    <tr>
+                        <td><%= file.getName() %></td>
+                        <td><a href="DownloadServlet?fileName=<%= file.getName() %>">Download</a></td>
+                    </tr>
+                    <%
+                        }
+                    %>
+                </table>
+                <%
+                        } else {
+                            out.println("No files found in the upload directory.");
+                        }
+                    }
+                %>
 
         </div>
 
@@ -417,7 +450,7 @@
                             </div>
                         </div>
                     </div>
-
+                                                       
                     <div class="w3-panel w3-center">
                         <input class="w3-input w3-border w3-green" name="HANTAR PERMOHONAN" type="submit" onclick="">
                         <button class="w3-button w3-border w3-border-green" href="#">KEMBALI</button>
