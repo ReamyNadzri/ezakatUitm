@@ -22,7 +22,7 @@ public class loginDonatorServlet extends HttpServlet {
             Connection conn = null;
             PreparedStatement pstmt = null;
             
-             conn = DBConnection.getConnection();
+            conn = DBConnection.getConnection();
             
             // Prepare SQL query to validate login credentials
             String query = "SELECT * FROM DONATOR WHERE EMAIL = ? AND PASSWORD = ?";

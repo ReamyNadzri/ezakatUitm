@@ -17,13 +17,7 @@ public class Family extends Student {
     private String guardianPhone;
     private String guardianAddress;
     private double grossIncome;
-
-    public Family(String studentID, String matricNo, String password, String name, String email, String phoneNum, String sem, String courseName, String courseCode, String academicLvl, String campus, String adminID) {
-        super(studentID, matricNo, password, name, email, phoneNum, sem, courseName, courseCode, academicLvl, campus, adminID);
-    }
-
     
-
     // Constructor
     /*\public Family(String studentID, String name, String email, String phoneNum,
                   String familyName, String familyPhone, String familyAddress,
@@ -99,7 +93,7 @@ public class Family extends Student {
     @Override
     public String toString() {
         return "Family{" +
-                "studentID='" + getStudentID() + '\'' + // Correct method names
+                "studentID='" + '\'' + // Correct method names
                 ", name='" + getName() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", phoneNum='" + getPhoneNum() + '\'' +
