@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package com.zakat.model;
 
 /**
  *
@@ -15,15 +15,31 @@ package model;
     private String studentID;  // FK
     private String zakatID;    // FK
     private String staffID;    // FK
+    
+    //super
+    ZakatCategory zakatCategory;
+    
+    public Application() {
+        this.applicationID = "";
+        this.applicationDate = "";
+        this.applicationStatus = "";
+        this.studentID = "";
+        this.zakatID = "";
+        this.staffID = "";
+        
+        zakatCategory = new ZakatCategory();
+    }
 
     public Application(String applicationID, String applicationDate, String applicationStatus, 
-                       String studentID, String zakatID, String staffID) {
+                       String studentID, String zakatID, String staffID, ZakatCategory zakatcategory) {
+        
         this.applicationID = applicationID;
         this.applicationDate = applicationDate;
         this.applicationStatus = applicationStatus;
         this.studentID = studentID;
         this.zakatID = zakatID;
         this.staffID = staffID;
+        this.zakatCategory = zakatcategory;
     }
 
     // Getters and Setters

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package com.zakat.model;
 
 /**
  *
@@ -14,6 +14,15 @@ public class ZakatCategory {
     private String zakatName;
     private String description;
     private String applyID;  // Foreign Key (FK)
+    
+    // Constructor
+    public ZakatCategory() {
+        this.zakatID = "";
+        this.zakatName = "";
+        this.description = "";
+        this.applyID = "";
+    }
+    
 
     // Constructor
     public ZakatCategory(String zakatID, String zakatName, String description, String applyID) {
@@ -22,6 +31,7 @@ public class ZakatCategory {
         this.description = description;
         this.applyID = applyID;
     }
+    
 
     // Getters and Setters
     public String getZakatID() {

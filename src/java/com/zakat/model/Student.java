@@ -1,4 +1,4 @@
-package model;
+package com.zakat.model;
 
 /**
  * Represents a student with academic and personal information.

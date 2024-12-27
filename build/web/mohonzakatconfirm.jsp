@@ -52,39 +52,6 @@
     <div class="w3-container w3-row">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">
 
-            <h2>Uploaded Files</h2>
-                <%
-                    String uploadDir = application.getRealPath("") + File.separator + "uploads";
-                    File folder = new File(uploadDir);
-                    if (!folder.exists()) {
-                        out.println("No files uploaded yet.");
-                    } else {
-                        File[] files = folder.listFiles();
-                        if (files != null && files.length > 0) {
-                %>
-                <table border="1">
-                    <tr>
-                        <th>File Name</th>
-                        <th>Action</th>
-                    </tr>
-                    <%
-                        for (File file : files) {
-                    %>
-                    <tr>
-                        <td><%= file.getName() %></td>
-                        <td><a href="DownloadServlet?fileName=<%= file.getName() %>">Download</a></td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                </table>
-                <%
-                        } else {
-                            out.println("No files found in the upload directory.");
-                        }
-                    }
-                %>
-
         </div>
 
         <!--applyID, studentID, zakatID, siblings, applyDate(current), totalIncome, studentLetter, transcriptDoc, icDoc, gradDate, entryDate, bankName, bankNum-->
@@ -111,7 +78,7 @@
                     </div>
                 </div>
                 <hr>
-                <form action="" method="post" enctype="multipart/form-data">
+                
                     <div class="w3-col w3-margin-bottom">
                         <div class="w3-cell w3-panel">
                             <b>Sesi Tawaran</b><br>
@@ -232,14 +199,16 @@
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen <i>student letter</i></b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumentStudentLetter" accept=".pdf" disabled>
+                                    <%= request.getAttribute("file1Name") %>
+                                    
                                 </div><br>
                             </div>
                             <div class="w3-cell" style="width:25px"></div>
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen transcript</b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumentTranscript" accept=".pdf" disabled>
+                                    <%= request.getAttribute("file2Name") %>
+                                    
                                 </div><br>
                             </div>
                         
@@ -248,7 +217,8 @@
                             <div class="w3-cell">
                                 <b>Sila masukkan dokumen KP. depan & belakang</b><span style="color: red;">*</span>
                                 <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                    <input class="pad w3-input" type="file" name="dokumenKP" accept=".pdf" disabled>
+                                    <%= request.getAttribute("file3Name") %>
+                                    
                                 </div><br>
                             </div>
                             
@@ -286,14 +256,19 @@
                             <!-- Additional Inputs -->
                             <div id="" class="w3-margin-top ">
 
-                                <h3 for="musibahDetails">Zakat Musibah Details:
+                                <h3 for="musibahDetails">Zakat Musibah Details:   
                                     <%
                                         if("TIDAK MEMOHON".equals(request.getAttribute("reason"))){
                                             %>
                                             <span style="color: red;"><b>TIDAK MEMOHON</b>
                                             </span>
                                             <%
-                                        }
+                                        }else{
+                                        %>
+                                            <span style="color: green;"><b>MEMOHON</b>
+                                            </span>
+                                            <input type="hidden" name="pilihMusibah" value="true">
+                                            <%}
                                         %>
                                 </h3><hr>
                                 <div class="w3-panel w3-border w3-padding w3-card w3-small">
@@ -319,13 +294,31 @@
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen kerugian dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="dokumenkerugian" accept=".pdf" disabled>
+                                        <%
+                                        if(request.getAttribute("file4Name")==null){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK LENGKAP</b>
+                                            </span>
+                                            <%
+                                        }else{
+                                            %>
+                                            <%= request.getAttribute("file4Name") %>
+                                            <%} %>
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen sebab dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="dokumensebab" accept=".pdf" disabled>
+                                        <%
+                                        if(request.getAttribute("file5Name")==null){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK LENGKAP</b>
+                                            </span>
+                                            <%
+                                        }else{
+                                            %>
+                                            <%= request.getAttribute("file5Name") %>
+                                            <%} %>
                                     </div><br>
                                 </div>
                             
@@ -341,8 +334,12 @@
                                             <span style="color: red;"><b>TIDAK MEMOHON</b>
                                             </span>
                                             <%
-                                        }
+                                        }else{
                                         %>
+                                            <span style="color: green;"><b>MEMOHON</b>
+                                            </span>
+                                            <input type="hidden" name="pilihYuran" value="true">
+                                            <%}%>
                                 
                                 </h3><hr>
                                 <div class="w3-panel w3-border w3-padding w3-card w3-small">
@@ -362,13 +359,31 @@
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan resit yuran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="resityuran" accept=".pdf" disabled>
+                                        <%
+                                        if(request.getAttribute("file6Name") == null){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK LENGKAP</b>
+                                            </span>
+                                            <%
+                                        }else{
+                                            %>
+                                            <%= request.getAttribute("file6Name") %>
+                                            <%} %>
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen surat tawaran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="surattawaran" accept=".pdf" disabled>
+                                        <%
+                                        if(request.getAttribute("file7Name") == null){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK LENGKAP</b>
+                                            </span>
+                                            <%
+                                        }else{
+                                            %>
+                                            <%= request.getAttribute("file7Name") %>
+                                            <%} %>
                                     </div><br>
                                 </div>
                                    
@@ -383,7 +398,12 @@
                                             <span style="color: red;"><b>TIDAK MEMOHON</b>
                                             </span>
                                             <%
-                                        }
+                                        }else{
+                                        %>
+                                            <span style="color: green;"><b>MEMOHON</b>
+                                            </span>
+                                            <input type="hidden" name="pilihKolej" value="true">
+                                            <%}
                                         %>
                                 
                                 </h3>
@@ -409,13 +429,32 @@
                                 <div class="w3-cell w3-panel w3-margin-top">
                                     <b>Sila masukkan borang elektrik</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="borangElektrik" accept=".pdf" disabled>
+                                        <%
+                                        if(request.getAttribute("file8Name")==null){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK LENGKAP</b>
+                                            </span>
+                                            <%
+                                        }else{
+                                            %>
+                                            <%= request.getAttribute("file8Name") %>
+                                            <%} %>
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen permohonan kolej yang berjaya</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="permohonanKolej" accept=".pdf" disabled>
+                                        <%
+                                        if(request.getAttribute("file9Name")==null){
+                                            %>
+                                            <span style="color: red;"><b>TIDAK LENGKAP</b>
+                                            </span>
+                                            <%
+                                        }else{
+                                            %>
+                                            <%= request.getAttribute("file9Name") %>
+                                            <%} %>
+                                        
                                     </div><br>
                                 </div>
 
@@ -429,7 +468,12 @@
                                             <span style="color: red;"><b>TIDAK MEMOHON</b>
                                             </span>
                                             <%
-                                        }
+                                        }else{
+                                        %>
+                                            <span style="color: green;"><b>MEMOHON</b>
+                                            </span>
+                                            <input type="hidden" name="pilihCafe" value="true">
+                                            <%}
                                         %>
                                 
                                 </h3>
@@ -450,12 +494,34 @@
                             </div>
                         </div>
                     </div>
-                                                       
-                    <div class="w3-panel w3-center">
-                        <input class="w3-input w3-border w3-green" name="HANTAR PERMOHONAN" type="submit" onclick="">
-                        <button class="w3-button w3-border w3-border-green" href="#">KEMBALI</button>
-                    </div>
-                </form>
+                                           
+                                        <form action="addZakat.do" method="post" >
+                                            <input type="hidden" name="isSecondSubmission" value="true">
+                                            <input type="hidden" name="applyID"         value="<%= request.getAttribute("applyID") %>">
+                                            <input type="hidden" name="currentSemester" value="<%= request.getAttribute("currentSemester") %>">
+                                            <input type="hidden" name="currentCgpa"     value="<%= request.getAttribute("currentCgpa") %>">
+                                            <input type="hidden" name="currentGpa"      value="<%= request.getAttribute("currentGpa") %>">
+                                            <input type="hidden" name="insentifmakanan" value="<%= request.getAttribute("insentifmakanan") %>">
+                                            <input type="hidden" name="bantuan"         value="<%= request.getAttribute("bantuan") %>">
+                                            <input type="hidden" name="namaBantuan"     value="<%= request.getAttribute("namaBantuan") %>">
+                                            <input type="hidden" name="jumlahBantuan"   value="<%= request.getAttribute("jumlahBantuan") %>">
+                                            <input type="hidden" name="gradYear"        value="<%= request.getAttribute("gradYear") %>">
+                                            <input type="hidden" name="bankName"        value="<%= request.getAttribute("bankName") %>">
+                                            <input type="hidden" name="bankNo"          value="<%= request.getAttribute("bankNo") %>">
+                                            <input type="hidden" name="reason"          value="<%= request.getAttribute("reason") %>">
+                                            <input type="hidden" name="totalLost"       value="<%= request.getAttribute("totalLost") %>">
+                                            <input type="hidden" name="tarikhmusibah"   value="<%= request.getAttribute("tarikhmusibah") %>">
+                                            <input type="hidden" name="yuran"           value="<%= request.getAttribute("yuran") %>">
+                                            <input type="hidden" name="kolej"           value="<%= request.getAttribute("kolej") %>">
+                                            <input type="hidden" name="totalKolej"      value="<%= request.getAttribute("totalKolej") %>">
+                                            <input type="hidden" name="cafe"            value="<%= request.getAttribute("cafe") %>">
+                                        
+                               
+                                            <div class="w3-panel w3-center" style="margin-bottom: 5%">
+                                                <button class="w3-button w3-border w3-green w3-cell" name="HANTAR PERMOHONAN" type="submit" onclick="">HANTAR PERMOHONAN</button>
+                                                <button class="w3-button w3-border w3-border-green" href="#">KEMBALI</button>
+                                            </div>
+                                        </form>
             </div>
             
 

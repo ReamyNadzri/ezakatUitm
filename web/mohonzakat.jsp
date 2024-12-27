@@ -353,13 +353,13 @@
                                 <div class="w3-cell w3-panel w3-margin-top">
                                     <b>Sila masukkan borang elektrik</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="file7" accept=".pdf">
+                                        <input class="pad w3-input" type="file" name="file8" accept=".pdf">
                                     </div><br>
                                 </div>
                                 <div class="w3-cell w3-panel">
                                     <b>Sila masukkan dokumen permohonan kolej yang berjaya</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
-                                        <input class="pad w3-input" type="file" name="file8" accept=".pdf">
+                                        <input class="pad w3-input" type="file" name="file9" accept=".pdf">
                                     </div><br>
                                 </div>
 
@@ -387,8 +387,8 @@
                         </div>
                     </div>
 
-                    <div class="w3-panel w3-center w3-col">
-                        <button class="w3-button w3-border w3-green w3-cell" name="HANTAR PERMOHONAN" type="submit" onclick="">HANTAR PERMOHONAN</button>
+                    <div class="w3-panel w3-center w3-col" style="margin-bottom: 5%">
+                        <button class="w3-button w3-border w3-green w3-cell" name="MOHON" type="submit" onclick="">MOHON</button>
                         <button class="w3-button w3-border w3-border-green w3-cell w3-margin-left" href="#">KEMBALI</button>
                     </div>
                 </form>
