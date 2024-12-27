@@ -3,178 +3,130 @@ package com.zakat.model;
 /**
  * Represents a student with academic and personal information.
  */
-public class Student {
-    private String studentID;
-    private String matricNo;
+public class Student{
+
     private String password;
+    private String matricno;
     private String name;
+    private String icnom;
+    private String courceCode;
+    private String courseName;
+    private String campus;
     private String email;
     private String phoneNum;
-    private String sem;
-    private String courseName;
-    private String courseCode;
-    private String academicLvl;
-    private String campus;
-    private String adminID; // Foreign key for administrative linkage
+    private String address;
 
-    // Constructor
-    public Student(String studentID, String matricNo, String password, String name, String email, String phoneNum,
-                   String sem, String courseName, String courseCode, String academicLvl, String campus, String adminID) {
-        if (studentID == null || studentID.trim().isEmpty())
-            throw new IllegalArgumentException("Student ID cannot be null or empty.");
-        if (name == null || name.trim().isEmpty())
-            throw new IllegalArgumentException("Name cannot be null or empty.");
-        if (email == null || !email.contains("@"))
-            throw new IllegalArgumentException("Invalid email address.");
+    public Student() {
+    }
 
-        this.studentID = studentID;
-        this.matricNo = matricNo;
+    public Student(String password, String matricno, String name, String icnom, String courceCode, String courseName, String campus, String email, String phoneNum, String address) {
         this.password = password;
+        this.matricno = matricno;
         this.name = name;
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.sem = sem;
+        this.icnom = icnom;
+        this.courceCode = courceCode;
         this.courseName = courseName;
-        this.courseCode = courseCode;
-        this.academicLvl = academicLvl;
         this.campus = campus;
-        this.adminID = adminID;
-    }
-    
-    public Student(String studentID, String name, String email, String phoneNum) {
-        this.studentID = studentID;
-        this.name = name;
         this.email = email;
         this.phoneNum = phoneNum;
-    }
-
-    // Getters and Setters with validation
-    public String getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(String studentID) {
-        if (studentID == null || studentID.trim().isEmpty()) {
-            throw new IllegalArgumentException("Student ID cannot be null or empty.");
-        }
-        this.studentID = studentID;
-    }
-
-    public String getMatricNo() {
-        return matricNo;
-    }
-
-    public void setMatricNo(String matricNo) {
-        this.matricNo = matricNo;
+        this.address = address;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
-        if (password == null || password.trim().isEmpty()) {
-            throw new IllegalArgumentException("Password cannot be null or empty.");
-        }
         this.password = password;
     }
 
+    public String getMatricno() {
+        return this.matricno;
+    }
+
+    public void setMatricno(String matricno) {
+        this.matricno = matricno;
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty.");
-        }
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getIcnom() {
+        return this.icnom;
     }
 
-    public void setEmail(String email) {
-        if (email == null || !email.contains("@")) {
-            throw new IllegalArgumentException("Invalid email address.");
-        }
-        this.email = email;
+    public void setIcnom(String icnom) {
+        this.icnom = icnom;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getCourceCode() {
+        return this.courceCode;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        if (phoneNum != null && !phoneNum.matches("\\d{10}")) {
-            throw new IllegalArgumentException("Phone number must be a 10-digit number.");
-        }
-        this.phoneNum = phoneNum;
-    }
-
-    public String getSem() {
-        return sem;
-    }
-
-    public void setSem(String sem) {
-        this.sem = sem;
+    public void setCourceCode(String courceCode) {
+        this.courceCode = courceCode;
     }
 
     public String getCourseName() {
-        return courseName;
+        return this.courseName;
     }
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-
-    public String getAcademicLvl() {
-        return academicLvl;
-    }
-
-    public void setAcademicLvl(String academicLvl) {
-        this.academicLvl = academicLvl;
-    }
-
     public String getCampus() {
-        return campus;
+        return this.campus;
     }
 
     public void setCampus(String campus) {
         this.campus = campus;
     }
 
-    public String getAdminID() {
-        return adminID;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setAdminID(String adminID) {
-        this.adminID = adminID;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    // Overridden toString method
+    public String getPhoneNum() {
+        return this.phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
-        return "Student{" +
-                "studentID='" + studentID + '\'' +
-                ", matricNo='" + matricNo + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNum='" + phoneNum + '\'' +
-                ", sem='" + sem + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", courseCode='" + courseCode + '\'' +
-                ", academicLvl='" + academicLvl + '\'' +
-                ", campus='" + campus + '\'' +
-                ", adminID='" + adminID + '\'' +
-                '}';
+        return "{" +
+            " password='" + getPassword() + "'" +
+            ", matricno='" + getMatricno() + "'" +
+            ", name='" + getName() + "'" +
+            ", icnom='" + getIcnom() + "'" +
+            ", courceCode='" + getCourceCode() + "'" +
+            ", courseName='" + getCourseName() + "'" +
+            ", campus='" + getCampus() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", phoneNum='" + getPhoneNum() + "'" +
+            ", address='" + getAddress() + "'" +
+            "}";
     }
+
+
 }
