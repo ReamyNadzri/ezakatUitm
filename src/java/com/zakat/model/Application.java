@@ -14,6 +14,8 @@ public class Application {
         private String applyID;
         private String studentId;
         private String bantuanMakan;
+        private double CGPA;
+        private double GPA;
         private String bantuanKewangan;
         private String bantuanKewanganNama;
         private String bantuanKewanganNilai;
@@ -31,6 +33,8 @@ public class Application {
         applyID = "";
         studentId = "";
         bantuanMakan = "";
+        CGPA = 0.0;
+        GPA = 0.0;
         bantuanKewangan = "";
         bantuanKewanganNama = "";
         bantuanKewanganNilai = "";
@@ -44,11 +48,13 @@ public class Application {
         zakatcategory = new ZakatCategory();
     }
 
-    public Application(String applyID, String studentId, String bantuanMakan, String bantuanKewangan, String bantuanKewanganNama, String bantuanKewanganNilai, int gradYear, String studentLetter, String transcriptDoc, String icDoc, String bankNo, String bankName, ZakatCategory zakatcategory) {
+    public Application(String applyID, String studentId, String bantuanMakan, double CGPA, double GPA, String bantuanKewangan, String bantuanKewanganNama, String bantuanKewanganNilai, int gradYear, String studentLetter, String transcriptDoc, String icDoc, String bankNo, String bankName, ZakatCategory zakatcategory) {
         
         this.applyID = applyID;
         this.studentId = studentId;
         this.bantuanMakan = bantuanMakan;
+        this.CGPA = CGPA;
+        this.GPA = GPA;
         this.bantuanKewangan = bantuanKewangan;
         this.bantuanKewanganNama = bantuanKewanganNama;
         this.bantuanKewanganNilai = bantuanKewanganNilai;
@@ -83,6 +89,22 @@ public class Application {
 
     public void setBantuanMakan(String bantuanMakan) {
         this.bantuanMakan = bantuanMakan;
+    }
+    
+    public double getCGPA() {
+        return this.CGPA;
+    }
+
+    public void setCGPA(double CGPA) {
+        this.CGPA = CGPA;
+    }
+    
+    public double getGPA() {
+        return this.GPA;
+    }
+
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
     }
 
     public String getBantuanKewangan() {

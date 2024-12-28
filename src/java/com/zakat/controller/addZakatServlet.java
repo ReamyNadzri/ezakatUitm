@@ -112,17 +112,22 @@ public class addZakatServlet extends HttpServlet {
                 String Rbantuan = request.getParameter("Rbantuan");
                 String RnamaBantuan = request.getParameter("RnamaBantuan");
                 String RjumlahBantuan = request.getParameter("RjumlahBantuan");
-
                 String RgradYear = request.getParameter("RgradYear");
                 String RbankName = request.getParameter("RbankName");
                 String RbankNo = request.getParameter("RbankNo");
+                
                 String Rreason = request.getParameter("Rreason");
                 String RtotalLost = request.getParameter("RtotalLost");
                 String Rtarikhmusibah = request.getParameter("Rtarikhmusibah");
+                
                 String Ryuran = request.getParameter("Ryuran");
+                
                 String Rkolej = request.getParameter("Rkolej");
                 String RtotalKolej = request.getParameter("RtotalKolej");
+                
                 String Rcafe = request.getParameter("Rcafe");
+                
+                
                 
                 file1Data = handleFileUpload(request, "file1",uploadPath);
                 file2Data = handleFileUpload(request, "file2",uploadPath);
@@ -137,15 +142,119 @@ public class addZakatServlet extends HttpServlet {
                 try{
                     conn = DBConnection.getConnection();
                     
-                    if("true" == request.getParameter("pilihMusibah")){
+                    String mainSQL = "INSERT INTO ZAKAT_CATEGORY (ZAKATNAME, DESCRIPTION) "
+                                + "VALUES (?,?)";
                         
-                    }else if("true" == request.getParameter("pilihYuran")){
+                        pstmt = conn.prepareStatement(mainSQL);
                         
-                    }else if("true" == request.getParameter("pilihKolej")){
+                        pstmt.setString(1,"");
+                        pstmt.setString(2,"");
                         
-                    }else if("true" == request.getParameter("pilihMakan")){
+                        int rowsInserted = pstmt.executeUpdate();
+                        if (rowsInserted > 0) {
+                            System.out.println("A new application was inserted successfully!");
+                         }else{
+                            System.out.println("Failed to save to database");
+                            request.setAttribute("errorMessage", "Failed to save to database ZAKATCATEGORY, please try again!");
+                            request.getRequestDispatcher("/error.jsp").forward(request, response);
+                            return;
+                        }
+                    
+                    if(!pilihMusibah){
+                        String musibahSQL = "INSERT INTO ZAKAT_MUSIBAH (REASON, MUSIBAHDATE, TOTALCOST, COSTDOC, REASONDOC, ZAKATID)"
+                                + "VALUE (?,?,?,?,?,(SELECT ZAKATID FROM ZAKAT_CATEGORY WHERE ZAKATNAME = ?))";
+                        
+                        pstmt = conn.prepareStatement(musibahSQL);
+                        
+                        pstmt.setString(1,"");  
+                        pstmt.setDate(2, tarikhmusibah != null ? new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(tarikhmusibah).getTime()) : null);
+                        pstmt.setBigDecimal(3, totalLost!= null ? new java.math.BigDecimal(totalLost) : null);
+                        pstmt.setBytes(4, file1Data);
+                        pstmt.setBytes(5, file1Data);
+                        pstmt.setString(6,"");   //zakatname mainsql
+                        
+                        rowsInserted = pstmt.executeUpdate();
+                        if (rowsInserted > 0) {
+                            System.out.println("A new application was inserted successfully!");
+                         }else{
+                            System.out.println("Failed to save to database");
+                            request.setAttribute("errorMessage", "Failed to save to database ZAKATMUSIBAH, please try again!");
+                            request.getRequestDispatcher("/error.jsp").forward(request, response);
+                            return;
+                        }
+           
+                    }if(!pilihYuran){
+                        String yuranSQL = "INSERT INTO ZAKAT_YURAN (TOTALYURAN, YURANDOC, ENTRYSESSIONDOC, ZAKATID)"
+                                + "VALUE (?,?,?, (SELECT ZAKATID FROM ZAKAT_CATEGORY WHERE ZAKATNAME = ?))";
+                        
+                        pstmt = conn.prepareStatement(yuranSQL);
+                        
+                        pstmt.setBigDecimal(1, yuran!= null ? new java.math.BigDecimal(yuran) : null);
+                        pstmt.setBytes(6, file1Data);
+                        pstmt.setBytes(7, file1Data);
+                        pstmt.setString(4,"");   //zakatname mainsql
+                        
+                        rowsInserted = pstmt.executeUpdate();
+                        if (rowsInserted > 0) {
+                            System.out.println("A new application was inserted successfully!");
+                         }else{
+                            System.out.println("Failed to save to database");
+                            request.setAttribute("errorMessage", "Failed to save to database ZAKATYURAN, please try again!");
+                            request.getRequestDispatcher("/error.jsp").forward(request, response);
+                            return;
+                        }
+                        
+                    }if(!pilihKolej){
+                        String kolejSQL = "INSERT INTO ZAKAT_KOLEJ (KOLEJNAME, TOTALKOLEJ, ELECTRONICAPPLIANCE, KOLEJDOC, ZAKATID)"
+                                + "VALUES (?,?,?,?,(SELECT ZAKATID FROM ZAKAT_CATEGORY WHERE ZAKATNAME = ?))";
+                        
+                        pstmt = conn.prepareStatement(kolejSQL);
+                        
+                        pstmt.setString(1,"");   
+                        pstmt.setBigDecimal(2, totalKolej!= null ? new java.math.BigDecimal(totalKolej) : null);
+                        pstmt.setBytes(8, file1Data);
+                        pstmt.setBytes(9, file1Data);
+                        pstmt.setString(5,"");   //zakatname mainsql
+                        
+                        
+                        rowsInserted = pstmt.executeUpdate();
+                        if (rowsInserted > 0) {
+                            System.out.println("A new application was inserted successfully!");
+                         }else{
+                            System.out.println("Failed to save to database");
+                            request.setAttribute("errorMessage", "Failed to save to database ZAKATKOLEJ, please try again!");
+                            request.getRequestDispatcher("/error.jsp").forward(request, response);
+                            return;
+                        }
+                        
+                        
+                    }if(!pilihMakan){
+                        String makanSQL = "INSERT INTO ZAKAT_MAKANAN (CAFE, ZAKATID)"
+                                + "VALUES (?,(SELECT ZAKATID FROM ZAKAT_CATEGORY WHERE ZAKATNAME = ?))";
+                        
+                        pstmt = conn.prepareStatement(makanSQL);
+                        
+                        pstmt.setString(1,"");   //zakatname mainsql
+                        pstmt.setString(2,""); 
+                        
+                        rowsInserted = pstmt.executeUpdate();
+                        if (rowsInserted > 0) {
+                            System.out.println("A new application was inserted successfully!");
+                         }else{
+                            System.out.println("Failed to save to database");
+                            request.setAttribute("errorMessage", "Failed to save to database ZAKATMAKAN, please try again!");
+                            request.getRequestDispatcher("/error.jsp").forward(request, response);
+                            return;
+                        }
                     }
-                            
+                    
+                    //=======================================================================================================================
+                    
+                    String applicationZakatSQL = "INSERT INTO APPLICATION (STUDENTID, ZAKATID, BANTUANMAKAN, BANTUANKEWANGAN, BANTUANKEWANGANNAMA, BANTUANKEWANGANNILAI, GRADYEAR, CGPA, GPA, STUDENTLETTER, TRANSCRIPTDOC, ICDOC,  BANKNO, BANKNAME)"
+                            + "VALUE (";
+                    
+
+                          
                     
                 }catch(Exception e){
                 }
