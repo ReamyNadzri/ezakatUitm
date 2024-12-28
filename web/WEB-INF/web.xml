@@ -42,6 +42,38 @@
         <servlet-name>successLoginStudent</servlet-name>
         <servlet-class>com.zakat.view.successLoginStudent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>dbRegisterStaff</servlet-name>
+        <servlet-class>com.zakat.controller.dbRegisterStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>successRegisterStaff</servlet-name>
+        <servlet-class>com.zakat.view.successRegisterStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>successLoginStaff</servlet-name>
+        <servlet-class>com.zakat.view.successLoginStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>errorLoginStudent</servlet-name>
+        <servlet-class>com.zakat.view.errorLoginStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>errorLoginStaff</servlet-name>
+        <servlet-class>com.zakat.view.errorLoginStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loginStaffServlet</servlet-name>
+        <servlet-class>com.zakat.view.loginStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>dbLoginStaff</servlet-name>
+        <servlet-class>com.zakat.controller.dbLoginStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>registerStaff</servlet-name>
+        <servlet-class>com.zakat.model.registerStaff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -73,6 +105,38 @@
     <servlet-mapping>
         <servlet-name>successLoginStudent</servlet-name>
         <url-pattern>/successLoginStudent.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dbRegisterStaff</servlet-name>
+        <url-pattern>/dbRegisterStaff.controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>successRegisterStaff</servlet-name>
+        <url-pattern>/successRegisterStaff.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>successLoginStaff</servlet-name>
+        <url-pattern>/successLoginStaff.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>errorLoginStudent</servlet-name>
+        <url-pattern>/errorLoginStudent.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>errorLoginStaff</servlet-name>
+        <url-pattern>/errorLoginStaff.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginStaffServlet</servlet-name>
+        <url-pattern>/loginStaffServlet.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dbLoginStaff</servlet-name>
+        <url-pattern>/dbLoginStaff.controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registerStaff</servlet-name>
+        <url-pattern>/registerStaff.model</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
