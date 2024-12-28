@@ -11,33 +11,60 @@ package com.zakat.model;
  */
 public class Admin {
     private String adminID;
-    private String adminName;
+    private String username;
     private String adminPassword;
-    private String adminEmail;
     private String adminPhoneNum;
 
-    public Admin(String adminID, String adminName, String adminPassword, 
-                 String adminEmail, String adminPhoneNum) {
+    public Admin() {
+    }
+
+    public Admin(String adminID, String username, String adminPassword, String adminPhoneNum) {
         this.adminID = adminID;
-        this.adminName = adminName;
+        this.username = username;
         this.adminPassword = adminPassword;
-        this.adminEmail = adminEmail;
         this.adminPhoneNum = adminPhoneNum;
     }
 
-    // Getters and Setters
-    public String getAdminID() { return adminID; }
-    public void setAdminID(String adminID) { this.adminID = adminID; }
 
-    public String getAdminName() { return adminName; }
-    public void setAdminName(String adminName) { this.adminName = adminName; }
+    public String getAdminID() {
+        return this.adminID;
+    }
 
-    public String getAdminPassword() { return adminPassword; }
-    public void setAdminPassword(String adminPassword) { this.adminPassword = adminPassword; }
+    public void setAdminID(String adminID) {
+        this.adminID = adminID;
+    }
 
-    public String getAdminEmail() { return adminEmail; }
-    public void setAdminEmail(String adminEmail) { this.adminEmail = adminEmail; }
+    public String getUsername() {
+        return this.username;
+    }
 
-    public String getAdminPhoneNum() { return adminPhoneNum; }
-    public void setAdminPhoneNum(String adminPhoneNum) { this.adminPhoneNum = adminPhoneNum; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAdminPassword() {
+        return this.adminPassword;
+    }
+
+    public void setAdminPassword(String adminPassword) {
+        this.adminPassword = adminPassword;
+    }
+
+    public String getAdminPhoneNum() {
+        return this.adminPhoneNum;
+    }
+
+    public void setAdminPhoneNum(String adminPhoneNum) {
+        this.adminPhoneNum = adminPhoneNum;
+    }
+    @Override
+    public String toString() {
+        return "{" +
+            " adminID='" + getAdminID() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", adminPassword='" + getAdminPassword() + "'" +
+            ", adminPhoneNum='" + getAdminPhoneNum() + "'" +
+            "}";
+    }
 }
+   
