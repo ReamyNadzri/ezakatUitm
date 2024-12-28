@@ -253,7 +253,7 @@ public class addZakatServlet extends HttpServlet {
                     String applicationZakatSQL = "INSERT INTO APPLICATION (STUDENTID, ZAKATID, BANTUANMAKAN, BANTUANKEWANGAN, BANTUANKEWANGANNAMA, BANTUANKEWANGANNILAI, GRADYEAR, CGPA, GPA, STUDENTLETTER, TRANSCRIPTDOC, ICDOC,  BANKNO, BANKNAME)"
                             + "VALUE (";
                     
-);
+
                           
                     
                 }catch(Exception e){
