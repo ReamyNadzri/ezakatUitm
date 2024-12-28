@@ -18,10 +18,11 @@ public class Donator {
     private String state;
     private String city;
     private String noic;  // National ID
-    private String adminID;  // FK
 
-    public Donator(String donatorID, String username, String password, String email, String phoneNum, 
-                   String state, String city, String noic, String adminID) {
+    public Donator() {
+    }
+
+    public Donator(String donatorID, String username, String password, String email, String phoneNum, String state, String city, String noic) {
         this.donatorID = donatorID;
         this.username = username;
         this.password = password;
@@ -30,34 +31,85 @@ public class Donator {
         this.state = state;
         this.city = city;
         this.noic = noic;
-        this.adminID = adminID;
     }
 
-    // Getters and Setters
-    public String getDonatorID() { return donatorID; }
-    public void setDonatorID(String donatorID) { this.donatorID = donatorID; }
+    public String getDonatorID() {
+        return this.donatorID;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public void setDonatorID(String donatorID) {
+        this.donatorID = donatorID;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getUsername() {
+        return this.username;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public String getPhoneNum() { return phoneNum; }
-    public void setPhoneNum(String phoneNum) { this.phoneNum = phoneNum; }
+    public String getPassword() {
+        return this.password;
+    }
 
-    public String getState() { return state; }
-    public void setState(String state) { this.state = state; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
+    public String getEmail() {
+        return this.email;
+    }
 
-    public String getNoic() { return noic; }
-    public void setNoic(String noic) { this.noic = noic; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getAdminID() { return adminID; }
-    public void setAdminID(String adminID) { this.adminID = adminID; }
+    public String getPhoneNum() {
+        return this.phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getState() {
+        return this.state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return this.city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getNoic() {
+        return this.noic;
+    }
+
+    public void setNoic(String noic) {
+        this.noic = noic;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " donatorID='" + getDonatorID() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", phoneNum='" + getPhoneNum() + "'" +
+            ", state='" + getState() + "'" +
+            ", city='" + getCity() + "'" +
+            ", noic='" + getNoic() + "'" +
+            "}";
+    }
+
+
 }

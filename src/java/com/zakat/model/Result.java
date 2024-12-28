@@ -14,40 +14,57 @@ public class Result {
     private String resultDate;
     private String resultStatus;
     private double total;
-    private String zakatID;  // FK
-    private String staffID;  // FK
-    private String adminID;  // FK
 
-    public Result(String resultID, String resultDate, String resultStatus, double total, 
-                  String zakatID, String staffID, String adminID) {
+    public Result() {
+    }
+
+    public Result(String resultID, String resultDate, String resultStatus, double total) {
         this.resultID = resultID;
         this.resultDate = resultDate;
         this.resultStatus = resultStatus;
         this.total = total;
-        this.zakatID = zakatID;
-        this.staffID = staffID;
-        this.adminID = adminID;
     }
 
-    // Getters and Setters
-    public String getResultID() { return resultID; }
-    public void setResultID(String resultID) { this.resultID = resultID; }
+    public String getResultID() {
+        return this.resultID;
+    }
 
-    public String getResultDate() { return resultDate; }
-    public void setResultDate(String resultDate) { this.resultDate = resultDate; }
+    public void setResultID(String resultID) {
+        this.resultID = resultID;
+    }
 
-    public String getResultStatus() { return resultStatus; }
-    public void setResultStatus(String resultStatus) { this.resultStatus = resultStatus; }
+    public String getResultDate() {
+        return this.resultDate;
+    }
 
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
+    public void setResultDate(String resultDate) {
+        this.resultDate = resultDate;
+    }
 
-    public String getZakatID() { return zakatID; }
-    public void setZakatID(String zakatID) { this.zakatID = zakatID; }
+    public String getResultStatus() {
+        return this.resultStatus;
+    }
 
-    public String getStaffID() { return staffID; }
-    public void setStaffID(String staffID) { this.staffID = staffID; }
+    public void setResultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
+    }
 
-    public String getAdminID() { return adminID; }
-    public void setAdminID(String adminID) { this.adminID = adminID; }
+    public double getTotal() {
+        return this.total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " resultID='" + getResultID() + "'" +
+            ", resultDate='" + getResultDate() + "'" +
+            ", resultStatus='" + getResultStatus() + "'" +
+            ", total='" + getTotal() + "'" +
+            "}";
+    }
 }
+    

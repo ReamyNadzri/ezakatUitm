@@ -5,6 +5,7 @@ package com.zakat.model;
  */
 public class Student{
 
+    private String studentId;
     private String password;
     private String matricno;
     private String name;
@@ -19,7 +20,8 @@ public class Student{
     public Student() {
     }
 
-    public Student(String password, String matricno, String name, String icnom, String courceCode, String courseName, String campus, String email, String phoneNum, String address) {
+    public Student(String studentId, String password, String matricno, String name, String icnom, String courceCode, String courseName, String campus, String email, String phoneNum, String address) {
+        this.studentId = studentId;
         this.password = password;
         this.matricno = matricno;
         this.name = name;
@@ -30,6 +32,14 @@ public class Student{
         this.email = email;
         this.phoneNum = phoneNum;
         this.address = address;
+    }
+
+    public String getStudentId() {
+        return this.studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public String getPassword() {
@@ -115,7 +125,8 @@ public class Student{
     @Override
     public String toString() {
         return "{" +
-            " password='" + getPassword() + "'" +
+            " studentId='" + getStudentId() + "'" +
+            ", password='" + getPassword() + "'" +
             ", matricno='" + getMatricno() + "'" +
             ", name='" + getName() + "'" +
             ", icnom='" + getIcnom() + "'" +
