@@ -1,52 +1,59 @@
 <%@ page import="java.sql.*" %>
-<jsp:include page="dbRegisterStudent.jsp" />
 
 <%
+    // Retrieve form parameters
     String name = request.getParameter("name");
-    String matricNumber = request.getParameter("matric_number");
-    String icNumber = request.getParameter("ic_number");
-    String courseCode = request.getParameter("course_code");
+     String matricNumber = request.getParameter("matricNumber");
+    String icNumber = request.getParameter("icNumber");
+    String courseCode = request.getParameter("courseCode");
     String campus = request.getParameter("campus");
-    String phoneNumber = request.getParameter("phone_number");
+    String phoneNumber = request.getParameter("phoneNumber");
     String email = request.getParameter("email");
     String password = request.getParameter("password");
 
-    // Hash the password for security (optional, requires additional setup)
-    // String hashedPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
-
+    Connection conn = null;
     PreparedStatement pstmt = null;
 
     try {
-        Connection conn = (Connection) pageContext.getAttribute("conn");
+        // Load JDBC driver for Java DB
+        Class.forName("com.mysql.jdbc.Driver");
 
-        if (conn != null) {
-            // Correct SQL query
-            String sql = "INSERT INTO studentregister (studentName, matricNumber, icNum, courseCode, campus, phoneNum, email, password) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            pstmt = conn.prepareStatement(sql);
+        // Establish database connection to Java DB
+        String dbUrl = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
+        String dbUser = "root";
+        String dbPassword = "";
+        conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
-            pstmt.setString(1, name);
-            pstmt.setString(2, matricNumber);
-            pstmt.setString(3, icNumber);
-            pstmt.setString(4, courseCode);
-            pstmt.setString(5, campus);
-            pstmt.setString(6, phoneNumber);
-            pstmt.setString(7, email);
-            pstmt.setString(8, password); // Replace with `hashedPassword` if hashing is implemented
+        // SQL query for inserting a student record
+        String sql = "INSERT INTO studentregister (name, matricNumber, icNumber, courseCode, campus, phoneNumber, email, password) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        pstmt = conn.prepareStatement(sql);
 
-            int rowsInserted = pstmt.executeUpdate();
+        pstmt.setString(1, name);
+        pstmt.setString(2, matricNumber);
+        pstmt.setString(3, icNumber);
+        pstmt.setString(4, courseCode);
+        pstmt.setString(5, campus);
+        pstmt.setString(6, phoneNumber);
+        pstmt.setString(7, email);
+        pstmt.setString(8, password); // Optionally hash the password for security
 
-            if (rowsInserted > 0) {
-                response.sendRedirect("studentForm.jsp?success=true"); // Redirect with success flag
-            } else {
-                out.println("<p style='color:red;'>Registration failed. Please try again.</p>");
-            }
+        // Execute the SQL statement
+        int rowsInserted = pstmt.executeUpdate();
+
+        if (rowsInserted > 0) {
+            response.sendRedirect("studentForm.jsp?success=true");
+            out.println("<p>Success</p>");// Redirect with success flag
         } else {
-            out.println("<p style='color:red;'>Error: Database connection is not available.</p>");
+            out.println("<p style='color:red;'>Registration failed. Please try again.</p>");
         }
+    } catch (ClassNotFoundException e) {
+        out.println("<p style='color:red;'>Error: Java DB driver not found.</p>");
     } catch (SQLException e) {
         out.println("<p style='color:red;'>SQL Error: " + e.getMessage() + "</p>");
     } finally {
+        // Close resources
         if (pstmt != null) try { pstmt.close(); } catch (SQLException ignore) {}
+        if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
     }
 %>

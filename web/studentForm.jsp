@@ -1,3 +1,5 @@
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -101,9 +103,21 @@
     </style>
 </head>
 <body>
-    <!-- Button to Open Modal -->
-    <button id="openModal">Register As Student</button>
-
+    <sql:setDataSource var="myDatasource"
+                driver="com.mysql.jdbc.Driver"
+                url="jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull"
+                user="root"
+                password="" />
+    
+    <c:set var="matricNumber" value="${param.matricNumber}" />
+    <c:set var="name" value="${param.name}" />
+    <c:set var="icNumber" value="${param.icNumber}" />
+    <c:set var="courseCode" value="${param.courseCode}" />
+    <c:set var="campus" value="${param.campus}" />
+    <c:set var="phoneNumber" value="${param.phoneNumber}" />
+    <c:set var="email" value="${param.email}" />
+    <c:set var="password" value="${param.password}" />
+            
     <!-- Register Modal -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
@@ -112,24 +126,29 @@
             </div>
             <!-- Student Registration Form -->
             <form action="successRegisterStudent.jsp" method="post">
+                <input type="text" name="matricNumber" placeholder="No. Matrik..." required>
                 <input type="text" name="name" placeholder="Nama Penuh..." required>
-                <input type="text" name="matric_number" placeholder="No. Matrik..." required>
-                <input type="text" name="ic_number" placeholder="No. Kad Pengenalan (tanpa '-')..." required>
+                <input type="text" name="icNumber" placeholder="No. Kad Pengenalan (tanpa '-')..." required>
                 
                 <!-- Select element for course code -->
                 <div class="selek">
-                    <select name="course_code" required>
+                    <select name="courseCode" required>
                         <option value="" disabled selected>Pilih Program Pengajian Anda...</option>
-                        <option value="CS101">CDCS110 - Diploma Sains Komputer</option>
-                        <option value="CS102">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>
-                        <option value="CS103">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>
-                        <option value="CS104">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>
-                        <option value="CS104">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>
+                        <option value="CDCS110">CDCS110 - Diploma Sains Komputer</option>
+                        <option value="CDCS230">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>
+                        <option value="CDCS264">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>
+                        <option value="CDCS267">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>
+                        <option value="CDCS270">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>
                     </select>
                 </div>
                 
-                <input type="text" name="campus" placeholder="Kampus..." required>
-                <input type="text" name="phone_number" placeholder="Nombor Telefon (without '-')..." required>
+                <select name="campus" required>
+                        <option value="" disabled selected>Pilih Kampus Anda Anda...</option>
+                        <option value="UiTM Kuala Terengganu">UiTM Kuala Terengganu</option>
+                        <option value="UiTM Dungun">UiTM Dungun</option>
+                        <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>
+                    </select>
+                <input type="text" name="phoneNumber" placeholder="Nombor Telefon (without '-')..." required>
                 <input type="email" name="email" placeholder="Email..." required>
                 <input type="password" name="password" placeholder="Password..." required>
                 
@@ -152,10 +171,10 @@
     <script>
         const modal = document.getElementById('registerModal');
         const modalContent = document.querySelector('.modal-content');
-        const openModalBtn = document.getElementById('openModal');
         const closeModalBtn = document.getElementById('closeModal');
 
-        openModalBtn.onclick = function () {
+        // Automatically show modal when page loads
+        window.onload = function () {
             modal.style.display = 'block';
             setTimeout(() => modal.classList.add('show'), 10); // Add the "show" class to trigger animation
         };
@@ -169,13 +188,6 @@
             if (event.target === modal) {
                 modal.classList.remove('show');
                 setTimeout(() => modal.style.display = 'none', 300);
-            }
-        };
-         // Show the popup when the page loads
-        window.onload = function() {
-            var successMessage = "<%= request.getAttribute("successMessage") %>";
-            if (successMessage && successMessage.trim() !== "null") {
-                document.getElementById('popup').style.display = 'block';
             }
         };
     </script>

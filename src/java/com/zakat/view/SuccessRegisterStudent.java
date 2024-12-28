@@ -16,9 +16,14 @@ public class SuccessRegisterStudent extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get form data submitted from studentForm.jsp
-        String studentName = request.getParameter("studentName");
-        String studentEmail = request.getParameter("studentEmail");
-        String studentID = request.getParameter("studentID");
+        String name = request.getParameter("name");
+        String matricNumber = request.getParameter("matricNumber");
+        String icNumber = request.getParameter("icNumber");
+        String courseCode = request.getParameter("courseCode");
+        String campus = request.getParameter("campus");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
         // Optional: You can add a validation step here or store the student data in a database
         boolean registrationSuccess = true; // Assume the registration is successful
@@ -39,6 +44,6 @@ public class SuccessRegisterStudent extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Redirect GET requests to the form page
-        response.sendRedirect("studentForm.jsp");
+        response.sendRedirect("successRegisterStudent.jsp");
     }
 }
