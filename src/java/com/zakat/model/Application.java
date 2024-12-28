@@ -8,56 +8,179 @@ package com.zakat.model;
 /**
  *
  * @author user
- */public class Application {
-    private String applicationID;
-    private String applicationDate;
-    private String applicationStatus;
-    private String studentID;  // FK
-    private String zakatID;    // FK
-    private String staffID;    // FK
-    
-    //super
-    ZakatCategory zakatCategory;
-    
+ */
+public class Application {
+
+        private String applyID;
+        private String studentId;
+        private String bantuanMakan;
+        private String bantuanKewangan;
+        private String bantuanKewanganNama;
+        private String bantuanKewanganNilai;
+        private int gradYear;
+        private String studentLetter;
+        private String transcriptDoc;
+        private String icDoc;
+        private String bankNo;
+        private String bankName;
+
+        ZakatCategory zakatcategory;
+
+
     public Application() {
-        this.applicationID = "";
-        this.applicationDate = "";
-        this.applicationStatus = "";
-        this.studentID = "";
-        this.zakatID = "";
-        this.staffID = "";
-        
-        zakatCategory = new ZakatCategory();
+        applyID = "";
+        studentId = "";
+        bantuanMakan = "";
+        bantuanKewangan = "";
+        bantuanKewanganNama = "";
+        bantuanKewanganNilai = "";
+        gradYear = 0;
+        studentLetter = "";
+        transcriptDoc = "";
+        icDoc = "";
+        bankNo = "";
+        bankName = "";
+
+        zakatcategory = new ZakatCategory();
     }
 
-    public Application(String applicationID, String applicationDate, String applicationStatus, 
-                       String studentID, String zakatID, String staffID, ZakatCategory zakatcategory) {
+    public Application(String applyID, String studentId, String bantuanMakan, String bantuanKewangan, String bantuanKewanganNama, String bantuanKewanganNilai, int gradYear, String studentLetter, String transcriptDoc, String icDoc, String bankNo, String bankName, ZakatCategory zakatcategory) {
         
-        this.applicationID = applicationID;
-        this.applicationDate = applicationDate;
-        this.applicationStatus = applicationStatus;
-        this.studentID = studentID;
-        this.zakatID = zakatID;
-        this.staffID = staffID;
-        this.zakatCategory = zakatcategory;
+        this.applyID = applyID;
+        this.studentId = studentId;
+        this.bantuanMakan = bantuanMakan;
+        this.bantuanKewangan = bantuanKewangan;
+        this.bantuanKewanganNama = bantuanKewanganNama;
+        this.bantuanKewanganNilai = bantuanKewanganNilai;
+        this.gradYear = gradYear;
+        this.studentLetter = studentLetter;
+        this.transcriptDoc = transcriptDoc;
+        this.icDoc = icDoc;
+        this.bankNo = bankNo;
+        this.bankName = bankName;
+        this.zakatcategory = zakatcategory;
     }
 
-    // Getters and Setters
-    public String getApplicationID() { return applicationID; }
-    public void setApplicationID(String applicationID) { this.applicationID = applicationID; }
+    public String getApplyID() {
+        return this.applyID;
+    }
 
-    public String getApplicationDate() { return applicationDate; }
-    public void setApplicationDate(String applicationDate) { this.applicationDate = applicationDate; }
+    public void setApplyID(String applyID) {
+        this.applyID = applyID;
+    }
 
-    public String getApplicationStatus() { return applicationStatus; }
-    public void setApplicationStatus(String applicationStatus) { this.applicationStatus = applicationStatus; }
+    public String getStudentId() {
+        return this.studentId;
+    }
 
-    public String getStudentID() { return studentID; }
-    public void setStudentID(String studentID) { this.studentID = studentID; }
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
 
-    public String getZakatID() { return zakatID; }
-    public void setZakatID(String zakatID) { this.zakatID = zakatID; }
+    public String getBantuanMakan() {
+        return this.bantuanMakan;
+    }
 
-    public String getStaffID() { return staffID; }
-    public void setStaffID(String staffID) { this.staffID = staffID; }
-}
+    public void setBantuanMakan(String bantuanMakan) {
+        this.bantuanMakan = bantuanMakan;
+    }
+
+    public String getBantuanKewangan() {
+        return this.bantuanKewangan;
+    }
+
+    public void setBantuanKewangan(String bantuanKewangan) {
+        this.bantuanKewangan = bantuanKewangan;
+    }
+
+    public String getBantuanKewanganNama() {
+        return this.bantuanKewanganNama;
+    }
+
+    public void setBantuanKewanganNama(String bantuanKewanganNama) {
+        this.bantuanKewanganNama = bantuanKewanganNama;
+    }
+
+    public String getBantuanKewanganNilai() {
+        return this.bantuanKewanganNilai;
+    }
+
+    public void setBantuanKewanganNilai(String bantuanKewanganNilai) {
+        this.bantuanKewanganNilai = bantuanKewanganNilai;
+    }
+
+    public int getGradYear() {
+        return this.gradYear;
+    }
+
+    public void setGradYear(int gradYear) {
+        this.gradYear = gradYear;
+    }
+
+    public String getStudentLetter() {
+        return this.studentLetter;
+    }
+
+    public void setStudentLetter(String studentLetter) {
+        this.studentLetter = studentLetter;
+    }
+
+    public String getTranscriptDoc() {
+        return this.transcriptDoc;
+    }
+
+    public void setTranscriptDoc(String transcriptDoc) {
+        this.transcriptDoc = transcriptDoc;
+    }
+
+    public String getIcDoc() {
+        return this.icDoc;
+    }
+
+    public void setIcDoc(String icDoc) {
+        this.icDoc = icDoc;
+    }
+
+    public String getBankNo() {
+        return this.bankNo;
+    }
+
+    public void setBankNo(String bankNo) {
+        this.bankNo = bankNo;
+    }
+
+    public String getBankName() {
+        return this.bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " applyID='" + getApplyID() + "'" +
+            ", studentId='" + getStudentId() + "'" +
+            ", bantuanMakan='" + getBantuanMakan() + "'" +
+            ", bantuanKewangan='" + getBantuanKewangan() + "'" +
+            ", bantuanKewanganNama='" + getBantuanKewanganNama() + "'" +
+            ", bantuanKewanganNilai='" + getBantuanKewanganNilai() + "'" +
+            ", gradYear='" + getGradYear() + "'" +
+            ", studentLetter='" + getStudentLetter() + "'" +
+            ", transcriptDoc='" + getTranscriptDoc() + "'" +
+            ", icDoc='" + getIcDoc() + "'" +
+            ", bankNo='" + getBankNo() + "'" +
+            ", bankName='" + getBankName() + "'" +
+            "}";
+    }
+
+
+
+
+ }
+
+
+
+
+   

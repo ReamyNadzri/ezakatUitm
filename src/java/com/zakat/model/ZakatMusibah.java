@@ -11,31 +11,41 @@ package com.zakat.model;
  */
 public class ZakatMusibah extends ZakatCategory {
     private String reason;
+    private String musibahDate;
     private double totalCost;
     private String costDoc;
     private String reasonDoc;
 
-    // Constructor
-    public ZakatMusibah(String zakatID, String zakatName, String description, String applyID,
-                        String reason, double totalCost, String costDoc, String reasonDoc) {
-        super(zakatID, zakatName, description, applyID);
+    public ZakatMusibah() {
+    }
+
+    public ZakatMusibah(String zakatID, String zakatName, String description, String reason, String musibahDate, double totalCost, String costDoc, String reasonDoc) {
+        super(zakatID, zakatName, description);
         this.reason = reason;
+        this.musibahDate = musibahDate;
         this.totalCost = totalCost;
         this.costDoc = costDoc;
         this.reasonDoc = reasonDoc;
     }
 
-    // Getters and Setters
     public String getReason() {
-        return reason;
+        return this.reason;
     }
 
     public void setReason(String reason) {
         this.reason = reason;
     }
 
+    public String getMusibahDate() {
+        return this.musibahDate;
+    }
+
+    public void setMusibahDate(String musibahDate) {
+        this.musibahDate = musibahDate;
+    }
+
     public double getTotalCost() {
-        return totalCost;
+        return this.totalCost;
     }
 
     public void setTotalCost(double totalCost) {
@@ -43,7 +53,7 @@ public class ZakatMusibah extends ZakatCategory {
     }
 
     public String getCostDoc() {
-        return costDoc;
+        return this.costDoc;
     }
 
     public void setCostDoc(String costDoc) {
@@ -51,11 +61,26 @@ public class ZakatMusibah extends ZakatCategory {
     }
 
     public String getReasonDoc() {
-        return reasonDoc;
+        return this.reasonDoc;
     }
 
     public void setReasonDoc(String reasonDoc) {
         this.reasonDoc = reasonDoc;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " reason='" + getReason() + "'" +
+            ", musibahDate='" + getMusibahDate() + "'" +
+            ", totalCost='" + getTotalCost() + "'" +
+            ", costDoc='" + getCostDoc() + "'" +
+            ", reasonDoc='" + getReasonDoc() + "'" +
+            "}";
+    }
+
+
+
+
 }
+

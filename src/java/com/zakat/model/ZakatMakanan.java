@@ -10,43 +10,33 @@ package com.zakat.model;
  * @author user
  */
 public class ZakatMakanan extends ZakatCategory {
-    private String state;
-    private String city;
-    private double totalAmount;
+    private String cafe;
 
-    // Constructor
-    public ZakatMakanan(String zakatID, String zakatName, String description, String applyID,
-                        String state, String city, double totalAmount) {
-        super(zakatID, zakatName, description, applyID);
-        this.state = state;
-        this.city = city;
-        this.totalAmount = totalAmount;
+    public ZakatMakanan() {
     }
 
-    // Getters and Setters
-    public String getState() {
-        return state;
+    public ZakatMakanan(String zakatID, String zakatName, String description, String cafe) {
+        super(zakatID, zakatName, description);
+        this.cafe = cafe;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public String getCafe() {
+        return this.cafe;
     }
 
-    public String getCity() {
-        return city;
+    public void setCafe(String cafe) {
+        this.cafe = cafe;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    @Override
+    public String toString() {
+        return "{" +
+            " cafe='" + getCafe() + "'" +
+            "}";
     }
+    
+    
 
-    public double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
+    
     
 }

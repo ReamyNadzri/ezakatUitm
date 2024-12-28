@@ -10,62 +10,69 @@ package com.zakat.model;
  * @author user
  */
 public class ZakatKolej extends ZakatCategory {
-    private String studentID;
-    private double requestedAmount;
-    private double approvedAmount;
-    private String justification;
-    private String approvalStatus;
+    private String kolejName;
+    private double totalKolej;
+    private String electronicAppliance;
+    private String kolejDoc;
 
-    // Constructor
-    public ZakatKolej(String zakatID, String zakatName, String description, String applyID,
-                      String studentID, double requestedAmount, double approvedAmount,
-                      String justification, String approvalStatus) {
-        super(zakatID, zakatName, description, applyID);
-        this.studentID = studentID;
-        this.requestedAmount = requestedAmount;
-        this.approvedAmount = approvedAmount;
-        this.justification = justification;
-        this.approvalStatus = approvalStatus;
+    public ZakatKolej() {
+        kolejName = "";
+        totalKolej = 0;
+        electronicAppliance = "";
+        kolejDoc = "";
     }
 
-    // Getters and Setters
-    public String getStudentID() {
-        return studentID;
+    public ZakatKolej(String zakatID, String zakatName, String description, String kolejName, double totalKolej, String electronicAppliance, String kolejDoc) {
+        super(zakatID, zakatName, description);
+        this.kolejName = kolejName;
+        this.totalKolej = totalKolej;
+        this.electronicAppliance = electronicAppliance;
+        this.kolejDoc = kolejDoc;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public String getKolejName() {
+        return this.kolejName;
     }
 
-    public double getRequestedAmount() {
-        return requestedAmount;
+    public void setKolejName(String kolejName) {
+        this.kolejName = kolejName;
     }
 
-    public void setRequestedAmount(double requestedAmount) {
-        this.requestedAmount = requestedAmount;
+    public double getTotalKolej() {
+        return this.totalKolej;
     }
 
-    public double getApprovedAmount() {
-        return approvedAmount;
+    public void setTotalKolej(double totalKolej) {
+        this.totalKolej = totalKolej;
     }
 
-    public void setApprovedAmount(double approvedAmount) {
-        this.approvedAmount = approvedAmount;
+    public String getElectronicAppliance() {
+        return this.electronicAppliance;
     }
 
-    public String getJustification() {
-        return justification;
+    public void setElectronicAppliance(String electronicAppliance) {
+        this.electronicAppliance = electronicAppliance;
     }
 
-    public void setJustification(String justification) {
-        this.justification = justification;
+    public String getKolejDoc() {
+        return this.kolejDoc;
     }
 
-    public String getApprovalStatus() {
-        return approvalStatus;
+    public void setKolejDoc(String kolejDoc) {
+        this.kolejDoc = kolejDoc;
     }
 
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
+    @Override
+    public String toString() {
+        return "{" +
+            " kolejName='" + getKolejName() + "'" +
+            ", totalKolej='" + getTotalKolej() + "'" +
+            ", electronicAppliance='" + getElectronicAppliance() + "'" +
+            ", kolejDoc='" + getKolejDoc() + "'" +
+            "}";
     }
+
+
+
+    
 }

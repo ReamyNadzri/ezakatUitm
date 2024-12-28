@@ -12,20 +12,20 @@ package com.zakat.model;
 public class ZakatYuran extends ZakatCategory {
     private double totalYuranAmount;
     private String yuranDoc;
-    private String entrySession;
+    private String entrySessionDoc;
 
-    // Constructor
-    public ZakatYuran(String zakatID, String zakatName, String description, String applyID,
-                      double totalYuranAmount, String yuranDoc, String entrySession) {
-        super(zakatID, zakatName, description, applyID);
-        this.totalYuranAmount = totalYuranAmount;
-        this.yuranDoc = yuranDoc;
-        this.entrySession = entrySession;
+    public ZakatYuran() {
     }
 
-    // Getters and Setters
+
+    public ZakatYuran(String zakatID, String zakatName, String description, double totalYuranAmount, String yuranDoc, String entrySessionDoc) {
+        super(zakatID, zakatName, description);
+        this.totalYuranAmount = totalYuranAmount;
+        this.yuranDoc = yuranDoc;
+        this.entrySessionDoc = entrySessionDoc;
+    }
     public double getTotalYuranAmount() {
-        return totalYuranAmount;
+        return this.totalYuranAmount;
     }
 
     public void setTotalYuranAmount(double totalYuranAmount) {
@@ -33,18 +33,28 @@ public class ZakatYuran extends ZakatCategory {
     }
 
     public String getYuranDoc() {
-        return yuranDoc;
+        return this.yuranDoc;
     }
 
     public void setYuranDoc(String yuranDoc) {
         this.yuranDoc = yuranDoc;
     }
 
-    public String getEntrySession() {
-        return entrySession;
+    public String getEntrySessionDoc() {
+        return this.entrySessionDoc;
     }
 
-    public void setEntrySession(String entrySession) {
-        this.entrySession = entrySession;
+    public void setEntrySessionDoc(String entrySessionDoc) {
+        this.entrySessionDoc = entrySessionDoc;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " totalYuranAmount='" + getTotalYuranAmount() + "'" +
+            ", yuranDoc='" + getYuranDoc() + "'" +
+            ", entrySessionDoc='" + getEntrySessionDoc() + "'" +
+            "}";
+    }
+
 }

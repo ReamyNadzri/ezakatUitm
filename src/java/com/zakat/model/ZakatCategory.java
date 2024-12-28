@@ -13,23 +13,23 @@ public class ZakatCategory {
     private String zakatID;
     private String zakatName;
     private String description;
-    private String applyID;  // Foreign Key (FK)
+    
     
     // Constructor
     public ZakatCategory() {
         this.zakatID = "";
         this.zakatName = "";
         this.description = "";
-        this.applyID = "";
+        
     }
     
 
     // Constructor
-    public ZakatCategory(String zakatID, String zakatName, String description, String applyID) {
+    public ZakatCategory(String zakatID, String zakatName, String description) {
         this.zakatID = zakatID;
         this.zakatName = zakatName;
         this.description = description;
-        this.applyID = applyID;
+        
     }
     
 
@@ -58,11 +58,4 @@ public class ZakatCategory {
         this.description = description;
     }
 
-    public String getApplyID() {
-        return applyID;
-    }
-
-    public void setApplyID(String applyID) {
-        this.applyID = applyID;
-    }
 }
