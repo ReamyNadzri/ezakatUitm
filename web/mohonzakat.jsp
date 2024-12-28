@@ -121,11 +121,14 @@
                     </div>
                 </div>
                 <hr>
-                <form action="addZakat.do" method="post" id="zakatForm" enctype="multipart/form-data">
+                <form action="addzakat.do" method="post" id="zakatForm" enctype="multipart/form-data">
                     <div class="w3-col w3-margin-bottom">
                         <div class="w3-cell w3-panel">
                             <b>Sesi Tawaran</b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" value="OKT2024/FEB2025" name="applyID" id="" size="50%" value="OKT2024/FEB2025" disabled>
+                            <select class="w3-input" name='applyID' value="OKT2024-FEB2025" required>  <!--tukar dgn gradDate-->
+                                        <option value='OKT2024-FEB2025'>OKT2024-FEB2025</option>
+                                        
+                                    </select>
                         </div> <!--applyID-->
                         <div class="w3-cell w3-panel">
                             <b>Semester Semasa <span style="color: red;">*</span></b><br>
@@ -307,7 +310,7 @@
                                     
                                     <div class="w3-cell" style="">
                                         <b>Jumlah yuran (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" value="0.0" id="" size="50%" required>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" value="0" id="" size="50%" required>
                                     </div>
 
                                 </div>

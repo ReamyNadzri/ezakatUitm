@@ -104,7 +104,7 @@
                         <div class="w3-panel">
                             Adakah anda mendapat bantuan insentif Makanan UiTM (RM 120)<span style="color: red;">*</span>
                             <%
-                                String insetifMakanan = (String) request.getAttribute("insetifMakanan");
+                                String insetifMakanan = (String) request.getAttribute("insentifmakanan");
              
                             %>
                             <input 
@@ -115,7 +115,7 @@
                                 value="Ya" 
                                 disabled
                                 <%
-                                    if("true".equals(request.getAttribute("insetifMakanan")))
+                                    if("Ya".equals(request.getAttribute("insentifmakanan")))
                                        out.print("checked");
                                  %>   
                             > Ya
@@ -127,7 +127,7 @@
                                 value="Tidak" 
                                 disabled
                                 <%
-                                    if("false".equals(request.getAttribute("insetifMakanan")))
+                                    if("Tidak".equals(request.getAttribute("insentifmakanan")))
                                        out.print("checked");
                                  %>  
                             > Tidak
@@ -148,7 +148,7 @@
                                 id="yesBantuan" 
                                 disabled
                                 <%
-                                    if("true".equals(request.getAttribute("bantuan")))
+                                    if("Ya".equals(request.getAttribute("bantuan")))
                                        out.print("checked");
                                  %> 
                             > Ya
@@ -162,7 +162,7 @@
                                 id="noBantuan" 
                                 disabled
                                 <%
-                                    if("false".equals(request.getAttribute("bantuan")))
+                                    if("Tidak".equals(request.getAttribute("bantuan")))
                                        out.print("checked");
                                  %>
                             > Tidak
@@ -228,7 +228,7 @@
                                 <div class="w3-cell">
                                     <b>Pilih tahun graduasi <span style="color: red;">*</span></b><br>
                                     <select class="w3-input" name='gradYear' disabled>  <!--tukar dgn gradDate-->
-                                        <option value='${year}'><%=request.getAttribute("year")%></option>
+                                        <option value='${year}'><%=request.getAttribute("gradYear")%></option>
                                     </select>
                                 </div>
                                 <div class="w3-cell" style="width:30px"></div>
@@ -255,7 +255,7 @@
                          
                             <!-- Additional Inputs -->
                             <div id="" class="w3-margin-top ">
-
+                            <form action="addzakat.do" method="post" >
                                 <h3 for="musibahDetails">Zakat Musibah Details:   
                                     <%
                                         if("TIDAK MEMOHON".equals(request.getAttribute("reason"))){
@@ -295,7 +295,7 @@
                                     <b>Sila masukkan dokumen kerugian dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
                                         <%
-                                        if(request.getAttribute("file4Name")==null){
+                                        if(request.getAttribute("file4Name")==""){
                                             %>
                                             <span style="color: red;"><b>TIDAK LENGKAP</b>
                                             </span>
@@ -310,7 +310,7 @@
                                     <b>Sila masukkan dokumen sebab dibawah</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
                                         <%
-                                        if(request.getAttribute("file5Name")==null){
+                                        if(request.getAttribute("file5Name")==""){
                                             %>
                                             <span style="color: red;"><b>TIDAK LENGKAP</b>
                                             </span>
@@ -324,12 +324,14 @@
                             
                             
                             </div><hr>
+                          
                             <div id="" class="w3-margin-top ">
 
                                 <h3 for="musibahDetails">Zakat Yuran Details:
+                                    
                                 
                                     <%
-                                        if(("0.0").equals(request.getAttribute("totalYuran"))){
+                                        if(0 == Integer.parseInt((String)request.getAttribute("yuran"))){
                                             %>
                                             <span style="color: red;"><b>TIDAK MEMOHON</b>
                                             </span>
@@ -350,7 +352,7 @@
                                     
                                     <div class="w3-cell" style="">
                                         <b>Jumlah yuran (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" id="" size="50%" disabled value="${totalYuran}">
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="yuran" id="" size="50%" disabled value="${yuran}">
                                     </div>
 
                                 </div>
@@ -360,7 +362,7 @@
                                     <b>Sila masukkan resit yuran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
                                         <%
-                                        if(request.getAttribute("file6Name") == null){
+                                        if(request.getAttribute("file6Name") == ""){
                                             %>
                                             <span style="color: red;"><b>TIDAK LENGKAP</b>
                                             </span>
@@ -375,7 +377,7 @@
                                     <b>Sila masukkan dokumen surat tawaran</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
                                         <%
-                                        if(request.getAttribute("file7Name") == null){
+                                        if(request.getAttribute("file7Name") == ""){
                                             %>
                                             <span style="color: red;"><b>TIDAK LENGKAP</b>
                                             </span>
@@ -393,7 +395,7 @@
                                 <h3 for="musibahDetails">Zakat Kolej Details:
                                 
                                 <%
-                                        if(("0.0").equals(request.getAttribute("totalKolej"))){
+                                        if(0 == Integer.parseInt((String)request.getAttribute("totalKolej"))){
                                             %>
                                             <span style="color: red;"><b>TIDAK MEMOHON</b>
                                             </span>
@@ -430,7 +432,7 @@
                                     <b>Sila masukkan borang elektrik</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
                                         <%
-                                        if(request.getAttribute("file8Name")==null){
+                                        if(request.getAttribute("file8Name")==""){
                                             %>
                                             <span style="color: red;"><b>TIDAK LENGKAP</b>
                                             </span>
@@ -445,7 +447,7 @@
                                     <b>Sila masukkan dokumen permohonan kolej yang berjaya</b><span style="color: red;">*</span>
                                     <div class="w3-hover-shadow w3-card w3-round-large w3-padding">
                                         <%
-                                        if(request.getAttribute("file9Name")==null){
+                                        if(request.getAttribute("file9Name")==""){
                                             %>
                                             <span style="color: red;"><b>TIDAK LENGKAP</b>
                                             </span>
@@ -495,26 +497,26 @@
                         </div>
                     </div>
                                            
-                                        <form action="addZakat.do" method="post" >
+                                        
                                             <input type="hidden" name="isSecondSubmission" value="true">
-                                            <input type="hidden" name="applyID"         value="<%= request.getAttribute("applyID") %>">
-                                            <input type="hidden" name="currentSemester" value="<%= request.getAttribute("currentSemester") %>">
-                                            <input type="hidden" name="currentCgpa"     value="<%= request.getAttribute("currentCgpa") %>">
-                                            <input type="hidden" name="currentGpa"      value="<%= request.getAttribute("currentGpa") %>">
-                                            <input type="hidden" name="insentifmakanan" value="<%= request.getAttribute("insentifmakanan") %>">
-                                            <input type="hidden" name="bantuan"         value="<%= request.getAttribute("bantuan") %>">
-                                            <input type="hidden" name="namaBantuan"     value="<%= request.getAttribute("namaBantuan") %>">
-                                            <input type="hidden" name="jumlahBantuan"   value="<%= request.getAttribute("jumlahBantuan") %>">
-                                            <input type="hidden" name="gradYear"        value="<%= request.getAttribute("gradYear") %>">
-                                            <input type="hidden" name="bankName"        value="<%= request.getAttribute("bankName") %>">
-                                            <input type="hidden" name="bankNo"          value="<%= request.getAttribute("bankNo") %>">
-                                            <input type="hidden" name="reason"          value="<%= request.getAttribute("reason") %>">
-                                            <input type="hidden" name="totalLost"       value="<%= request.getAttribute("totalLost") %>">
-                                            <input type="hidden" name="tarikhmusibah"   value="<%= request.getAttribute("tarikhmusibah") %>">
-                                            <input type="hidden" name="yuran"           value="<%= request.getAttribute("yuran") %>">
-                                            <input type="hidden" name="kolej"           value="<%= request.getAttribute("kolej") %>">
-                                            <input type="hidden" name="totalKolej"      value="<%= request.getAttribute("totalKolej") %>">
-                                            <input type="hidden" name="cafe"            value="<%= request.getAttribute("cafe") %>">
+                                            <input type="hidden" name="RapplyID"         value="<%= request.getAttribute("applyID") %>">
+                                            <input type="hidden" name="RcurrentSemester" value="<%= request.getAttribute("currentSemester") %>">
+                                            <input type="hidden" name="RcurrentCgpa"     value="<%= request.getAttribute("currentCgpa") %>">
+                                            <input type="hidden" name="RcurrentGpa"      value="<%= request.getAttribute("currentGpa") %>">
+                                            <input type="hidden" name="Rinsentifmakanan" value="<%= request.getAttribute("insentifmakanan") %>">
+                                            <input type="hidden" name="Rbantuan"         value="<%= request.getAttribute("bantuan") %>">
+                                            <input type="hidden" name="RnamaBantuan"     value="<%= request.getAttribute("namaBantuan") %>">
+                                            <input type="hidden" name="RjumlahBantuan"   value="<%= request.getAttribute("jumlahBantuan") %>">
+                                            <input type="hidden" name="RgradYear"        value="<%= request.getAttribute("gradYear") %>">
+                                            <input type="hidden" name="RbankName"        value="<%= request.getAttribute("bankName") %>">
+                                            <input type="hidden" name="RbankNo"          value="<%= request.getAttribute("bankNo") %>">
+                                            <input type="hidden" name="Rreason"          value="<%= request.getAttribute("reason") %>">
+                                            <input type="hidden" name="RtotalLost"       value="<%= request.getAttribute("totalLost") %>">
+                                            <input type="hidden" name="Rtarikhmusibah"   value="<%= request.getAttribute("tarikhmusibah") %>">
+                                            <input type="hidden" name="Ryuran"           value="<%= request.getAttribute("yuran") %>">
+                                            <input type="hidden" name="Rkolej"           value="<%= request.getAttribute("kolej") %>">
+                                            <input type="hidden" name="RtotalKolej"      value="<%= request.getAttribute("totalKolej") %>">
+                                            <input type="hidden" name="Rcafe"            value="<%= request.getAttribute("cafe") %>">
                                         
                                
                                             <div class="w3-panel w3-center" style="margin-bottom: 5%">
