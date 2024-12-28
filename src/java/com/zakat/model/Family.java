@@ -10,6 +10,7 @@ package com.zakat.model;
  * @author wafi
  */
 public class Family extends Student {
+
     private String fName;
     private String fWork;
     private String fPhoneNum;
@@ -177,5 +178,5 @@ public class Family extends Student {
             "}";
     }
 
-    
-}
+}  
+

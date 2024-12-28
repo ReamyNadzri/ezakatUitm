@@ -22,7 +22,7 @@ public class loginDonatorServlet extends HttpServlet {
             Connection conn = null;
             PreparedStatement pstmt = null;
             
-             conn = DBConnection.getConnection();
+            conn = DBConnection.getConnection();
             
             // Prepare SQL query to validate login credentials
             String query = "SELECT * FROM DONATOR WHERE EMAIL = ? AND PASSWORD = ?";
@@ -36,7 +36,7 @@ public class loginDonatorServlet extends HttpServlet {
             if (rs.next()) {
                 // Successful login, set session attributes
                 HttpSession session = request.getSession();
-                session.setAttribute("id", rs.getInt("ID"));
+                session.setAttribute("id", rs.getInt("DONATORID"));
                 session.setAttribute("username", rs.getString("USERNAME"));
 
                 response.sendRedirect("index.jsp");
