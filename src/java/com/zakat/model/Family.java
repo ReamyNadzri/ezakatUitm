@@ -10,100 +10,173 @@ package com.zakat.model;
  * @author wafi
  */
 public class Family extends Student {
-    private String familyName;
-    private String familyPhone;
-    private String familyAddress;
-    private String guardianName;
-    private String guardianPhone;
-    private String guardianAddress;
-    private double grossIncome;
-    
-    // Constructor
-    /*\public Family(String studentID, String name, String email, String phoneNum,
-                  String familyName, String familyPhone, String familyAddress,
-                  String guardianName, String guardianPhone, String guardianAddress, double grossIncome) {
-        super(studentID, name, email, phoneNum); // Call the Student superclass constructor
-        this.familyName = familyName;
-        this.familyPhone = familyPhone;
-        this.familyAddress = familyAddress;
-        this.guardianName = guardianName;
-        this.guardianPhone = guardianPhone;
-        this.guardianAddress = guardianAddress;
-        this.grossIncome = grossIncome;
-    }*/
 
-    // Getters and Setters for Family class
-    public String getFamilyName() {
-        return familyName;
+    private String fName;
+    private String fWork;
+    private String fPhoneNum;
+    private String mName;
+    private String mWork;
+    private String mPhoneNum;
+    private String guardianRelay;
+    private String guardianWork;
+    private String guardianPhoneNum;
+    private String maritalStatus;
+    private String address;
+    private String postcode;
+    private int grossIncomeM;
+    private int grossIncomeF;
+
+    public Family() {
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
+    public Family(String fName, String fWork, String fPhoneNum, String mName, String mWork, String mPhoneNum, String guardianRelay, String guardianWork, String guardianPhoneNum, String maritalStatus, String address, String postcode, int grossIncomeM, int grossIncomeF) {
+        this.fName = fName;
+        this.fWork = fWork;
+        this.fPhoneNum = fPhoneNum;
+        this.mName = mName;
+        this.mWork = mWork;
+        this.mPhoneNum = mPhoneNum;
+        this.guardianRelay = guardianRelay;
+        this.guardianWork = guardianWork;
+        this.guardianPhoneNum = guardianPhoneNum;
+        this.maritalStatus = maritalStatus;
+        this.address = address;
+        this.postcode = postcode;
+        this.grossIncomeM = grossIncomeM;
+        this.grossIncomeF = grossIncomeF;
     }
 
-    public String getFamilyPhone() {
-        return familyPhone;
+
+    public String getFName() {
+        return this.fName;
     }
 
-    public void setFamilyPhone(String familyPhone) {
-        this.familyPhone = familyPhone;
+    public void setFName(String fName) {
+        this.fName = fName;
     }
 
-    public String getFamilyAddress() {
-        return familyAddress;
+    public String getFWork() {
+        return this.fWork;
     }
 
-    public void setFamilyAddress(String familyAddress) {
-        this.familyAddress = familyAddress;
+    public void setFWork(String fWork) {
+        this.fWork = fWork;
     }
 
-    public String getGuardianName() {
-        return guardianName;
+    public String getFPhoneNum() {
+        return this.fPhoneNum;
     }
 
-    public void setGuardianName(String guardianName) {
-        this.guardianName = guardianName;
+    public void setFPhoneNum(String fPhoneNum) {
+        this.fPhoneNum = fPhoneNum;
     }
 
-    public String getGuardianPhone() {
-        return guardianPhone;
+    public String getMName() {
+        return this.mName;
     }
 
-    public void setGuardianPhone(String guardianPhone) {
-        this.guardianPhone = guardianPhone;
+    public void setMName(String mName) {
+        this.mName = mName;
     }
 
-    public String getGuardianAddress() {
-        return guardianAddress;
+    public String getMWork() {
+        return this.mWork;
     }
 
-    public void setGuardianAddress(String guardianAddress) {
-        this.guardianAddress = guardianAddress;
+    public void setMWork(String mWork) {
+        this.mWork = mWork;
     }
 
-    public double getGrossIncome() {
-        return grossIncome;
+    public String getMPhoneNum() {
+        return this.mPhoneNum;
     }
 
-    public void setGrossIncome(double grossIncome) {
-        this.grossIncome = grossIncome;
+    public void setMPhoneNum(String mPhoneNum) {
+        this.mPhoneNum = mPhoneNum;
     }
 
-    // Overridden toString method
+    public String getGuardianRelay() {
+        return this.guardianRelay;
+    }
+
+    public void setGuardianRelay(String guardianRelay) {
+        this.guardianRelay = guardianRelay;
+    }
+
+    public String getGuardianWork() {
+        return this.guardianWork;
+    }
+
+    public void setGuardianWork(String guardianWork) {
+        this.guardianWork = guardianWork;
+    }
+
+    public String getGuardianPhoneNum() {
+        return this.guardianPhoneNum;
+    }
+
+    public void setGuardianPhoneNum(String guardianPhoneNum) {
+        this.guardianPhoneNum = guardianPhoneNum;
+    }
+
+    public String getMaritalStatus() {
+        return this.maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPostcode() {
+        return this.postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public int getGrossIncomeM() {
+        return this.grossIncomeM;
+    }
+
+    public void setGrossIncomeM(int grossIncomeM) {
+        this.grossIncomeM = grossIncomeM;
+    }
+
+    public int getGrossIncomeF() {
+        return this.grossIncomeF;
+    }
+
+    public void setGrossIncomeF(int grossIncomeF) {
+        this.grossIncomeF = grossIncomeF;
+    }
     @Override
     public String toString() {
-        return "Family{" +
-                "studentID='" + '\'' + // Correct method names
-                ", name='" + getName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", phoneNum='" + getPhoneNum() + '\'' +
-                ", familyName='" + getFamilyName() + '\'' +
-                ", familyPhone='" + getFamilyPhone() + '\'' +
-                ", familyAddress='" + getFamilyAddress() + '\'' +
-                ", guardianName='" + getGuardianName() + '\'' +
-                ", guardianPhone='" + getGuardianPhone() + '\'' +
-                ", guardianAddress='" + getGuardianAddress() + '\'' +
-                ", grossIncome=" + getGrossIncome() +
-                '}';
+        return "{" +
+            " fName='" + getFName() + "'" +
+            ", fWork='" + getFWork() + "'" +
+            ", fPhoneNum='" + getFPhoneNum() + "'" +
+            ", mName='" + getMName() + "'" +
+            ", mWork='" + getMWork() + "'" +
+            ", mPhoneNum='" + getMPhoneNum() + "'" +
+            ", guardianRelay='" + getGuardianRelay() + "'" +
+            ", guardianWork='" + getGuardianWork() + "'" +
+            ", guardianPhoneNum='" + getGuardianPhoneNum() + "'" +
+            ", maritalStatus='" + getMaritalStatus() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", postcode='" + getPostcode() + "'" +
+            ", grossIncomeM='" + getGrossIncomeM() + "'" +
+            ", grossIncomeF='" + getGrossIncomeF() + "'" +
+            "}";
     }
-}
+
+}  
+
