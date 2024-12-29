@@ -71,19 +71,25 @@ public class BayarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-        
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        String bank = request.getParameter("bank");
-        out.println("<p>bank ID: " + bank + "</p>");
-        String amaun = request.getParameter("amaun");
-        out.println("<p>amaun ID: " + amaun + "</p>");
-        String tarikh = request.getParameter("tarikh");
-        out.println("<p>tarikh ID: " + tarikh + "</p>");
-        String lainlain = request.getParameter("lainlain");
-        out.println("<p>lainlain ID: " + lainlain + "</p>");
-        out.println("Berjaya");
+        try {
+            String bank = request.getParameter("bank");
+            out.println("<p>bank ID: " + bank + "</p>");
+            String amaun = request.getParameter("amaun");
+            out.println("<p>amaun ID: " + amaun + "</p>");
+            String tarikh = request.getParameter("tarikh");
+            out.println("<p>tarikh ID: " + tarikh + "</p>");
+            String lainlain = request.getParameter("lainlain");
+            out.println("<p>lainlain ID: " + lainlain + "</p>");
+            out.println("Berjaya");
+        } catch ( Exception e ) {
+            out.println ("Error : " + e.getMessage());
+        } finally {
+            out.close();
+        }
+        
     }
 
     /**

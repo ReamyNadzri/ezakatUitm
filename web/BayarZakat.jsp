@@ -1,8 +1,7 @@
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
-    
+<html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +19,6 @@
                 box-sizing: border-box;
                 font-family: google sans, sans-serif;
             }
-
-
 
             /* Form card styling */
             .form-card {
@@ -142,13 +139,13 @@
             <div class="form-card w3-center">
                 <h2>Pembayaran Zakat</h2>
                 <!-- Form -->
-               <form action="BayarServlet" method="post" enctype="multipart/form-data">
+               <form action="BayarServlet" method="post">
                 <input type="text" name="bank" placeholder="Nama Bank..." required>
                 <input type="number" name="amaun" id="amaun" placeholder="Amaun..." required>
                 <input type="date" name="tarikh" required>
                 <input type="text" name="lainlain" placeholder="Lain-lain...">
                 <p>Pembayaran boleh dilakukan pada bank: <br>
-                <img src="1qr.jpg" class="qr-img"> <br>
+                <img src="sources/1qr.jpg" class="qr-img"> <br>
                 <b>XXXXXXXXXXXXXX <br> (Bank Islam)</b></p>
                 <div class="form-buttons">
                     <div class="action-buttons">
@@ -156,8 +153,7 @@
                         <button type="submit" class="pay-btn">Bayar</button>
                     </div>
                 </div>
-    </form>
-
+               </form>
             </div>
         </div>
     </body>
