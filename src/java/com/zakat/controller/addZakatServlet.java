@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.zakat.model.DBConnection;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -308,7 +309,7 @@ public class addZakatServlet extends HttpServlet {
                 }finally{
                     try{
                         if(pstmt!=null) pstmt.close();
-                            DBConnection.closeConnection();
+                            DBConnection.closeConnection(conn);
                     }catch(SQLException e){
                         e.printStackTrace();
                     }

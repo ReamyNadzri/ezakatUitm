@@ -74,6 +74,10 @@
         <servlet-name>registerStaff</servlet-name>
         <servlet-class>com.zakat.model.registerStaff</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>dbtestConnection</servlet-name>
+        <servlet-class>com.zakat.controller.dbtestConnection</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -137,6 +141,10 @@
     <servlet-mapping>
         <servlet-name>registerStaff</servlet-name>
         <url-pattern>/registerStaff.model</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dbtestConnection</servlet-name>
+        <url-pattern>/dbtestConnection</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3,53 +3,80 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.zakat.model;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class DBConnection {
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String USER = "zakatdb";
+    private static final String PASSWORD = "zakatdb";
 
-    // Database URL, username, and password
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE"; // Change accordingly
-    private static final String USERNAME = "zakatdb";  // Your username
-    private static final String PASSWORD = "zakatdb";  // Your password
-
-    // Static Connection object
-    private static Connection connection;
-
-    // Private constructor to prevent instantiation
-    private DBConnection() {}
-
-    // Method to get the database connection
-        public static Connection getConnection() throws SQLException {
-            
-            
-        System.out.println("Attempting to get a database connection..."); // Log entry point
-        if (connection == null || connection.isClosed()) {
-            try {
-                
-                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                System.out.println("Database connection established successfully!"); // Success Log
-            } catch (SQLException e) {
-                System.out.println("Error connecting to database: " + e.getMessage()); // Log the error
-                throw e;
-            }
-        } else {
-            System.out.println("Reusing an existing database connection"); // Log if it's reusing existing connection
+    // Kaedah untuk mendapatkan sambungan
+    public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            System.err.println("Oracle JDBC Driver not found.");
+            e.printStackTrace();
+            throw new SQLException(e);
         }
-        return connection;
     }
 
-    // Method to close the connection
-    public static void closeConnection() {
-        try {
-            if (connection != null && !connection.isClosed()) {
+    // Kaedah untuk menutup sambungan
+    public static void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
                 connection.close();
+                System.out.println("Connection closed successfully.");
+            } catch (SQLException e) {
+                System.err.println("Failed to close connection.");
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            System.out.println("Error closing the connection: " + e.getMessage());
+        }
+    }
+
+    // Kaedah untuk menutup Statement
+    public static void closeStatement(Statement statement) {
+        if (statement != null) {
+            try {
+                statement.close();
+                System.out.println("Statement closed successfully.");
+            } catch (SQLException e) {
+                System.err.println("Failed to close statement.");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Kaedah untuk menutup PreparedStatement
+    public static void closePreparedStatement(PreparedStatement preparedStatement) {
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+                System.out.println("PreparedStatement closed successfully.");
+            } catch (SQLException e) {
+                System.err.println("Failed to close PreparedStatement.");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Kaedah untuk menutup ResultSet
+    public static void closeResultSet(ResultSet resultSet) {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+                System.out.println("ResultSet closed successfully.");
+            } catch (SQLException e) {
+                System.err.println("Failed to close ResultSet.");
+                e.printStackTrace();
+            }
         }
     }
 }
