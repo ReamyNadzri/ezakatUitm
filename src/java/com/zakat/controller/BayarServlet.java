@@ -5,19 +5,12 @@
  */
 package com.zakat.controller;
 
-import com.zakat.model.Bayar;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.util.HashSet;
-import java.util.Set;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.zakat.model.DBConnection;
 
 /**
  *
@@ -77,57 +70,20 @@ public class BayarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-            
-        try {
-            // Get form input from request
-            String bank = request.getParameter("bank");
-//            out.println("<p>bank ID: " + bank + "</p>");
-            Double amaun = Double.parseDouble(request.getParameter("amaun"));
-//            out.println("<p>amaun ID: " + amaun + "</p>");
-            String tarikh = request.getParameter("tarikh");
-//            out.println("<p>tarikh ID: " + tarikh + "</p>");
-            String lainlain = request.getParameter("lainlain");
-//            out.println("<p>lainlain ID: " + lainlain + "</p>");
-            
-            if (amaun == 0 || tarikh.length() == 0)
-                response.sendRedirect("popupFalse.jsp");
-            
-            
-            try {
-                conn = DBConnection.getConnection();
-                
-                String sql = "INSERT INTO DONATION (AMOUNT, DONATIONDATE, OTHERS, BANK)" + "VALUES (?,?,?,?)";
-                pstmt = conn.prepareStatement(sql);
-                
-                pstmt.setBigDecimal(1,new java.math.BigDecimal(amaun));
-                pstmt.setString(2, tarikh);
-                pstmt.setString(3, lainlain);
-                pstmt.setString(4, bank);
-                
-                int rowsInserted = pstmt.executeUpdate();
-                
-                if (rowsInserted > 0) {
-                    out.println("<h1>Payment Successful!</h1>");
-                    out.println("<a href='Receipt.jsp'>Receipt ?</a>");
-                }
-                else {
-                out.println("<h1>Payment Failed To Database. Try Again.</h1>");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.sendRedirect("popupFalse.jsp");
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("popupFalse.jsp");
-        }
-        
+        String bank = request.getParameter("bank");
+        out.println("<p>bank ID: " + bank + "</p>");
+        String amaun = request.getParameter("amaun");
+        out.println("<p>amaun ID: " + amaun + "</p>");
+        String tarikh = request.getParameter("tarikh");
+        out.println("<p>tarikh ID: " + tarikh + "</p>");
+        String lainlain = request.getParameter("lainlain");
+        out.println("<p>lainlain ID: " + lainlain + "</p>");
+        out.println("Berjaya");
     }
 
     /**
