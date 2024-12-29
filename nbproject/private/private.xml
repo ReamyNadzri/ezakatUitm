@@ -3,37 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbRegisterStaff.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbLoginStudent.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/Family.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/Footer.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/successRegisterStaff.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/registerStaff.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/successLoginStudent.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbLoginStaff.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/errorLoginStaff.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/loginStaff.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/loginStudentServlet.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/successLoginStaff.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/loginStudent.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/studentForm.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbRegisterStudent.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/successLoginStaff.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/successRegisterStaff.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/loginStaffServlet.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/successLoginStudent.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/errorLoginStudent.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/registerStudent.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/studentDashboard.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/index.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/errorLoginStudent.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/successRegisterStudent.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/staffDashboard.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/DBConnection.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/BayarServlet.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/updateParentProfile.jsp</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/SuccessRegisterStudent.java</file>
-            <file>file:/C:/Users/asyra/Documents/NetBeansProjects/ezakatUitm/web/errorLoginStaff.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/DatabaseServlet.java</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/addZakatServlet.java</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/registerStudent.java</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/DBConnection.java</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/mohonzakatconfirm.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/SuccessRegisterStudent.java</file>
         </group>
     </open-files>
 </project-private>
