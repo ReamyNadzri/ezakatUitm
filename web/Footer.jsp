@@ -14,9 +14,9 @@
             <div class="footer-section">
                 <h3>Belum Log Masuk ?</h3>
                 <ul>
-                    <li><a href="#">Pelajar</a></li>
+                    <li><a href="loginStudent.jsp">Pelajar</a></li>
                     <li><a href="#">Donator</a></li>
-                    <li><a href="#">Staff</a></li>
+                    <li><a href="loginStaff.jsp">Staff</a></li>
                     <li><a href="#">Administrator</a></li>
                 </ul>
             </div>

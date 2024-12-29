@@ -2,14 +2,13 @@
 
 <%
     // Retrieve form parameters
-    String name = request.getParameter("name");
-     String matricNumber = request.getParameter("matricNumber");
-    String icNumber = request.getParameter("icNumber");
-    String courseCode = request.getParameter("courseCode");
-    String campus = request.getParameter("campus");
-    String phoneNumber = request.getParameter("phoneNumber");
-    String email = request.getParameter("email");
-    String password = request.getParameter("password");
+    String staffNo = request.getParameter("staffNo");
+    String staffName = request.getParameter("staffName");
+    String staffIc = request.getParameter("staffIc");
+    String staffCampus = request.getParameter("staffCampus");
+    String staffPhoneNumber = request.getParameter("staffPhoneNumber");
+    String staffEmail = request.getParameter("staffEmail");
+    String staffPassword = request.getParameter("staffPassword");
 
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -25,25 +24,23 @@
         conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
         // SQL query for inserting a student record
-        String sql = "INSERT INTO studentregister (name, matricNumber, icNumber, courseCode, campus, phoneNumber, email, password) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO staffregister (staffNo, staffName, staffIc, staffCampus, staffPhoneNumber, staffEmail, staffPassword) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
         pstmt = conn.prepareStatement(sql);
 
-        pstmt.setString(1, name);
-        pstmt.setString(2, matricNumber);
-        pstmt.setString(3, icNumber);
-        pstmt.setString(4, courseCode);
-        pstmt.setString(5, campus);
-        pstmt.setString(6, phoneNumber);
-        pstmt.setString(7, email);
-        pstmt.setString(8, password); // Optionally hash the password for security
+        pstmt.setString(1, staffNo);
+        pstmt.setString(2, staffName);
+        pstmt.setString(3, staffIc);
+        pstmt.setString(4, staffCampus);
+        pstmt.setString(5,staffPhoneNumber);
+        pstmt.setString(6, staffEmail);
+        pstmt.setString(7, staffPassword);
 
         // Execute the SQL statement
         int rowsInserted = pstmt.executeUpdate();
 
         if (rowsInserted > 0) {
-            response.sendRedirect("studentForm.jsp?success=true");
-            out.println("<p>Success</p>");// Redirect with success flag
+            response.sendRedirect("registerStaff.jsp?success=true"); // Redirect with success flag
         } else {
             out.println("<p style='color:red;'>Registration failed. Please try again.</p>");
         }
