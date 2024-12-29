@@ -22,6 +22,10 @@
         <servlet-name>addZakatServlet</servlet-name>
         <servlet-class>com.zakat.controller.addZakatServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DatabaseServlet</servlet-name>
+        <servlet-class>com.zakat.controller.DatabaseServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -33,6 +37,10 @@
     <servlet-mapping>
         <servlet-name>addZakatServlet</servlet-name>
         <url-pattern>/addzakat.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DatabaseServlet</servlet-name>
+        <url-pattern>/DatabaseServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

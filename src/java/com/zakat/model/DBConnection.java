@@ -7,6 +7,7 @@ package com.zakat.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import oracle.jdbc.OracleDriver.*;
 
 public class DBConnection {
 
@@ -22,15 +23,21 @@ public class DBConnection {
     private DBConnection() {}
 
     // Method to get the database connection
-    public static Connection getConnection() throws SQLException {
+        public static Connection getConnection() throws SQLException {
+            
+            
+        System.out.println("Attempting to get a database connection..."); // Log entry point
         if (connection == null || connection.isClosed()) {
             try {
-                // Create a new connection if not already created
+                
                 connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                System.out.println("Database connection established successfully!"); // Success Log
             } catch (SQLException e) {
-                System.out.println("Error connecting to database: " + e.getMessage());
+                System.out.println("Error connecting to database: " + e.getMessage()); // Log the error
                 throw e;
             }
+        } else {
+            System.out.println("Reusing an existing database connection"); // Log if it's reusing existing connection
         }
         return connection;
     }

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.sql.DriverManager;
 
 import javax.servlet.annotation.MultipartConfig;
 //import javax.servlet.annotation.WebServlet;
@@ -24,6 +24,8 @@ import com.zakat.model.DBConnection;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
 
 
@@ -58,6 +60,7 @@ public class addZakatServlet extends HttpServlet {
         if(!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
+        //WAJIB UNTUK DB
         Connection conn = null;
         PreparedStatement pstmt = null;
         
@@ -67,6 +70,9 @@ public class addZakatServlet extends HttpServlet {
         boolean pilihYuran = request.getParameter("pilihYuran") != null;
         boolean pilihKolej = request.getParameter("pilihKolej") != null;
         boolean pilihMakan = request.getParameter("pilihMakan") != null;
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = currentDate.format(formatter);
 
         try{
 
@@ -128,29 +134,42 @@ public class addZakatServlet extends HttpServlet {
                 String Rcafe = request.getParameter("Rcafe");
                 
                 
+                //problem
+                //file1Data = handleFileUpload(request, "file1",uploadPath);
+                // = handleFileUpload(request, "file2",uploadPath);
+                //file3Data = handleFileUpload(request, "file3",uploadPath);
+                //file4Data = handleFileUpload(request, "file4",uploadPath);
+                //file5Data = handleFileUpload(request, "file5",uploadPath);
+                //file6Data = handleFileUpload(request, "file6",uploadPath);
+                //file7Data = handleFileUpload(request, "file7",uploadPath);
+                //file8Data = handleFileUpload(request, "file8",uploadPath);
+                //file9Data = handleFileUpload(request, "file9",uploadPath);
                 
-                file1Data = handleFileUpload(request, "file1",uploadPath);
-                file2Data = handleFileUpload(request, "file2",uploadPath);
-                file3Data = handleFileUpload(request, "file3",uploadPath);
-                file4Data = handleFileUpload(request, "file4",uploadPath);
-                file5Data = handleFileUpload(request, "file5",uploadPath);
-                file6Data = handleFileUpload(request, "file6",uploadPath);
-                file7Data = handleFileUpload(request, "file7",uploadPath);
-                file8Data = handleFileUpload(request, "file8",uploadPath);
-                file9Data = handleFileUpload(request, "file9",uploadPath);
+                
                 
                 try{
-                    conn = DBConnection.getConnection();
+                    conn = DBConnection.getConnection(); //STEP 1   //error disini
+                    
+                    String choose = null;
+                    if(pilihMusibah == true){
+                        choose = "ZAKATMUSIBAH";
+                    }else if(pilihYuran == true){
+                        choose = "ZAKATYURAN";
+                    }else if(pilihKolej == true){
+                        choose = "ZAKATKOLEJ";
+                    }else if(pilihMakan == true){
+                        choose = "ZAKATMAKAN";
+                    }
                     
                     String mainSQL = "INSERT INTO ZAKAT_CATEGORY (ZAKATNAME, DESCRIPTION) "
-                                + "VALUES (?,?)";
+                                + "VALUES (?,?)";  //STEP 2
                         
-                        pstmt = conn.prepareStatement(mainSQL);
+                        pstmt = conn.prepareStatement(mainSQL); //STEP2
                         
-                        pstmt.setString(1,"");
-                        pstmt.setString(2,"");
+                        pstmt.setString(1,choose);
+                        pstmt.setString(2,formattedDate);
                         
-                        int rowsInserted = pstmt.executeUpdate();
+                        int rowsInserted = pstmt.executeUpdate();  //STEP3
                         if (rowsInserted > 0) {
                             System.out.println("A new application was inserted successfully!");
                          }else{
@@ -169,8 +188,8 @@ public class addZakatServlet extends HttpServlet {
                         pstmt.setString(1,"");  
                         pstmt.setDate(2, tarikhmusibah != null ? new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(tarikhmusibah).getTime()) : null);
                         pstmt.setBigDecimal(3, totalLost!= null ? new java.math.BigDecimal(totalLost) : null);
-                        pstmt.setBytes(4, file1Data);
-                        pstmt.setBytes(5, file1Data);
+                        pstmt.setBytes(4, file4Data);
+                        pstmt.setBytes(5, file5Data);
                         pstmt.setString(6,"");   //zakatname mainsql
                         
                         rowsInserted = pstmt.executeUpdate();
@@ -190,8 +209,8 @@ public class addZakatServlet extends HttpServlet {
                         pstmt = conn.prepareStatement(yuranSQL);
                         
                         pstmt.setBigDecimal(1, yuran!= null ? new java.math.BigDecimal(yuran) : null);
-                        pstmt.setBytes(6, file1Data);
-                        pstmt.setBytes(7, file1Data);
+                        pstmt.setBytes(2, file6Data);
+                        pstmt.setBytes(3, file7Data);
                         pstmt.setString(4,"");   //zakatname mainsql
                         
                         rowsInserted = pstmt.executeUpdate();
@@ -212,8 +231,8 @@ public class addZakatServlet extends HttpServlet {
                         
                         pstmt.setString(1,"");   
                         pstmt.setBigDecimal(2, totalKolej!= null ? new java.math.BigDecimal(totalKolej) : null);
-                        pstmt.setBytes(8, file1Data);
-                        pstmt.setBytes(9, file1Data);
+                        pstmt.setBytes(3, file8Data);
+                        pstmt.setBytes(4, file9Data);
                         pstmt.setString(5,"");   //zakatname mainsql
                         
                         
@@ -234,8 +253,8 @@ public class addZakatServlet extends HttpServlet {
                         
                         pstmt = conn.prepareStatement(makanSQL);
                         
-                        pstmt.setString(1,"");   //zakatname mainsql
-                        pstmt.setString(2,""); 
+                        pstmt.setString(1,Rcafe);   //zakatname mainsql
+                        pstmt.setString(2,choose); 
                         
                         rowsInserted = pstmt.executeUpdate();
                         if (rowsInserted > 0) {
@@ -251,12 +270,48 @@ public class addZakatServlet extends HttpServlet {
                     //=======================================================================================================================
                     
                     String applicationZakatSQL = "INSERT INTO APPLICATION (STUDENTID, ZAKATID, BANTUANMAKAN, BANTUANKEWANGAN, BANTUANKEWANGANNAMA, BANTUANKEWANGANNILAI, GRADYEAR, CGPA, GPA, STUDENTLETTER, TRANSCRIPTDOC, ICDOC,  BANKNO, BANKNAME)"
-                            + "VALUE (";
+                            + "VALUE (("
+                            + "(SELECT STUDENTID FROM STUDENT WHERE STUDENTID = ?)," //AMBIL DARI SESSION
+                            + "(SELECT ZAKATID FROM ZAKAT_CATEGORY WHERE ZAKATNAME = ?)," //AMBIK ATAS
+                            + "?,?,?,?,?,?,?,?,?,?,?,?)";
                     
-
-                          
+                    pstmt.setString(1, cafe); //student
+                    pstmt.setString(2, cafe);
+                    pstmt.setString(3, cafe); 
+                    pstmt.setString(4, cafe); 
+                    pstmt.setString(5, cafe); 
+                    pstmt.setBigDecimal(6, currentCgpa != null ? new java.math.BigDecimal(currentCgpa) : null);
+                    pstmt.setBigDecimal(7, currentCgpa != null ? new java.math.BigDecimal(currentCgpa) : null);
+                    pstmt.setBigDecimal(8, currentCgpa != null ? new java.math.BigDecimal(currentCgpa) : null);
+                    pstmt.setBigDecimal(9, currentCgpa != null ? new java.math.BigDecimal(currentCgpa) : null);
+                    pstmt.setBytes(10, file1Data);
+                    pstmt.setBytes(11, file2Data);
+                    pstmt.setBytes(12, file3Data);
+                    pstmt.setString(13, cafe); 
+                    pstmt.setString(14, cafe);
                     
-                }catch(Exception e){
+                    rowsInserted = pstmt.executeUpdate();
+                        if (rowsInserted > 0) {
+                            System.out.println("A new application was inserted successfully!");
+                         }else{
+                            System.out.println("Failed to save to database");
+                            request.setAttribute("errorMessage", "Failed to save to database APPLICATION, please try again!");
+                            request.getRequestDispatcher("/error.jsp").forward(request, response);
+                            return;
+                        }
+   
+                }catch(SQLException e){
+                    e.printStackTrace();
+                    request.setAttribute("errorMsgs","Error saving to database. Please try again.");
+                    request.getRequestDispatcher("/error.jsp").forward(request, response);
+                    return;
+                }finally{
+                    try{
+                        if(pstmt!=null) pstmt.close();
+                            DBConnection.closeConnection();
+                    }catch(SQLException e){
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -309,7 +364,7 @@ public class addZakatServlet extends HttpServlet {
             response.getWriter().println("Error processing the form. Please try again.");
             
         }finally {
-
+// CLOSE CONNECTION
         }
     }
     
