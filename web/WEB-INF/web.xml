@@ -83,10 +83,6 @@
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BayarServlet</servlet-name>
-        <url-pattern>/bayarZakat.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>addZakatServlet</servlet-name>
         <url-pattern>/addzakat.do</url-pattern>
     </servlet-mapping>
@@ -145,6 +141,10 @@
     <servlet-mapping>
         <servlet-name>dbtestConnection</servlet-name>
         <url-pattern>/dbtestConnection</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BayarServlet</servlet-name>
+        <url-pattern>/BayarServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

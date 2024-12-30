@@ -18,7 +18,7 @@
         <div id="popupModal" class="modal-overlay">
             <div class="modal-box">
                 <!-- Warning Icon -->
-                <img src="1seru.png" class="seru" alt="warning">
+                <img src="sources/1seru.png" class="seru" alt="warning">
                 
                 <!-- Warning Text -->
                 <div class="modal-text">User already registered!</div>
