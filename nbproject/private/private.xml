@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/DatabaseServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/addZakatServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/registerStudent.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/DBConnection.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/mohonzakatconfirm.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/SuccessRegisterStudent.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbLoginStudent.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/web/loginStudent.jsp</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/web/BayarZakat.jsp</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/web/Receipt.jsp</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/loginStudentServlet.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/web/mohonzakat.jsp</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/DBConnection.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/BayarServlet.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/addZakatServlet.java</file>
         </group>
     </open-files>
 </project-private>

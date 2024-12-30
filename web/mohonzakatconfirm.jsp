@@ -282,11 +282,11 @@
                                     </div>
                                     <div class="w3-cell" style="padding-left: 25px;">
                                         <b>Jumlah kerosakkan (RM): <span style="color: red;">*</span></b><br>
-                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalLost" id="" size="50%" value="${totalcost}" disabled>
+                                        <input class="w3-input w3-border w3-round-large" type="text" name="totalLost" id="" size="50%" value="${totalLost}" disabled>
                                     </div>
                                     <div class="w3-margin-top">
                                         <b>Tarikh berlaku musibah: <span style="color: red;">*</span></b>
-                                        <input class="w3-input w3-date" type="date" id="tarikhmusibah" name="tarikhmusibah" disabled value="${dateStr}">
+                                        <input class="w3-input w3-date" type="date" id="tarikhmusibah" name="tarikhmusibah" disabled value="${tarikhmusibah}">
                                     </div>
                                 </div>
                                 

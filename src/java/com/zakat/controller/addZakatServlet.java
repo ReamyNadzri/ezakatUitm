@@ -27,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 import javax.servlet.ServletException;
 
 
@@ -100,15 +101,15 @@ public class addZakatServlet extends HttpServlet {
 
 
             // 2. Retrieve File Uploads
-            byte[] file1Data=null;
-            byte[] file2Data=null;
-            byte[] file3Data=null;
-            byte[] file4Data=null;
-            byte[] file5Data=null;
-            byte[] file6Data=null;
-            byte[] file7Data=null;
-            byte[] file8Data=null;
-            byte[] file9Data=null;
+            String file1Path = null;
+            String file2Path = null;
+            String file3Path = null;
+            String file4Path = null;
+            String file5Path = null;
+            String file6Path = null;
+            String file7Path = null;
+            String file8Path = null;
+            String file9Path = null;
             
             if(isSecondSubmission){
                 String RapplyID = request.getParameter("RapplyID");
@@ -136,15 +137,15 @@ public class addZakatServlet extends HttpServlet {
                 
                 
                 //problem
-                //file1Data = handleFileUpload(request, "file1",uploadPath);
-                // = handleFileUpload(request, "file2",uploadPath);
-                //file3Data = handleFileUpload(request, "file3",uploadPath);
-                //file4Data = handleFileUpload(request, "file4",uploadPath);
-                //file5Data = handleFileUpload(request, "file5",uploadPath);
-                //file6Data = handleFileUpload(request, "file6",uploadPath);
-                //file7Data = handleFileUpload(request, "file7",uploadPath);
-                //file8Data = handleFileUpload(request, "file8",uploadPath);
-                //file9Data = handleFileUpload(request, "file9",uploadPath);
+                file1Path = handleFileUpload(request, "file1",uploadPath);
+                file2Path = handleFileUpload(request, "file2",uploadPath);
+                file3Path = handleFileUpload(request, "file3",uploadPath);
+                file4Path = handleFileUpload(request, "file4",uploadPath);
+                file5Path = handleFileUpload(request, "file5",uploadPath);
+                file6Path = handleFileUpload(request, "file6",uploadPath);
+                file7Path = handleFileUpload(request, "file7",uploadPath);
+                file8Path = handleFileUpload(request, "file8",uploadPath);
+                file9Path = handleFileUpload(request, "file9",uploadPath);
                 
                 
                 
@@ -180,18 +181,32 @@ public class addZakatServlet extends HttpServlet {
                             return;
                         }
                     
-                    if(!pilihMusibah){
-                        String musibahSQL = "INSERT INTO ZAKAT_MUSIBAH (REASON, MUSIBAHDATE, TOTALCOST, COSTDOC, REASONDOC, ZAKATID)"
-                                + "VALUE (?,?,?,?,?,(SELECT ZAKATID FROM ZAKAT_CATEGORY WHERE ZAKATNAME = ?))";
+                    if(choose.equals("ZAKATMUSIBAH")){
+                        String musibahSQL = "INSERT INTO ZAKAT_MUSIBAH (REASON, MUSIBAHDATE, TOTALCOST, COSTDOC, REASONDOC, ZAKATID)\n" +
+                                            "VALUES (\n" +
+                                            "    ?,\n" +
+                                            "    ?),\n" +
+                                            "    ?,\n" +
+                                            "    NULL," +
+                                            "    NULL,\n" +
+                                            "    (\n" +
+                                            "        SELECT ZAKATID\n" +
+                                            "        FROM (\n" +
+                                            "            SELECT ZAKATID\n" +
+                                            "            FROM ZAKAT_CATEGORY\n" +
+                                            "            ORDER BY ZAKATID DESC\n" +
+                                            "        )\n" +
+                                            "        WHERE ROWNUM = 1\n" +
+                                            "    )\n" +
+                                            ");";
                         
-                        pstmt = conn.prepareStatement(musibahSQL);
+                        pstmt = conn.prepareStatement(musibahSQL); //PROBLLEM
+                        pstmt.setString(1,Rreason);  
+                        pstmt.setDate(2, Rtarikhmusibah != null ? new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(Rtarikhmusibah).getTime()) : null);
+                        pstmt.setBigDecimal(3, RtotalLost!= null ? new java.math.BigDecimal(RtotalLost) : null);
+                        pstmt.setString(4, file4Path);
+                        pstmt.setString(5, file5Path);
                         
-                        pstmt.setString(1,"");  
-                        pstmt.setDate(2, tarikhmusibah != null ? new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(tarikhmusibah).getTime()) : null);
-                        pstmt.setBigDecimal(3, totalLost!= null ? new java.math.BigDecimal(totalLost) : null);
-                        pstmt.setBytes(4, file4Data);
-                        pstmt.setBytes(5, file5Data);
-                        pstmt.setString(6,"");   //zakatname mainsql
                         
                         rowsInserted = pstmt.executeUpdate();
                         if (rowsInserted > 0) {
@@ -210,8 +225,8 @@ public class addZakatServlet extends HttpServlet {
                         pstmt = conn.prepareStatement(yuranSQL);
                         
                         pstmt.setBigDecimal(1, yuran!= null ? new java.math.BigDecimal(yuran) : null);
-                        pstmt.setBytes(2, file6Data);
-                        pstmt.setBytes(3, file7Data);
+                        pstmt.setString(2, file6Path);
+                        pstmt.setString(3, file7Path);
                         pstmt.setString(4,"");   //zakatname mainsql
                         
                         rowsInserted = pstmt.executeUpdate();
@@ -232,8 +247,8 @@ public class addZakatServlet extends HttpServlet {
                         
                         pstmt.setString(1,"");   
                         pstmt.setBigDecimal(2, totalKolej!= null ? new java.math.BigDecimal(totalKolej) : null);
-                        pstmt.setBytes(3, file8Data);
-                        pstmt.setBytes(4, file9Data);
+                        pstmt.setString(3, file8Path);
+                        pstmt.setString(4, file9Path);
                         pstmt.setString(5,"");   //zakatname mainsql
                         
                         
@@ -285,9 +300,9 @@ public class addZakatServlet extends HttpServlet {
                     pstmt.setBigDecimal(7, currentCgpa != null ? new java.math.BigDecimal(currentCgpa) : null);
                     pstmt.setBigDecimal(8, currentCgpa != null ? new java.math.BigDecimal(currentCgpa) : null);
                     pstmt.setBigDecimal(9, currentCgpa != null ? new java.math.BigDecimal(currentCgpa) : null);
-                    pstmt.setBytes(10, file1Data);
-                    pstmt.setBytes(11, file2Data);
-                    pstmt.setBytes(12, file3Data);
+                    pstmt.setString(10, file1Path);
+                    pstmt.setString(11, file2Path);
+                    pstmt.setString(12, file3Path);
                     pstmt.setString(13, cafe); 
                     pstmt.setString(14, cafe);
                     
@@ -341,15 +356,15 @@ public class addZakatServlet extends HttpServlet {
             request.setAttribute("totalKolej", totalKolej);
             request.setAttribute("cafe", cafe);
 
-            request.setAttribute("file1Name", request.getPart("file1").getSubmittedFileName());
-            request.setAttribute("file2Name", request.getPart("file2").getSubmittedFileName());
-            request.setAttribute("file3Name", request.getPart("file3").getSubmittedFileName());
-            request.setAttribute("file4Name", request.getPart("file4").getSubmittedFileName());
-            request.setAttribute("file5Name", request.getPart("file5").getSubmittedFileName());
-            request.setAttribute("file6Name", request.getPart("file6").getSubmittedFileName());
-            request.setAttribute("file7Name", request.getPart("file7").getSubmittedFileName());
-            request.setAttribute("file8Name", request.getPart("file8").getSubmittedFileName());
-            request.setAttribute("file9Name", request.getPart("file9").getSubmittedFileName());
+            request.setAttribute("file1Name", request.getPart("file1Data").getSubmittedFileName());
+            request.setAttribute("file2Name", request.getPart("file2Data").getSubmittedFileName());
+            request.setAttribute("file3Name", request.getPart("file3Data").getSubmittedFileName());
+            request.setAttribute("file4Name", request.getPart("file4Data").getSubmittedFileName());
+            request.setAttribute("file5Name", request.getPart("file5Data").getSubmittedFileName());
+            request.setAttribute("file6Name", request.getPart("file6Data").getSubmittedFileName());
+            request.setAttribute("file7Name", request.getPart("file7Data").getSubmittedFileName());
+            request.setAttribute("file8Name", request.getPart("file8Data").getSubmittedFileName());
+            request.setAttribute("file9Name", request.getPart("file9Data").getSubmittedFileName());
             
             
             if(!isSecondSubmission){
@@ -369,25 +384,22 @@ public class addZakatServlet extends HttpServlet {
         }
     }
     
-     private byte[] handleFileUpload(HttpServletRequest request, String inputName, Path uploadPath)
-         throws IOException, ServletException {
+     private String handleFileUpload(HttpServletRequest request, String inputName, Path uploadPath)
+            throws IOException, ServletException {
 
-            Part filePart = request.getPart(inputName);
-            if (filePart == null || filePart.getSize() <= 0)
-                return null;
+        Part filePart = request.getPart(inputName);
+        if (filePart == null || filePart.getSize() <= 0)
+            return null;
+        String originalFileName = filePart.getSubmittedFileName();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf('.'));
+        String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
+        Path filePath = uploadPath.resolve(uniqueFileName);
+        try (InputStream fileContent = filePart.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(fileContent)) {
+            Files.copy(bis, filePath);
+            return filePath.toString(); //return filepath
 
-            try (InputStream fileContent = filePart.getInputStream();
-                BufferedInputStream bis = new BufferedInputStream(fileContent);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-
-                byte[] buffer = new byte[8192];
-                int bytesRead;
-
-                while ((bytesRead = bis.read(buffer)) != -1) {
-                    baos.write(buffer, 0, bytesRead);
-                }
-               return baos.toByteArray();
-            }
+        }
     }
        /**
      * Returns a short description of the servlet.
