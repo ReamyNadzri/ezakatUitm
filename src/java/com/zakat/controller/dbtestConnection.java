@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.sql.PreparedStatement;
 import com.zakat.model.DBConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -39,17 +39,23 @@ public class dbtestConnection extends HttpServlet {
         out.println("<h1>Servlet Database</h1>");
         
         try (Connection conn = DBConnection.getConnection()) {
-            out.println("Berjaya disambung ke pangkalan data!");
+            String mainSQL = "INSERT INTO ZAKAT_CATEGORY (ZAKATNAME, DESCRIPTION) VALUES (?,?)";  //STEP 1
 
-            // Contoh Query
-            String query = "SELECT * FROM STUDENT";
-            try (Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery(query)) {
+                            PreparedStatement pstmt = null;
+                            pstmt = conn.prepareStatement(mainSQL); //STEP2
 
-                while (rs.next()) {
-                    out.println("Data: " + rs.getString("NAME"));
-                }
-            }
+                            pstmt.setString(1,"makkau");
+                            pstmt.setString(2,"2024-12-12");
+
+                            int rowsInserted = pstmt.executeUpdate();  //STEP3
+                            if (rowsInserted > 0) {
+                                System.out.println("A new application was inserted successfully!");
+                             }else{
+                                System.out.println("Failed to save to database");
+                                request.setAttribute("errorMessage", "Failed to save to database ZAKATCATEGORY, please try again!");
+                                request.getRequestDispatcher("/error.jsp").forward(request, response);
+                                return;
+                            }
         } catch (Exception e) {
             e.printStackTrace();
             out.println("<h1>Connection failed</h1>");

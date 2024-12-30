@@ -517,6 +517,15 @@
                                             <input type="hidden" name="Rkolej"           value="<%= request.getAttribute("kolej") %>">
                                             <input type="hidden" name="RtotalKolej"      value="<%= request.getAttribute("totalKolej") %>">
                                             <input type="hidden" name="Rcafe"            value="<%= request.getAttribute("cafe") %>">
+                                            <input type="hidden" name="file1Path"        value="${file1Path}">
+                                            <input type="hidden" name="file2Path"        value="${file2Path}">
+                                            <input type="hidden" name="file3Path"        value="${file3Path}">
+                                            <input type="hidden" name="file4Path"        value="${file4Path}">
+                                            <input type="hidden" name="file5Path"        value="${file5Path}">
+                                            <input type="hidden" name="file6Path"        value="${file6Path}">
+                                            <input type="hidden" name="file7Path"        value="${file7Path}">
+                                            <input type="hidden" name="file8Path"        value="${file8Path}">
+                                            <input type="hidden" name="file9Path"        value="${file9Path}">
                                         
                                
                                             <div class="w3-panel w3-center" style="margin-bottom: 5%">

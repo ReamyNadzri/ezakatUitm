@@ -42,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 999;
         }
 
@@ -75,10 +75,8 @@
             color: white;
         }
 
-        #popup button#cancelSubmit {
-            background-color: #f44336;
-            color: white;
-        }
+   
+        
     </style>
 </head>
 
@@ -132,17 +130,17 @@
                         </div> <!--applyID-->
                         <div class="w3-cell w3-panel">
                             <b>Semester Semasa <span style="color: red;">*</span></b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="currentSemester" id="" size="50%" required>
+                            <input class="w3-input w3-border w3-round-large" type="text" name="currentSemester" id="" value="" size="50%" required>
                         </div>
                     </div>
                     <div class="w3-col w3-margin-bottom">
                         <div class="w3-cell w3-panel">
                             <b>Keputusan Terkini CGPA <span style="color: red;">*</span></b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="currentCgpa" id="" size="50%" required>
+                            <input class="w3-input w3-border w3-round-large" type="text" name="currentCgpa" id="" value="" size="50%" required>
                         </div>
                         <div class="w3-cell w3-panel">
                             <b>Keputusan Terkini GPA <span style="color: red;">*</span></b><br>
-                            <input class="w3-input w3-border w3-round-large" type="text" name="currentGpa" id="" size="50%" required>
+                            <input class="w3-input w3-border w3-round-large" type="text" name="currentGpa" id="" value="" size="50%" required>
                         </div>
                     </div>
                     <div class="w3-col w3-margin-bottom">
@@ -162,11 +160,11 @@
                         <div id="bantuankewangan" class="w3-col">
                             <div class="w3-cell w3-panel">
                                 <b>Jika ada, nyatakan dari mana: </b><br>
-                                <input class="w3-input w3-border w3-round-large" type="text" name="namaBantuan" value=" " id="" size="50%" required>
+                                <input class="w3-input w3-border w3-round-large" type="text" name="namaBantuan" value="" id="" size="50%" >
                             </div>
                             <div class="w3-cell w3-panel">
                                 <b>Jumlah per/sem: (RM) </b><br>
-                                <input class="w3-input w3-border w3-round-large" type="text" name="jumlahBantuan" value=" " id="" size="50%" required>
+                                <input class="w3-input w3-border w3-round-large" type="text" name="jumlahBantuan" value="" id="" size="50%" >
                             </div>
 
                         </div> 
@@ -217,7 +215,7 @@
                                 <div class="w3-cell" style="width:30px"></div>
                                 <div class="w3-cell" >
                                         <b>Nama Bank: <span style="color: red;">*</span></b><br>
-                                        <select class="w3-input" name='bankName' required>  <!--tukar dgn gradDate-->
+                                        <select class="w3-input" name='bankName'>  <!--tukar dgn gradDate-->
                                             <option value='Maybank (Malayan Banking Berhad)'>Maybank (Malayan Banking Berhad)</option>
                                             <option value='CIMB Bank'>CIMB Bank</option>
                                             <option value='RHB Bank'>RHB Bank</option>
@@ -230,7 +228,7 @@
                                 <div class="w3-cell" style="width:30px"></div>
                                 <div class="w3-cell">
                                     <b>Nombor Bank <span style="color: red;">*</span></b><br>
-                                    <input class="w3-input w3-border w3-round-large" style="width: 300px;" type="text" name="bankNo" id="" size="50%" required>
+                                    <input class="w3-input w3-border w3-round-large" style="width: 300px;" type="text" name="bankNo" id="" size="50%">
                                 </div>
                             </div>
                         </div>
@@ -377,7 +375,7 @@
                                 <div class="w3-col w3-margin-bottom">
                                     <div class="w3-cell">
                                         <b>Pilih cafe berdekatan anda <span style="color: red;">*</span></b><br>
-                                        <select class="w3-input" name='cafe' value="Cafe" required>
+                                        <select class="w3-input" name='cafe' value="Cafe">
                                             <option value='TIDAK MEMOHON'>Sila Pilih</option>
                                             <option value='cafelestari'>Cafe Lestari</option>
                                             <option value='rrcafe'>RR Cafe (Kiosk)</option>
@@ -390,7 +388,7 @@
                         </div>
                     </div>
 
-                    <div class="w3-panel w3-center w3-col" style="margin-bottom: 5%">
+                    <div class="w3-panel w3-center w3-col" style="margin-bottom: 3%">
                         <button class="w3-button w3-border w3-green w3-cell" name="MOHON" type="submit" onclick="">MOHON</button>
                         <button class="w3-button w3-border w3-border-green w3-cell w3-margin-left" href="#">KEMBALI</button>
                     </div>
@@ -399,10 +397,12 @@
                 <div id="overlay"></div>
 
                 <!-- Popup -->
-                <div id="popup">
-                    <p>Are you sure you want to submit the form?</p>
-                    <button id="confirmSubmit">Yes</button>
-                    <button id="cancelSubmit">No</button>
+                <div class="w3-panel w3-card-4" id="popup" style="width: 30%;">
+                    <img src="sources/alarm.gif" alt="" style="width: 30%;">
+                    <h5><B>SILA SEMAK DENGAN TELITI!</B></h5>
+                    <p>Pihak UiTM tidak akan bertanggungjawab<br> jikalau terdapat sebarang kesalahan teknikal<br>atau kecuaian pelajar</p>
+                    <button class="w3-button" id="confirmSubmit">Hantar!</button>
+                    <button class="w3-button w3-border" id="cancelSubmit">Kembali</button>
                 </div>
                 
             </div>
@@ -416,7 +416,10 @@
             
 
         </div>
-
+    </div>
+    <div class="" style="margin-top: 3%">
+            <jsp:include page="Footer.jsp"></jsp:include>
+        </div>
         <script>
             function toggleInputs() {
                 const yesCheckbox = document.getElementById('yesBantuan');
@@ -486,3 +489,4 @@
                 
 
         </script>
+        

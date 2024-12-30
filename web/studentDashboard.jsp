@@ -156,6 +156,15 @@
         }
     </style>
 </head>
+<script>
+        // Check if success is true and show a popup
+        window.onload = function() {
+            const success = '<%= request.getAttribute("success") %>';
+            if (success.equals("success")) {
+                alert('Data saved successfully!');
+            }
+        };
+    </script>
 <body>
     <!-- Sidebar -->
     <div class="sidebar">

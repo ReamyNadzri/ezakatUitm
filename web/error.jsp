@@ -57,6 +57,7 @@
             } else {
         %>
             <p>An unexpected error occurred. Please try again.</p>
+            <%= request.getAttribute("errorMessage") %>
         <%
             }
         %>
