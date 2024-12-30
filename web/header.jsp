@@ -13,7 +13,7 @@
 
                 <div class="w3-container w3-col w3-right" style="">
                     <button class="w3-button w3-border w3-round-large"> Tentang Zakat</button>
-                    <button class="w3-button w3-border w3-round-large w3-green" href="indexa.html"> Log Masuk</button> </a>
+                    <a class="w3-button w3-border w3-round-large w3-green" href="loginStudent.jsp"> Log Masuk</a>
 
                 </div>
                 

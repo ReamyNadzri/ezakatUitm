@@ -1,3 +1,4 @@
+<%@page import="com.zakat.model.DBConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -8,17 +9,12 @@
 
 <%
     // Retrieve matric number from session
-    String matricNumber = (String) session.getAttribute("matricNumber");
+    String matricNumber = (String) session.getAttribute("MATRICNO");
     if (matricNumber == null) {
         // Redirect to login page if no session exists
         response.sendRedirect("loginStudent.jsp");
         return;
     }
-
-    // JDBC settings
-    String jdbcURL = "jdbc:mysql://localhost:3306/zakat_system";
-    String dbUser = "root";
-    String dbPassword = "";
 
     // Variables to store student's name and email
     String fullName = "";
@@ -26,18 +22,18 @@
 
     // Database connection and query
     try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
 
-        String query = "SELECT name, email FROM studentregister WHERE matricNumber = ?";
+        Connection connection = DBConnection.getConnection();
+
+        String query = "SELECT NAME, EMAIL FROM STUDENT WHERE MATRICNO = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, matricNumber);
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
-            fullName = resultSet.getString("name");
-            email = resultSet.getString("email");
+            fullName = resultSet.getString("NAME");
+            email = resultSet.getString("EMAIL");
         } else {
             // If no data found, set default messages
             fullName = "Unknown Student";
@@ -170,7 +166,7 @@
     <div class="sidebar">
         <h2>Dashboard</h2>
         <a href="studentDashboard.jsp">Home</a>
-        <a href="viewProfile.jsp">View Profile</a>
+        <a href="updateProfile.jsp">View Profile</a>
         <a href="viewCourses.jsp">View Courses</a>
         <a href="changePassword.jsp">Change Password</a>
         <a href="contactSupport.jsp">Contact Support</a>

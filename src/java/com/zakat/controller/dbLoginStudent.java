@@ -5,15 +5,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
+import com.zakat.model.DBConnection;
 
 @WebServlet("/dbLoginStudent")
 public class dbLoginStudent extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // JDBC connection parameters
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "";
+   
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the matric number and password from the login form
@@ -27,9 +25,9 @@ public class dbLoginStudent extends HttpServlet {
         }
 
         // Check the login credentials from the database
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+        try (Connection conn = DBConnection.getConnection()) {
             // Query to check if the student exists in the database
-            String query = "SELECT * FROM studentregister WHERE matricNumber = ? AND password = ?";
+            String query = "SELECT * FROM STUDENT WHERE MATRICNO = ? AND PASSWORD = ?";
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1, matricNumber);
                 stmt.setString(2, password);
@@ -37,11 +35,11 @@ public class dbLoginStudent extends HttpServlet {
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
                         // Student found, login successful
-                        String studentName = rs.getString("name");
+                        String MATRICNO = rs.getString("MATRICNO");
 
                         // Store student name in session
                         HttpSession session = request.getSession();
-                        session.setAttribute("studentName", studentName);
+                        session.setAttribute("MATRICNO", MATRICNO);
 
                         // Redirect to successLoginStudent.jsp (Success Page)
                         response.sendRedirect("successLoginStudent.jsp");

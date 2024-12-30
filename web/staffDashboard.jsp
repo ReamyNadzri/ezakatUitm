@@ -1,3 +1,4 @@
+<%@page import="com.zakat.model.DBConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -8,17 +9,14 @@
 
 <%
     // Retrieve matric number from session
-    String staffNo = (String) session.getAttribute("staffNo");
+    String staffNo = (String) session.getAttribute("STAFFNO");
     if (staffNo == null) {
         // Redirect to login page if no session exists
         response.sendRedirect("loginStaff.jsp");
         return;
     }
 
-    // JDBC settings
-    String jdbcURL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-    String dbUser = "root";
-    String dbPassword = "";
+  
 
     // Variables to store student's name and email
     String staffName = "";
@@ -26,18 +24,18 @@
 
     // Database connection and query
     try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
 
-        String query = "SELECT staffName, staffEmail FROM staffregister WHERE staffNo = ?";
+        Connection connection = DBConnection.getConnection();
+
+        String query = "SELECT NAME, EMAIL FROM STAFF WHERE STAFFNO = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, staffNo);
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
-            staffName = resultSet.getString("staffName");
-            staffEmail = resultSet.getString("staffEmail");
+            staffName = resultSet.getString("NAME");
+            staffEmail = resultSet.getString("EMAIL");
         } else {
             // If no data found, set default messages
             staffName = "Unknown Staff";
