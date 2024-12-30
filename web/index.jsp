@@ -58,7 +58,7 @@
 
             </div>
             
-            <div class="w3-container w3-col w3-center w3-border" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:40%">
+            <div class="w3-container w3-col w3-center w3-border" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:28%">
 
                 <h1 class="w3-center">Jom Bayar Zakat Dengan Mudah!!</h1>
                 <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,
@@ -71,7 +71,7 @@
             <div class="w3-container w3-col w3-border" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:40%">
 
                 <div class="w3-container w3-cell">
-                    <h2>Zakat Kolej</h2>
+                    <h2 style="margin-top:3%">Zakat Kolej</h2>
                     <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,<br> Dummy texy, 
                         Dummy texy, Dummy texy, Dummy texy, 
                     </p>
