@@ -323,6 +323,7 @@ public class addZakatServlet extends HttpServlet {
                             
                             DBConnection.closeConnection(conn);
                             success = true;
+                            
                              
                         }catch(SQLException e){
                             e.printStackTrace();

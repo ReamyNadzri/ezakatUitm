@@ -404,6 +404,8 @@
                     </div>
                 </form>
                 
+                
+                <!--popup and copy all style-->
                 <div id="overlay"></div>
 
                 <!-- Popup -->
@@ -470,6 +472,8 @@
                 document.getElementById(selectedId).classList.add('selected');
                 document.getElementById(selectedId + 'Inputs').classList.remove('hidden');
             }
+            
+            //POPUP JAVASCRIPT
             // Get elements
             const form = document.getElementById('zakatForm');
             const popup = document.getElementById('popup');
