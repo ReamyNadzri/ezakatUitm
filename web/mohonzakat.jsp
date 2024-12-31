@@ -3,6 +3,15 @@
     <meta name="viewport">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <%
+    String matricNumber = (String) session.getAttribute("MATRICNO");
+    if (matricNumber == null) {
+        // Redirect to login page if no session exists
+        response.sendRedirect("loginStudent.jsp");
+        return;
+    }
+    %>
     <style>
         #bantuankewangan {
             display: none; /* Hide inputs by default */
@@ -389,6 +398,7 @@
                     </div>
 
                     <div class="w3-panel w3-center w3-col" style="margin-bottom: 3%">
+                        <input hidden class="w3-input w3-border w3-round-large" type="text" name="matricNumber" value="matricNumber" id="" size="50%">
                         <button class="w3-button w3-border w3-green w3-cell" name="MOHON" type="submit" onclick="">MOHON</button>
                         <button class="w3-button w3-border w3-border-green w3-cell w3-margin-left" href="#">KEMBALI</button>
                     </div>

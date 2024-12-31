@@ -30,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import java.sql.ResultSet;
+import javax.servlet.http.HttpSession;
 
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024,
@@ -56,6 +57,14 @@ public class addZakatServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
+        HttpSession session = request.getSession();
+        String matricNumber = (String) session.getAttribute("MATRICNO");
+        if (matricNumber == null) {
+            // Redirect to login page if no session exists
+            response.sendRedirect("loginStudent.jsp");
+            return;
+        }
+    
         // Prepare a directory to store uploaded files
         String applicationPath = request.getServletContext().getRealPath("");
         Path uploadPath = Paths.get(applicationPath, UPLOAD_DIRECTORY);
@@ -276,7 +285,7 @@ public class addZakatServlet extends HttpServlet {
 
                             pstmt = conn.prepareStatement(applicationZakatSQL);
                             
-                            pstmt.setInt(1, 2024963611);
+                            pstmt.setInt(1, 2024963611); //session
                             pstmt.setString(2, insentifmakanan);
                             pstmt.setString(3, bantuan);
                             pstmt.setString(4, namaBantuan);
