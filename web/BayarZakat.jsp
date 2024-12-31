@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Pembayaran Zakat</title>
-        <div class="w3-border w3-border-blue" style="height:8%">
+        <div class="" style="">
             <jsp:include page="header.jsp"></jsp:include>
         </div>
         <style>

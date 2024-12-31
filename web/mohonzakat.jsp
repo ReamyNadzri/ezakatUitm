@@ -1,14 +1,20 @@
 <head>
+    <jsp:include page="header.jsp"></jsp:include>
     <title>Permohonan Zakat</title>
     <meta name="viewport">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
+
     <%
     String matricNumber = (String) session.getAttribute("MATRICNO");
     if (matricNumber == null) {
         // Redirect to login page if no session exists
-        response.sendRedirect("loginStudent.jsp");
+        %>
+        <script>alert('Log masuk terlebih dahulu sebelum membuat permohonan!');
+        window.location.href = 'loginStudent.jsp';
+        </script>
+        <%
         return;
     }
     %>
@@ -92,10 +98,7 @@
 
 <body>
 
-    
-    <div class="w3-border w3-border-blue" style="height:8%">
-        <jsp:include page="header.jsp"></jsp:include>
-    </div>
+  
 
     <div class="w3-container w3-row">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">

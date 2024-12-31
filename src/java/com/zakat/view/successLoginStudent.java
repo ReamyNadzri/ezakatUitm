@@ -35,7 +35,7 @@ public class successLoginStudent extends HttpServlet {
         response.getWriter().println("<h3 style='text-align: center;'>You have successfully logged in.</h3>");
         response.getWriter().println("<p style='text-align: center;'>Matric Number: " + matricno + "</p>");
         response.getWriter().println("<div style='text-align: center;'>");
-        response.getWriter().println("<a href='staffDashboard.jsp' style='text-decoration: none; color: white; background-color: purple; padding: 10px 20px; border-radius: 4px;'>Go to Dashboard</a>");
+        response.getWriter().println("<a href='index.jsp' style='text-decoration: none; color: white; background-color: purple; padding: 10px 20px; border-radius: 4px;'>Return</a>");
         response.getWriter().println("</div>");
         response.getWriter().println("</body>");
         response.getWriter().println("</html>");

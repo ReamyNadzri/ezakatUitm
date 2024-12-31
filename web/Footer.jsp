@@ -45,7 +45,7 @@
 
         <!-- Copyright Section -->
         <div class="footer-bottom">
-            <p>Copyright © 2024 UNIVERSITI MARA TEKNOLOGI CAWANGAN TERENGGANU</p>
+            <p><b>Hak Cipta &copy AbeFiwan Expert Studios. Hak Cipta Terpelihara</b></p>
         </div>
     </footer>
 

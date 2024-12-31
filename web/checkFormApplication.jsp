@@ -3,7 +3,7 @@
     Created on : Dec 15, 2024, 2:09:45 AM
     Author     : rahim
 --%>
-
+<jsp:include page="header.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

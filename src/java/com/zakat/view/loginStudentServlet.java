@@ -44,11 +44,13 @@ public class loginStudentServlet extends HttpServlet {
                 // If matric number exists, check password
                 String storedPassword = resultSet.getString("PASSWORD");
                 String storedmatricno = resultSet.getString("MATRICNO");
+                String storedname = resultSet.getString("NAME");
                 
                 if (storedPassword.equals(password)) {
                     // If password matches, redirect to successLoginStudent.jsp
                     HttpSession session = request.getSession();
                     session.setAttribute("MATRICNO", storedmatricno);
+                    session.setAttribute("NAME", storedname);
                     response.sendRedirect("successLoginStudent.jsp");
                 } else {
                     // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
