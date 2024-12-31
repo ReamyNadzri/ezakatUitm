@@ -6,20 +6,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Student Login</title>
+    <div class="w3-border w3-border-blue" style="height:8%">
+            <jsp:include page="header.jsp"></jsp:include>
+    </div>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f3f3f7;
-        color: #333;
-        text-align: center;
-        padding: 50px;
-    }
+    * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: google sans, sans-serif;
+            }
+           
     form {
         display: inline-block;
         background: #1c1c1e;
         padding: 30px;
+        margin-top: 80px;
+        margin-bottom: 80px;
+        margin-right: 150px;
+        margin-left: 550px;
         border-radius: 16px;
+        text-align: center;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         color: #fff;
         width: 300px;
@@ -75,9 +85,9 @@
 </head>
 <body>
     <form action="loginStudentServlet" method="post">
-        <h2>Login as Student</h2>
-        <input type="text" name="matricno" placeholder="Enter Matric Number" required>
-        <input type="password" name="password" placeholder="Enter Password" required>
+        <h2>Login Sebagai Pelajar</h2>
+        <input type="text" name="matricno" placeholder="Masukkan Nombor Matrik" required>
+        <input type="password" name="password" placeholder="Masukkan Password" required>
         <button type="submit">Login</button>
         <a href="studentForm.jsp">Not Register Yet? Register First</a>
     </form>
@@ -87,4 +97,7 @@
         <p class="error">${errorMessage}</p>
     </c:if>
 </body>
+
+        <jsp:include page="Footer.jsp"></jsp:include>
+ 
 </html>
