@@ -285,7 +285,7 @@ public class addZakatServlet extends HttpServlet {
 
                             pstmt = conn.prepareStatement(applicationZakatSQL);
                             
-                            pstmt.setInt(1, 2024963611); //session
+                            pstmt.setInt(1, Integer.parseInt(matricNumber)); //session
                             pstmt.setString(2, insentifmakanan);
                             pstmt.setString(3, bantuan);
                             pstmt.setString(4, namaBantuan);
