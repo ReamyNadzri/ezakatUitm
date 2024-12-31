@@ -19,29 +19,36 @@ public class loginStudentServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            
         // Get input parameters from the form
-        String matricNumber = request.getParameter("matricNumber");
+        String matricno = request.getParameter("matricno");
         String password = request.getParameter("password");
-
 
         // Database connection and query
         try {
+            // Load the Oracle JDBC driver
+
+
+            // Establish connection to Oracle DB
             Connection connection = DBConnection.getConnection();
 
             // Check if matric number exists in the database
-            String query = "SELECT * FROM STUDENT WHERE MATRICNO = ?";
+            String query = "SELECT * FROM STUDENT WHERE matricno = ?";
+
+            
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, matricNumber);
+            preparedStatement.setString(1, matricno);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 // If matric number exists, check password
                 String storedPassword = resultSet.getString("PASSWORD");
-                String matricno = resultSet.getString("MATRICNO");
+                String storedmatricno = resultSet.getString("MATRICNO");
+                
                 if (storedPassword.equals(password)) {
                     // If password matches, redirect to successLoginStudent.jsp
                     HttpSession session = request.getSession();
-                    session.setAttribute("MATRICNO", matricno);
+                    session.setAttribute("MATRICNO", storedmatricno);
                     response.sendRedirect("successLoginStudent.jsp");
                 } else {
                     // If password is incorrect, set error message and redirect to errorLoginStudent.jsp

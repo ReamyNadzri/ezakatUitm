@@ -2,12 +2,15 @@
 
 <%
     // Retrieve form parameters
+    String studentId = request.getParameter("studentId");
     String name = request.getParameter("name");
-     String matricNumber = request.getParameter("matricNumber");
-    String icNumber = request.getParameter("icNumber");
+    String matricno = request.getParameter("matricno");
+    String income = request.getParameter("income");
     String courseCode = request.getParameter("courseCode");
+    String courseName = request.getParameter("courseName");
     String campus = request.getParameter("campus");
-    String phoneNumber = request.getParameter("phoneNumber");
+    String phoneNum = request.getParameter("phoneNum");
+    String address = request.getParameter("address");
     String email = request.getParameter("email");
     String password = request.getParameter("password");
 
@@ -15,40 +18,42 @@
     PreparedStatement pstmt = null;
 
     try {
-        // Load JDBC driver for Java DB
-        Class.forName("com.mysql.jdbc.Driver");
+        // Load JDBC driver for Oracle
+        Class.forName("oracle.jdbc.OracleDriver");
 
-        // Establish database connection to Java DB
-        String dbUrl = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-        String dbUser = "root";
-        String dbPassword = "";
+        // Establish database connection to Oracle
+        String dbUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update as per your Oracle DB configuration
+        String dbUser = "zakatdb"; // Replace with your Oracle username
+        String dbPassword = "zakatdb"; // Replace with your Oracle password
         conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
         // SQL query for inserting a student record
-        String sql = "INSERT INTO studentregister (name, matricNumber, icNumber, courseCode, campus, phoneNumber, email, password) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO STUDENT (studentId, name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         pstmt = conn.prepareStatement(sql);
 
-        pstmt.setString(1, name);
-        pstmt.setString(2, matricNumber);
-        pstmt.setString(3, icNumber);
-        pstmt.setString(4, courseCode);
-        pstmt.setString(5, campus);
-        pstmt.setString(6, phoneNumber);
-        pstmt.setString(7, email);
-        pstmt.setString(8, password); // Optionally hash the password for security
+        pstmt.setString(1, studentId);
+        pstmt.setString(2, name);
+        pstmt.setString(3, matricno);
+        pstmt.setString(4, income);
+        pstmt.setString(5, courseCode);
+        pstmt.setString(6, courseName);
+        pstmt.setString(7, campus);
+        pstmt.setString(8, phoneNum);
+        pstmt.setString(9, address);
+        pstmt.setString(10, email);
+        pstmt.setString(11, password); // Optionally hash the password for security
 
         // Execute the SQL statement
         int rowsInserted = pstmt.executeUpdate();
 
         if (rowsInserted > 0) {
-            response.sendRedirect("studentForm.jsp?success=true");
-            out.println("<p>Success</p>");// Redirect with success flag
+            response.sendRedirect("studentForm.jsp?success=true"); // Redirect with success flag
         } else {
             out.println("<p style='color:red;'>Registration failed. Please try again.</p>");
         }
     } catch (ClassNotFoundException e) {
-        out.println("<p style='color:red;'>Error: Java DB driver not found.</p>");
+        out.println("<p style='color:red;'>Error: Oracle JDBC driver not found.</p>");
     } catch (SQLException e) {
         out.println("<p style='color:red;'>SQL Error: " + e.getMessage() + "</p>");
     } finally {

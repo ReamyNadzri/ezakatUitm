@@ -17,9 +17,9 @@ public class dbRegisterStaff extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     // Database connection parameters for Java DB
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
+     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE"; // Update as per your Oracle DB configuration
+    private static final String DB_USER = "zakatdb"; // Replace with your Oracle username
+    private static final String DB_PASSWORD = "zakatdb"; // Replace with your Oracle password
 
     /**
      * Handles HTTP POST requests for student registration.
@@ -30,36 +30,36 @@ public class dbRegisterStaff extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         // Retrieve form parameters
+       String staffId = request.getParameter("staffId");
+        String Name = request.getParameter("Name");
         String staffNo = request.getParameter("staffNo");
-        String staffName = request.getParameter("staffName");
-        String staffIc = request.getParameter("staffIc");
-        String staffCampus = request.getParameter("staffCampus");
-        String staffPhoneNumber = request.getParameter("staffPhoneNumber");
-        String staffEmail = request.getParameter("staffEmail");
-        String staffPassword = request.getParameter("staffPassword");
+        String Campus = request.getParameter("Campus");
+        String PhoneNum = request.getParameter("PhoneNum");
+        String Email = request.getParameter("Email");
+        String Password = request.getParameter("Password");
 
         Connection conn = null;
         PreparedStatement pstmt = null;
 
         try {
             // Load JDBC driver for Java DB
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("oracle.jdbc.OracleDriver");
 
             // Establish database connection
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
             // SQL query to insert student record
-            String sql = "INSERT INTO staffregister (staffNo, staffName, staffIc, staffCampus, staffPhoneNumber, staffEmail, staffPassword) " +
+            String sql = "INSERT INTO STAFF (staffId, Name, staffNo, Campus, PhoneNum, Email, Password) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?)";
-                pstmt = conn.prepareStatement(sql);
+        pstmt = conn.prepareStatement(sql);
 
-                pstmt.setString(1, staffNo);
-                pstmt.setString(2, staffName);
-                pstmt.setString(3, staffIc);
-                pstmt.setString(4, staffCampus);
-                pstmt.setString(5,staffPhoneNumber);
-                pstmt.setString(6, staffEmail);
-                pstmt.setString(7, staffPassword);
+        pstmt.setString(1, staffId);
+        pstmt.setString(2, Name);
+        pstmt.setString(3, staffNo);
+        pstmt.setString(4, Campus);
+        pstmt.setString(5, PhoneNum);
+        pstmt.setString(6, Email);
+        pstmt.setString(7, Password);
 
             // Execute the query
             int rows = pstmt.executeUpdate();

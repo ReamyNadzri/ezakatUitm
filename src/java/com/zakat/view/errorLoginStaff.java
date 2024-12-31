@@ -18,9 +18,9 @@ public class errorLoginStaff extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     // JDBC connection parameters
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
+     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe"; // Update as per your Oracle DB configuration
+    private static final String DB_USER = "zakatdb"; // Replace with your Oracle username
+    private static final String DB_PASSWORD = "zakatdb"; // Replace with your Oracle password
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Set the response content type
@@ -29,13 +29,13 @@ public class errorLoginStaff extends HttpServlet {
 
         // Get matric number and password from the login form
         String staffNo = request.getParameter("staffNo");
-        String staffPassword = request.getParameter("staffPassword");
+        String Password = request.getParameter("Password");
 
         // Error message variable
         String errorMessage = null;
 
         // Check if matric number and password are provided
-        if (staffNo == null || staffPassword == null || staffNo.isEmpty() || staffPassword.isEmpty()) {
+        if (staffNo == null || Password == null || staffNo.isEmpty() || Password.isEmpty()) {
             errorMessage = "Matric number and password are required.";
             displayErrorPage(out, errorMessage);
             return;
@@ -44,17 +44,17 @@ public class errorLoginStaff extends HttpServlet {
         // JDBC connection and query
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // Check if the matric number exists in the database
-            String checkMatricQuery = "SELECT staffPassword FROM staffregister WHERE staffNo = ?";
+            String checkMatricQuery = "SELECT Password FROM STAFF WHERE staffNo = ?";
             try (PreparedStatement stmt = conn.prepareStatement(checkMatricQuery)) {
                 stmt.setString(1, staffNo);
                 ResultSet rs = stmt.executeQuery();
 
                 if (rs.next()) {
                     // Matric number exists, validate the password
-                    String storedPassword = rs.getString("staffPassword");
-                    if (storedPassword.equals(staffPassword)) {
+                    String storedPassword = rs.getString("Password");
+                    if (storedPassword.equals(Password)) {
                         // Login successful, redirect to dashboard
-                        response.sendRedirect("studentDashboard.jsp");
+                        response.sendRedirect("staffDashboard.jsp");
                         return;
                     } else {
                         // Password is incorrect

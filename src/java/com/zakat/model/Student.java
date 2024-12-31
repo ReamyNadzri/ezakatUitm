@@ -9,7 +9,7 @@ public class Student{
     private String password;
     private String matricno;
     private String name;
-    private String icnom;
+    private int income;
     private String courceCode;
     private String courseName;
     private String campus;
@@ -20,12 +20,12 @@ public class Student{
     public Student() {
     }
 
-    public Student(String studentId, String password, String matricno, String name, String icnom, String courceCode, String courseName, String campus, String email, String phoneNum, String address) {
+    public Student(String studentId, String password, String matricno, String name, int income, String courceCode, String courseName, String campus, String email, String phoneNum, String address) {
         this.studentId = studentId;
         this.password = password;
         this.matricno = matricno;
         this.name = name;
-        this.icnom = icnom;
+        this.income = income;
         this.courceCode = courceCode;
         this.courseName = courseName;
         this.campus = campus;
@@ -66,12 +66,12 @@ public class Student{
         this.name = name;
     }
 
-    public String getIcnom() {
-        return this.icnom;
+    public int getIncome() {
+        return this.income;
     }
 
-    public void setIcnom(String icnom) {
-        this.icnom = icnom;
+    public void setIncome(int income) {
+        this.income = income;
     }
 
     public String getCourceCode() {
@@ -129,7 +129,7 @@ public class Student{
             ", password='" + getPassword() + "'" +
             ", matricno='" + getMatricno() + "'" +
             ", name='" + getName() + "'" +
-            ", icnom='" + getIcnom() + "'" +
+            ", icnom='" + getIncome() + "'" +
             ", courceCode='" + getCourceCode() + "'" +
             ", courseName='" + getCourseName() + "'" +
             ", campus='" + getCampus() + "'" +

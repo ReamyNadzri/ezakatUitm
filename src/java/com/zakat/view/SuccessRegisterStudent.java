@@ -16,12 +16,15 @@ public class SuccessRegisterStudent extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get form data submitted from studentForm.jsp
+        String studentId = request.getParameter("studentId");
         String name = request.getParameter("name");
-        String matricNumber = request.getParameter("matricNumber");
-        String icNumber = request.getParameter("icNumber");
+        String matricno = request.getParameter("matricno");
+        String income = request.getParameter("income");
         String courseCode = request.getParameter("courseCode");
+        String courseName = request.getParameter("courseName");
         String campus = request.getParameter("campus");
-        String phoneNumber = request.getParameter("phoneNumber");
+        String phoneNum = request.getParameter("phoneNum");
+        String address = request.getParameter("address");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
