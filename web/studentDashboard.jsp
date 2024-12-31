@@ -1,153 +1,146 @@
-<%@page import="com.zakat.model.DBConnection"%>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="java.sql.*" %>
-<jsp:include page="header.jsp"></jsp:include>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
+    <div class="w3-border w3-border-blue" style="height:8%">
+            <jsp:include page="header.jsp"></jsp:include>
+    </div>
     <style>
-                /* General body styling */
-      
+        * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: google sans, sans-serif;
+            }
 
-        /* Sidebar styles */
-        .sidebar {
-            width: 250px;
-            background-color: #6a1b9a; /* Dark violet background */
+        /* Header styling */
+        .header {
+            background: linear-gradient(to right, #6a1b9a, #8e24aa);
             color: white;
-            
-            height: 100%;
-            top: 0;
-            left: 0; /* Sidebar always visible */
-            padding-top: 30px;
-            box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            padding: 10px 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .sidebar h2 {
-            text-align: center;
-            color: #fff;
-            font-size: 24px;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
+        .header .welcome {
+            font-size: 20px;
         }
 
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin: 20px 0;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-
-        .sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            display: block;
-            padding: 15px;
+        .header .nav-buttons button {
+            background-color: #4a148c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin-left: 10px;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            font-size: 14px;
         }
 
-        .sidebar ul li a:hover {
-            background-color: #9c4d97; /* Lighter violet on hover */
-            transform: scale(1.05); /* Slightly enlarge on hover */
+        .header .nav-buttons button:hover {
+            background-color: #6a1b9a;
         }
 
         /* Main content styling */
-        .main-content {
-            margin-left: 250px; /* Space for the sidebar */
-            padding: 30px;
-            width: 100%;
-            background-color: #fff;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-            overflow-y: auto; /* Allow scrolling if content is too large */
+        .content {
+            text-align: center;
+            margin: 20px 0;
         }
 
-        .main-content h1 {
-            color: #6a1b9a; /* Dark violet color for heading */
-            font-size: 36px;
-            letter-spacing: 1px;
+        .carousel {
+            position: relative;
+            margin: 0 auto;
+            width: 80%;
+            height: 300px;
+            background: #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .main-content p {
-            font-size: 18px;
-            color: #333;
-            line-height: 1.6;
+        .carousel .arrow {
+            font-size: 24px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
         }
 
-        /* Button to toggle sidebar (removed as sidebar is always visible) */
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="w3-container w3-row">
-    <!-- Sidebar Section (Always visible) -->
-                <div class="sidebar w3-cell" style="margin-right: 20%">
-                    <h2>Student Dashboard</h2>
-                    <ul>
-                        <li><a href="studentDashboard.jsp">Dashboard</a></li>
-                        <li><a href="profile.jsp">Profile</a></li>
-                        <li><a href="assignments.jsp">Assignments</a></li>
-                        <li><a href="grades.jsp">Grades</a></li>
-                        <li><a href="settings.jsp">Settings</a></li>
-                        <li><a href="logout.jsp">Logout</a></li>
-                    </ul>
-                </div>
-    
-                <br>
-                
-                <div class="w3-container w3-cell" style="">
-        
-    <%
-       
-        
-        try{
-            Connection conn = DBConnection.getConnection();
-            
-            String query = "SELECT APPLYID, DESCRIPTION, ZAKATNAME FROM ";
-            
-            %>
-                    <h2>Senarai Permohonan</h2>
-                    <table class="w3-table-all" id='saiz' border='1'>
-                        <tr class="w3-table">
-                            <td>No Pemohonan</td>
-                            <td>Tarikh Mohon & Hantar</td>
-                            <td>Jenis Bantuan</td>
-                            <td>Ulasan</td>
-                            <td></td>
-                            <td>Kemaskini</td>
-                            <td>Laporan (CETAK)</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-            <%
-            
-
-        }catch(Exception e){
-        
-        }
-         
-        %>
-        
-        
+    <div class="header">
+        <div class="welcome">Hi, Student!</div>
+        <div class="nav-buttons">
+            <button>About Zakat</button>
+            <button>Profile</button>
+            <button>Logout</button>
+        </div>
     </div>
-        
+
+    <div class="content">
+        <div class="carousel">
+            <button class="arrow">&#8249;</button>
+            <div class="carousel-content">Content Here</div>
+            <button class="arrow">&#8250;</button>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <img src="sources/zakat.jpg" alt="Zakat Musibah">
+                <div>Zakat Musibah</div>
+            </div>
+            <div class="card">
+                <img src="sources/zakat.jpg" alt="Zakat Kolej">
+                <div>Zakat Kolej</div>
+            </div>
+            <div class="card">
+                <img src="sources/zakat.jpg" alt="Zakat Yuran">
+                <div>Zakat Yuran</div>
+            </div>
+            <div class="card">
+                <img src="sources/zakat.jpg" alt="Zakat Makan">
+                <div>Zakat Makan</div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
+ <jsp:include page="Footer.jsp"></jsp:include>
 </html>
