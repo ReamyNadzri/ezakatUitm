@@ -9,6 +9,19 @@
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/DBConnection.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/web/popupFalse.jsp</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/ezakatUitm/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/donatorRegisterServlet.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/StudentServlet.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/ResultServlet.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/web/loginDonator.jsp</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/AdminServlet.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/DonatorServlet.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbLoginStaff.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbRegisterStudent.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/StaffServlet.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/registerStudent.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/dbRegisterStaff.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/ezakatUitm/web/RegisterDonitor.jsp</file>
         </group>
     </open-files>
 </project-private>
