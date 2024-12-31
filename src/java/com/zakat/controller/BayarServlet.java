@@ -42,9 +42,12 @@ public class BayarServlet extends HttpServlet {
             
             if (bank.length() == 0 || amaun == 0 || tarikh.length() == 0)
             {
-                response.sendRedirect("popupFalse.jsp");
-                return;
+                request.setAttribute("status", "failed");
+            } else {
+                request.setAttribute("status", "success");
             }
+            
+            request.getRequestDispatcher("BayarZakat.jsp").forward(request, response);
             
             Connection conn = null;
             PreparedStatement pst = null;
@@ -65,24 +68,23 @@ public class BayarServlet extends HttpServlet {
 
                             if (rowsInserted > 0) {
                                System.out.println("A new application was inserted successfully!");
-                               response.sendRedirect("popupTrue.jsp");
+                               request.setAttribute("status", "success");
                              } else {
                                  System.out.println("Failed to save to database");
-                                request.setAttribute("errorMessage", "Failed to save to database ZAKATMAKANAN, please try again!");
-                                request.getRequestDispatcher("/error.jsp").forward(request, response);
-                                return;
+                                request.setAttribute("status", "failed");
                             }
+                            request.getRequestDispatcher("BayarZakat.jsp").forward(request, response);
+                            
             } finally {
                 if (pst != null) pst.close();
                 if (conn != null) conn.close();
                 DBConnection.getConnection();
             }
-
-            response.sendRedirect("popupTrue.jsp");
             
         } catch ( Exception e ) {
             out.println ("Error : " + e.getMessage());
-            response.sendRedirect("popupFalse.jsp");
+            request.setAttribute("status", "failed");
+            request.getRequestDispatcher("BayarZakat.jsp").forward(request, response);
         } finally {
             out.close();
         }
