@@ -17,7 +17,7 @@
                     <li><a href="loginStudent.jsp">Pelajar</a></li>
                     <li><a href="#">Donator</a></li>
                     <li><a href="loginStaff.jsp">Staff</a></li>
-                    <li><a href="#">Administrator</a></li>
+                    <li><a href="admin/dashboard.jsp">Administrator</a></li>
                 </ul>
             </div>
 
