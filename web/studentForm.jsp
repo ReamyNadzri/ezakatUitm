@@ -8,100 +8,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Form Student</title>
-    <style>
-        /* Styling for the modal */
-        .tajuk {
-            text-align: center;
-        }
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* Center the modal */
-            background-color: #111;
-            padding: 20px;
-            border-radius: 8px;
-            width: 40%;
-            color: white;
-            transform: translate(-50%, -50%) scale(0.8);
-            opacity: 0;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-        }
-        .modal.show .modal-content {
-            transform: translate(-50%, -50%) scale(1); /* Pop up effect */
-            opacity: 1; /* Fade-in effect */
-        }
-        .modal-content input,
-        .modal-content select { /* Apply the same styling to input and select */
-            display: block;
-            width: 90%;
-            margin: 10px auto;
-            padding: 8px;
-            border: none;
-            border-radius: 10px;
-            font-size: 14px; /* Ensure the font size matches for consistency */
-            background-color: #f2f2f2;
-        }
-        .selek {
-            align-self: left;
-        }
-        .modal-content .button-container {
-            text-align: center; /* Center-align the buttons */
-        }
-        .modal-content button {
-            margin: 10px 5px;
-            width: 100px; /* Smaller button size */
-            padding: 8px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .modal-content .register-btn {
-            background-color: purple;
-            color: white;
-        }
-        .modal-content .close-btn {
-            background-color: gray;
-            color: white;
-        }
-        .checkmark {
-            font-size: 50px;
-            color: #00FF00;
-            margin-bottom: 10px;
-        }
-        .popup-content {
-            background-color: #1b1b1b;
-            color: white;
-            width: 300px;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 15% auto;
-            position: relative;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-        }
-    </style>
+   <style>
+    /* Styling for the modal */
+    .tajuk {
+        text-align: center;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center the modal */
+        background-color: #111;
+        padding: 15px;
+        border-radius: 8px;
+        width: 50%; /* Adjusted width */
+        max-width: 500px; /* Limit maximum width */
+        color: white;
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+    .modal.show .modal-content {
+        transform: translate(-50%, -50%) scale(1); /* Pop up effect */
+        opacity: 1; /* Fade-in effect */
+    }
+    .modal-content input,
+    .modal-content select { /* Apply the same styling to input and select */
+        display: block;
+        width: 100%; /* Make inputs wider */
+        max-width: 400px; /* Restrict maximum width */
+        margin: 8px auto;
+        padding: 6px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px; /* Ensure the font size matches for consistency */
+        background-color: #3d3d3d;
+    }
+    .selek {
+        align-self: left;
+    }
+    .modal-content .button-container {
+        text-align: center; /* Center-align the buttons */
+    }
+    .modal-content button {
+        margin: 8px 5px;
+        width: 90px; /* Smaller button size */
+        padding: 6px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .modal-content .register-btn {
+        background-color: purple;
+        color: white;
+    }
+    .modal-content .close-btn {
+        background-color: gray;
+        color: white;
+    }
+    .checkmark {
+        font-size: 50px;
+        color: #00FF00;
+        margin-bottom: 10px;
+    }
+    .popup-content {
+        background-color: #1b1b1b;
+        color: white;
+        width: 300px;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin: 15% auto;
+        position: relative;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+    }
+</style>
+
 </head>
 <body>
     <sql:setDataSource var="myDatasource"
@@ -158,7 +161,7 @@
                 </div>
                 
                 <select name="campus" required>
-                        <option value="" disabled selected>Pilih Kampus Anda Anda...</option>
+                        <option value="" disabled selected>Pilih Kampus Anda...</option>
                         <option value="UiTM Kuala Terengganu">UiTM Kuala Terengganu</option>
                         <option value="UiTM Dungun">UiTM Dungun</option>
                         <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>
