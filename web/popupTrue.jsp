@@ -1,52 +1,10 @@
-<%-- 
-    Document   : popupTrue
-    Created on : Dec 18, 2024, 2:06:38 AM
-    Author     : user
---%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <title>User Registration Popup</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-
-    <body>
-        <button class="openpopup" onclick="showpopup()">Popup?</button></strong>
-        <!-- Modal Overlay -->
-        <div id="popupModal" class="modal-overlay">
-            <div class="modal-box">
-                <!-- Warning Icon -->
-                <img src="sources/1check.png" class="seru" alt="warning">
-                
-                <!-- Warning Text -->
-                <div class="modal-text">User successfully registered!</div>
-
-                <!-- Back Button -->
-                <button type="button" class="back" onclick="closepopup()">Kembali Semula</button>
-            </div>
-        </div>
-
-        <!-- JavaScript to Trigger the Modal -->
-        <script>
-            // Function to Show the Popup
-             function showpopup() {
-                document.getElementById("popupModal").style.display = "block";
-            }
-
-            // Function to Close the Popup
-            function closepopup() {
-                document.getElementById("popupModal").style.display = "none";
-            }
-        </script>
-    </body>
-</html>
-
-
-<!-- CSS -->
-<style>
+        <style>
             /* Modal Background Overlay */
             .modal-overlay {
                 display: none; /* Hidden by default */
@@ -104,4 +62,37 @@
             .modal-button:hover {
                 background: #6b35d4;
             }
-</style>
+        </style>
+    </head>
+
+    <body>
+        <button class="openpopup" onclick="showpopup()">Popup?</button></strong>
+        <!-- Modal Overlay -->
+        <div id="popupModal" class="modal-overlay">
+            <div class="modal-box">
+                <!-- Warning Icon -->
+                <img src="sources/1check.png" class="seru" alt="warning">
+                
+                <!-- Warning Text -->
+                <div class="modal-text">User successfully registered!</div>
+
+                <!-- Back Button -->
+                <button type="button" class="back" onclick="closepopup()">Kembali Semula</button>
+            </div>
+        </div>
+
+        <!-- JavaScript to Trigger the Modal -->
+        <script>
+            // Function to Show the Popup
+             function showpopup() {
+                document.getElementById("popupModal").style.display = "block";
+            }
+
+            // Function to Close the Popup
+            function closepopup() {
+                document.getElementById("popupModal").style.display = "none";
+            }
+            
+        </script>
+    </body>
+</html>
