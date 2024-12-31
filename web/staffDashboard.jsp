@@ -1,196 +1,130 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%
-    // Retrieve matric number from session
-    String staffNo = (String) session.getAttribute("staffNo");
-    if (staffNo == null) {
-        // Redirect to login page if no session exists
-        response.sendRedirect("loginStaff.jsp");
-        return;
-    }
-
-    // JDBC settings
-    String jdbcURL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-    String dbUser = "root";
-    String dbPassword = "";
-
-    // Variables to store student's name and email
-    String staffName = "";
-    String staffEmail = "";
-
-    // Database connection and query
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
-
-        String query = "SELECT staffName, staffEmail FROM staffregister WHERE staffNo = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, staffNo);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            staffName = resultSet.getString("staffName");
-            staffEmail = resultSet.getString("staffEmail");
-        } else {
-            // If no data found, set default messages
-            staffName = "Unknown Staff";
-            staffEmail = "Email not found";
-        }
-
-        connection.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-        staffName = "Error fetching data";
-        staffEmail = "Error fetching data";
-    }
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
+    <title>Staff Dashboard</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
+            margin: 0;
             font-family: 'Arial', sans-serif;
-            display: flex;
-            height: 100vh;
-            color: #fff;
-            background-color: #1b1b3a;
+            background-color: #f4f4f4;
         }
+
         .sidebar {
-            width: 260px;
-            background-color: #2c2c54;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color:  #6a1b9a;
+            padding-top: 20px;
+            overflow: hidden;
         }
+
         .sidebar h2 {
+            color: #ecf0f1;
             text-align: center;
             margin-bottom: 30px;
-            color: #fff;
-            font-size: 1.8em;
         }
-        .sidebar a {
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .sidebar ul li a {
             text-decoration: none;
-            color: #bbb;
+            color: #ecf0f1;
+            font-size: 18px;
             display: block;
-            padding: 12px 15px;
-            margin: 8px 0;
-            border-radius: 5px;
-            font-size: 1.1em;
-            transition: all 0.3s;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .sidebar a:hover {
-            background-color: #6c5ce7;
-            color: #fff;
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+            color: #1abc9c;
         }
-        .sidebar .logout {
-            margin-top: auto;
-            background-color: #d63031;
-            color: #fff;
-            font-weight: bold;
-        }
-        .sidebar .logout:hover {
-            background-color: #ff7675;
-        }
+
         .content {
-            flex-grow: 1;
-            padding: 40px;
-            background-color: #1b1b3a;
-        }
-        .content h1 {
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            color: #6c5ce7;
-        }
-        .content p {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .card {
-            background-color: #2c2c54;
+            margin-left: 250px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: calc(33.333% - 20px);
-            color: #fff;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: margin-left 0.3s ease-in-out;
         }
+
+        .header {
+            background-color: #2980b9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        .card h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #6c5ce7;
+
+        .card h3 {
+            margin-top: 0;
+            color: #2980b9;
         }
+
         .card p {
-            font-size: 1em;
-            color: #bbb;
-        }
-        @media (max-width: 768px) {
-            .card {
-                width: 100%;
-            }
+            color: #7f8c8d;
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
     <div class="sidebar">
-        <h2>Dashboard</h2>
-        <a href="staffDashboard.jsp">Home</a>
-        <a href="viewProfile.jsp">View Profile</a>
-        <a href="viewCourses.jsp">View Courses</a>
-        <a href="changePassword.jsp">Change Password</a>
-        <a href="contactSupport.jsp">Contact Support</a>
-        <a href="logoutStudentServlet" class="logout">Logout</a>
+        <h2>Staff Menu</h2>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Manage Staff</a></li>
+            <li><a href="#">Attendance</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
     </div>
 
-    <!-- Content -->
     <div class="content">
-        <h1>Welcome to Your Dashboard</h1>
-        <p><strong>Name:</strong> <%= staffName %></p>
-        <p><strong>Email:</strong> <%= staffEmail %></p>
-        <p>Use the sidebar to navigate through your dashboard.</p>
-
-        <!-- Cards Section -->
-        <div class="card-container">
+        <div class="header">Staff Dashboard</div>
+        <div class="cards">
             <div class="card">
-                <h2>Profile</h2>
-                <p>View and update your personal information.</p>
-                <a href="viewProfile.jsp" style="color: #6c5ce7; text-decoration: underline;">Go to Profile</a>
+                <h3>Staff Overview</h3>
+                <p>Track all staff activities and key metrics.</p>
             </div>
             <div class="card">
-                <h2>Courses</h2>
-                <p>Check out your enrolled courses and details.</p>
-                <a href="viewCourses.jsp" style="color: #6c5ce7; text-decoration: underline;">Go to Courses</a>
+                <h3>Attendance</h3>
+                <p>Monitor attendance records and trends.</p>
             </div>
             <div class="card">
-                <h2>Support</h2>
-                <p>Contact support for any assistance you need.</p>
-                <a href="contactSupport.jsp" style="color: #6c5ce7; text-decoration: underline;">Contact Support</a>
+                <h3>Reports</h3>
+                <p>Generate and analyze reports easily.</p>
             </div>
         </div>
     </div>

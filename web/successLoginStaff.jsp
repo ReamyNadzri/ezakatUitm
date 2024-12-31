@@ -45,9 +45,9 @@
 <body>
     <div class="container">
         <h2>Login Successful!</h2>
-        <p>Welcome, ${sessionScope.staffName}!</p> <!-- Assuming student name is stored in session after login -->
+        <p>Welcome, ${sessionScope.Name}!</p> <!-- Assuming student name is stored in session after login -->
         <p>You have logged in successfully.</p>
-        <a href="studentDashboard.jsp">Go to Dashboard</a> <!-- Redirect to student dashboard or another page -->
+        <a href="staffDashboard.jsp">Go to Dashboard</a> <!-- Redirect to student dashboard or another page -->
     </div>
 </body>
 </html>

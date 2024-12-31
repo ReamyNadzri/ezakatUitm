@@ -2,39 +2,39 @@
 
 <%
     // Retrieve form parameters
+    String staffId = request.getParameter("staffId");
+    String Name = request.getParameter("Name");
     String staffNo = request.getParameter("staffNo");
-    String staffName = request.getParameter("staffName");
-    String staffIc = request.getParameter("staffIc");
-    String staffCampus = request.getParameter("staffCampus");
-    String staffPhoneNumber = request.getParameter("staffPhoneNumber");
-    String staffEmail = request.getParameter("staffEmail");
-    String staffPassword = request.getParameter("staffPassword");
+    String Campus = request.getParameter("Campus");
+    String PhoneNum = request.getParameter("PhoneNum");
+    String Email = request.getParameter("Email");
+    String Password = request.getParameter("Password");
 
     Connection conn = null;
     PreparedStatement pstmt = null;
 
     try {
         // Load JDBC driver for Java DB
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("oracle.jdbc.OracleDriver");
 
-        // Establish database connection to Java DB
-        String dbUrl = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-        String dbUser = "root";
-        String dbPassword = "";
+        // Establish database connection to Oracle
+        String dbUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update as per your Oracle DB configuration
+        String dbUser = "zakatdb"; // Replace with your Oracle username
+        String dbPassword = "zakatdb"; // Replace with your Oracle password
         conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
         // SQL query for inserting a student record
-        String sql = "INSERT INTO staffregister (staffNo, staffName, staffIc, staffCampus, staffPhoneNumber, staffEmail, staffPassword) " +
+        String sql = "INSERT INTO STAFF (staffId, Name, staffNo, Campus, PhoneNum, Email, Password) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?)";
         pstmt = conn.prepareStatement(sql);
 
-        pstmt.setString(1, staffNo);
-        pstmt.setString(2, staffName);
-        pstmt.setString(3, staffIc);
-        pstmt.setString(4, staffCampus);
-        pstmt.setString(5,staffPhoneNumber);
-        pstmt.setString(6, staffEmail);
-        pstmt.setString(7, staffPassword);
+        pstmt.setString(1, staffId);
+        pstmt.setString(2, Name);
+        pstmt.setString(3, staffNo);
+        pstmt.setString(4, Campus);
+        pstmt.setString(5,PhoneNum);
+        pstmt.setString(6, Email);
+        pstmt.setString(7, Password);
 
         // Execute the SQL statement
         int rowsInserted = pstmt.executeUpdate();

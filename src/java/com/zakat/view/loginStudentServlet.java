@@ -18,22 +18,26 @@ public class loginStudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get input parameters from the form
-        String matricNumber = request.getParameter("matricNumber");
+        String matricno = request.getParameter("matricno");
         String password = request.getParameter("password");
 
-        // JDBC settings
-        String jdbcURL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-        String dbUser = "root";
-        String dbPassword = "";
+        // JDBC settings for Oracle
+        String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";  // Replace with your Oracle DB URL and SID
+        String dbUser = "zakatdb";  // Replace with your Oracle DB username
+        String dbPassword = "zakatdb";  // Replace with your Oracle DB password
 
         // Database connection and query
         try {
+            // Load the Oracle JDBC driver
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // Establish connection to Oracle DB
             Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
 
             // Check if matric number exists in the database
-            String query = "SELECT * FROM studentregister WHERE matricNumber = ?";
+            String query = "SELECT * FROM STUDENT WHERE matricno = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, matricNumber);
+            preparedStatement.setString(1, matricno);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

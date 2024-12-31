@@ -16,13 +16,13 @@ public class successRegisterStaff extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get form data submitted from studentForm.jsp
-       String staffNo = request.getParameter("staffNo");
-        String staffName = request.getParameter("staffName");
-        String staffIc = request.getParameter("staffIc");
-        String staffCampus = request.getParameter("staffCampus");
-        String staffPhoneNumber = request.getParameter("staffPhoneNumber");
-        String staffEmail = request.getParameter("staffEmail");
-        String staffPassword = request.getParameter("staffPassword");
+       String staffId = request.getParameter("staffId");
+        String Name = request.getParameter("Name");
+        String staffNo = request.getParameter("staffNo");
+        String Campus = request.getParameter("Campus");
+        String PhoneNum = request.getParameter("PhoneNum");
+        String Email = request.getParameter("Email");
+        String Password = request.getParameter("Password");
 
         // Optional: You can add a validation step here or store the student data in a database
         boolean registrationSuccess = true; // Assume the registration is successful

@@ -19,27 +19,31 @@ public class loginStaffServlet extends HttpServlet {
             throws ServletException, IOException {
         // Get input parameters from the form
         String staffNo = request.getParameter("staffNo");
-        String staffPassword = request.getParameter("staffPassword");
+        String Password = request.getParameter("Password");
 
-        // JDBC settings
-        String jdbcURL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-        String dbUser = "root";
-        String dbPassword = "";
+        // JDBC settings for Oracle
+        String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";  // Replace with your Oracle DB URL and SID
+        String dbUser = "zakatdb";  // Replace with your Oracle DB username
+        String dbPassword = "zakatdb";  // Replace with your Oracle DB password
 
         // Database connection and query
         try {
+            // Load the Oracle JDBC driver
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // Establish connection to Oracle DB
             Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
 
             // Check if matric number exists in the database
-            String query = "SELECT * FROM staffregister WHERE staffNo = ?";
+            String query = "SELECT * FROM STAFF WHERE staffNo = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, staffNo);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 // If matric number exists, check password
-                String storedPassword = resultSet.getString("staffPassword");
-                if (storedPassword.equals(staffPassword)) {
+                String storedPassword = resultSet.getString("Password");
+                if (storedPassword.equals(Password)) {
                     // If password matches, redirect to successLoginStudent.jsp
                     response.sendRedirect("successLoginStaff.jsp");
                 } else {
@@ -49,7 +53,7 @@ public class loginStaffServlet extends HttpServlet {
                 }
             } else {
                 // If matric number doesn't exist, set error message and redirect to errorLoginStudent.jsp
-                request.setAttribute("errorMessage", "Staff Number not found. Please register first.");
+                request.setAttribute("errorMessage", "Matric number not found. Please register first.");
                 request.getRequestDispatcher("errorLoginStaff.jsp").forward(request, response);
             }
 

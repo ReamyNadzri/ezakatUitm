@@ -52,7 +52,7 @@
     <h2>Login as Staff</h2>
     <form action="loginStaffServlet" method="post">
         <input type="text" name="staffNo" placeholder="Masukkan Nombor Pekerja" required>
-        <input type="password" name="staffPassword" placeholder="Masukkan Password Anda" required>
+        <input type="password" name="Password" placeholder="Masukkan Password Anda" required>
         <button type="submit">Login</button>
     </form>
 

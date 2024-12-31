@@ -104,19 +104,22 @@
 </head>
 <body>
     <sql:setDataSource var="myDatasource"
-                driver="com.mysql.jdbc.Driver"
-                url="jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull"
-                user="root"
-                password="" />
+                driver="oracle.jdbc.OracleDriver"
+                url="jdbc:oracle:thin:@localhost:1521:XE"
+                user="zakatdb"
+                password="zakatdb" />
     
-    <c:set var="matricNumber" value="${param.matricNumber}" />
+    <c:set var="studentId" value="${param.studentId}" />
+    <c:set var="matricno" value="${param.matricno}" />
     <c:set var="name" value="${param.name}" />
-    <c:set var="icNumber" value="${param.icNumber}" />
+    <c:set var="income" value="${param.income}" />
     <c:set var="courseCode" value="${param.courseCode}" />
+    <c:set var="courseName" value="${param.courseName}" />
     <c:set var="campus" value="${param.campus}" />
-    <c:set var="phoneNumber" value="${param.phoneNumber}" />
+    <c:set var="phoneNum" value="${param.phoneNum}" />
     <c:set var="email" value="${param.email}" />
     <c:set var="password" value="${param.password}" />
+     <c:set var="address" value="${param.address}" />
             
     <!-- Register Modal -->
     <div id="registerModal" class="modal">
@@ -126,9 +129,10 @@
             </div>
             <!-- Student Registration Form -->
             <form action="successRegisterStudent.jsp" method="post">
-                <input type="text" name="matricNumber" placeholder="No. Matrik..." required>
+                <input type="text" name="studentId" placeholder="No. ID..." required>
+                <input type="text" name="matricno" placeholder="No. Matrik..." required>
                 <input type="text" name="name" placeholder="Nama Penuh..." required>
-                <input type="text" name="icNumber" placeholder="No. Kad Pengenalan (tanpa '-')..." required>
+                <input type="number" name="income" placeholder="Pendapatan..." required>
                 
                 <!-- Select element for course code -->
                 <div class="selek">
@@ -141,6 +145,16 @@
                         <option value="CDCS270">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>
                     </select>
                 </div>
+                <div class="selek">
+                    <select name="courseName" required>
+                        <option value="" disabled selected>Pilih Nama Program Pengajian Anda...</option>
+                        <option value="Diploma Sains Komputer">CDCS110 - Diploma Sains Komputer</option>
+                        <option value="Sarjana Muda Sains Komputer (Kepujian)">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>
+                        <option value="Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>
+                        <option value="Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>
+                        <option value="Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>
+                    </select>
+                </div>
                 
                 <select name="campus" required>
                         <option value="" disabled selected>Pilih Kampus Anda Anda...</option>
@@ -148,7 +162,8 @@
                         <option value="UiTM Dungun">UiTM Dungun</option>
                         <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>
                     </select>
-                <input type="text" name="phoneNumber" placeholder="Nombor Telefon (without '-')..." required>
+                <input type="text" name="phoneNum" placeholder="Nombor Telefon (without '-')..." required>
+                <input type="text" name="address" placeholder="Alamat..." required>
                 <input type="email" name="email" placeholder="Email..." required>
                 <input type="password" name="password" placeholder="Password..." required>
                 

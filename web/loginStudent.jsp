@@ -51,7 +51,7 @@
 <body>
     <h2>Login as Student</h2>
     <form action="loginStudentServlet" method="post">
-        <input type="text" name="matricNumber" placeholder="Enter Matric Number" required>
+        <input type="text" name="matricno" placeholder="Enter Matric Number" required>
         <input type="password" name="password" placeholder="Enter Password" required>
         <button type="submit">Login</button>
     </form>

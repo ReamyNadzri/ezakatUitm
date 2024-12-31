@@ -1,3 +1,5 @@
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -75,6 +77,19 @@
     </style>
 </head>
 <body>
+    <sql:setDataSource var="myDatasource"
+                driver="oracle.jdbc.OracleDriver"
+                url="jdbc:oracle:thin:@localhost:1521:XE"
+                user="zakatdb"
+                password="zakatdb" />
+    
+    <c:set var="staffId" value="${param.staffId}" />
+    <c:set var="staffNo" value="${param.staffNo}" />
+    <c:set var="Name" value="${param.Name}" />
+    <c:set var="Password" value="${param.Password}" />
+    <c:set var="PhoneNum" value="${param.PhoneNum}" />
+    <c:set var="Email" value="${param.Email}" />
+    <c:set var="Campus" value="${param.Campus}" />
     <!-- Button to Open Modal -->
     <button id="openModal">Register As Staff</button>
 
@@ -85,15 +100,20 @@
                 <h2>Daftar Sebagai Staf</h2>
             </div>
             <!-- Staff Registration Form -->
-            <form action="register.jsp" method="post">
-                <input type="text" name="nameStaff" placeholder="Nama Penuh..." required>
-                <input type="text" name="staff_number" placeholder="No.Staf..." required>
-                <input type="text" name="icStaff_number" placeholder="No. Kad Pengenalan (tanpa '-')..." required>
+            <form action="successRegisterStaff.jsp" method="post">
+                <input type="text" name="staffId" placeholder="ID Staf" required>
+                <input type="text" name="Name" placeholder="Nama Penuh..." required>
+                <input type="text" name="staffNo" placeholder="No.Staf..." required>
                 <!-- Select element for campusStaff -->
-                <input type="text" name="campusStaff" placeholder="Kampus..." required>
-                <input type="text" name="phoneStaff_number" placeholder="Nombor Telefon (tanpa '-')..." required>
-                <input type="email" name="emailStaff" placeholder="Email..." required>
-                <input type="password" name="password" placeholder="Password..." required>
+               <select name="Campus" required>
+                        <option value="" disabled selected>Pilih Kampus Anda Anda...</option>
+                        <option value="UiTM Kuala Terengganu">UiTM Kuala Terengganu</option>
+                        <option value="UiTM Dungun">UiTM Dungun</option>
+                        <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>
+                    </select>
+                <input type="text" name="PhoneNum" placeholder="Nombor Telefon (tanpa '-')..." required>
+                <input type="email" name="Email" placeholder="Email..." required>
+                <input type="password" name="Password" placeholder="Password..." required>
                 <div class="button-container">
                     <button type="button" class="close-btn" id="closeModal">Kembali</button>
                     <button type="submit" class="register-btn">Daftar</button>

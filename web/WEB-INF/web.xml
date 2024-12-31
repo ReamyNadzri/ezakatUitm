@@ -27,10 +27,6 @@
         <servlet-class>com.zakat.controller.dbRegisterStudent</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>registerStudent</servlet-name>
-        <servlet-class>com.zakat.model.registerStudent</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>loginStudentServlet</servlet-name>
         <servlet-class>com.zakat.view.loginStudentServlet</servlet-class>
     </servlet>
@@ -89,10 +85,6 @@
     <servlet-mapping>
         <servlet-name>dbRegisterStudent</servlet-name>
         <url-pattern>/dbRegisterStudent.controller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>registerStudent</servlet-name>
-        <url-pattern>/registerStudent.model</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginStudentServlet</servlet-name>

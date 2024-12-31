@@ -1,56 +1,5 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%
-    // Retrieve matric number from session
-    String matricNumber = (String) session.getAttribute("matricNumber");
-    if (matricNumber == null) {
-        // Redirect to login page if no session exists
-        response.sendRedirect("loginStudent.jsp");
-        return;
-    }
-
-    // JDBC settings
-    String jdbcURL = "jdbc:mysql://localhost:3306/zakat_system";
-    String dbUser = "root";
-    String dbPassword = "";
-
-    // Variables to store student's name and email
-    String fullName = "";
-    String email = "";
-
-    // Database connection and query
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
-
-        String query = "SELECT name, email FROM studentregister WHERE matricNumber = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, matricNumber);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            fullName = resultSet.getString("name");
-            email = resultSet.getString("email");
-        } else {
-            // If no data found, set default messages
-            fullName = "Unknown Student";
-            email = "Email not found";
-        }
-
-        connection.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-        fullName = "Error fetching data";
-        email = "Error fetching data";
-    }
-%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,141 +7,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+                /* General body styling */
         body {
             font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             height: 100vh;
-            color: #fff;
-            background-color: #1b1b3a;
+            background-color: #f2f2f2; /* Light grey background for the main area */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
+
+        /* Sidebar styles */
         .sidebar {
-            width: 260px;
-            background-color: #2c2c54;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
+            width: 250px;
+            background-color: #6a1b9a; /* Dark violet background */
+            color: white;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0; /* Sidebar always visible */
+            padding-top: 30px;
+            box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
         }
+
         .sidebar h2 {
             text-align: center;
+            color: #fff;
+            font-size: 24px;
+            letter-spacing: 2px;
             margin-bottom: 30px;
-            color: #fff;
-            font-size: 1.8em;
+            text-transform: uppercase;
         }
-        .sidebar a {
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
             text-decoration: none;
-            color: #bbb;
+            font-size: 18px;
             display: block;
-            padding: 12px 15px;
-            margin: 8px 0;
+            padding: 15px;
             border-radius: 5px;
-            font-size: 1.1em;
-            transition: all 0.3s;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        .sidebar a:hover {
-            background-color: #6c5ce7;
-            color: #fff;
+
+        .sidebar ul li a:hover {
+            background-color: #9c4d97; /* Lighter violet on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
-        .sidebar .logout {
-            margin-top: auto;
-            background-color: #d63031;
-            color: #fff;
-            font-weight: bold;
+
+        /* Main content styling */
+        .main-content {
+            margin-left: 250px; /* Space for the sidebar */
+            padding: 30px;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            overflow-y: auto; /* Allow scrolling if content is too large */
         }
-        .sidebar .logout:hover {
-            background-color: #ff7675;
+
+        .main-content h1 {
+            color: #6a1b9a; /* Dark violet color for heading */
+            font-size: 36px;
+            letter-spacing: 1px;
         }
-        .content {
-            flex-grow: 1;
-            padding: 40px;
-            background-color: #1b1b3a;
+
+        .main-content p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
         }
-        .content h1 {
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            color: #6c5ce7;
-        }
-        .content p {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .card {
-            background-color: #2c2c54;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: calc(33.333% - 20px);
-            color: #fff;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-        .card h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #6c5ce7;
-        }
-        .card p {
-            font-size: 1em;
-            color: #bbb;
-        }
-        @media (max-width: 768px) {
-            .card {
-                width: 100%;
-            }
-        }
+
+        /* Button to toggle sidebar (removed as sidebar is always visible) */
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
+
+
+    <!-- Sidebar Section (Always visible) -->
     <div class="sidebar">
-        <h2>Dashboard</h2>
-        <a href="studentDashboard.jsp">Home</a>
-        <a href="viewProfile.jsp">View Profile</a>
-        <a href="viewCourses.jsp">View Courses</a>
-        <a href="changePassword.jsp">Change Password</a>
-        <a href="contactSupport.jsp">Contact Support</a>
-        <a href="logoutStudentServlet" class="logout">Logout</a>
+        <h2>Student Dashboard</h2>
+        <ul>
+            <li><a href="studentDashboard.jsp">Dashboard</a></li>
+            <li><a href="profile.jsp">Profile</a></li>
+            <li><a href="assignments.jsp">Assignments</a></li>
+            <li><a href="grades.jsp">Grades</a></li>
+            <li><a href="settings.jsp">Settings</a></li>
+            <li><a href="logout.jsp">Logout</a></li>
+        </ul>
     </div>
 
-    <!-- Content -->
-    <div class="content">
-        <h1>Welcome to Your Dashboard</h1>
-        <p><strong>Name:</strong> <%= fullName %></p>
-        <p><strong>Email:</strong> <%= email %></p>
-        <p>Use the sidebar to navigate through your dashboard.</p>
-
-        <!-- Cards Section -->
-        <div class="card-container">
-            <div class="card">
-                <h2>Profile</h2>
-                <p>View and update your personal information.</p>
-                <a href="viewProfile.jsp" style="color: #6c5ce7; text-decoration: underline;">Go to Profile</a>
-            </div>
-            <div class="card">
-                <h2>Courses</h2>
-                <p>Check out your enrolled courses and details.</p>
-                <a href="viewCourses.jsp" style="color: #6c5ce7; text-decoration: underline;">Go to Courses</a>
-            </div>
-            <div class="card">
-                <h2>Support</h2>
-                <p>Contact support for any assistance you need.</p>
-                <a href="contactSupport.jsp" style="color: #6c5ce7; text-decoration: underline;">Contact Support</a>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

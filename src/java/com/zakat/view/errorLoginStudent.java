@@ -18,9 +18,9 @@ public class errorLoginStudent extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     // JDBC connection parameters
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
+   private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe"; // Update as per your Oracle DB configuration
+    private static final String DB_USER = "zakatdb"; // Replace with your Oracle username
+    private static final String DB_PASSWORD = "zakatdb"; // Replace with your Oracle password
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Set the response content type
@@ -28,14 +28,14 @@ public class errorLoginStudent extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         // Get matric number and password from the login form
-        String matricNumber = request.getParameter("matricNumber");
+        String matricno = request.getParameter("matricno");
         String password = request.getParameter("password");
 
         // Error message variable
         String errorMessage = null;
 
         // Check if matric number and password are provided
-        if (matricNumber == null || password == null || matricNumber.isEmpty() || password.isEmpty()) {
+        if (matricno == null || password == null || matricno.isEmpty() || password.isEmpty()) {
             errorMessage = "Matric number and password are required.";
             displayErrorPage(out, errorMessage);
             return;
@@ -44,9 +44,9 @@ public class errorLoginStudent extends HttpServlet {
         // JDBC connection and query
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // Check if the matric number exists in the database
-            String checkMatricQuery = "SELECT password FROM studentregister WHERE matricNumber = ?";
+            String checkMatricQuery = "SELECT password FROM STUDENT WHERE matricno = ?";
             try (PreparedStatement stmt = conn.prepareStatement(checkMatricQuery)) {
-                stmt.setString(1, matricNumber);
+                stmt.setString(1, matricno);
                 ResultSet rs = stmt.executeQuery();
 
                 if (rs.next()) {

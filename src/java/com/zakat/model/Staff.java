@@ -12,24 +12,24 @@ package com.zakat.model;
 public class Staff {
     private String staffId;
     private String staffNo;
-    private String staffName;
-    private String staffPassword;
-    private String staffEmail;
-    private String staffPhoneNum;
-    private String staffCampus;
+    private String Name;
+    private String Password;
+    private String Email;
+    private String PhoneNum;
+    private String Campus;
 
     public Staff() {
     }
 
 
-    public Staff(String staffId, String staffNo, String staffName, String staffPassword, String staffEmail, String staffPhoneNum, String staffCampus) {
+    public Staff(String staffId, String staffNo, String Name, String Password, String Email, String PhoneNum, String Campus) {
         this.staffId = staffId;
         this.staffNo = staffNo;
-        this.staffName = staffName;
-        this.staffPassword = staffPassword;
-        this.staffEmail = staffEmail;
-        this.staffPhoneNum = staffPhoneNum;
-        this.staffCampus = staffCampus;
+        this.Name = Name;
+        this.Password = Password;
+        this.Email = Email;
+        this.PhoneNum = PhoneNum;
+        this.Campus = Campus;
     }
     public String getStaffId() {
         return this.staffId;
@@ -47,44 +47,44 @@ public class Staff {
         this.staffNo = staffNo;
     }
 
-    public String getStaffName() {
-        return this.staffName;
+    public String getName() {
+        return this.Name;
     }
 
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
-    public String getStaffPassword() {
-        return this.staffPassword;
+    public String getPassword() {
+        return this.Password;
     }
 
-    public void setStaffPassword(String staffPassword) {
-        this.staffPassword = staffPassword;
+    public void setPassword(String Password) {
+        this.Password = Password;
     }
 
-    public String getStaffEmail() {
-        return this.staffEmail;
+    public String getEmail() {
+        return this.Email;
     }
 
-    public void setStaffEmail(String staffEmail) {
-        this.staffEmail = staffEmail;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
-    public String getStaffPhoneNum() {
-        return this.staffPhoneNum;
+    public String getPhoneNum() {
+        return this.PhoneNum;
     }
 
-    public void setStaffPhoneNum(String staffPhoneNum) {
-        this.staffPhoneNum = staffPhoneNum;
+    public void setPhoneNum(String PhoneNum) {
+        this.PhoneNum = PhoneNum;
     }
 
-    public String getStaffCampus() {
-        return this.staffCampus;
+    public String getCampus() {
+        return this.Campus;
     }
 
-    public void setStaffCampus(String staffCampus) {
-        this.staffCampus = staffCampus;
+    public void setCampus(String Campus) {
+        this.Campus = Campus;
     }
 
     
@@ -94,11 +94,11 @@ public class Staff {
         return "{" +
             " staffId='" + getStaffId() + "'" +
             ", staffNo='" + getStaffNo() + "'" +
-            ", staffName='" + getStaffName() + "'" +
-            ", staffPassword='" + getStaffPassword() + "'" +
-            ", staffEmail='" + getStaffEmail() + "'" +
-            ", staffPhoneNum='" + getStaffPhoneNum() + "'" +
-            ", staffCampus='" + getStaffCampus() + "'" +
+            ", staffName='" + getName() + "'" +
+            ", staffPassword='" + getPassword() + "'" +
+            ", staffEmail='" + getEmail() + "'" +
+            ", staffPhoneNum='" + getPhoneNum() + "'" +
+            ", staffCampus='" + getCampus() + "'" +
             "}";
     }
 }
