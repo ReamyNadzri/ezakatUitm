@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-        <div class="w3-container w3-row w3-row-padding w3-card-2" style=" height: 4.5rem; background: #cfa1f7; width: 100%">
-            <div class="w3-container w3-col w3-row w3-row-padding" style="margin-top: 8px; margin-bottom: 14px;margin-left: 10%; height: 34px; width: auto; background: #cfa1f7">
+        <div class="w3-container w3-row w3-row-padding w3-card-4" style=" height: 4.5rem; background: #cfa1f7; width: 100%">
+            <div class="w3-container w3-col w3-row w3-row-padding w3-card-3" style="margin-top: 8px; margin-bottom: 14px;margin-left: 10%; height: 34px; width: auto; background: #cfa1f7">
                 <a href="index.jsp" class=""><img src="sources/1ZakatLogoBR.png" class="w3-images w3-cell w3-center" style="width:140px;"></a>
                 
             </div>

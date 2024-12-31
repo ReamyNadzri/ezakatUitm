@@ -1,3 +1,4 @@
+<%@page import="com.zakat.model.DBConnection"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
 <jsp:include page="header.jsp"></jsp:include>
@@ -9,22 +10,14 @@
     <title>Student Dashboard</title>
     <style>
                 /* General body styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            background-color: #f2f2f2; /* Light grey background for the main area */
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
+      
 
         /* Sidebar styles */
         .sidebar {
             width: 250px;
             background-color: #6a1b9a; /* Dark violet background */
             color: white;
-            position: fixed;
+            
             height: 100%;
             top: 0;
             left: 0; /* Sidebar always visible */
@@ -95,19 +88,66 @@
 </head>
 <body>
 
-
+    <div class="w3-container w3-row">
     <!-- Sidebar Section (Always visible) -->
-    <div class="sidebar">
-        <h2>Student Dashboard</h2>
-        <ul>
-            <li><a href="studentDashboard.jsp">Dashboard</a></li>
-            <li><a href="profile.jsp">Profile</a></li>
-            <li><a href="assignments.jsp">Assignments</a></li>
-            <li><a href="grades.jsp">Grades</a></li>
-            <li><a href="settings.jsp">Settings</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
-        </ul>
+                <div class="sidebar w3-cell" style="margin-right: 20%">
+                    <h2>Student Dashboard</h2>
+                    <ul>
+                        <li><a href="studentDashboard.jsp">Dashboard</a></li>
+                        <li><a href="profile.jsp">Profile</a></li>
+                        <li><a href="assignments.jsp">Assignments</a></li>
+                        <li><a href="grades.jsp">Grades</a></li>
+                        <li><a href="settings.jsp">Settings</a></li>
+                        <li><a href="logout.jsp">Logout</a></li>
+                    </ul>
+                </div>
+    
+                <br>
+                
+                <div class="w3-container w3-cell" style="">
+        
+    <%
+       
+        
+        try{
+            Connection conn = DBConnection.getConnection();
+            
+            String query = "SELECT APPLYID, DESCRIPTION, ZAKATNAME FROM ";
+            
+            %>
+                    <h2>Senarai Permohonan</h2>
+                    <table class="w3-table-all" id='saiz' border='1'>
+                        <tr class="w3-table">
+                            <td>No Pemohonan</td>
+                            <td>Tarikh Mohon & Hantar</td>
+                            <td>Jenis Bantuan</td>
+                            <td>Ulasan</td>
+                            <td></td>
+                            <td>Kemaskini</td>
+                            <td>Laporan (CETAK)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+            <%
+            
+
+        }catch(Exception e){
+        
+        }
+         
+        %>
+        
+        
     </div>
+        
 
 </body>
 </html>

@@ -100,7 +100,7 @@
 
   
 
-    <div class="w3-container w3-row">
+    <div class="w3-container w3-row w3-white" style="background: #f3e8fd">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">
 
             
@@ -401,7 +401,6 @@
                     </div>
 
                     <div class="w3-panel w3-center w3-col" style="margin-bottom: 3%">
-                        <input hidden class="w3-input w3-border w3-round-large" type="text" name="matricNumber" value="matricNumber" id="" size="50%">
                         <button class="w3-button w3-border w3-green w3-cell" name="MOHON" type="submit" onclick="">MOHON</button>
                         <button class="w3-button w3-border w3-border-green w3-cell w3-margin-left" href="#">KEMBALI</button>
                     </div>
