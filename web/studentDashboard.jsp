@@ -1,146 +1,120 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
-    <div class="w3-border w3-border-blue" style="height:8%">
-            <jsp:include page="header.jsp"></jsp:include>
-    </div>
-    <style>
-        * {
+<%@ page import="java.sql.*" %>
+<jsp:include page="header.jsp"></jsp:include>
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Student Dashboard</title>  
+    <style>  
+    * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
                 font-family: google sans, sans-serif;
             }
+            
 
-        /* Header styling */
-        .header {
-            background: linear-gradient(to right, #6a1b9a, #8e24aa);
-            color: white;
-            padding: 10px 100px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    h1 {  
+        text-align: center;  
+        color: #333;  
+        margin-bottom: 20px;  
+    }  
 
-        .header .welcome {
-            font-size: 20px;
-        }
+    table {  
+        width: 80%;  
+        margin: 0 auto;  
+        border-collapse: collapse;  
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+        border-radius: 8px;  
+        overflow: hidden;  
+        background-color: #fff;  
+    }  
 
-        .header .nav-buttons button {
-            background-color: #4a148c;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            margin-left: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+    th, td {  
+        padding: 12px 15px;  
+        text-align: left;  
+        border-bottom: 1px solid #ddd;  
+    }  
 
-        .header .nav-buttons button:hover {
-            background-color: #6a1b9a;
-        }
+    th {  
+        background-color: #4CAF50;  
+        color: white;  
+        font-weight: bold;  
+    }  
 
-        /* Main content styling */
-        .content {
-            text-align: center;
-            margin: 20px 0;
-        }
+    tr:hover {  
+        background-color: #f1f1f1;  
+    }  
 
-        .carousel {
-            position: relative;
-            margin: 0 auto;
-            width: 80%;
-            height: 300px;
-            background: #ccc;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    tr:nth-child(even) {  
+        background-color: #f9f9f9;  
+    }  
 
-        .carousel .arrow {
-            font-size: 24px;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
+    tr:nth-child(odd) {  
+        background-color: #ffffff;  
+    }  
 
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
+    @media (max-width: 768px) {  
+        table {  
+            width: 100%;  
+        }  
+    }  
+</style>
+</head>  
+<body>  
+    <h1>Student Dashboard</h1>  
+    <table>  
+        <tr>  
+            <th>ID</th>  
+            <th>Name</th>  
+            <th>Matric No</th>  
+            <th>Email</th>
+            <th>Address</th> 
+        </tr>  
+        <%  
+            String url = "jdbc:oracle:thin:@localhost:1521:xe"; // Adjust the URL as needed  
+            String user = "zakatdb"; // replace with your DB username  
+            String password = "zakatdb"; // replace with your DB password  
 
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            width: 150px;
-            text-align: center;
-            padding: 20px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
+            Connection conn = null;  
+            Statement stmt = null;  
+            ResultSet rs = null;  
 
-        .card:hover {
-            transform: scale(1.05);
-        }
+            try {  
+                Class.forName("oracle.jdbc.driver.OracleDriver");  
+                conn = DriverManager.getConnection(url, user, password);  
+                stmt = conn.createStatement();  
+                String sql = "SELECT * FROM student";  
+                rs = stmt.executeQuery(sql);  
 
-        .card img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <div class="welcome">Hi, Student!</div>
-        <div class="nav-buttons">
-            <button>About Zakat</button>
-            <button>Profile</button>
-            <button>Logout</button>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="carousel">
-            <button class="arrow">&#8249;</button>
-            <div class="carousel-content">Content Here</div>
-            <button class="arrow">&#8250;</button>
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <img src="sources/zakat.jpg" alt="Zakat Musibah">
-                <div>Zakat Musibah</div>
-            </div>
-            <div class="card">
-                <img src="sources/zakat.jpg" alt="Zakat Kolej">
-                <div>Zakat Kolej</div>
-            </div>
-            <div class="card">
-                <img src="sources/zakat.jpg" alt="Zakat Yuran">
-                <div>Zakat Yuran</div>
-            </div>
-            <div class="card">
-                <img src="sources/zakat.jpg" alt="Zakat Makan">
-                <div>Zakat Makan</div>
-            </div>
-        </div>
-    </div>
-
-
+                while (rs.next()) {  
+                    int studentId = rs.getInt("studentId");  
+                    String name = rs.getString("name");  
+                    String matricno = rs.getString("matricno");  
+                    String email = rs.getString("email");
+                    String address = rs.getString("address");
+        %>  
+                    <tr>  
+                        <td><%= studentId %></td>  
+                        <td><%= name %></td>  
+                        <td><%= matricno %></td>  
+                        <td><%= email %></td> 
+                          <td><%= address %></td>
+                    </tr>  
+        <%  
+                }  
+            } catch (Exception e) {  
+                e.printStackTrace();  
+            } finally {  
+                try {  
+                    if (rs != null) rs.close();  
+                    if (stmt != null) stmt.close();  
+                    if (conn != null) conn.close();  
+                } catch (SQLException e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+        %>  
+    </table>  
 </body>
  <jsp:include page="Footer.jsp"></jsp:include>
 </html>
