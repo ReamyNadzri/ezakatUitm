@@ -78,6 +78,10 @@
         <servlet-name>donatorRegisterServlet</servlet-name>
         <servlet-class>com.zakat.controller.donatorRegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>com.zakat.controller.logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -145,6 +149,10 @@
     <servlet-mapping>
         <servlet-name>donatorRegisterServlet</servlet-name>
         <url-pattern>/donatorRegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logoutAll</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

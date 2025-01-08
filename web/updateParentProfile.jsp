@@ -96,11 +96,6 @@
     </style>
 </head>
 <body>
-    <sql:setDataSource var="myDatasource"
-                driver="com.mysql.jdbc.Driver"
-                url="jdbc:mysql://localhost:3306/zakat_system?zeroDateTimeBehavior=convertToNull"
-                user="root"
-                password="" />
     
     <c:set var="FName" value="${param.FName}" />
     <c:set var="FWork" value="${param.FWork}" />
