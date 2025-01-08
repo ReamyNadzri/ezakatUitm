@@ -47,7 +47,7 @@
         <h2>Login Successful!</h2>
         <p>Welcome, ${sessionScope.name}!</p> <!-- Assuming student name is stored in session after login -->
         <p>You have logged in successfully.</p>
-        <a href="studentDashboard.jsp">Go to Dashboard</a> <!-- Redirect to student dashboard or another page -->
+        <a href="index.jsp">Return</a> <!-- Redirect to student dashboard or another page -->
     </div>
 </body>
 </html>

@@ -34,10 +34,10 @@ public class loginStudentServlet extends HttpServlet {
 
             // Check if matric number exists in the database
             String query = "SELECT * FROM STUDENT WHERE matricno = ?";
-
             
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, matricno);
+            
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -45,12 +45,16 @@ public class loginStudentServlet extends HttpServlet {
                 String storedPassword = resultSet.getString("PASSWORD");
                 String storedmatricno = resultSet.getString("MATRICNO");
                 String storedname = resultSet.getString("NAME");
+                String storedemail = resultSet.getString("EMAIL");
+                String storedcampus = resultSet.getString("CAMPUS");
                 
                 if (storedPassword.equals(password)) {
                     // If password matches, redirect to successLoginStudent.jsp
                     HttpSession session = request.getSession();
                     session.setAttribute("MATRICNO", storedmatricno);
                     session.setAttribute("NAME", storedname);
+                    session.setAttribute("EMAIL", storedemail);
+                    session.setAttribute("CAMPUS", storedcampus);
                     response.sendRedirect("successLoginStudent.jsp");
                 } else {
                     // If password is incorrect, set error message and redirect to errorLoginStudent.jsp

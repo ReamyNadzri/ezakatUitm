@@ -42,7 +42,7 @@
         </div>
     
     <div class="w3-container w3-row">
-        <div class="w3-container w3-col" style="width: 10%; height: 100px;">
+        <div class="w3-container w3-col" style="width: 10%; height: 120px;">
 
         </div>
 
