@@ -1,190 +1,103 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>  
+<%@ page import="java.sql.*" %>  
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Update Profile - Zakat UiTM</title>  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+    <style>  
+        body {  
+            display: flex;  
+            flex-direction: column;  
+            height: 100vh;  
+            margin: 0;  
+        }  
+        .main-content {  
+            flex: 1;  
+            padding: 20px;  
+            background-color: #f8f9fa;  
+        }  
+        .form-group {  
+            margin-bottom: 15px;  
+        }  
+        input[type="text"], input[type="email"] {  
+            width: 100%; /* Make input fields take full width */  
+            padding: 10px; /* Add some padding for better appearance */  
+            border: 1px solid #ccc; /* Add a border */  
+            border-radius: 4px; /* Rounded corners */  
+            box-sizing: border-box; /* Include padding and border in element's total width and height */  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="main-content">  
+        <h1>Update Profile</h1>  
+        <%  
+            String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
+            String dbUser = "zakatdb"; // Your Oracle username  
+            String dbPassword = "zakatdb"; // Your Oracle password  
+            String matricno = (String) session.getAttribute("MATRICNO"); // Assume student ID is stored in session  
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Profile</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
-            margin: 0;
-            padding: 0;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #111;
-            border-radius: 10px;
-            padding: 30px;
-            width: 500px;
-            color: white;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
-            max-height: 80%;  /* Max height to prevent it from overflowing the viewport */
-            overflow-y: auto;  /* Enables vertical scrolling if the content overflows */
-            padding-bottom: 20px; /* Padding for the scrollable area */
-        }
-        .modal-content h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        .modal-content input,
-        .modal-content label {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #333;
-            color: white;
-        }
-        
-        .modal-content select { /* Apply the same styling to input and select */
-            display: block;
-            width: 90%;
-            margin: 10px auto;
-            padding: 8px;
-            border: none;
-            border-radius: 10px;
-            font-size: 14px; /* Ensure the font size matches for consistency */
-            background-color: #f2f2f2;
-        }
-        .modal-content label {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .modal-content button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .modal-content .back-btn {
-            background-color: #666;
-            color: white;
-        }
-        .modal-content .save-btn {
-            background-color: purple;
-            color: white;
-        }
-        .upload-section {
-            text-align: center;
-            margin: 20px 0;
-        }
-        /* Profile image styling */
-        .profile-img-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .profile-img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border: 2px solid #fff;
-            background-color: #bbb;
-        }
-    </style>
-</head>
-<body>
-    <!-- Button to Open Modal -->
-    <button id="openModalBtn" style="margin: 20px; padding: 10px 20px;">Kemaskini Profil</button>
+            if (matricno != null) {  
+                Connection conn = null;  
+                PreparedStatement stmt = null;  
+                ResultSet rs = null;  
 
-    <!-- Update Profile Modal -->
-    <div id="updateProfileModal" class="modal">
-        <div class="modal-content">
-            <h2>Kemaskini Profil</h2>
-            <!-- Form Submission to JSP -->
-            <form action="updateProfile.jsp" method="post" enctype="multipart/form-data">
-                <!-- Profile Image Section -->
-                <div class="profile-img-container">
-                    <!-- Default Profile Image (or existing one) -->
-                    <img src="<%= request.getAttribute("profileImage") != null ? request.getAttribute("profileImage") : "default-profile.jpg" %>" id="profileImage" class="profile-img" alt="Profile Picture">
-                </div>
+                try {  
+                    // Load Oracle JDBC Driver  
+                    Class.forName("oracle.jdbc.OracleDriver");  
+                    conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
+                    String sql = "SELECT * FROM student WHERE matricno = ?";  
+                    stmt = conn.prepareStatement(sql);  
+                    stmt.setString(1, matricno);  
+                    rs = stmt.executeQuery();  
 
-                <!-- File input for updating profile picture -->
-                <div class="upload-section">
-                    <label for="profile_picture">Kemaskini Profil Gambar</label>
-                    <input type="file" name="profile_picture" id="profile_picture" accept="image/*" onchange="previewProfileImage(event)">
-                </div>
-
-                <!-- Other Profile Fields -->
-                <input type="text" name="name" value="<%= request.getAttribute("name") != null ? request.getAttribute("name") : "" %>" placeholder="Nama Penuh..." required>
-                <input type="text" name="matric_number" value="<%= request.getAttribute("matric_number") != null ? request.getAttribute("matric_number") : "" %>" placeholder="Nombor Matrik..." readonly>
-                    <div class="selek">
-                    <select name="course_code" required>
-                        <option value="" disabled selected>Pilih Program Pengajian Anda...</option>
-                        <option value="CS101">CDCS110 - Diploma Sains Komputer</option>
-                        <option value="CS102">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>
-                        <option value="CS103">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>
-                        <option value="CS104">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>
-                        <option value="CS104">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>
-                    </select>
-                </div>
-                <input type="text" name="campus" value="<%= request.getAttribute("campus") != null ? request.getAttribute("campus") : "" %>" placeholder="Kampus..." required>
-                <input type="text" name="phone_number" value="<%= request.getAttribute("phone_number") != null ? request.getAttribute("phone_number") : "" %>" placeholder="Nombor Telefon (tanpa -)" required>
-                <input type="email" name="email" value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>" placeholder="Email..." required>
-                <input type="password" name="password" placeholder="Password..." required>
-                <div class="button-container">
-                    <button type="button" class="back-btn" id="closeModalBtn">Kembali</button>
-                    <button type="submit" class="save-btn">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // JavaScript to handle modal open/close
-        const modal = document.getElementById('updateProfileModal');
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-
-        openModalBtn.onclick = function () {
-            modal.style.display = 'block';
-        };
-
-        closeModalBtn.onclick = function () {
-            modal.style.display = 'none';
-        };
-
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        };
-
-        // Preview the selected profile image
-        function previewProfileImage(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const profileImage = document.getElementById('profileImage');
-                profileImage.src = e.target.result; // Set the new image as the profile image
-            };
-            reader.readAsDataURL(file);
-        }
-    </script>
-</body>
+                    if (rs.next()) {  
+                        String name = rs.getString("name");  
+                        String email = rs.getString("email");  
+                        String phoneNum = rs.getString("phoneNum");  
+                        String address = rs.getString("address");  
+        %>  
+                        <form action="processUpdate.jsp" method="post">  
+                            <div class="form-group">  
+                                <label for="name">Name:</label>  
+                                <input type="text" id="name" name="name" value="<%= name %>" required>  
+                            </div>  
+                            <div class="form-group">  
+                                <label for="email">Email:</label>  
+                                <input type="email" id="email" name="email" value="<%= email %>" required>  
+                            </div>  
+                            <div class="form-group">  
+                                <label for="phoneNum">Phone Number:</label>  
+                                <input type="text" id="phoneNum" name="phoneNum" value="<%= phoneNum %>" required>  
+                            </div>  
+                            <div class="form-group">  
+                                <label for="address">Address:</label>  
+                                <input type="text" id="address" name="address" value="<%= address %>" required>  
+                            </div>  
+                            <input type="hidden" name="matricno" value="<%= matricno %>">  
+                            <button type="submit" class="w3-button w3-purple">Update</button>  
+                        </form>  
+        <%  
+                    } else {  
+                        out.println("<p>No student found with the provided ID.</p>");  
+                    }  
+                } catch (SQLException e) {  
+                    out.println("<p>Error retrieving profile information: " + e.getMessage() + "</p>");  
+                } catch (ClassNotFoundException e) {  
+                    out.println("<p>Database driver not found: " + e.getMessage() + "</p>");  
+                } finally {  
+                    // Close resources  
+                    if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                    if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                    if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                }  
+            } else {  
+                out.println("<p>No student ID found in session.</p>");  
+            }  
+        %>  
+    </div>  
+</body>  
 </html>

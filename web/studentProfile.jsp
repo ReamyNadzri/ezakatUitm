@@ -43,6 +43,9 @@
         }  
         .profile-info {  
             margin: 10px 0;  
+        }
+        .update-button {  
+            margin-top: 20px;  
         }  
     </style>  
 </head>  
@@ -119,7 +122,10 @@
                         </div>  
                         <div class="profile-info">  
                             <strong>Address:</strong> <%= address %>  
-                        </div>  
+                        </div>
+                        <div class="update-button">  
+                            <a href="updateProfile.jsp" class="w3-button w3-purple">Update Profile</a>  
+                        </div>
         <%  
                     } else {  
                         out.println("<p>No student found with the provided ID.</p>");  
