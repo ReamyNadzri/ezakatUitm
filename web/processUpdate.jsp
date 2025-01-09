@@ -36,7 +36,7 @@
             int rowsUpdated = stmt.executeUpdate();  
 
             if (rowsUpdated > 0) {  
-                out.println("<p>Profile updated successfully!</p>");  
+                response.sendRedirect("popupTrueUpdateStudent.jsp");  
             } else {  
                 out.println("<p>Error updating profile. Please try again.</p>");  
             }  
