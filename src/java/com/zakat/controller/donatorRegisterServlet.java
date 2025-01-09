@@ -6,7 +6,9 @@ import java.sql.*;
 import javax.servlet.ServletException;  
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse; 
+import javax.servlet.http.HttpServletResponse;  
+
+import com.zakat.model.DBConnection;  
 
 public class donatorRegisterServlet extends HttpServlet {  
 
@@ -14,43 +16,39 @@ public class donatorRegisterServlet extends HttpServlet {
             throws ServletException, IOException {  
         // Set content type for response  
         response.setContentType("text/html;charset=UTF-8");  
-
+        PrintWriter out = response.getWriter();  
         // Initialize necessary variables  
-        String username = request.getParameter("username");  
-        String phoneNumber = request.getParameter("phone_number");  
-        String icNumber = request.getParameter("ic_number");  
-        String state = request.getParameter("state");  
-        String city = request.getParameter("city");  
-        String email = request.getParameter("email");  
-        String password = request.getParameter("password");  
+        Connection conn = null;  
+        PreparedStatement pst = null;  
         String successMessage = "";  
         String errorMessage = "";  
 
-        try (PrintWriter out = response.getWriter()) {  
-            // Load MySQL JDBC Driver  
-            Class.forName("com.mysql.jdbc.Driver");  
+        try {  
+            String username = request.getParameter("username");  
+            String phoneNumber = request.getParameter("phonenum");  
+            String icNumber = request.getParameter("noic");  
+            String state = request.getParameter("state");  
+            String city = request.getParameter("city");  
+            String email = request.getParameter("email");  
+            String password = request.getParameter("password");  
 
-            // Connect to database  
-            Connection conn = DriverManager.getConnection(  
-                "jdbc:mysql://localhost:3306/zakatsystem", "root", "");  
+            conn = DBConnection.getConnection();  
 
             // Prepare SQL query for insertion  
-            String query = "INSERT INTO donator (USERNAME, PHONE_NUMBER, IC_NUMBER, STATE, CITY, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?, ?, ?)";  
-            PreparedStatement preparedStatement = conn.prepareStatement(query);  
-
-              
+            String sql = "INSERT INTO DONATOR (USERNAME, PASSWORD, EMAIL, PHONENUM, STATE, CITY, NOIC) VALUES (?, ?, ?, ?, ?, ?, ?)";  
+            pst = conn.prepareStatement(sql);  
 
             // Set query parameters from form data  
-            preparedStatement.setString(1, username);  
-            preparedStatement.setString(2, phoneNumber);  
-            preparedStatement.setString(3, icNumber);  
-            preparedStatement.setString(4, state);  
-            preparedStatement.setString(5, city);  
-            preparedStatement.setString(6, email);  
-            preparedStatement.setString(7, password);  
+            pst.setString(1, username);  
+            pst.setString(2, password);  
+            pst.setString(3, email);  
+            pst.setString(4, phoneNumber);  
+            pst.setString(5, state);  
+            pst.setString(6, city);  
+            pst.setString(7, icNumber);  
 
             // Execute query  
-            int rows = preparedStatement.executeUpdate();  
+            int rows = pst.executeUpdate();  
 
             // Check if row insertion was successful  
             if (rows > 0) {  
@@ -68,18 +66,26 @@ public class donatorRegisterServlet extends HttpServlet {
                 out.println("<p>Unfortunately, we couldn't register your account. Please ensure all details are correct and try again.</p>");  
                 out.println("<a href='index.jsp' style='text-decoration: none; color: white; background-color: red; padding: 10px 20px; border-radius: 5px;'>Back to Home</a>");  
                 out.println("</body></html>");  
-            }  
-            
-            // Close resources  
-            preparedStatement.close();  
-            conn.close();  
-
-        } catch (SQLException e) {  
+            }
+            } catch (SQLException e) {  
             errorMessage = "Database error: " + e.getMessage();  
-            response.getWriter().println("<html><body><h3 style='color: red;'>" + errorMessage + "</h3></body></html>");  
-        } catch (ClassNotFoundException e) {  
-            errorMessage = "JDBC Driver not found!";  
-            response.getWriter().println("<html><body><h3 style='color: red;'>" + errorMessage + "</h3></body></html>");  
+            out.println("<html><body><h3 style='color: red;'>" + errorMessage + "</h3></body></html>");  
+        } finally {  
+            if (pst != null) {  
+                try {  
+                    pst.close();  
+                } catch (SQLException e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+            if (conn != null) {  
+                try {  
+                    conn.close();  
+                } catch (SQLException e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+            out.close();  
         }  
     }  
 
