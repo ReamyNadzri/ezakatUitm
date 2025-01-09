@@ -16,7 +16,6 @@ public class SuccessRegisterStudent extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get form data submitted from studentForm.jsp
-        String studentId = request.getParameter("studentId");
         String name = request.getParameter("name");
         String matricno = request.getParameter("matricno");
         String income = request.getParameter("income");

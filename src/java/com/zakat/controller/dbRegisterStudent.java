@@ -30,7 +30,6 @@ public class dbRegisterStudent extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         // Retrieve form parameters
-        String studentId = request.getParameter("studentId");
         String name = request.getParameter("name");
         String matricno = request.getParameter("matricno");
         String income = request.getParameter("income");
@@ -53,21 +52,20 @@ public class dbRegisterStudent extends HttpServlet {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
             // SQL query to insert student record
-            String sql = "INSERT INTO STUDENT (studentId, name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO STUDENT (name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, studentId);
-            pstmt.setString(2, name);
-            pstmt.setString(3, matricno);
-            pstmt.setString(4, income);
-            pstmt.setString(5, courseCode);
-            pstmt.setString(6, courseName);
-            pstmt.setString(7, campus);
-            pstmt.setString(8, phoneNum);
-            pstmt.setString(9, address);
-            pstmt.setString(10, email);
-            pstmt.setString(11, password);
+            pstmt.setString(1, name);
+            pstmt.setString(2, matricno);
+            pstmt.setString(3, income);
+            pstmt.setString(4, courseCode);
+            pstmt.setString(5, courseName);
+            pstmt.setString(6, campus);
+            pstmt.setString(7, phoneNum);
+            pstmt.setString(8, address);
+            pstmt.setString(9, email);
+            pstmt.setString(10, password);
 
             // Execute the query
             int rows = pstmt.executeUpdate();
