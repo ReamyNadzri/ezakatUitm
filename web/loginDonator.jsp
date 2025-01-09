@@ -87,7 +87,7 @@
 </head>
 <body>
     <!-- Button to Open Modal -->
-    <button id="openLoginModal">Login as Donator</button>
+    <br><br><br><br><button id="openLoginModal">Login as Donator</button>
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
