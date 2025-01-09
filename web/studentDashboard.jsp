@@ -1,120 +1,101 @@
-<%@ page import="java.sql.*" %>
-<jsp:include page="header.jsp"></jsp:include>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>  
 <!DOCTYPE html>  
 <html>  
 <head>  
-    <title>Student Dashboard</title>  
+    <title>Student Dashboard - Zakat UiTM</title>  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
     <style>  
-    * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: google sans, sans-serif;
-            }
-            
-
-    h1 {  
-        text-align: center;  
-        color: #333;  
-        margin-bottom: 20px;  
-    }  
-
-    table {  
-        width: 80%;  
-        margin: 0 auto;  
-        border-collapse: collapse;  
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
-        border-radius: 8px;  
-        overflow: hidden;  
-        background-color: #fff;  
-    }  
-
-    th, td {  
-        padding: 12px 15px;  
-        text-align: left;  
-        border-bottom: 1px solid #ddd;  
-    }  
-
-    th {  
-        background-color: #4CAF50;  
-        color: white;  
-        font-weight: bold;  
-    }  
-
-    tr:hover {  
-        background-color: #f1f1f1;  
-    }  
-
-    tr:nth-child(even) {  
-        background-color: #f9f9f9;  
-    }  
-
-    tr:nth-child(odd) {  
-        background-color: #ffffff;  
-    }  
-
-    @media (max-width: 768px) {  
-        table {  
-            width: 100%;  
+        body {  
+            display: flex;  
+            flex-direction: row;  
+            height: 100vh;  
+            margin: 0;  
         }  
-    }  
-</style>
+        .sidebar {  
+            width: 250px;  
+            background-color: #AF65C2;  
+            color: white;  
+            padding: 15px;  
+        }  
+        .sidebar a {  
+            color: white;  
+            text-decoration: none;  
+            display: block;  
+            padding: 10px;  
+            margin: 5px 0;  
+        }  
+        .sidebar a:hover {  
+            background-color: #9B30FF;  
+        }  
+        .main-content {  
+            flex: 1;  
+            padding: 20px;  
+            background-color: #f8f9fa;  
+        }  
+        .header-container {  
+            width: 100%;  
+            display: flex;  
+            justify-content: space-between;  
+            align-items: center;  
+            padding: 10px 0;  
+        }  
+        .welcome-message {  
+            margin: 20px 0;  
+            font-size: 24px;  
+            font-weight: bold;  
+        }  
+    </style>  
 </head>  
 <body>  
-    <h1>Student Dashboard</h1>  
-    <table>  
-        <tr>  
-            <th>ID</th>  
-            <th>Name</th>  
-            <th>Matric No</th>  
-            <th>Email</th>
-            <th>Address</th> 
-        </tr>  
+    <!-- Sidebar -->  
+    <div class="sidebar">  
+        <h2>Zakat UiTM</h2>  
         <%  
-            String url = "jdbc:oracle:thin:@localhost:1521:xe"; // Adjust the URL as needed  
-            String user = "zakatdb"; // replace with your DB username  
-            String password = "zakatdb"; // replace with your DB password  
-
-            Connection conn = null;  
-            Statement stmt = null;  
-            ResultSet rs = null;  
-
-            try {  
-                Class.forName("oracle.jdbc.driver.OracleDriver");  
-                conn = DriverManager.getConnection(url, user, password);  
-                stmt = conn.createStatement();  
-                String sql = "SELECT * FROM student";  
-                rs = stmt.executeQuery(sql);  
-
-                while (rs.next()) {  
-                    int studentId = rs.getInt("studentId");  
-                    String name = rs.getString("name");  
-                    String matricno = rs.getString("matricno");  
-                    String email = rs.getString("email");
-                    String address = rs.getString("address");
+            String user = (String) session.getAttribute("NAME");  
+            if (user != null) {  
         %>  
-                    <tr>  
-                        <td><%= studentId %></td>  
-                        <td><%= name %></td>  
-                        <td><%= matricno %></td>  
-                        <td><%= email %></td> 
-                          <td><%= address %></td>
-                    </tr>  
+            <p>Assalamu'alaikum, <%= user %></p>  
+            <a href="studentDashboard.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a>  
+            <a href="studentProfile.jsp"><i class="fas fa-user"></i> Profile</a>  
+            <a href="courses.jsp"><i class="fas fa-book"></i> Courses</a>  
+            <a href="grades.jsp"><i class="fas fa-graduation-cap"></i> Grades</a>  
+            <a href="logoutAll"><i class="fas fa-sign-out-alt"></i> Logout</a>  
         <%  
-                }  
-            } catch (Exception e) {  
-                e.printStackTrace();  
-            } finally {  
-                try {  
-                    if (rs != null) rs.close();  
-                    if (stmt != null) stmt.close();  
-                    if (conn != null) conn.close();  
-                } catch (SQLException e) {  
-                    e.printStackTrace();  
-                }  
+            } else {  
+        %>  
+            <a href="loginStudent.jsp"><i class="fas fa-sign-in-alt"></i> Login</a>  
+        <%  
             }  
         %>  
-    </table>  
-</body>
- <jsp:include page="Footer.jsp"></jsp:include>
+    </div>  
+
+    <!-- Main Content -->  
+    <div class="main-content">  
+        <div class="header-container">  
+            <h1>Student Dashboard</h1>  
+        </div>  
+        <div class="welcome-message">  
+            <%  
+                if (user != null) {  
+            %>  
+                Welcome to your dashboard, <%= user %>!  
+            <%  
+                } else {  
+            %>  
+                Welcome to the Student Dashboard!  
+            <%  
+                }  
+            %>  
+        </div>  
+
+        <!-- Additional Dashboard Content -->  
+        <div class="w3-container">  
+            <h3>Your Courses</h3>  
+            <p>List of courses you are enrolled in will go here.</p>  
+            <!-- Add more content as needed -->  
+        </div>  
+    </div>  
+</body>  
 </html>

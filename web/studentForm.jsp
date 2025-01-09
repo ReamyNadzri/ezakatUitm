@@ -30,6 +30,7 @@
         transform: translate(-50%, -50%); /* Center the modal */
         background-color: #111;
         padding: 15px;
+        margin-top: 50px;
         border-radius: 8px;
         width: 50%; /* Adjusted width */
         max-width: 500px; /* Limit maximum width */
@@ -125,90 +126,86 @@
     <c:set var="password" value="${param.password}" />
      <c:set var="address" value="${param.address}" />
             
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <div class="tajuk">
-                <h2>Daftar Sebagai Pelajar Sekarang</h2>
-            </div>
-            <!-- Student Registration Form -->
-            <form action="successRegisterStudent.jsp" method="post">
-                <input type="text" name="studentId" placeholder="No. ID..." required>
-                <input type="text" name="matricno" placeholder="No. Matrik..." required>
-                <input type="text" name="name" placeholder="Nama Penuh..." required>
-                <input type="number" name="income" placeholder="Pendapatan..." required>
-                
-                <!-- Select element for course code -->
-                <div class="selek">
-                    <select name="courseCode" required>
-                        <option value="" disabled selected>Pilih Program Pengajian Anda...</option>
-                        <option value="CDCS110">CDCS110 - Diploma Sains Komputer</option>
-                        <option value="CDCS230">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>
-                        <option value="CDCS264">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>
-                        <option value="CDCS267">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>
-                        <option value="CDCS270">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>
-                    </select>
-                </div>
-                <div class="selek">
-                    <select name="courseName" required>
-                        <option value="" disabled selected>Pilih Nama Program Pengajian Anda...</option>
-                        <option value="Diploma Sains Komputer">CDCS110 - Diploma Sains Komputer</option>
-                        <option value="Sarjana Muda Sains Komputer (Kepujian)">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>
-                        <option value="Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>
-                        <option value="Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>
-                        <option value="Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>
-                    </select>
-                </div>
-                
-                <select name="campus" required>
-                        <option value="" disabled selected>Pilih Kampus Anda...</option>
-                        <option value="UiTM Kuala Terengganu">UiTM Kuala Terengganu</option>
-                        <option value="UiTM Dungun">UiTM Dungun</option>
-                        <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>
-                    </select>
-                <input type="text" name="phoneNum" placeholder="Nombor Telefon (without '-')..." required>
-                <input type="text" name="address" placeholder="Alamat..." required>
-                <input type="email" name="email" placeholder="Email..." required>
-                <input type="password" name="password" placeholder="Password..." required>
-                
-                <div class="button-container">
-                    <button type="button" class="close-btn" id="closeModal">Kembali</button>
-                    <button type="submit" class="register-btn">Daftar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Pop-up Success Message -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <div class="checkmark">&#10003;</div>
-            <p>User successfully registered!</p>
-            <button onclick="window.location.reload();" class="button">Kembali Semula</button>
-        </div>
-    </div>
+  <!-- Register Modal -->  
+<div id="registerModal" class="modal">  
+    <div class="modal-content">  
+        <div class="tajuk">  
+            <h2>Daftar Sebagai Pelajar Sekarang</h2>  
+        </div>  
+        <!-- Student Registration Form -->  
+        <form action="successRegisterStudent.jsp" method="post" onsubmit="return handleFormSubmit();">   
+            <input type="text" name="matricno" placeholder="No. Matrik..." required>  
+            <input type="text" name="name" placeholder="Nama Penuh..." required>  
+            <input type="number" name="income" placeholder="Pendapatan..." required>  
+            
+            <!-- Select element for course code -->  
+            <div class="selek">  
+                <select name="courseCode" required>  
+                    <option value="" disabled selected>Pilih Kod Kursus Anda...</option>  
+                    <option value="CDCS110">CDCS110</option>  
+                    <option value="CDCS230">CDCS230</option>  
+                    <option value="CDCS264">CDCS264</option>  
+                    <option value="CDCS267">CDCS267</option>  
+                    <option value="CDCS270">CDCS270</option>  
+                </select>  
+            </div>  
+            <div class="selek">  
+                <select name="courseName" required>  
+                    <option value="" disabled selected>Pilih Nama Program Pengajian Anda...</option>  
+                    <option value="Diploma Sains Komputer">CDCS110 - Diploma Sains Komputer</option>  
+                    <option value="Sarjana Muda Sains Komputer (Kepujian)">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>  
+                    <option value="Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>  
+                    <option value="Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>  
+                    <option value="Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>  
+                </select>  
+            </div>  
+            
+            <select name="campus" required>  
+                <option value="" disabled selected>Pilih Kampus Anda...</option>  
+                <option value="UiTM Kuala Terengganu">UiTM Kuala Terengganu</option>  
+                <option value="UiTM Dungun">UiTM Dungun</option>  
+                <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>  
+            </select>  
+            <input type="text" name="phoneNum" placeholder="Nombor Telefon (without '-')..." required>  
+            <input type="text" name="address" placeholder="Alamat..." required>  
+            <input type="email" name="email" placeholder="Email..." required>  
+            <input type="password" name="password" placeholder="Password..." required>  
+            
+            <div class="button-container">  
+                <button type="button" class="back" onclick="window.location.href='studentForm.jsp';">Kembali</button> 
+                <button type="submit" class="register-btn">Daftar</button>  
+            </div>  
+        </form>  
+    </div>  
+</div>  
 
-    <script>
-        const modal = document.getElementById('registerModal');
-        const modalContent = document.querySelector('.modal-content');
-        const closeModalBtn = document.getElementById('closeModal');
+<script>  
+    const modal = document.getElementById('registerModal');  
+    const closeModalBtn = document.getElementById('closeModal');  
 
-        // Automatically show modal when page loads
-        window.onload = function () {
-            modal.style.display = 'block';
-            setTimeout(() => modal.classList.add('show'), 10); // Add the "show" class to trigger animation
-        };
+    // Automatically show modal when page loads  
+    window.onload = function () {  
+        modal.style.display = 'block';  
+        setTimeout(() => modal.classList.add('show'), 10); // Add the "show" class to trigger animation  
+    };  
 
-        closeModalBtn.onclick = function () {
-            modal.classList.remove('show'); // Remove the "show" class for reverse animation
-            setTimeout(() => modal.style.display = 'none', 300); // Delay hiding the modal to match animation
-        };
+    closeModalBtn.onclick = function () {  
+        modal.classList.remove('show'); // Remove the "show" class for reverse animation  
+        setTimeout(() => modal.style.display = 'none', 300); // Delay hiding the modal to match animation  
+    };  
 
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.classList.remove('show');
-                setTimeout(() => modal.style.display = 'none', 300);
-            }
-        };
-    </script>
+    window.onclick = function (event) {  
+        if (event.target === modal) {  
+            modal.classList.remove('show');  
+            setTimeout(() => modal.style.display = 'none', 300);  
+        }  
+    };  
+
+    function handleFormSubmit() {  
+        // This function will be called when the form is submitted  
+        // You can add any additional validation here if needed  
+        return true; // Allow form submission  
+    }  
+</script>
 </body>
 </html>
