@@ -51,7 +51,7 @@
 <body>
     <div class="container">
         <h2>Log Masuk Berjaya!</h2>
-        <p>Selamat Datang, <%=session.getAttribute("NAME")%>!</p> <!-- Assuming student name is stored in session after login -->
+        <p>Selamat Datang, <%=session.getAttribute("USERNAME")%>!</p> <!-- Assuming student name is stored in session after login -->
         <p>You have logged in successfully.</p>
         <p class="redirect-timer">
             You will be redirected to the home page in <strong>5 seconds</strong>.

@@ -83,9 +83,9 @@
 
 </head>
 <body>
-    <form action="loginStudentServlet" method="post">
-        <h2>Login Sebagai Pelajar</h2>
-        <input type="text" name="matricno" placeholder="Masukkan Nombor Matrik" required>
+    <form action="form" method="post">
+        <h2>Log Masuk</h2>
+        <input type="text" name="matricno" placeholder="Masukkan Nombor Matrik/Pengenalan" required>
         <input type="password" name="password" placeholder="Masukkan Password" required>
         <button type="submit">Login</button>
         <a href="studentForm.jsp">Not Register Yet? Register First</a>

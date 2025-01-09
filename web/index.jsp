@@ -66,16 +66,24 @@
                 </a>
 
             </div>
-            
+        
             <div class="w3-container w3-col w3-center w3-border w3-animate" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:28%">
 
                 <h1 class="w3-center">Masih Belum Memohon Zakat?</h1>
                 <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,
                 Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, </p>
+            <%
+                String staff = (String) session.getAttribute("USERNAME");
+                if(staff!=null) {
+            %>
+                <a href="mohonzakat.jsp">
+                    <button class="w3-button w3-border w3-light-grey" disabled>Permohonan Zakat Hanya Untuk Pelajar</button>
+                </a>
+                <%}else{%>
                 <a href="mohonzakat.jsp">
                     <button class="w3-button w3-border w3-light-grey">Mohon Zakat</button>
                 </a>
-
+                <%}%>
             </div>
             
             

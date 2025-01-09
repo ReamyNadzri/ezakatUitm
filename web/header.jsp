@@ -55,11 +55,12 @@
             <div class="w3-right w3-hide-small">
                 <%
                     String user = (String) session.getAttribute("NAME");
+                    String staff = (String) session.getAttribute("USERNAME");
                     if(user != null) {
                 %>
                         <span class="w3-padding-large">Assalamu'alaikum, <%= user %></span>
                         <!-- Dashboard Button with Icon -->
-                        <a href="dashboard.jsp" class="w3-button w3-border-bottom w3-padding-large">
+                        <a href="studentDashboard.jsp" class="w3-button w3-border-bottom w3-padding-large">
                             <i class="fas fa-tachometer-alt"></i> Dashboard
                         </a>
                         <!-- Logout Button with Icon -->
@@ -67,7 +68,21 @@
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                 <%
-                    } else {
+                    } else if(staff!=null) {
+                %>
+                        <span class="w3-padding-large">Assalamu'alaikum, <%= staff %></span>
+                        <!-- Dashboard Button with Icon -->
+                        <a href="donatorDashboard.jsp" class="w3-button w3-border-bottom w3-padding-large">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                        <!-- Logout Button with Icon -->
+                        <a href="logoutAll" class="w3-button w3-border-bottom w3-padding-large">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+
+                <%
+                    }else{
+
                 %>
                         <!-- Login Button with Icon -->
                         <a href="loginStudent.jsp" class="w3-button w3-border-bottom w3-padding-large">
