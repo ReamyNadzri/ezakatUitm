@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.zakat.controller;
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.zakat.model.DBConnection;
 import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author rahim
  */
 public class form extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +32,6 @@ public class form extends HttpServlet {
         
       
     }
-
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,11 +44,8 @@ public class form extends HttpServlet {
         // Database connection and query
         try {
             // Load the Oracle JDBC driver
-
-
             // Establish connection to Oracle DB
             Connection connection = DBConnection.getConnection();
-
             // Check if matric number exists in the database
             String queryStudent = "SELECT * FROM STUDENT WHERE matricno = ?";
             
@@ -64,7 +53,6 @@ public class form extends HttpServlet {
             preparedStatementSTD.setString(1, id);
             
             ResultSet resultSetStudent = preparedStatementSTD.executeQuery();
-
             if (resultSetStudent.next()) {
                 // If matric number exists, check password
                 String storedPassword = resultSetStudent.getString("PASSWORD");
@@ -90,10 +78,8 @@ public class form extends HttpServlet {
             
                 // Check if matric number exists in the database
                 String queryStaff = "SELECT * FROM DONATOR WHERE NOIC = ?";
-
                 PreparedStatement preparedStatementSTF = connection.prepareStatement(queryStaff);
                 preparedStatementSTF.setString(1, id);
-
                 ResultSet resultSetStaff = preparedStatementSTF.executeQuery();
             
                 if (resultSetStaff.next()) {
@@ -118,23 +104,16 @@ public class form extends HttpServlet {
                         request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
             
                     }
-                    // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
-                        request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
-                        request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred.");
         }
-
     }
-
    
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
