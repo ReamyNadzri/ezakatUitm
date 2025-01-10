@@ -85,7 +85,7 @@
 
                 %>
                         <!-- Login Button with Icon -->
-                        <a href="loginStudent.jsp" class="w3-button w3-border-bottom w3-padding-large">
+                        <a href="userLogin.jsp" class="w3-button w3-border-bottom w3-padding-large">
                             <i class="fas fa-sign-in-alt"></i> Login
                         </a>
                 <%
