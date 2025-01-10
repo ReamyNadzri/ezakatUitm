@@ -141,7 +141,7 @@
         // Redirect to login page if no session exists
         %>
         <script>alert('Log masuk terlebih dahulu sebelum membuat permohonan!');
-        window.location.href = 'loginStudent.jsp';
+        window.location.href = 'userLogin.jsp';
         </script>
         <%
         return;
