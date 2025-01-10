@@ -94,7 +94,7 @@
         <div class="modal-content">
             <h2 style="text-align:center;">Login Donitor</h2>
             <!-- Login Form -->
-            <form action="login.jsp" method="post">
+            <form action="loginDonator.jsp" method="post">
                 <input type="email" name="Email" placeholder="Email..." required>
                 <input type="password" name="password" placeholder="Password..." required>
                 <div class="button-container">
