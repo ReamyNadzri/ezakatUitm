@@ -118,6 +118,9 @@ public class form extends HttpServlet {
                         request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
             
                     }
+                    // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
+                        request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
+                        request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
                 }
             }
 
