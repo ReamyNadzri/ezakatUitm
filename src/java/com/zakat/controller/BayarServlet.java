@@ -34,7 +34,7 @@ public class BayarServlet extends HttpServlet {
             String bank = request.getParameter("bank");
             double amaun = Double.parseDouble(request.getParameter("amaun"));
             String tarikh = request.getParameter("tarikh");
-            String lainlain = request.getParameter("lainlain");
+            String nota = request.getParameter("nota");
 //            out.println("Bank Name : " + bank) <br><br>;
 //            out.println("Amaun : " + amaun) <br><br>;
 //            out.println("Tarikh : " + tarikh) <br><br>;
@@ -43,11 +43,9 @@ public class BayarServlet extends HttpServlet {
             if (bank.length() == 0 || amaun == 0 || tarikh.length() == 0)
             {
                 request.setAttribute("status", "failed");
-            } else {
-                request.setAttribute("status", "success");
+                request.getRequestDispatcher("notidonation.jsp").forward(request, response);
+                return;
             }
-            
-            request.getRequestDispatcher("BayarZakat.jsp").forward(request, response);
             
             Connection conn = null;
             PreparedStatement pst = null;
@@ -60,35 +58,29 @@ public class BayarServlet extends HttpServlet {
                 pst.setString (1, bank);
                 pst.setDouble (2, amaun);
                 pst.setString (3, tarikh);
-                pst.setString (4, lainlain);
-                pst.executeUpdate();
-
+                pst.setString (4, nota);
                 
                 int rowsInserted = pst.executeUpdate();
-
                             if (rowsInserted > 0) {
-                               System.out.println("A new application was inserted successfully!");
                                request.setAttribute("status", "success");
                              } else {
-                                 System.out.println("Failed to save to database");
-                                request.setAttribute("status", "failed");
+                               request.setAttribute("status", "failed");
                             }
-                            request.getRequestDispatcher("BayarZakat.jsp").forward(request, response);
                             
             } finally {
                 if (pst != null) pst.close();
                 if (conn != null) conn.close();
                 DBConnection.getConnection();
             }
+            request.getRequestDispatcher("notidonation.jsp").forward(request,response);
             
         } catch ( Exception e ) {
             out.println ("Error : " + e.getMessage());
             request.setAttribute("status", "failed");
-            request.getRequestDispatcher("BayarZakat.jsp").forward(request, response);
+            request.getRequestDispatcher("notidonation.jsp").forward(request, response);
         } finally {
             out.close();
         }
-        
         
     }
 

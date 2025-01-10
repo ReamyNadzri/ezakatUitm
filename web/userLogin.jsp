@@ -23,10 +23,10 @@
         display: inline-block;
         background: #1c1c1e;
         padding: 30px;
-        margin-top: 80px;
-        margin-bottom: 80px;
-        margin-right: 150px;
-        margin-left: 550px;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 40%;
+        margin-right: 40%;
         border-radius: 16px;
         text-align: center;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);

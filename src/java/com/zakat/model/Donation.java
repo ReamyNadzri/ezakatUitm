@@ -2,73 +2,124 @@ package com.zakat.model;
 
 public class Donation {
     
-    private String doanteId;
+    private int donateID;
+    private String bankname;
     private double amount;
-    private String donationDate;
+    private String donationdate;
+    private String note;
     private String donationStatus;
-    private String others;
 
     public Donation() {
     }
-
-    public Donation(String doanteId, double amount, String donationDate, String donationStatus, String others) {
-        this.doanteId = doanteId;
+    
+    public Donation(String bankname, String note, double amount) {
+        this.bankname = bankname;
+        this.note = note;
         this.amount = amount;
-        this.donationDate = donationDate;
-        this.donationStatus = donationStatus;
-        this.others = others;
+    }
+    
+//    public Donation(int donateID, String bankname, double amount, String donationdate,String note, String donationStatus) {
+//        this.donateID = donateID;
+//        this.bankname = bankname;
+//        this.amount = amount;
+//        this.donationdate = donationdate;
+//        this.note = note;
+//        this.donationStatus = donationStatus;
+//    }
+
+    /**
+     * @return the donateID
+     */
+    public int getDonateID() {
+        return donateID;
     }
 
-
-    public String getDoanteId() {
-        return this.doanteId;
+    /**
+     * @param donateID the donateID to set
+     */
+    public void setDonateID(int donateID) {
+        this.donateID = donateID;
     }
 
-    public void setDoanteId(String doanteId) {
-        this.doanteId = doanteId;
+    /**
+     * @return the bankname
+     */
+    public String getBankname() {
+        return bankname;
     }
 
+    /**
+     * @param bankname the bankname to set
+     */
+    public void setBankname(String bankname) {
+        this.bankname = bankname;
+    }
+
+    /**
+     * @return the amount
+     */
     public double getAmount() {
-        return this.amount;
+        return amount;
     }
 
+    /**
+     * @param amount the amount to set
+     */
     public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public String getDonationDate() {
-        return this.donationDate;
+    /**
+     * @return the donationdate
+     */
+    public String getDonationdate() {
+        return donationdate;
     }
 
-    public void setDonationDate(String donationDate) {
-        this.donationDate = donationDate;
+    /**
+     * @param donationdate the donationdate to set
+     */
+    public void setDonationdate(String donationdate) {
+        this.donationdate = donationdate;
     }
 
+    /**
+     * @return the note
+     */
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * @param note the note to set
+     */
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    /**
+     * @return the donationStatus
+     */
     public String getDonationStatus() {
-        return this.donationStatus;
+        return donationStatus;
     }
 
+    /**
+     * @param donationStatus the donationStatus to set
+     */
     public void setDonationStatus(String donationStatus) {
         this.donationStatus = donationStatus;
     }
-
-    public String getOthers() {
-        return this.others;
-    }
-
-    public void setOthers(String others) {
-        this.others = others;
-    }
-    @Override
-    public String toString() {
-        return "{" +
-            " doanteId='" + getDoanteId() + "'" +
-            ", amount='" + getAmount() + "'" +
-            ", donationDate='" + getDonationDate() + "'" +
-            ", donationStatus='" + getDonationStatus() + "'" +
-            ", others='" + getOthers() + "'" +
-            "}";
-    }
-
-
+    
+//    @Override
+//    public String toString() {
+//        return "{" +
+//            " doanteId='" + getdonateID() + "'" +
+//            ", amount='" + getAmount() + "'" +
+//            ", donationDate='" + getDonationDate() + "'" +
+//            ", donationStatus='" + getDonationStatus() + "'" +
+//            ", others='" + getOthers() + "'" +
+//            "}";
+//    }
+    
 }
