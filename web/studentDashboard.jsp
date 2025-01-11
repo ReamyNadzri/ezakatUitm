@@ -58,7 +58,9 @@
         %>  
             <p>Assalamu'alaikum, <%= user %></p>  
             <a href="studentDashboard.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a>  
-            <a href="studentProfile.jsp"><i class="fas fa-user"></i> Profile</a>    
+            <a href="studentProfile.jsp"><i class="fas fa-user"></i> Profile</a>
+            <a href="familyDetails.jsp"><i class="fas fa-user"></i> Maklumat Keluarga</a>
+            <a href="formPeribadi.jsp"><i class="fas fa-user"></i> Isi Maklumat Keluarga</a>
             <a href="logoutAll"><i class="fas fa-sign-out-alt"></i> Logout</a>  
         <%  
             } else {  

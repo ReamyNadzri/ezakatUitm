@@ -59,7 +59,9 @@
         %>  
             <p>Assalamu'alaikum, <%= user %></p>  
             <a href="studentDashboard.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a>  
-            <a href="studentProfile.jsp"><i class="fas fa-user"></i> Profile</a>     
+            <a href="studentProfile.jsp"><i class="fas fa-user"></i> Profile</a>
+            <a href="familyDetails.jsp"><i class="fas fa-user"></i> Maklumat Keluarga</a>
+            <a href="formPeribadi.jsp"><i class="fas fa-user"></i> Isi Maklumat Keluarga</a>
             <a href="logoutAll"><i class="fas fa-sign-out-alt"></i> Logout</a>  
         <%  
             } else {  
@@ -101,6 +103,7 @@
                         String name = rs.getString("name");
                         String courseCode = rs.getString("courseCode");
                         String courseName = rs.getString("courseName");
+                        String campus = rs.getString("campus");
                         String email = rs.getString("email");  
                         String phoneNum = rs.getString("phoneNum");  
                         String address = rs.getString("address");  
@@ -113,6 +116,9 @@
                         </div>
                         <div class="profile-info">  
                             <strong>Course Name:</strong> <%= courseName %>  
+                        </div>
+                        <div class="profile-info">  
+                            <strong>Campus:</strong> <%= campus %>  
                         </div>
                         <div class="profile-info">  
                             <strong>Email:</strong> <%= email %>  

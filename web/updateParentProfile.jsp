@@ -1,192 +1,107 @@
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="header.jsp"></jsp:include>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Parent Profile</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
-            margin: 0;
-            padding: 0;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #111;
-            border-radius: 10px;
-            padding: 30px;
-            width: 80%;
-            color: white;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
-            max-height: 80%;
-            overflow-y: auto;
-        }
-        .modal-content h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        .form-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 40px;
-        }
-        .form-section {
-            flex: 1;
-        }
-        .form-section h3 {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            text-decoration: underline;
-        }
-        .modal-content input,
-        .modal-content select {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #333;
-            color: white;
-        }
-        .modal-content select {
-            cursor: pointer;
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .modal-content button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .modal-content .back-btn {
-            background-color: #666;
-            color: white;
-        }
-        .modal-content .save-btn {
-            background-color: purple;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    
-    <c:set var="FName" value="${param.FName}" />
-    <c:set var="FWork" value="${param.FWork}" />
-    <c:set var="FPhoneNumber" value="${param.FPhoneNumber}" />
-    <c:set var="address" value="${param.address}" />
-    <c:set var="postcode" value="${param.postcode}" />
-    <c:set var="GrossIncomeF" value="${param.GrossIncomeF}" />
-    <c:set var="MaritialStatusF" value="${param.MaritialStatusF}" />
-    <c:set var="MName" value="${param.MName}" />
-    <c:set var="MWork" value="${param.MWork}" />
-    <c:set var="MPhoneNumber" value="${param.MPhoneNumber}" />
-    <c:set var="GrossIncomeM" value="${param.GrossIncomeM}" />
-    <c:set var="MaritialStatusM" value="${param.MaritialStatusM}" />
-    <c:set var="GuardianRelay" value="${param.GuardianRelay}" />
-    <c:set var="GuardianWork" value="${param.GuardianWork}" />
-    <c:set var="GuardianPhoneNumber" value="${param.GuardianPhoneNumber}" />
-    <!-- Button to Open Modal -->
-    <button id="openModalBtn" style="margin: 20px; padding: 10px 20px;">Kemaskini Profil</button>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>  
+<%@ page import="java.sql.*" %>  
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Update Profile - Zakat UiTM</title>  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+    <style>  
+        body {  
+            display: flex;  
+            flex-direction: column;  
+            height: 100vh;  
+            margin: 0;  
+        }  
+        .main-content {  
+            flex: 1;  
+            padding: 20px;  
+            background-color: #f8f9fa;  
+        }  
+        .form-group {  
+            margin-bottom: 15px;  
+        }  
+        input[type="text"], input[type="email"] {  
+            width: 100%; /* Make input fields take full width */  
+            padding: 10px; /* Add some padding for better appearance */  
+            border: 1px solid #ccc; /* Add a border */  
+            border-radius: 4px; /* Rounded corners */  
+            box-sizing: border-box; /* Include padding and border in element's total width and height */  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="main-content">  
+        <h1>Update Profile</h1>  
+        <%  
+            String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
+            String dbUser = "zakatdb"; // Your Oracle username  
+            String dbPassword = "zakatdb"; // Your Oracle password  
+            String matricno = (String) session.getAttribute("MATRICNO"); // Assume student ID is stored in session  
 
-    <!-- Update Profile Modal -->
-    <div id="updateProfileModal" class="modal">
-        <div class="modal-content">
-            <h2>Kemaskini Profil Ibu Bapa & Penjaga</h2>
-            <form action="successUpdateParentProfile.jsp" method="post" enctype="multipart/form-data">
-                <div class="form-container">
-                    <!-- Father Section -->
-                    <div class="form-section">
-                        <h3>Bapa</h3>
-                        <input type="text" name="FName" value="<%= request.getAttribute("FName") != null ? request.getAttribute("FName") : "" %>" placeholder="Nama Bapa..." required>
-                        <input type="text" name="FWork" value="<%= request.getAttribute("FWork") != null ? request.getAttribute("FWork") : "" %>" placeholder="Pekerjaan Bapa..." required>
-                        <input type="number" name="FPhoneNumber" value="<%= request.getAttribute("FPhoneNumber") != null ? request.getAttribute("FPhoneNumber") : "" %>" placeholder="Nombor Telefon Bapa (tanpa -)" required>
-                        <input type="text" name="address" value="<%= request.getAttribute("address") != null ? request.getAttribute("address") : "" %>" placeholder="Alamat..." required>
-                        <input type="text" name="postcode" value="<%= request.getAttribute("postcode") != null ? request.getAttribute("postcode") : "" %>" placeholder="Poskod" required>
-                        <input type="text" name="GrossIncomeF" value="<%= request.getAttribute("GrossIncomeF") != null ? request.getAttribute("GrossIncomeF") : "" %>" placeholder="Pendapatan Kasar Bapa" required>
-                        <select name="MaritialStatusF" required>
-                            <option value="" disabled selected>Status Perkahwinan Ayah</option>
-                            <option value="Berkahwin">Berkahwin</option>
-                            <option value="Duda">Duda</option>
-                        </select>
-                    </div>
+            if (matricno != null) {  
+                Connection conn = null;  
+                PreparedStatement stmt = null;  
+                ResultSet rs = null;  
 
-                    <!-- Mother Section -->
-                    <div class="form-section">
-                        <h3>Ibu</h3>
-                        <input type="text" name="MName" value="<%= request.getAttribute("MName") != null ? request.getAttribute("MName") : "" %>" placeholder="Nama Ibu..." required>
-                        <input type="text" name="MWork" value="<%= request.getAttribute("MWork") != null ? request.getAttribute("MWork") : "" %>" placeholder="Pekerjaan Ibu..." required>
-                        <input type="number" name="MPhoneNumber" value="<%= request.getAttribute("MPhoneNumber") != null ? request.getAttribute("MPhoneNumber") : "" %>" placeholder="Nombor Telefon Ibu (tanpa -)" required>
-                        <input type="text" name="GrossIncomeM" value="<%= request.getAttribute("GrossIncomeM") != null ? request.getAttribute("GrossIncomeM") : "" %>" placeholder="Pendapatan Kasar Ibu " required>
-                        <select name="MaritialStatusM" required>
-                            <option value="" disabled selected>Status Perkahwinan Ibu</option>
-                            <option value="Berkahwin">Berkahwin</option>
-                            <option value="Duda">Janda</option>
-                        </select>
-                    </div>
-                    
-                    <!-- Guardian Section -->
-                    <div class="form-section">
-                        <h3>Penjaga</h3>
-                        <input type="text" name="GuardianRelay" value="<%= request.getAttribute("GuardianRelay") != null ? request.getAttribute("GuardianRelay") : "" %>" placeholder="Hubungan Dengan Penjaga" required>
-                        <input type="text" name="GuardianWork" value="<%= request.getAttribute("GuardianWork") != null ? request.getAttribute("GuardianWork") : "" %>" placeholder="Pekerjaan Penjaga" required>
-                        <input type="number" name="GuardianPhoneNumber" value="<%= request.getAttribute("GuardianPhoneNumber") != null ? request.getAttribute("GuardianPhoneNumber") : "" %>" placeholder="Nombor Telefon Penjaga (tanpa -)" required>
-                    </div>
-                </div>
+                try {  
+                    // Load Oracle JDBC Driver  
+                    Class.forName("oracle.jdbc.OracleDriver");  
+                    conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
+                    String sql = "SELECT * FROM family WHERE matricno = ?";  
+                    stmt = conn.prepareStatement(sql);  
+                    stmt.setString(1, matricno);  
+                    rs = stmt.executeQuery();  
 
-                <div class="button-container">
-                    <button type="button" class="back-btn" id="closeModalBtn">Kembali</button>
-                    <button type="submit" class="save-btn">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // JavaScript to handle modal open/close
-        const modal = document.getElementById('updateProfileModal');
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-
-        openModalBtn.onclick = function () {
-            modal.style.display = 'block';
-        };
-
-        closeModalBtn.onclick = function () {
-            modal.style.display = 'none';
-        };
-
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        };
-    </script>
-</body>
+                    if (rs.next()) {  
+                        String fName = rs.getString("fName");  
+                        String mName = rs.getString("mName");  
+                        String guardianRelay = rs.getString("guardianRelay");  
+                        String maritalStatus = rs.getString("maritalStatus");  
+        %>  
+                        <form action="processUpdate.jsp" method="post">  
+                            <div class="form-group">  
+                                <label for="name">Father Name:</label>  
+                                <input type="text" id="fName" name="fName" value="<%= fName %>" required>  
+                            </div>  
+                            <div class="form-group">  
+                                <label for="email">Mother Name:</label>  
+                                <input type="text" id="mName" name="mName" value="<%= mName %>" required>  
+                            </div>  
+                            <div class="form-group">  
+                                <label for="phoneNum">Guardian Name:</label>  
+                                <input type="text" id="guardianRelay" name="guardianRelay" value="<%= guardianRelay %>" required>  
+                            </div>  
+                            <div class="form-group">  
+                                <label for="address">Marital Status:</label>  
+                                <select name="maritalStatus" required class="border rounded p-1 w-full mb-2">  
+                                <option value="" disabled selected>Pilih Status Perkahwinan Ibu Bapa Anda...</option>  
+                                <option value="Berkahwin">Berkahwin</option>  
+                                <option value="Bercerai">Bercerai</option>  
+                                </select>  
+                            </div>  
+                            <input type="hidden" name="matricno" value="<%= matricno %>">  
+                            <button type="submit" class="w3-button w3-purple">Update</button>  
+                        </form>  
+        <%  
+                    } else {  
+                        out.println("<p>No student found with the provided ID.</p>");  
+                    }  
+                } catch (SQLException e) {  
+                    out.println("<p>Error retrieving profile information: " + e.getMessage() + "</p>");  
+                } catch (ClassNotFoundException e) {  
+                    out.println("<p>Database driver not found: " + e.getMessage() + "</p>");  
+                } finally {  
+                    // Close resources  
+                    if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                    if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                    if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                }  
+            } else {  
+                out.println("<p>No student ID found in session.</p>");  
+            }  
+        %>  
+    </div>  
+</body>  
 </html>

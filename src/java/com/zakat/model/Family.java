@@ -11,6 +11,8 @@ package com.zakat.model;
  */
 public class Family extends Student {
 
+    private String studentId;
+    private String matricno;
     private String fName;
     private String fWork;
     private String fPhoneNum;
@@ -29,7 +31,9 @@ public class Family extends Student {
     public Family() {
     }
 
-    public Family(String fName, String fWork, String fPhoneNum, String mName, String mWork, String mPhoneNum, String guardianRelay, String guardianWork, String guardianPhoneNum, String maritalStatus, String address, String postcode, int grossIncomeM, int grossIncomeF) {
+    public Family(String matricno, String studentId, String fName, String fWork, String fPhoneNum, String mName, String mWork, String mPhoneNum, String guardianRelay, String guardianWork, String guardianPhoneNum, String maritalStatus, String address, String postcode, int grossIncomeM, int grossIncomeF) {
+        this.studentId = studentId;
+        this.matricno = matricno;
         this.fName = fName;
         this.fWork = fWork;
         this.fPhoneNum = fPhoneNum;
@@ -46,7 +50,22 @@ public class Family extends Student {
         this.grossIncomeF = grossIncomeF;
     }
 
+    public String getStudentId() {
+        return this.studentId;
+    }
 
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+    
+    public String getMatricno() {
+        return this.matricno;
+    }
+
+    public void setMatricno(String matricno) {
+        this.matricno = matricno;
+    }
+    
     public String getFName() {
         return this.fName;
     }
@@ -158,9 +177,13 @@ public class Family extends Student {
     public void setGrossIncomeF(int grossIncomeF) {
         this.grossIncomeF = grossIncomeF;
     }
+    
+    
     @Override
     public String toString() {
         return "{" +
+            " studentId='" + getStudentId() + "'" +
+             " matricno='" + getMatricno() + "'" +
             " fName='" + getFName() + "'" +
             ", fWork='" + getFWork() + "'" +
             ", fPhoneNum='" + getFPhoneNum() + "'" +
