@@ -187,12 +187,12 @@
         <url-pattern>/checkLoginAdminStaff</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>logoutAdminStaff</servlet-name>
-        <url-pattern>/logoutAdminStaff</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>loginAdminStaff</servlet-name>
         <url-pattern>/admin/loginAdminStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutAdminStaff</servlet-name>
+        <url-pattern>/admin/logoutAdminStaff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
