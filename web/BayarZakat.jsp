@@ -70,7 +70,6 @@
     <script>
         // Replace date dgn current date
         document.getElementById('tarikh').value = new Date().toISOString().slice(0, 10);
-        
     </script>
 </body>
 <div class="w3-border">

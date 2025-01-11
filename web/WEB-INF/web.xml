@@ -87,10 +87,6 @@
         <servlet-class>com.zakat.controller.form</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>receiptservlet</servlet-name>
-        <servlet-class>com.zakat.controller.receiptservlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>checkLoginAdminStaff</servlet-name>
         <servlet-class>com.zakat.controller.checkLoginAdminStaff</servlet-class>
     </servlet>
@@ -177,10 +173,6 @@
     <servlet-mapping>
         <servlet-name>form</servlet-name>
         <url-pattern>/form</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>receiptservlet</servlet-name>
-        <url-pattern>/receiptservlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>checkLoginAdminStaff</servlet-name>

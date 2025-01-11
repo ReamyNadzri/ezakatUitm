@@ -1,3 +1,9 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="com.zakat.model.DBConnection"%>
+<%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -6,15 +12,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Invoice - Zakat Management System</title>
-    <jsp:include page="header.jsp"></jsp:include>
+    <%--<jsp:include page="header.jsp"></jsp:include>--%>
     <script>
-        // Print Page Function
         function printPage() {
             window.print();
         }
     </script>
 </head>
 <body class="w3-light-grey">
+    <%
+        try{
+        Connection con = DBConnection.getConnection();
+
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT BANKNAME, AMOUNT, TO_CHAR(DONATIONDATE, 'YYYY-MM-DD') AS DONATIONDATE, NOTE FROM DONATION WHERE ROWNUM = 1 ORDER BY DONATEID DESC");
+        while (rs.next()) {
+    %>
     <!-- Full Receipt Invoice -->
     <div class="w3-container w3-card-4 w3-margin w3-white w3-round-large w3-padding">
         <!-- Header -->
@@ -27,10 +40,10 @@
             </div>
         </div>
 
-        <!-- Tengoh2 -->
+        <!-- Content -->
         <div class="w3-row-padding w3-margin-top">
             <div class="w3-half">
-                <p>Date: <strong>15/12/2024</strong></p>
+                <p>Date: <strong><%= rs.getString("DONATIONDATE") %></strong></p>
                 <p>Invoice from:</p>
             </div>
             <div class="w3-half w3-right-align">
@@ -54,15 +67,28 @@
                         <th>Amaun</th>
                     </tr>
                 </thead>
-                <tr>
-                    <td>Maybank</td>
-                    <td>Lain-Lain...</td>
-                    <td>RM XXXX.XX</td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="w3-right-align w3-bold">Jumlah Pembayaran</td>
-                    <td>RM XXXX.XX</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td><%= rs.getString("BANKNAME") %></td>
+                        <td><%= rs.getString("NOTE") %></td>
+                        <td>RM <%= rs.getDouble("AMOUNT") %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="w3-right-align w3-bold">Jumlah Pembayaran</td>
+                        <td>RM <%= rs.getDouble("AMOUNT") %></td>
+                    </tr>
+                    <%
+                    }
+                        rs.close();
+                        stmt.close();
+                    }catch (SQLException e){
+                        out.println(e.getMessage());
+
+                    }catch(Exception e){
+                        out.println(e.getMessage());
+                    }
+                    %>
+                </tbody>
             </table>
         </div>
 
