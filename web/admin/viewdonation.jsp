@@ -1,5 +1,6 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>  
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> 
+<jsp:include page="admin_header.jsp"></jsp:include>
 <!DOCTYPE html>  
 <html lang="en">  
 <head>  
@@ -78,8 +79,6 @@
         <a href="dashboard.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Dashboard</a>  
     </div>  
 </div>  
-
-<jsp:include page="../Footer.jsp"></jsp:include>
 
 </body>  
 </html>

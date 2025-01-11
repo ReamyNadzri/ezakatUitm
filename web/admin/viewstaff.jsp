@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
+<jsp:include page="admin_header.jsp"></jsp:include>
 <!DOCTYPE html>  
 <html lang="en">  
 <head>  
@@ -8,9 +9,7 @@
     <title>Staff Management</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
     <style>  
-        html, body {  
-            height: 100%;  
-        }  
+  
         .bg-custom {  
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
         }  
@@ -74,8 +73,6 @@
         <a href="dashboard.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Dashboard</a>  
     </div>  
 </div>  
-
-<jsp:include page="../Footer.jsp"></jsp:include>
 
 </body>  
 </html>

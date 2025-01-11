@@ -37,7 +37,7 @@
   <!--------Bar -->
 <div style="background-color: #AF65C2">
   <div class="w3-bar w3-27374D" style="background-color: #AF65C2; font-weight: bold; margin:0 auto; width:80%;height:75px">
-    <a href="mainpage.php?id=9956" class="w3-bar-item w3-button" style="width:16.66%;height:auto">
+    <a href="dashboard.jsp" class="w3-bar-item w3-button" style="width:16.66%;height:auto">
     <div class="w3-left"><i class="fas fa-home w3-xlarge" style="padding: 10px 0px;position:relative;right:2px;top:10px;height:60px"></i></div><br>
     MAIN PAGE</a>
     <div class="w3-dropdown-hover" style="width: 16.66%;">
@@ -50,15 +50,12 @@
         <a href='viewstaff.jsp' class="w3-bar-item w3-button">STAFF</a>
         <a href='viewstudent.jsp' class="w3-bar-item w3-button">STUDENT</a>
         <a href='viewdonator.jsp' class="w3-bar-item w3-button">DONATOR</a>
-        <a href='#' class="w3-bar-item w3-button">ADMIN</a>
+        <a href='viewadmin.jsp' class="w3-bar-item w3-button">ADMIN</a>
       </div>
     </div>
     <a href="analysis.php" class="w3-bar-item w3-button" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-chart-line w3-xlarge" style="padding: 10px 0px;;position:relative;right:-4px;top:10px;height:60px"></i></div><br>
     LATEST APPLICATION</a>
-    <a href='car_data_upload.php' class="w3-bar-item w3-button" style="width: 16.66%;">
-    <div class="w3-left"><i class="fas fa-paper-plane w3-xlarge" style="padding: 10px 0px;;position:relative;right:-8px;top:10px;height:60px"></i></div><br>
-    DATA UPLOAD</a>
 
     <div class="w3-dropdown-hover" style="width: 16.66%;">
       <button class="w3-button" style="width: 100%;">
@@ -73,7 +70,7 @@
           onclick="resizeText(-1)" />
       </div>
     </div>
-    <a href='logoutAdminStaff' class="w3-bar-item w3-button" style="width: 16.66%;">
+    <a href='logoutAdminStaff' class="w3-bar-item w3-button w3-right" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-lock w3-xlarge" style="padding: 10px 0px;position:relative;right:-30px;top:10px;height:60px"></i></div><br>
     LOG OUT</a>
   </div>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<jsp:include page="admin_header.jsp"></jsp:include>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

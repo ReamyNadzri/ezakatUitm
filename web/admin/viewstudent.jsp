@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
+<jsp:include page="admin_header.jsp"></jsp:include>
 <!DOCTYPE html>  
 <html lang="en">  
 <head>  
@@ -75,7 +76,6 @@
     </div>  
 </div>  
 
-<jsp:include page="../Footer.jsp"></jsp:include>
 
 </body>  
 </html>
