@@ -3,36 +3,22 @@
 <html>  
 <head>  
     <title>Student Dashboard - Zakat UiTM</title>  
+    <jsp:include page="header.jsp"></jsp:include>  
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
     <style>  
         body {  
             display: flex;  
-            flex-direction: row;  
+            flex-direction: column;  
             height: 100vh;  
             margin: 0;  
-        }  
-        .sidebar {  
-            width: 250px;  
-            background-color: #AF65C2;  
-            color: white;  
-            padding: 15px;  
-        }  
-        .sidebar a {  
-            color: white;  
-            text-decoration: none;  
-            display: block;  
-            padding: 10px;  
-            margin: 5px 0;  
-        }  
-        .sidebar a:hover {  
-            background-color: #9B30FF;  
         }  
         .main-content {  
             flex: 1;  
             padding: 20px;  
-            background-color: #f8f9fa;  
+            background-color: #f8f9fa;
+            align-self: center;
         }  
         .header-container {  
             width: 100%;  
@@ -42,35 +28,31 @@
             padding: 10px 0;  
         }  
         .welcome-message {  
-            margin: 20px 0;  
+            margin: 20px 0;
             font-size: 24px;  
             font-weight: bold;  
         }  
+        .button-container {  
+            margin: 20px 0;
+        }  
+        .button {  
+            background-color: #AF65C2;  
+            color: white;  
+            border: none;  
+            padding: 20px 30px;  /* Increased padding for larger buttons */  
+            margin: 5px;  
+            cursor: pointer;  
+            font-size: 18px;  /* Increased font size for better visibility */  
+            border-radius: 5px;  
+            transition: background-color 0.3s;  
+        }  
+        .button:hover {  
+            background-color: #9B30FF;  
+        }  
     </style>  
 </head>  
-<body>  
-    <!-- Sidebar -->  
-    <div class="sidebar">  
-        <h2>Zakat UiTM</h2>  
-        <%  
-            String user = (String) session.getAttribute("NAME");  
-            if (user != null) {  
-        %>  
-            <p>Assalamu'alaikum, <%= user %></p>  
-            <a href="studentDashboard.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a>  
-            <a href="studentProfile.jsp"><i class="fas fa-user"></i> Profile</a>
-            <a href="familyDetails.jsp"><i class="fas fa-user"></i> Maklumat Keluarga</a>
-            <a href="formPeribadi.jsp"><i class="fas fa-user"></i> Isi Maklumat Keluarga</a>
-            <a href="logoutAll"><i class="fas fa-sign-out-alt"></i> Logout</a>  
-        <%  
-            } else {  
-        %>  
-            <a href="loginStudent.jsp"><i class="fas fa-sign-in-alt"></i> Login</a>  
-        <%  
-            }  
-        %>  
-    </div>  
 
+<body>  
     <!-- Main Content -->  
     <div class="main-content">  
         <div class="header-container">  
@@ -78,6 +60,7 @@
         </div>  
         <div class="welcome-message">  
             <%  
+                String user = (String) session.getAttribute("NAME");  
                 if (user != null) {  
             %>  
                 Welcome to your dashboard, <%= user %>!  
@@ -90,12 +73,24 @@
             %>  
         </div>  
 
-        <!-- Additional Dashboard Content -->  
-        <div class="w3-container">  
-            <h3>Your Courses</h3>  
-            <p>List of courses you are enrolled in will go here.</p>  
-            <!-- Add more content as needed -->  
-        </div>  
+        <!-- Button Container -->  
+        <div class="button-container">  
+            <%  
+                if (user != null) {  
+            %>    
+                <button class="button" onclick="location.href='studentProfile.jsp'"><i class="fas fa-user"></i> Profile</button>  
+                <button class="button" onclick="location.href='mohonzakat.jsp'"><i class="fas fa-user"></i> Mohon Zakat</button>  
+                <button class="button" onclick="location.href='familyDetails.jsp'"><i class="fas fa-user"></i> Maklumat Keluarga</button>  
+                <button class="button" onclick="location.href='formPeribadi.jsp'"><i class="fas fa-user"></i> Isi Maklumat Keluarga</button>   
+            <%  
+                } else {  
+            %>  
+                <button class="button" onclick="location.href='loginStudent.jsp'"><i class="fas fa-sign-in-alt"></i> Login</button>  
+            <%  
+                }  
+            %>  
+        </div>    
     </div>  
+    <jsp:include page="Footer.jsp"></jsp:include>  
 </body>  
 </html>

@@ -32,6 +32,7 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         color: #fff;
         width: 300px;
+        align-self: center;
     }
     h2 {
         color: #fff;

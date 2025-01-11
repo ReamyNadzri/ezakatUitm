@@ -39,9 +39,9 @@
         <h1 class="text-xl font-bold mb-2">Isi Maklumat Peribadi</h1>  
         <form action="successMaklumat.jsp" method="post">  
             <div class="flex-section">    
-                <div class="half-width">
-                    <h2 class="text-lg font-semibold mt-2">Masukkan Nombor Matrik</h2>
-                    <input type="text" name="matricno" class="border rounded p-1 w-full mb-2" required>
+                <div class="half-width">  
+                    <h2 class="text-lg font-semibold mt-2">Masukkan Nombor Matrik</h2>  
+                    <input type="text" name="matricno" class="border rounded p-1 w-full mb-2" required>  
                     <h2 class="text-lg font-semibold mt-2">1. Maklumat Bapa</h2>  
                     <label>Nama:</label>  
                     <input type="text" name="fName" class="border rounded p-1 w-full mb-2" required>  
@@ -90,7 +90,10 @@
                 </div>  
             </div>  
 
-            <button type="submit" class="bg-blue-500 text-white rounded p-2">Hantar</button>  
+            <div class="flex justify-between mt-4"> <!-- Flex container for buttons -->  
+                <button type="button" onclick="location.href='studentDashboard.jsp'" class="bg-green-500 text-white rounded p-2">Kembali</button>  
+                <button type="submit" class="bg-blue-500 text-white rounded p-2">Hantar</button>  
+            </div>  
         </form>  
     </div>  
 </body>  

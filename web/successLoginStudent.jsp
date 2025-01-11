@@ -44,7 +44,7 @@
     <script>
         // Timer for automatic redirection
         setTimeout(function() {
-            window.location.href = "index.jsp";
+            window.location.href = "studentDashboard.jsp";
         }, 5000); // Redirect after 5 seconds
     </script>
 </head>
@@ -57,7 +57,7 @@
             You will be redirected to the home page in <strong>5 seconds</strong>.
         </p>
         <p class="w3-text-grey">If you don't want to wait, click the button below:</p>
-        <form action="index.jsp">
+        <form action="studentDashboard.jsp">
             <button type="submit" class="w3-button">
                 Go to Home Page Now
             </button>
