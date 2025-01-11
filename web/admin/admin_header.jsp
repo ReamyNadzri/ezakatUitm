@@ -48,7 +48,6 @@
         <a href='viewapplication.jsp' class="w3-bar-item w3-button">APPLICATION</a>
         <a href='viewadonation.jsp' class="w3-bar-item w3-button">DONATION</a>
         <a href='viewstaff.jsp' class="w3-bar-item w3-button">STAFF</a>
-        
         <a href='viewstudent.jsp' class="w3-bar-item w3-button">STUDENT</a>
         <a href='viewdonator.jsp' class="w3-bar-item w3-button">DONATOR</a>
         <a href='#' class="w3-bar-item w3-button">ADMIN</a>
@@ -74,7 +73,7 @@
           onclick="resizeText(-1)" />
       </div>
     </div>
-    <a href='logout.php' class="w3-bar-item w3-button" style="width: 16.66%;">
+    <a href='logoutAdminStaff' class="w3-bar-item w3-button" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-lock w3-xlarge" style="padding: 10px 0px;position:relative;right:-30px;top:10px;height:60px"></i></div><br>
     LOG OUT</a>
   </div>

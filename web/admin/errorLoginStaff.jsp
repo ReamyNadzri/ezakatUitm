@@ -27,7 +27,7 @@
 <body>
     <h2>Login Failed</h2>
     <p class="error">${errorMessage}</p>
-    <p><a href="loginStaff.jsp">Try again</a></p>
-    <p><a href="registerStaff.jsp">Not Register Yet? Register First</a></p>
+    <p><a href="index.jsp">Try again</a></p>
+    
 </body>
 </html>

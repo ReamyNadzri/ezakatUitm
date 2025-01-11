@@ -90,6 +90,18 @@
         <servlet-name>receiptservlet</servlet-name>
         <servlet-class>com.zakat.controller.receiptservlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkLoginAdminStaff</servlet-name>
+        <servlet-class>com.zakat.controller.checkLoginAdminStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logoutAdminStaff</servlet-name>
+        <servlet-class>com.zakat.controller.logoutAdminStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loginAdminStaff</servlet-name>
+        <servlet-class>com.zakat.controller.loginAdminStaff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -169,6 +181,18 @@
     <servlet-mapping>
         <servlet-name>receiptservlet</servlet-name>
         <url-pattern>/receiptservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkLoginAdminStaff</servlet-name>
+        <url-pattern>/checkLoginAdminStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutAdminStaff</servlet-name>
+        <url-pattern>/logoutAdminStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginAdminStaff</servlet-name>
+        <url-pattern>/admin/loginAdminStaff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

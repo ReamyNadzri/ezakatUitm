@@ -3,15 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/loginStudent.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/loginDonator.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/loginStaff.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/registerStaff.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/warndonation.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/userLogin.jsp</file>
             <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/addZakatServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/studentDashboard.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/logout.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/header.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/loginAdminStaff.java</file>
             <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/mohonzakat.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/view/loginStudentServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/index.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/BayarZakat.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/dashboard.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/index.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/admin_header.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/successLoginStaff.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/checkLoginAdminStaff.java</file>
         </group>
     </open-files>
 </project-private>

@@ -15,10 +15,28 @@
             background: white;  
         }  
     </style>
+    <jsp:include page="admin_header.jsp"></jsp:include>
+    <%
+    String staffNo = (String) session.getAttribute("STAFFNO");
+    String adminNo =  (String) session.getAttribute("ADMNOIC");
+    boolean adminAccess = (Boolean) session.getAttribute("ADMIN");
+    
+    if (staffNo == null && adminNo == null) {
+        // Redirect to login page if no session exists
+        %>
+        <script>alert('Log masuk terlebih dahulu!!!');
+        window.location.href = 'index.jsp';
+        </script>
+        <%
+        return;
+    }
+    %>
+    
+    
 </head>
 <body class="bg-custom flex flex-col justify-between">
     
-            <jsp:include page="../header.jsp"></jsp:include>
+            
             
 <div class="container mx-auto flex-grow flex flex-col items-center justify-center mt-10 px-4">  
     <h1 class="text-4xl font-bold text-center mb-6 text-white">Admin Dashboard</h1>  
