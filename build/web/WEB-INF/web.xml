@@ -98,6 +98,10 @@
         <servlet-name>loginAdminStaff</servlet-name>
         <servlet-class>com.zakat.controller.loginAdminStaff</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>actionApplicationServlet</servlet-name>
+        <servlet-class>com.zakat.controller.actionApplicationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -185,6 +189,10 @@
     <servlet-mapping>
         <servlet-name>logoutAdminStaff</servlet-name>
         <url-pattern>/admin/logoutAdminStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>actionApplicationServlet</servlet-name>
+        <url-pattern>/admin/actionApplicationServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

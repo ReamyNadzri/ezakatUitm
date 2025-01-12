@@ -38,7 +38,7 @@ boolean adminaccess = false;
         String id = request.getParameter("staffNo");
         String pass =  request.getParameter("staffPass");
         
-         try {
+        try {
             // CHECK STAFF DAHULU
             // Establish connection to Oracle DB
             Connection connection = DBConnection.getConnection();
@@ -103,6 +103,10 @@ boolean adminaccess = false;
                         request.getRequestDispatcher("errorLoginStaff.jsp").forward(request, response);
             
                     }
+                }else {
+                        // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
+                        request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
+                        request.getRequestDispatcher("errorLoginStaff.jsp").forward(request, response);
                 }
             }
         } catch (Exception e) {

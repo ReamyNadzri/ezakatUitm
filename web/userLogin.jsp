@@ -115,8 +115,8 @@
       
       <button type="submit" class="login-button">Log Masuk</button><br>
       <a href="studentForm.jsp">Tidak berdaftar? Tekan disini</a>
-    </form>
-    <button href="index.jsp" class="back-button">Back</button>
+    </form><br>
+    <a href="index.jsp" class="back-button">Back</a>
   </div>
 
     <!-- Error message if any -->
