@@ -21,6 +21,19 @@
         }
     </style>
 </head>
+<%
+    String username = (String) session.getAttribute("USERNAME");
+
+    if (username == null) {
+        // Redirect to login page if no session exists
+        %>
+        <script>alert('Log masuk terlebih dahulu sebelum membayar zakat!');
+        window.location.href = 'userLogin.jsp';
+        </script>
+        <%
+        return;
+    }
+    %>
 
 <body class="w3-light-grey">
     <div class="w3-container w3-center w3-panel w3-light-grey">

@@ -12,91 +12,118 @@
     <title>Student Login</title>
    
     <style>
-    * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: google sans, sans-serif;
-            }
-           
-    form {
-        display: inline-block;
-        background: #1c1c1e;
-        padding: 30px;
-        margin-top: 5%;
-        margin-bottom: 5%;
-        margin-left: 40%;
-        margin-right: 40%;
-        border-radius: 16px;
+    body {
+        background-size: cover; /* Ensures the image covers the entire page */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents tiling of the image */
+        background-attachment: fixed; /* Keeps the image fixed while scrolling */
+        
+  
+ 
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        width: 350px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 8px solid #800080; /* Thicker purple border */
+       
         text-align: center;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        color: #fff;
-        width: 300px;
-        align-self: center;
-    }
-    h2 {
-        color: #fff;
-        font-size: 18px;
+      }
+
+      .title {
+        text-align: center;
         margin-bottom: 20px;
-    }
-    input {
-        display: block;
-        margin: 15px auto;
-        padding: 12px;
-        width: 90%;
-        border: none;
-        border-radius: 8px;
-        background-color: #2c2c2e;
-        color: #fff;
-    }
-    input::placeholder {
-        color: #bbb;
-    }
-    button {
-        margin-top: 15px;
-        padding: 12px 25px;
-        background-color: #6a00ff;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
+        font-size: 24px;
         font-weight: bold;
+        color: #000;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        width: 100%;
+        text-align: left;
+      }
+
+      input {
+        margin-bottom: 15px;
+        padding: 10px;
         font-size: 14px;
-    }
-    button:hover {
-        background-color: #5000d1;
-    }
-    a {
-        display: block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%; /* Full width */
+        box-sizing: border-box;
+      }
+
+      .login-button {
+        background-color: #800080; /* Purple color */
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%; /* Full width */
+      }
+
+      .login-button:hover {
+        background-color: #550055; /* Darker purple on hover */
+      }
+
+      .back-button {
         margin-top: 10px;
+        width: 100%;
+        padding: 10px;
+        background-color: #666;
+        color: white;
+        border: none;
+        border-radius: 5px;
         font-size: 14px;
-        color: #6a00ff;
-        text-decoration: none;
-    }
-    a:hover {
-        color: #5000d1;
-    }
-    .error {
-        color: red;
-        margin-bottom: 10px;
-    }
+        cursor: pointer;
+      }
+
+      .back-button:hover {
+        background-color: #444;
+      }
+
+
 </style>
 
 </head>
-<body>
-    <form action="form" method="post">
-        <h2>Log Masuk</h2>
-        <input type="text" name="matricno" placeholder="Masukkan Nombor Matrik/Pengenalan" required>
-        <input type="password" name="password" placeholder="Masukkan Password" required>
-        <button type="submit">Login</button>
-        <a href="studentForm.jsp">Not Register Yet? Register First</a>
+<body ><br><Br><br><br><br>
+    <div class="w3-container container w3-center" style="margin-left: 40%; margin-bottom:2%; margin-top: 2%">
+    <h2 class="title">Log Masuk</h2>
+    <form class="form" action="form" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="matricno" placeholder="Masukkan Nombor Matrik/Pengenalan" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Masukkan kata laluan" required>
+      
+      <button type="submit" class="login-button">Log Masuk</button><br>
+      <a href="studentForm.jsp">Tidak berdaftar? Tekan disini</a>
     </form>
+    <button href="index.jsp" class="back-button">Back</button>
+  </div>
 
     <!-- Error message if any -->
     <c:if test="${not empty errorMessage}">
         <p class="error">${errorMessage}</p>
     </c:if>
-</body>
+</body><br><br><br>
 
         <jsp:include page="Footer.jsp"></jsp:include>
  
