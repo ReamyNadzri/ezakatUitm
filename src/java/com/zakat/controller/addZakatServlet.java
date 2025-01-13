@@ -348,23 +348,29 @@ public class addZakatServlet extends HttpServlet {
             }
     }
     
-   private String handleFileUpload(HttpServletRequest request, String inputName, Path uploadPath)
-            throws IOException, ServletException {
+    private String handleFileUpload(HttpServletRequest request, String inputName, Path uploadPath)
+        throws IOException, ServletException {
 
         Part filePart = request.getPart(inputName);
         if (filePart == null || filePart.getSize() <= 0) {
-            return "TIDAK MEMOHON"; // Return null if the file is empty
+            return "TIDAK MEMOHON"; // Indicate no file uploaded
         }
+
         String originalFileName = filePart.getSubmittedFileName();
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf('.'));
         String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
+
+        // Resolve the file path relative to the upload directory
         Path filePath = uploadPath.resolve(uniqueFileName);
+
         try (InputStream fileContent = filePart.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(fileContent)) {
+             BufferedInputStream bis = new BufferedInputStream(fileContent)) {
             Files.copy(bis, filePath);
-            return filePath.toString(); //return filepath
+            // Return the relative path for storing in the database
+            return "/ezakatUitm/uploads/" + uniqueFileName; // Assuming /uploads is mapped to your web server
         }
     }
+
 
     private String getFileName(HttpServletRequest request, String inputName) throws IOException, ServletException {
         Part filePart = request.getPart(inputName);

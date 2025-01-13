@@ -133,7 +133,7 @@
         }    </style>
 </head>
 <%
-    String matricNumber = (String) session.getAttribute("USERNAME");
+    String matricNumber = (String) session.getAttribute("MATRICNO");
     String name = (String) session.getAttribute("NAME");
     String campus = (String) session.getAttribute("CAMPUS");
     String email = (String) session.getAttribute("EMAIL");

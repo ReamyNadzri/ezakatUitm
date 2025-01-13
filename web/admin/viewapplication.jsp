@@ -39,7 +39,8 @@
     Connection connection = DBConnection.getConnection();
     
     Statement stmt = connection.createStatement();
-    ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  Z.ZAKATNAME AS ZAKAT_CATEGORY, TO_DATE(Z.DESCRIPTION, 'MM/DD/YYYY') AS ZAKAT_DATE FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID ");
+    ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION "
+    + "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID ORDER BY A.APPLYID DESC");
     %>
 
 <div class="container mx-auto flex-grow mt-10 px-4">  
@@ -66,7 +67,7 @@
                     %>
                 <tr>  
                     <td class="border px-4 py-2"><%=rs.getString("APPLYID")%></td>  
-                    <td class="border px-4 py-2"><%=rs.getString("ZAKAT_DATE")%></td>  
+                    <td class="border px-4 py-2"><%=rs.getString("DESCRIPTION")%></td>  
                     <td class="border px-4 py-2"><%=rs.getString("MATRICNO")%></td>  
                     <td class="border px-4 py-2"><%=rs.getString("STUDENT_NAME")%></td>   
                     <td class="border px-4 py-2"><%=rs.getString("ZAKATNAME")%></td>   

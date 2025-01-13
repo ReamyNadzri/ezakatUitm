@@ -7,6 +7,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="admin_header.jsp"></jsp:include>
 <!DOCTYPE html>
+<%
+    
+    %>
+
+
+
 <head>
     <title>Permohonan Zakat</title>
     <meta name="viewport">
@@ -85,6 +91,47 @@
     </style>
 </head>
 <body>
+    <%
+        String doc1 = ((String) request.getAttribute("TRANSCRIPTDOC")).replace("\\", "/");
+        String doc2 = ((String) request.getAttribute("STUDENTLETTER")).replace("\\", "/");
+        String doc3 = ((String) request.getAttribute("ICDOC")).replace("\\", "/");
+        String doc4 = ((String) request.getAttribute("ELECTRONICAPPLIANCE"));
+        if(doc4 != null){
+        doc4 = doc4.replace("\\", "/");
+        }else{
+        doc4 = "TIDAK MEMOHON";
+        }
+        String doc5 = ((String) request.getAttribute("KOLEJDOC"));
+        if(doc5 != null){
+        doc5 = doc5.replace("\\", "/");
+        }else{
+        doc4 = "TIDAK MEMOHON";
+        }
+        String doc6 = ((String) request.getAttribute("ENTRYSESSIONDOC"));
+        if(doc6 != null){
+        doc6 = doc6.replace("\\", "/");
+        }else{
+        doc4 = "TIDAK MEMOHON";
+        }
+        String doc7 = ((String) request.getAttribute("YURANDOC"));
+        if(doc7 != null){
+        doc7 = doc7.replace("\\", "/");
+        }else{
+        doc4 = "TIDAK MEMOHON";
+        }
+        String doc8 = ((String) request.getAttribute("COSTDOC"));
+        if(doc8 != null){
+        doc8 = doc8.replace("\\", "/");
+        }else{
+        doc4 = "TIDAK MEMOHON";
+        }
+        String doc9 = ((String) request.getAttribute("REASONDOC"));
+        if(doc9 != null){
+        doc9 = doc9.replace("\\", "/");
+        }else{
+        doc4 = "TIDAK MEMOHON";
+        }
+    %>
   
     <div class="w3-container w3-row w3-white" style="background: #f3e8fd">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">
@@ -93,37 +140,64 @@
         <!--applyID, studentID, zakatID, siblings, applyDate(current), totalIncome, studentLetter, transcriptDoc, icDoc, gradDate, entryDate, bankName, bankNum-->
         <div class="w3-container w3-col" style="width: 80%;">
         
-            <div class="w3-container w3-round-large w3-margin w3-card w3-col" style="padding-left:50px ; padding-top:25px">
-                
-                <div class="w3-panel">
-                    <h2>Pemohonan zakat bagi sesi OKT2024/FEB2025</h2>
-                    <HR>
-                    <div class="w3-cell">
-                        Nama
-                        <br>No. Matrik &emsp;&emsp;  <!--studentID-->
-                        <br>Email
-                        <br>Kampus
-                    </div>
-                    <div class="w3-cell">  <!--select * from student where studentID = (name)-->
-                        :&emsp; <%=session.getAttribute("NAME")%>
-                        <br>:&emsp; <%=session.getAttribute("MATRICNO")%>
-                        <br>:&emsp; <%=session.getAttribute("EMAIL")%>
-                        <br>:&emsp; <%=session.getAttribute("CAMPUS")%>
+            <div class="w3-container w3-round-large w3-margin w3-card w3-row" style="padding-left:50px ; padding-top:25px">
+                <div class="w3-container w3-cell">
+                    <div class="w3-panel w3-row w3-cell w3-green">
+                        <h3>Maklumat Terperinci Permohonan Zakat</h3>
+                        <HR>
+                        <div class="w3-cell w3-red">
+                            ID Permohonan
+                            <br>No. Matrik &emsp;&emsp;  <!--studentID-->
+                            <br>Nama
+                            <br>Email
+                            <br>Kampus
+                            <hr><!-- maklumat pelajar -->
+                            CGPA Terkini
+                            <br>GPA Terkini
+                            <br>Tahun Graduasi
+                            <hr><!-- maklumat bank -->
+                            Nombor Bank
+                            <br>Nama Bank
+                            <hr>
+                            Surat Transcript
+                            <br>Student Letter
+                            <br>Dokumen IC
+                        </div>
+                        <div class="w3-cell w3-blue">  <!--select * from student where studentID = (name)-->
+                            &emsp;:&emsp; ${APPLYID}
+                            <br>&emsp;:&emsp; ${MATRICNO}
+                            <br>&emsp;:&emsp; ${NAME}
+                            <br>&emsp;:&emsp; <%=session.getAttribute("EMAIL")%>
+                            <br>&emsp;:&emsp; <%=session.getAttribute("CAMPUS")%>
+                            <hr><!-- maklumat pelajar -->
+                            &emsp;:&emsp; ${CGPA}
+                            <br>&emsp;:&emsp; ${GPA}
+                            <br>&emsp;:&emsp; ${GRADYEAR}
+                            <hr><!-- maklumat bank -->
+                            &emsp;:&emsp; ${BANKNO}
+                            <br>&emsp;:&emsp; ${BANKNAME}
+                            <hr>
+                            &emsp;:&emsp; <a href="<%=doc1%>" target="_blank">Download</a>
+                            <br>&emsp;:&emsp; <a href="<%=doc2%>" target="_blank">Download</a>
+                            <br>&emsp;:&emsp; <a href="<%=doc3%>" target="_blank">Download</a>
+                        </div>
                     </div>
                 </div>
                 <hr>
-                <div class="w3-panel">
-                    <div class="w3-cell">
-                        Nama
-                        <br>No. Matrik &emsp;&emsp;  <!--studentID-->
-                        <br>Email
-                        <br>Kampus
-                    </div>
-                    <div class="w3-cell">  <!--select * from student where studentID = (name)-->
-                        :&emsp; <%=session.getAttribute("NAME")%>
-                        <br>:&emsp; <%=session.getAttribute("MATRICNO")%>
-                        <br>:&emsp; <%=session.getAttribute("EMAIL")%>
-                        <br>:&emsp; <%=session.getAttribute("CAMPUS")%>
+                <div class="w3-panel w3-cell w3-yellow">
+                    <div class="w3-container w3-cell">
+                        <div class="w3-cell">
+                            Nama
+                            <br>No. Matrik &emsp;&emsp;  <!--studentID-->
+                            <br>Email
+                            <br>Kampus
+                        </div>
+                        <div class="w3-cell">  <!--select * from student where studentID = (name)-->
+                            :&emsp; <%=session.getAttribute("NAME")%>
+                            <br>:&emsp; <%=session.getAttribute("MATRICNO")%>
+                            <br>:&emsp; <%=session.getAttribute("EMAIL")%>
+                            <br>:&emsp; <%=session.getAttribute("CAMPUS")%>
+                        </div>
                     </div>
                 </div>
                 <form action="addzakat.do" method="post" id="zakatForm" enctype="multipart/form-data">

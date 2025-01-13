@@ -23,8 +23,9 @@
 </head>
 <%
     String username = (String) session.getAttribute("USERNAME");
+    String matricno = (String) session.getAttribute("MATRICNO");
 
-    if (username == null) {
+    if (username == null && matricno == null) {
         // Redirect to login page if no session exists
         %>
         <script>alert('Log masuk terlebih dahulu sebelum membayar zakat!');

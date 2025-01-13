@@ -21,7 +21,7 @@
         // Session validation and access control
         String staffNo = (String) session.getAttribute("STAFFNO");
         String adminNo = (String) session.getAttribute("ADMNOIC");
-        Boolean adminAccess = (Boolean) session.getAttribute("ADMIN");
+        boolean adminAccess = (Boolean) session.getAttribute("ADMIN");
         
         if (staffNo == null && adminNo == null) {
     %>

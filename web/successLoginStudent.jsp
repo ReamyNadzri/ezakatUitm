@@ -57,7 +57,7 @@
             You will be redirected to the home page in <strong>5 seconds</strong>.
         </p>
         <p class="w3-text-grey">If you don't want to wait, click the button below:</p>
-        <form action="studentDashboard.jsp">
+        <form action="index.jsp">
             <button type="submit" class="w3-button">
                 Go to Home Page Now
             </button>
