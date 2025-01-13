@@ -72,7 +72,7 @@
                     <td class="border px-4 py-2"><%=rs.getString("ZAKATNAME")%></td>   
                     <td class="border px-4 py-2 status-pending">PENDING</td> 
                     <td class="border px-4 py-2">  
-                        <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this application?');">  
+                        <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
                             <input type="hidden" name="APPLYID" value='<%=rs.getString("APPLYID")%>' />  
                             <button type="submit" name="action" value="view" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button>  
                             <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  

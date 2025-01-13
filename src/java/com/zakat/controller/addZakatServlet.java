@@ -107,6 +107,7 @@ public class addZakatServlet extends HttpServlet {
             String totalKolej = request.getParameter("totalKolej");
             if(kolej.equals("kerawang") && totalKolej == "0"){kolej="TIDAK MEMOHON";}
             String cafe = request.getParameter("cafe");
+            String status = null;
             
 
             // 2. Retrieve File Uploads
@@ -277,11 +278,11 @@ public class addZakatServlet extends HttpServlet {
 
 
                             // =======================================================================================================================
-                        String applicationZakatSQL = "INSERT INTO APPLICATION (STUDENTID, ZAKATID, BANTUANMAKAN, BANTUANKEWANGAN, BANTUANKEWANGANNAMA, BANTUANKEWANGANNILAI, GRADYEAR, CGPA, GPA, BANKNO, BANKNAME, STUDENTLETTER, TRANSCRIPTDOC, ICDOC) " +
+                        String applicationZakatSQL = "INSERT INTO APPLICATION (STUDENTID, ZAKATID, BANTUANMAKAN, BANTUANKEWANGAN, BANTUANKEWANGANNAMA, BANTUANKEWANGANNILAI, GRADYEAR, CGPA, GPA, BANKNO, BANKNAME, STUDENTLETTER, TRANSCRIPTDOC, ICDOC, STATUS) " +
                                                      "VALUES ("
                                   + "(SELECT STUDENTID FROM STUDENT WHERE MATRICNO = ?),"
                                   + "(SELECT ZAKATID FROM (SELECT ZAKATID FROM ZAKAT_CATEGORY ORDER BY ZAKATID DESC) WHERE ROWNUM = 1),"
-                                  + "?,?,?,?,?,?,?,?,?,?,?,?)";
+                                  + "?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                             pstmt = conn.prepareStatement(applicationZakatSQL);
                             
@@ -298,6 +299,7 @@ public class addZakatServlet extends HttpServlet {
                             pstmt.setString(11, file1Path);
                             pstmt.setString(12, file2Path);
                             pstmt.setString(13, file3Path);
+                            pstmt.setString(14, "DISEMAK");
                             
 
                            rowsInserted = pstmt.executeUpdate();
