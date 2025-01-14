@@ -12,7 +12,7 @@ package com.zakat.model;
 public class Family extends Student {
 
     private String studentId;
-    private String matricno;
+    private String name;
     private String fName;
     private String fWork;
     private String fPhoneNum;
@@ -31,9 +31,9 @@ public class Family extends Student {
     public Family() {
     }
 
-    public Family(String matricno, String studentId, String fName, String fWork, String fPhoneNum, String mName, String mWork, String mPhoneNum, String guardianRelay, String guardianWork, String guardianPhoneNum, String maritalStatus, String address, String postcode, int grossIncomeM, int grossIncomeF) {
+    public Family(String name, String studentId, String fName, String fWork, String fPhoneNum, String mName, String mWork, String mPhoneNum, String guardianRelay, String guardianWork, String guardianPhoneNum, String maritalStatus, String address, String postcode, int grossIncomeM, int grossIncomeF) {
         this.studentId = studentId;
-        this.matricno = matricno;
+        this.name = name;
         this.fName = fName;
         this.fWork = fWork;
         this.fPhoneNum = fPhoneNum;
@@ -58,12 +58,12 @@ public class Family extends Student {
         this.studentId = studentId;
     }
     
-    public String getMatricno() {
-        return this.matricno;
+    public String getName() {
+        return this.name;
     }
 
-    public void setMatricno(String matricno) {
-        this.matricno = matricno;
+    public void setName(String name) {
+        this.name = name;
     }
     
     public String getFName() {
@@ -183,7 +183,7 @@ public class Family extends Student {
     public String toString() {
         return "{" +
             " studentId='" + getStudentId() + "'" +
-             " matricno='" + getMatricno() + "'" +
+             " name='" + getName() + "'" +
             " fName='" + getFName() + "'" +
             ", fWork='" + getFWork() + "'" +
             ", fPhoneNum='" + getFPhoneNum() + "'" +

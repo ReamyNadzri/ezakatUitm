@@ -1,100 +1,160 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>   
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@page contentType="text/html" pageEncoding="UTF-8"%>  
 <!DOCTYPE html>  
-<html lang="ms">  
+<html>  
 <head>  
     <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Isi Maklumat Peribadi</title>  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">  
+    <title>Student Information Form</title>  
     <style>  
-        /* Custom styles for the layout */  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f4f4f4;  
+            margin: 0;  
+            padding: 20px;  
+        }  
+        h2 {  
+            text-align: center;  
+            color: #333;  
+        }  
         .form-container {  
-            max-height: 100vh; /* Limit height to 100% of the viewport height */  
-            overflow: hidden; /* Disable scrolling */  
-        }  
-        .flex-section {  
-            display: flex; /* Use flexbox for layout */  
-            justify-content: space-between; /* Space between the two sections */  
-            margin-bottom: 10px; /* Space between rows */  
-        }  
-        .half-width {  
-            flex: 1; /* Take equal space */  
-            margin-right: 5px; /* Space between columns */  
-        }  
-        .half-width:last-child {  
-            margin-right: 0; /* Remove margin for the last child */  
+            background-color: #fff;  
+            padding: 20px;  
+            border-radius: 8px;  
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+            max-width: 600px;  
+            margin: auto;  
         }  
         label {  
-            font-size: 0.9rem; /* Smaller font size for labels */  
+            display: block;  
+            margin-bottom: 8px;  
+            font-weight: bold;  
+            color: #555;  
         }  
-        input, select {  
-            font-size: 0.9rem; /* Smaller font size for inputs and selects */  
+        input[type="text"],  
+        input[type="number"],  
+        textarea {  
+            width: 100%;  
+            padding: 10px;  
+            margin-bottom: 15px;  
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+            box-sizing: border-box;  
+        }  
+        input[type="submit"],  
+        .pagination button {  
+            background-color: #5cb85c;  
+            color: white;  
+            border: none;  
+            padding: 10px 15px;  
+            border-radius: 4px;  
+            cursor: pointer;  
+            font-size: 16px;  
+            margin: 5px;  
+        }  
+        input[type="submit"]:hover,  
+        .pagination button:hover {  
+            background-color: #4cae4c;  
+        }  
+        .pagination {  
+            text-align: center;  
+            margin-top: 20px;  
+        }  
+        .hidden {  
+            display: none;  
         }  
     </style>  
+    <script>  
+        function showSection(sectionId) {  
+            // Hide all sections  
+            var sections = document.querySelectorAll('.form-section');  
+            sections.forEach(function(section) {  
+                section.classList.add('hidden');  
+            });  
+            // Show the selected section  
+            document.getElementById(sectionId).classList.remove('hidden');  
+        }  
+    </script>  
 </head>  
-<body class="bg-gray-100 p-4">  
-    <div class="container mx-auto bg-white p-4 rounded-lg shadow-lg form-container">  
-        <h1 class="text-xl font-bold mb-2">Isi Maklumat Peribadi</h1>  
-        <form action="successMaklumat.jsp" method="post">  
-            <div class="flex-section">    
-                <div class="half-width">  
-                    <h2 class="text-lg font-semibold mt-2">Masukkan Nombor Matrik</h2>  
-                    <input type="text" name="matricno" class="border rounded p-1 w-full mb-2" required>  
-                    <h2 class="text-lg font-semibold mt-2">1. Maklumat Bapa</h2>  
-                    <label>Nama:</label>  
-                    <input type="text" name="fName" class="border rounded p-1 w-full mb-2" required>  
-                    <label>Pekerjaan:</label>  
-                    <input type="text" name="fWork" class="border rounded p-1 w-full mb-2" required>  
-                    <label>Pendapatan Kasar (Bapa):</label>  
-                    <input type="number" name="grossIncomeM" class="border rounded p-1 w-full mb-2" required>   
-                    <label>No. Telefon:</label>  
-                    <input type="text" name="fPhoneNum" class="border rounded p-1 w-full mb-2" required>  
-                </div>  
-                <div class="half-width">  
-                    <h2 class="text-lg font-semibold mt-2">2. Maklumat Ibu</h2>  
-                    <label>Nama:</label>  
-                    <input type="text" name="mName" class="border rounded p-1 w-full mb-2" required>  
-                    <label>Pekerjaan:</label>  
-                    <input type="text" name="mWork" class="border rounded p-1 w-full mb-2" required>  
-                    <label>Pendapatan Kasar (Ibu):</label>  
-                    <input type="number" name="grossIncomeF" class="border rounded p-1 w-full mb-2" required>  
-                    <label>No. Telefon:</label>  
-                    <input type="text" name="mPhoneNum" class="border rounded p-1 w-full mb-2" required>  
-                </div>  
+<body>  
+    <h2>Student Information Form</h2>  
+    <div class="form-container">  
+        <form action="dbMaklumatKeluarga" method="post">  
+            <div class="form-section" id="section1">  
+                <h3>1. Nama Pelajar</h3>  
+                <label for="name">Nama:</label>  
+                <input type="text" id="name" name="name" required>  
             </div>  
 
-            <div class="flex-section">  
-                <div class="half-width">  
-                    <h2 class="text-lg font-semibold mt-2">3. Maklumat Penjaga</h2>  
-                    <label>Nama:</label>  
-                    <input type="text" name="guardianRelay" class="border rounded p-1 w-full mb-2" required>  
-                    <label>Pekerjaan:</label>  
-                    <input type="text" name="guardianWork" class="border rounded p-1 w-full mb-2" required>  
-                    <label>No. Telefon:</label>  
-                    <input type="text" name="guardianPhoneNum" class="border rounded p-1 w-full mb-2" required>  
-                </div>  
-                <div class="half-width">  
-                    <h2 class="text-lg font-semibold mt-2">4. Maklumat Lain</h2>  
-                    <label>Status Perkahwinan Ibu & Bapa:</label>  
-                    <select name="maritalStatus" required class="border rounded p-1 w-full mb-2">  
-                        <option value="" disabled selected>Pilih Status Perkahwinan Ibu Bapa Anda...</option>  
-                        <option value="Berkahwin">Berkahwin</option>  
-                        <option value="Bercerai">Bercerai</option>  
-                    </select>   
-                    <label>Alamat:</label>  
-                    <input type="text" name="address" class="border rounded p-1 w-full mb-2" required>  
-                    <label>Poskod:</label>  
-                    <input type="text" name="postcode" class="border rounded p-1 w-full mb-2" required>     
-                </div>  
+            <div class="form-section hidden" id="section2">  
+                <h3>2. Maklumat Bapa</h3>  
+                <label for="fName">Nama Bapa:</label>  
+                <input type="text" id="fName" name="fName" required>  
+
+                <label for="fWork">Pekerjaan Bapa:</label>  
+                <input type="text" id="fWork" name="fWork" required>  
+
+                <label for="fPhoneNum">Nombor Telefon Bapa:</label>  
+                <input type="text" id="fPhoneNum" name="fPhoneNum" required>  
             </div>  
 
-            <div class="flex justify-between mt-4"> <!-- Flex container for buttons -->  
-                <button type="button" onclick="location.href='studentDashboard.jsp'" class="bg-green-500 text-white rounded p-2">Kembali</button>  
-                <button type="submit" class="bg-blue-500 text-white rounded p-2">Hantar</button>  
+            <div class="form-section hidden" id="section3">  
+                <h3>3. Maklumat Ibu</h3>  
+                <label for="mName">Nama Ibu:</label>  
+                <input type="text" id="mName" name="mName" required>  
+
+                <label for="mWork">Pekerjaan Ibu:</label>  
+                <input type="text" id="mWork" name="mWork" required>  
+
+                <label for="mPhoneNum">Nombor Telefon Ibu:</label>  
+                <input type="text" id="mPhoneNum" name="mPhoneNum" required>  
+            </div>  
+
+            <div class="form-section hidden" id="section4">  
+                <h3>4. Maklumat Penjaga</h3>  
+                <label for="guardianRelay">Nama Penjaga:</label>  
+                <input type="text" id="guardianRelay" name="guardianRelay" required>  
+
+                <label for="guardianWork">Pekerjaan Penjaga:</label>  
+                <input type="text" id="guardianWork" name="guardianWork" required>  
+
+                <label for="guardianPhoneNum">Nombor Telefon Penjaga:</label>  
+                <input type="text" id="guardianPhoneNum" name="guardianPhoneNum" required>  
+            </div>  
+
+            <div class="form-section hidden" id="section5">  
+                <h3>5. Maklumat Lain-lain</h3>  
+                <label for="maritalStatus">Status Perkahwinan:</label>  
+                <input type="text" id="maritalStatus" name="maritalStatus" required>  
+
+                <label for="address">Alamat:</label>  
+                <textarea id="address" name="address" required></textarea>  
+
+                <label for="postcode">Poskod:</label>  
+                <input type="text" id="postcode" name="postcode" required>  
+
+                <label for="grossIncomeM">Pendapatan Kasar (Ibu):</label>  
+                <input type="number" id="grossIncomeM" name="grossIncomeM" required>  
+
+                <label for="grossIncomeF">Pendapatan Kasar (Bapa):</label>  
+                <input type="number" id="grossIncomeF" name="grossIncomeF" required>  
+
+                <input type="submit" value="Hantar">  <!-- Submit button in the last section -->  
+            </div>  
+
+            <div class="pagination">  
+                <button type="button" onclick="showSection('section1')">1</button>  
+                <button type="button" onclick="showSection('section2')">2</button>  
+                <button type="button" onclick="showSection('section3')">3</button>  
+                <button type="button" onclick="showSection('section4')">4</button>  
+                <button type="button" onclick="showSection('section5')">5</button>  
             </div>  
         </form>  
     </div>  
+
+    <script>  
+        // Show the first section by default  
+        showSection('section1');  
+    </script>  
 </body>  
 </html>
