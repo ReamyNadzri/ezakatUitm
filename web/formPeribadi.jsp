@@ -77,7 +77,7 @@
     </script>  
 </head>  
 <body>  
-    <h2>Student Information Form</h2>  
+    <h2>Isi Maklumat Keluarga Anda</h2>  
     <div class="form-container">  
         <form action="dbMaklumatKeluarga" method="post">  
             <div class="form-section" id="section1">  
@@ -92,7 +92,10 @@
                 <input type="text" id="fName" name="fName" required>  
 
                 <label for="fWork">Pekerjaan Bapa:</label>  
-                <input type="text" id="fWork" name="fWork" required>  
+                <input type="text" id="fWork" name="fWork" required>
+                
+                <label for="grossIncomeF">Pendapatan Kasar (Bapa):</label>  
+                <input type="number" id="grossIncomeF" name="grossIncomeF" required>
 
                 <label for="fPhoneNum">Nombor Telefon Bapa:</label>  
                 <input type="text" id="fPhoneNum" name="fPhoneNum" required>  
@@ -104,7 +107,10 @@
                 <input type="text" id="mName" name="mName" required>  
 
                 <label for="mWork">Pekerjaan Ibu:</label>  
-                <input type="text" id="mWork" name="mWork" required>  
+                <input type="text" id="mWork" name="mWork" required>
+                
+                <label for="grossIncomeM">Pendapatan Kasar (Ibu):</label>  
+                <input type="number" id="grossIncomeM" name="grossIncomeM" required>
 
                 <label for="mPhoneNum">Nombor Telefon Ibu:</label>  
                 <input type="text" id="mPhoneNum" name="mPhoneNum" required>  
@@ -132,13 +138,7 @@
 
                 <label for="postcode">Poskod:</label>  
                 <input type="text" id="postcode" name="postcode" required>  
-
-                <label for="grossIncomeM">Pendapatan Kasar (Ibu):</label>  
-                <input type="number" id="grossIncomeM" name="grossIncomeM" required>  
-
-                <label for="grossIncomeF">Pendapatan Kasar (Bapa):</label>  
-                <input type="number" id="grossIncomeF" name="grossIncomeF" required>  
-
+  
                 <input type="submit" value="Hantar">  <!-- Submit button in the last section -->  
             </div>  
 
