@@ -46,6 +46,7 @@ public class form extends HttpServlet {
                 // If matric number exists, check password
                 String storedPassword = resultSetStudent.getString("PASSWORD");
                 String storedmatricno = resultSetStudent.getString("MATRICNO");
+                String storedstdid = resultSetStudent.getString("STUDENTID");
                 String storedname = resultSetStudent.getString("NAME");
                 String storedemail = resultSetStudent.getString("EMAIL");
                 String storedcampus = resultSetStudent.getString("CAMPUS");
@@ -53,6 +54,7 @@ public class form extends HttpServlet {
                 if (storedPassword.equals(password)) {
                     // If password matches, redirect to successLoginStudent.jsp
                     HttpSession session = request.getSession();
+                    session.setAttribute("STUDENTID", storedstdid);
                     session.setAttribute("MATRICNO", storedmatricno);
                     session.setAttribute("NAME", storedname);
                     session.setAttribute("EMAIL", storedemail);

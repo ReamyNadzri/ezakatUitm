@@ -39,7 +39,7 @@
     Connection connection = DBConnection.getConnection();
     
     Statement stmt = connection.createStatement();
-    ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION "
+    ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME,A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION "
     + "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID ORDER BY A.APPLYID DESC");
     %>
 
@@ -66,17 +66,27 @@
                     while (rs.next()){
                     %>
                 <tr>  
+                    <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
                     <td class="border px-4 py-2"><%=rs.getString("APPLYID")%></td>  
                     <td class="border px-4 py-2"><%=rs.getString("DESCRIPTION")%></td>  
                     <td class="border px-4 py-2"><%=rs.getString("MATRICNO")%></td>  
-                    <td class="border px-4 py-2"><%=rs.getString("STUDENT_NAME")%></td>   
+                    <td class="border px-4 py-2"><%=rs.getString("STUDENT_NAME")%><button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button> </td>   
                     <td class="border px-4 py-2"><%=rs.getString("ZAKATNAME")%></td>   
-                    <td class="border px-4 py-2 status-pending">PENDING</td> 
+                    <% if(rs.getString("STATUS").equals("BERJAYA")){%>
+                        <td class="border px-4 py-2 status-approved"><%=rs.getString("STATUS")%></td>
+                        <%
+                        }else if(rs.getString("STATUS").equals("DISEMAK")){ %>
+                        <td class="border px-4 py-2 status-pending"><%=rs.getString("STATUS")%></td> <%
+                        }else if(rs.getString("STATUS").equals("DITOLAK")){ %>
+                        <td class="border px-4 py-2 status-rejected"><%=rs.getString("STATUS")%></td> <%
+                        }%>
                     <td class="border px-4 py-2">  
-                        <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
+                        
                             <input type="hidden" name="APPLYID" value='<%=rs.getString("APPLYID")%>' />  
-                            <button type="submit" name="action" value="view" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button>  
-                            <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                            <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Success</button>
+                            <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Pending</button>
+                            <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Reject</button>
+                            <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
                         </form>  
                     </td>  
                 </tr>

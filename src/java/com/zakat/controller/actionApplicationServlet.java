@@ -49,6 +49,8 @@ public class actionApplicationServlet extends HttpServlet {
                             "    a.STUDENTID, \n" +
                             "    s.NAME, \n" +
                             "    s.MATRICNO, \n" +
+                            "    s.EMAIL, \n" +
+                            "    s.CAMPUS, \n" +
                             "    zc.ZAKATNAME, \n" +
                             "    a.GRADYEAR, \n" +
                             "    a.CGPA, \n" +
@@ -99,6 +101,8 @@ public class actionApplicationServlet extends HttpServlet {
                                 request.setAttribute("STUDENTID", rs.getInt("STUDENTID"));
                                 request.setAttribute("NAME", rs.getString("NAME"));
                                 request.setAttribute("MATRICNO", rs.getString("MATRICNO"));
+                                request.setAttribute("EMAIL", rs.getString("EMAIL"));
+                                request.setAttribute("CAMPUS", rs.getString("CAMPUS"));
                                 request.setAttribute("ZAKATNAME", rs.getString("ZAKATNAME"));
                                 request.setAttribute("GRADYEAR", rs.getInt("GRADYEAR"));
                                 request.setAttribute("CGPA", rs.getDouble("CGPA"));
@@ -143,10 +147,41 @@ public class actionApplicationServlet extends HttpServlet {
         }else if("delete".equals(action)){
             
             try (Connection conn = DBConnection.getConnection()) {
-                String sql = "DELETE FROM your_table WHERE id = ?";
+                String sql = "DELETE FROM APPLICATION WHERE APPLYID = ?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
+                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else if("success".equals(action)){
+            try (Connection conn = DBConnection.getConnection()) {
+                String sql = "UPDATE APPLICATION SET STATUS = 'BERJAYA' WHERE APPLYID = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else if("semak".equals(action)){
+            try (Connection conn = DBConnection.getConnection()) {
+                String sql = "UPDATE APPLICATION SET STATUS = 'DISEMAK' WHERE APPLYID = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else if("reject".equals(action)){
+            try (Connection conn = DBConnection.getConnection()) {
+                String sql = "UPDATE APPLICATION SET STATUS = 'DITOLAK' WHERE APPLYID = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
             } catch (SQLException e) {
                 e.printStackTrace();
             }
