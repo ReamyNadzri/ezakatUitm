@@ -73,7 +73,11 @@ public class dbMaklumatKeluarga extends HttpServlet {
             pstmt.setInt(15, grossIncomeF);  
             pstmt.executeUpdate();  
 
-            out.println("<h3>Data submitted successfully!</h3>");  
+                out.println("<html><body style='font-family: Arial, sans-serif; text-align: center;'>");    
+                out.println("<p>Your maklumat keluarga has been registered successfully.</p>");  
+                out.println("<a href='studentDashboard.jsp' style='margin-right: 10px; text-decoration: none; color: white; background-color: green; padding: 10px 20px; border-radius: 5px;'>Login</a>");  
+                out.println("<a href='index.jsp' style='text-decoration: none; color: white; background-color: blue; padding: 10px 20px; border-radius: 5px;'>Back to Home</a>");  
+                out.println("</body></html>");  
         } catch (Exception e) {  
             e.printStackTrace();  
             out.println("<h3>Error: " + e.getMessage() + "</h3>");  

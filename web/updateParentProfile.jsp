@@ -3,7 +3,7 @@
 <!DOCTYPE html>  
 <html>  
 <head>  
-    <title>Update Profile - Zakat UiTM</title>  
+    <title>Kemaskini Profile Keluarga - Zakat UiTM</title>  
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
@@ -22,7 +22,7 @@
         .form-group {  
             margin-bottom: 15px;  
         }  
-        input[type="text"], input[type="email"] {  
+        input[type="text"] {  
             width: 100%; /* Make input fields take full width */  
             padding: 10px; /* Add some padding for better appearance */  
             border: 1px solid #ccc; /* Add a border */  
@@ -38,9 +38,9 @@
             String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
             String dbUser = "zakatdb"; // Your Oracle username  
             String dbPassword = "zakatdb"; // Your Oracle password  
-            String matricno = (String) session.getAttribute("MATRICNO"); // Assume student ID is stored in session  
+            String name = (String) session.getAttribute("NAME"); // Assume student ID is stored in session  
 
-            if (matricno != null) {  
+            if (name != null) {  
                 Connection conn = null;  
                 PreparedStatement stmt = null;  
                 ResultSet rs = null;  
@@ -49,39 +49,49 @@
                     // Load Oracle JDBC Driver  
                     Class.forName("oracle.jdbc.OracleDriver");  
                     conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
-                    String sql = "SELECT * FROM family WHERE matricno = ?";  
+                    String sql = "SELECT * FROM family WHERE name = ?";  
                     stmt = conn.prepareStatement(sql);  
-                    stmt.setString(1, matricno);  
+                    stmt.setString(1, name);  
                     rs = stmt.executeQuery();  
 
-                    if (rs.next()) {  
-                        String fName = rs.getString("fName");  
-                        String mName = rs.getString("mName");  
-                        String guardianRelay = rs.getString("guardianRelay");  
-                        String maritalStatus = rs.getString("maritalStatus");  
+                    if (rs.next()) {   
+                        String fName = rs.getString("fName");
+                         String fWork = rs.getString("fWork");
+                          String grossIncomeF = rs.getString("grossIncomeF");
+                           String fPhoneNum = rs.getString("fPhoneNum");
+                            String mName = rs.getString("mName");
+                             String mWork = rs.getString("mWork");
+                              String grossIncomeM = rs.getString("grossIncomeM");
+                               String mPhoneNum = rs.getString("mPhoneNum");
+                                String maritalStatus = rs.getString("maritalStatus");
+                                 String guardianRelay = rs.getString("guardianRelay");
+                                  String guardianWork = rs.getString("guardianWork");
+                                   String guardianPhoneNum = rs.getString("guardianPhoneNum");
+                                    String address = rs.getString("address");
+                                     String postcode = rs.getString("postcode");  
         %>  
-                        <form action="processUpdate.jsp" method="post">  
+                        <form action="processUpdateFamily.jsp" method="post">  
                             <div class="form-group">  
-                                <label for="name">Father Name:</label>  
+                                <label for="fName">Nama Bapa:</label>  
                                 <input type="text" id="fName" name="fName" value="<%= fName %>" required>  
                             </div>  
                             <div class="form-group">  
-                                <label for="email">Mother Name:</label>  
+                                <label for="fWork">Pekerjaan Bapa:</label>  
+                                <input type="text" id="fWork" name="fWork" value="<%= fWork %>" required>  
+                            </div>   
+                            <div class="form-group">  
+                                <label for="mName">Nama Ibu:</label>  
                                 <input type="text" id="mName" name="mName" value="<%= mName %>" required>  
-                            </div>  
+                            </div>
                             <div class="form-group">  
-                                <label for="phoneNum">Guardian Name:</label>  
+                                <label for="mWork">Pekerjaan Ibu:</label>  
+                                <input type="text" id="mWork" name="mWork" value="<%= mWork %>" required>  
+                            </div>
+                            <div class="form-group">  
+                                <label for="guardianRelay">Nama Waris Terdekat:</label>  
                                 <input type="text" id="guardianRelay" name="guardianRelay" value="<%= guardianRelay %>" required>  
-                            </div>  
-                            <div class="form-group">  
-                                <label for="address">Marital Status:</label>  
-                                <select name="maritalStatus" required class="border rounded p-1 w-full mb-2">  
-                                <option value="" disabled selected>Pilih Status Perkahwinan Ibu Bapa Anda...</option>  
-                                <option value="Berkahwin">Berkahwin</option>  
-                                <option value="Bercerai">Bercerai</option>  
-                                </select>  
-                            </div>  
-                            <input type="hidden" name="matricno" value="<%= matricno %>">  
+                            </div>
+                            <input type="hidden" name="name" value="<%= name %>">  
                             <button type="submit" class="w3-button w3-purple">Update</button>  
                         </form>  
         <%  
