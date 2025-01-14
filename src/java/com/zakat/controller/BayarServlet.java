@@ -39,7 +39,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         
         if (bank.isEmpty() || amaun == 0 || tarikh.isEmpty()) {
             request.setAttribute("status", "failed");
-            request.getRequestDispatcher("notidonation.jsp").forward(request, response);
+            request.getRequestDispatcher("noti.jsp").forward(request, response);
             return;
         }
         
@@ -71,12 +71,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         }
         
         // Forward to notification page
-        request.getRequestDispatcher("notidonation.jsp").forward(request, response);
+        request.getRequestDispatcher("noti.jsp").forward(request, response);
         
     } catch (Exception e) {
         out.println("Error: " + e.getMessage());
         request.setAttribute("status", "failed");
-        request.getRequestDispatcher("notidonation.jsp").forward(request, response);
+        request.getRequestDispatcher("noti.jsp").forward(request, response);
     } finally {
         out.close();
     }

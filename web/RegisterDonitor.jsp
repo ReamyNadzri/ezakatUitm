@@ -141,7 +141,7 @@
                         </tr>   
                         <tr>  
                             <td><label for="donorPhone">Nombor Telefon:</label></td>  
-                            <td><input type="text" id="donorPhone" name="phoneNum" required></td>  
+                            <td><input type="text" id="donorPhone" name="phonenum" required></td>  
                         </tr>  
                         <tr>  
                             <td><label for="state">Negeri:</label></td>  

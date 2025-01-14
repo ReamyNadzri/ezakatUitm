@@ -5,17 +5,17 @@
 <html>  
 <head>  
     <title>Student Profile - Zakat UiTM</title>  
-    <jsp:include page="header.jsp"></jsp:include>  
+    <jsp:include page="header.jsp"></jsp:include>
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
-</head>  
-<body class="w3-light-grey">  
+</head>
+<body class="w3-light-white">
+    <div style="height: 100px;"></div>
     <!-- Main Content -->  
     <div class="w3-content w3-margin-top w3-margin-bottom w3-padding-32 w3-white w3-round-large w3-card-4 w3-center" style="max-width:500px;">  
         <div class="w3-container w3-margin-bottom">  
-            <h1>Student Profile</h1>  
-        </div>  
-
+            <h1>DONOR PROFIL</h1>  
+        </div>
         <%  
             String noic = (String) session.getAttribute("NOIC"); // Assume student ID is stored in session  
 
@@ -45,17 +45,17 @@
                             <strong>Email :</strong> <%= email %>  
                         </div>  
                         <div class="w3-margin-bottom">  
-                            <strong>Phone Number :</strong> <%= phonenum %>  
+                            <strong>Nombor Telefon :</strong> <%= phonenum %>  
                         </div>  
                         <div class="w3-margin-bottom">  
-                            <strong>State :</strong> <%= state %>  
+                            <strong>Negeri :</strong> <%= state %>  
                         </div>  
                         <div class="w3-margin-bottom">  
-                            <strong>City :</strong> <%= city %>  
+                            <strong>Bandar :</strong> <%= city %>  
                         </div>
                         <div class="w3-margin-top">  
-                            <a href="#" class="w3-button w3-purple">Update Profile</a>  
-                        </div>  
+                            <a href="donatorUpdProfile.jsp" class="w3-button w3-purple w3-round-large">Kemaskini Profil</a>  
+                        </div>
         <%  
                     } else {  
                         out.println("<p>No Donator IC found with the provided IC.</p>");  
@@ -71,11 +71,8 @@
                 out.println("<p>No Donator IC found in session.</p>");  
             }  
         %>  
-        
     </div>
-    <!-- Footer -->
-    <div class="w3-border-top">
-        <jsp:include page="Footer.jsp"></jsp:include>
-    </div>
+    <div style="height: 30px;"></div>
+    <jsp:include page="Footer.jsp"></jsp:include>
 </body>
 </html>
