@@ -8,48 +8,48 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
     <style>  
-        body {  
-            display: flex;  
-            flex-direction: column;  
-            height: 100vh;  
-            margin: 0;  
-        }  
-        .main-content {  
-            flex: 1;  
-            padding: 20px;  
-            background-color: #f8f9fa;
-            align-self: center;
-        }  
-        .header-container {  
-            width: 100%;  
-            display: flex;  
-            justify-content: space-between;  
-            align-items: center;  
-            padding: 10px 0;  
-        }  
-        .welcome-message {  
-            margin: 20px 0;
-            font-size: 24px;  
-            font-weight: bold;  
-        }  
-        .button-container {  
-            margin: 20px 0;
-        }  
-        .button {  
-            background-color: #AF65C2;  
-            color: white;  
-            border: none;  
-            padding: 20px 30px;  /* Increased padding for larger buttons */  
-            margin: 5px;  
-            cursor: pointer;  
-            font-size: 18px;  /* Increased font size for better visibility */  
-            border-radius: 5px;  
-            transition: background-color 0.3s;  
-        }  
-        .button:hover {  
-            background-color: #9B30FF;  
-        }  
-    </style>  
+    body {  
+        display: flex;  
+        flex-direction: column;  
+        height: 100vh;  
+        margin: 0;  
+    }  
+    .main-content {  
+        flex: 1;  
+        padding: 20px;  
+        background-color: #ffffff; /* Changed to white */  
+        align-self: center;  
+    }  
+    .header-container {  
+        width: 100%;  
+        display: flex;  
+        justify-content: space-between;  
+        align-items: center;  
+        padding: 10px 0;  
+    }  
+    .welcome-message {  
+        margin: 20px 0;  
+        font-size: 24px;  
+        font-weight: bold;  
+    }  
+    .button-container {  
+        margin: 20px 0;  
+    }  
+    .button {  
+        background-color: #AF65C2;  
+        color: white;  
+        border: none;  
+        padding: 20px 30px;  /* Increased padding for larger buttons */  
+        margin: 5px;  
+        cursor: pointer;  
+        font-size: 18px;  /* Increased font size for better visibility */  
+        border-radius: 5px;  
+        transition: background-color 0.3s;  
+    }  
+    .button:hover {  
+        background-color: #9B30FF;  
+    }  
+</style>  
 </head>  
 
 <body>  
