@@ -131,7 +131,7 @@ public class actionApplicationServlet extends HttpServlet {
                      // Forward the data to a JSP page for display
                     
                 
-            } catch (SQLException e) {
+            } catch (SQLException e) { 
                 e.printStackTrace();
                 response.getWriter().println("Error processing the form. Please try again.");
                 response.sendRedirect("../error.jsp"); // Redirect to error page if needed

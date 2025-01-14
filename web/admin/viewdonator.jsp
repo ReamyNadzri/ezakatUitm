@@ -1,6 +1,13 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
-<jsp:include page="admin_header.jsp"></jsp:include>
+<%@ page import="java.sql.Connection" %>  
+<%@ page import="java.sql.Statement" %>  
+<%@ page import="java.sql.ResultSet" %>  
+<%@ page import="java.sql.SQLException" %>  
+<%@ page import="com.zakat.model.DBConnection" %>  
+<%@ page import="java.util.List" %>  
+<%@ page import="com.zakat.model.Donator" %>  
+
+<jsp:include page="admin_header.jsp"></jsp:include>  
 <!DOCTYPE html>  
 <html lang="en">  
 <head>  
@@ -9,16 +16,23 @@
     <title>Donor Management</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
     <style>  
-        html, body {  
-            height: 100%;  
-        }  
+     
         .bg-custom {  
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
+        }  
+        .status-approved {  
+            color: green;  
+        }  
+        .status-rejected {  
+            color: red;  
+        }  
+        .status-pending {  
+            color: orange;  
         }  
     </style>  
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
-
+    
 <div class="container mx-auto flex-grow mt-10 px-4">  
     <h1 class="text-4xl font-bold text-center mb-6 text-white">Donor Management</h1>  
 
@@ -37,36 +51,44 @@
                 </tr>  
             </thead>  
             <tbody>  
-                <!-- Sample Data - Replace with dynamic data from your backend -->  
+                <%  
+                    Connection connection = null;  
+                    Statement stmt = null;  
+                    ResultSet rs = null;  
+                    try {  
+                        connection = DBConnection.getConnection();  
+                        stmt = connection.createStatement();  
+                        rs = stmt.executeQuery("SELECT DONATORID, PHONENUM, NOIC, USERNAME, EMAIL FROM DONATOR ORDER BY DONATORID DESC");  
+                        int count = 1;  
+                        while (rs.next()) {  
+                %>  
                 <tr>  
-                    <td class="border px-4 py-2">1</td>  
-                    <td class="border px-4 py-2">012-3456789</td>  
-                    <td class="border px-4 py-2">123456-78-9012</td>  
-                    <td class="border px-4 py-2">Ali</td>  
-                    <td class="border px-4 py-2">ali@example.com</td>  
-                    <td class="border px-4 py-2">password123</td>  
+                    <td class="border px-4 py-2"><%= count++ %></td>  
+                    <td class="border px-4 py-2"><%= rs.getString("PHONENUM") %></td>  
+                    <td class="border px-4 py-2"><%= rs.getString("NOIC") %></td>  
+                    <td class="border px-4 py-2"><%= rs.getString("USERNAME") %></td>  
+                    <td class="border px-4 py-2"><%= rs.getString("EMAIL") %></td>  
+                    <td class="border px-4 py-2">[hidden]</td> <!-- Password should not be displayed -->  
                     <td class="border px-4 py-2">  
-                        <form action="deleteDonor" method="post" onsubmit="return confirm('Are you sure you want to delete this donor?');">  
-                            <input type="hidden" name="donorId" value="1" />  
-                            <button type="submit" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                        <form action="actionDonatorServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this Donator?');">  
+                            <input type="hidden" name="DONATORID" value='<%=rs.getString("DONATORID")%>' />   
+                            <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
                         </form>  
                     </td>  
                 </tr>  
-                <tr>  
-                    <td class="border px-4 py-2">2</td>  
-                    <td class="border px-4 py-2">013-9876543</td>  
-                    <td class="border px-4 py-2">987654-32-1098</td>  
-                    <td class="border px-4 py-2">Siti</td>  
-                    <td class="border px-4 py-2">siti@example.com</td>  
-                    <td class="border px-4 py-2">password456</td>  
-                    <td class="border px-4 py-2">  
-                        <form action="deleteDonor" method="post" onsubmit="return confirm('Are you sure you want to delete this donor?');">  
-                            <input type="hidden" name="donorId" value="2" />  
-                            <button type="submit" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
-                        </form>  
-                    </td>  
-                </tr>  
-                <!-- Add more donor rows as needed -->  
+                <%  
+                        }  
+                    } catch (SQLException e) {  
+                        out.println("<tr><td colspan='7' class='border px-4 py-2 text-center text-red-600'>SQL Error: " + e.getMessage() + "</td></tr>");  
+                    } catch (Exception e) {  
+                        out.println("<tr><td colspan='7' class='border px-4 py-2 text-center text-red-600'>Error: " + e.getMessage() + "</td></tr>");  
+                    } finally {  
+                        // Close resources  
+                        if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                        if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                        if (connection != null) try { connection.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                    }  
+                %>  
             </tbody>  
         </table>  
     </div>  

@@ -1,4 +1,7 @@
+
+<%@page import="com.zakat.model.DBConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.*" %> 
 <jsp:include page="admin_header.jsp"></jsp:include>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +24,7 @@
         // Session validation and access control
         String staffNo = (String) session.getAttribute("STAFFNO");
         String adminNo = (String) session.getAttribute("ADMNOIC");
-        boolean adminAccess = (Boolean) session.getAttribute("ADMIN");
+        Boolean adminAccess = (Boolean) session.getAttribute("ADMIN");
         
         if (staffNo == null && adminNo == null) {
     %>
@@ -37,7 +40,6 @@
 
 <body class="bg-gray-100">
     <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
         <!-- Donation Summary Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-6">
@@ -60,7 +62,8 @@
                 </table>
             </div>
 
-            <!-- Total Donators Table -->
+
+<!-- Total Donators Table -->
             <div class="card bg-white p-6 rounded-lg shadow-lg">
                 <h2 class="text-2xl font-semibold mb-4">Jumlah Pemberi Zakat Terkini</h2>
                 <table class="table-auto w-full text-left border-collapse border border-gray-300">
@@ -73,7 +76,30 @@
                     <tbody>
                         <tr>
                             <td class="px-4 py-2 border">Jumlah Pemberi Zakat</td>
-                            <td class="px-4 py-2 border font-bold">120</td>
+                            <td class="px-4 py-2 border font-bold">
+                            
+                              
+                            <%  
+                                    int donorCount = 0;  
+                                    try {  
+                                        Connection connection = DBConnection.getConnection();  //untuk retrieve data dari database dan display dalam form jumlah pemberi zakat
+                                        String sql = "SELECT COUNT(*) AS total FROM DONATOR";  
+                                        PreparedStatement stmt = connection.prepareStatement(sql);  
+                                        ResultSet rs = stmt.executeQuery();  
+                                        if (rs.next()) {  
+                                            donorCount = rs.getInt("total");  
+                                        }  
+                                        rs.close();  
+                                        stmt.close();  
+                                        connection.close();  
+                                    } catch (SQLException e) {  
+                                        e.printStackTrace();  
+                                        out.println("Error retrieving donor count: " + e.getMessage());  
+                                    }  
+                                    out.print(donorCount);  
+                                %>  
+                            
+                            </td>
                         </tr>
                     </tbody>
                 </table>
