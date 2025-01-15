@@ -46,7 +46,7 @@
       INFORMATION</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4" >
         <a href='viewapplication.jsp' class="w3-bar-item w3-button">APPLICATION</a>
-        <a href='viewadonation.jsp' class="w3-bar-item w3-button">DONATION</a>
+        <a href='viewdonation.jsp' class="w3-bar-item w3-button">DONATION</a>
         <a href='viewstaff.jsp' class="w3-bar-item w3-button">STAFF</a>
         <a href='viewstudent.jsp' class="w3-bar-item w3-button">STUDENT</a>
         <a href='viewdonator.jsp' class="w3-bar-item w3-button">DONATOR</a>
