@@ -110,6 +110,10 @@
         <servlet-name>actionDonatorServlet</servlet-name>
         <servlet-class>com.zakat.controller.actionDonatorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>actionStudentServlet</servlet-name>
+        <servlet-class>com.zakat.controller.actionStudentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -209,6 +213,10 @@
     <servlet-mapping>
         <servlet-name>actionDonatorServlet</servlet-name>
         <url-pattern>/admin/actionDonatorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>actionStudentServlet</servlet-name>
+        <url-pattern>/admin/actionStudentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

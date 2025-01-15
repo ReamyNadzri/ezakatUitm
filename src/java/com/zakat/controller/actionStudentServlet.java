@@ -4,6 +4,7 @@ import com.zakat.model.DBConnection;
 import java.io.IOException;  
 import java.sql.Connection;  
 import java.sql.PreparedStatement;  
+import java.sql.ResultSet;
 import java.sql.SQLException;  
 import javax.servlet.RequestDispatcher;  
 import javax.servlet.ServletException;  
@@ -26,20 +27,18 @@ public class actionStudentServlet extends HttpServlet {
         int studentId = Integer.parseInt(request.getParameter("STUDENTID"));  
 
         if ("view".equals(action)) {  
-            // Fetch data from the database using the ID  
-            // (Implementation for viewing student details)  
+            // boleh tgk data family ni 
         } else if ("delete".equals(action)) {  
             try (Connection conn = DBConnection.getConnection()) {  
-                String sql = "DELETE * FROM STUDENT WHERE STUDENTID = ?";  
+                String sql = "DELETE FROM STUDENT WHERE STUDENTID = ?";  
                 PreparedStatement stmt = conn.prepareStatement(sql);  
                 stmt.setInt(1, studentId);  
 
-                int rowsAffected = stmt.executeUpdate();  
-                if (rowsAffected > 0) {  
-                    request.setAttribute("successMessage", "Student deleted successfully.");  
-                } else {  
-                    request.setAttribute("errorMessage", "No student found with the given ID.");  
-                }  
+                ResultSet rs = stmt.executeQuery();  
+                if(rs.next()){
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("viewstudent.jsp");
+                                dispatcher.forward(request, response);
+                }
             } catch (SQLException e) {  
                 e.printStackTrace();  
                 request.setAttribute("errorMessage", "Error deleting student: " + e.getMessage());  
