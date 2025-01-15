@@ -50,11 +50,16 @@ public class dbRegisterStudent extends HttpServlet {
 
             // Establish database connection
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            
+            String sql1 = "INSERT INTO FAMILY (name)";
+            pstmt = conn.prepareStatement(sql1);
 
             // SQL query to insert student record
             String sql = "INSERT INTO STUDENT (name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
+            String sql1 = "INSERT INTO STUDENT (name)";
+            pstmt = conn.prepareStatement(sql1);
 
             pstmt.setString(1, name);
             pstmt.setString(2, matricno);

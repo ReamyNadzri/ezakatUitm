@@ -12,7 +12,7 @@
     String dbPassword = "zakatdb"; // Your Oracle password  
 
     // Retrieve form data  
-    String name = request.getParameter("name");  
+    String name = request.getParameter("STUDENTID");  
     String fName = request.getParameter("fName");  
     String fWork = request.getParameter("fWork");   
     String mName = request.getParameter("mName");
@@ -27,7 +27,7 @@
             // Load Oracle JDBC Driver  
             Class.forName("oracle.jdbc.OracleDriver");  
             conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
-            String sql = "UPDATE family SET fName = ?, fWork = ?, mName = ?,  mWork = ?, guardianRelay = ? WHERE name = ?";  
+            String sql = "UPDATE family SET fName = ?, fWork = ?, mName = ?,  mWork = ?, guardianRelay = ? WHERE STUDENTID = ?";  
             stmt = conn.prepareStatement(sql);  
             stmt.setString(1, fName);  
             stmt.setString(2, fWork);   

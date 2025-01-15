@@ -14,7 +14,7 @@
             flex-direction: column;  
             height: 100vh;  
             margin: 0;  
-            background-color: #f8f9fa;  
+           
         }  
         .main-content {
             align-self: center;
@@ -42,7 +42,7 @@
         }  
     </style>  
 </head>  
-<body>  
+<body>  <br><br>
     <!-- Main Content -->  
     <div class="main-content">  
         <div class="profile-header">  
@@ -54,7 +54,7 @@
             String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
             String dbUser = "zakatdb"; // Your Oracle username  
             String dbPassword = "zakatdb"; // Your Oracle password  
-            String name = (String) session.getAttribute("NAME"); // Assume student ID is stored in session  
+            String name = (String) session.getAttribute("STUDENTID"); // Assume student ID is stored in session  
 
             if (name != null) {  
                 Connection conn = null;  
@@ -65,7 +65,7 @@
                     // Load Oracle JDBC Driver  
                     Class.forName("oracle.jdbc.OracleDriver");  
                     conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
-                    String sql = "SELECT * FROM family WHERE name = ?"; // Adjust column name as per your table  
+                    String sql = "SELECT * FROM family WHERE STUDENTID = ?"; // Adjust column name as per your table  
                     stmt = conn.prepareStatement(sql);  
                     stmt.setString(1, name);  
                     rs = stmt.executeQuery();  
@@ -86,30 +86,49 @@
                                     String address = rs.getString("address");
                                      String postcode = rs.getString("postcode");
         %>  
-                        <div class="profile-info">  
-                            <strong>Nama Bapa:</strong> <%= fName %>  
-                        </div>
-                        <div class="profile-info">  
-                            <strong>Pekerjaan Bapa:</strong> <%= fWork %>  
-                        </div>
-                        <div class="profile-info">  
-                            <strong>Gaji Kasar Bapa: RM</strong> <%= grossIncomeF %>  
-                        </div>
-                        <div class="profile-info">  
-                            <strong>Nama Ibu:</strong> <%= mName %>  
-                        </div>
-                        <div class="profile-info">  
-                            <strong>Pekerjaan Ibu:</strong> <%= mWork %>  
-                        </div>
-                        <div class="profile-info">  
-                            <strong>Gaji Kasar Ibu: RM</strong> <%= grossIncomeM %>  
-                        </div>
-                        <div class="profile-info">  
-                            <strong>Status Perkahwinan IbuBapa: </strong> <%= maritalStatus %>  
-                        </div>
-                        <div class="profile-info">  
-                            <strong>Nama Waris Terdekat</strong> <%= guardianRelay %>  
-                        </div>
+
+        <div class="profile-info">
+            <strong>Nama Bapa:</strong> <%= fName %>
+        </div>
+        <div class="profile-info">
+            <strong>Pekerjaan Bapa:</strong> <%= fWork %>
+        </div>
+        <div class="profile-info">
+            <strong>Gaji Kasar Bapa: RM</strong> <%= grossIncomeF %>
+        </div>
+        <div class="profile-info">
+            <strong>No Telefon Bapa:</strong> <%= fPhoneNum %>
+        </div><hr>
+        <div class="profile-info">
+            <strong>Nama Ibu:</strong> <%= mName %>
+        </div>
+        <div class="profile-info">
+            <strong>Pekerjaan Ibu:</strong> <%= mWork %>
+        </div>
+        <div class="profile-info">
+            <strong>Gaji Kasar Ibu: RM</strong> <%= grossIncomeM %>
+        </div>
+        <div class="profile-info">
+            <strong>No Telefon Ibu:</strong> <%= mPhoneNum %>
+        </div>
+        <div class="profile-info">
+            <strong>Status Perkahwinan Ibu Bapa:</strong> <%= maritalStatus %>
+        </div><hr>
+        <div class="profile-info">
+            <strong>Nama Waris Terdekat:</strong> <%= guardianRelay %>
+        </div>
+        <div class="profile-info">
+            <strong>Pekerjaan Waris Terdekat:</strong> <%= guardianWork %>
+        </div>
+        <div class="profile-info">
+            <strong>No Telefon Waris Terdekat:</strong> <%= guardianPhoneNum %>
+        </div>
+        <div class="profile-info">
+            <strong>Alamat:</strong> <%= address %>
+        </div>
+        <div class="profile-info">
+            <strong>Poskod:</strong> <%= postcode %>
+        </div>
                         <div class="update-button">  
                             <a href="updateParentProfile.jsp" class="w3-button w3-purple">Update Profile</a>  
                         </div>  
