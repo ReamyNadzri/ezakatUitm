@@ -1,77 +1,112 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>  
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.zakat.model.DBConnection"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> 
+<jsp:include page="header.jsp"></jsp:include>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Donor Management</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <jsp:include page="header.jsp"></jsp:include>
+    <title>Donation Zakat</title>  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
+    <style>    
+        .status-approved {  
+            color: green;  
+        }  
+        .status-pending {  
+            color: orange;  
+        }  
+    </style>  
 </head>  
-<body class="w3-light-grey w3-content w3-margin-top w3-margin-bottom w3-round-large w3-white w3-card-4" style="max-width: 800px;">  
-        <div class="w3-container w3-center w3-padding w3-margin-top">   
-                <p class="w3-large"><strong>DONATOR HISTORI</strong></p>
-        </div>
-<table class="w3-table-all w3-margin-top">
-    <thead>  
-        <tr class="w3-purple">  
-            <th>Bil.</th>  
-            <th>Donor ID</th>  
-            <th>Bank Name</th>  
-            <th>Amount</th>  
-            <th>Donation Date</th>  
-            <th>Note</th>  
-            <th>Status</th>  
-            <th>Actions</th>  
-        </tr>  
-    </thead>  
-    <tbody>  
-        <!-- Sample Data - Replace with dynamic data from your backend -->  
-        <tr>  
-            <td>1</td>  
-            <td>001</td>  
-            <td>Bank A</td>  
-            <td>100.00</td>  
-            <td>2025-01-01</td>  
-            <td>First Donation</td>  
-            <td>Completed</td>  
-            <td>  
-                <form action="deleteDonor" method="post" onsubmit="return confirm('Are you sure you want to delete this donation?');" style="display:inline;">
-                    <input type="hidden" name="donateId" value="001" />  
-                    <button type="submit" class="w3-button w3-red w3-round w3-margin-bottom">Delete</button>  
-                </form>  
-                <form action="printReceipt.jsp" method="get" style="display:inline;">
-                    <input type="hidden" name="donateId" value="001" />
-                    <button type="submit" class="w3-button w3-blue w3-round w3-margin-bottom">Print Receipt</button>
-                </form>
-            </td>  
-        </tr>  
-        <tr>  
-            <td>2</td>  
-            <td>002</td>  
-            <td>Bank B</td>  
-            <td>250.00</td>  
-            <td>2025-01-05</td>  
-            <td>Second Donation</td>  
-            <td>Pending</td>  
-            <td>  
-                <form action="deleteDonor" method="post" onsubmit="return confirm('Are you sure you want to delete this donation?');" style="display:inline;">
-                    <input type="hidden" name="donateId" value="002" />  
-                    <button type="submit" class="w3-button w3-red w3-round w3-margin-bottom">Delete</button>  
-                </form>  
-                <form action="printReceipt.jsp" method="get" style="display:inline;">
-                    <input type="hidden" name="donateId" value="002" />
-                    <button type="submit" class="w3-button w3-blue w3-round w3-margin-bottom">Print Receipt</button>
-                </form>
-            </td>  
-        </tr>  
-        <!-- Add more donation rows as needed -->  
-    </tbody>  
-</table>  
+<body class="flex flex-col justify-between">  
 
-<div class="w3-center w3-margin-top">  
-    <a href="donatorDashboard.jsp" class="w3-button w3-purple w3-round">Kembali ke Dashboard</a>  
-</div>  
+<div class="container mx-auto flex-grow mt-10 px-4">  
+    <h1 class="text-4xl font-bold text-center mb-6 text-black">Sumbangan Zakat</h1>  
 
+    <div class="bg-purple-800 shadow-lg rounded-lg p-8 w3-margin-bottom">  
+        <h2 class="text-2xl font-semibold mb-4 text-white">Jumlah Sumbangan Zakat</h2>  
+        <table class="min-w-full bg-white rounded-lg shadow-md">  
+            <thead>  
+                <tr class="bg-purple-600 text-white">  
+                    <th class="py-2 px-4">Bil.</th>  
+                    <th class="py-2 px-4">Tarikh</th>  
+                    <th class="py-2 px-4">Nama</th>  
+                    <th class="py-2 px-4">Nama Bank</th>  
+                    <th class="py-2 px-4">Amaun</th>  
+                    <th class="py-2 px-4">Nota</th>  
+                    <th class="py-2 px-4">Status</th>  
+                </tr>  
+            </thead>  
+            <tbody>
+                <% 
+                    Connection con = null;  
+                    Statement stmt = null;  
+                    ResultSet rs = null;  
+                    try {  
+                        con = DBConnection.getConnection();  
+                        stmt = con.createStatement();  
+                        rs = stmt.executeQuery("SELECT DONATEID, BANKNAME, AMOUNT, TO_CHAR(DONATIONDATE, 'YYYY-MM-DD') AS DONATIONDATE, NOTE, DONATIONSTATUS FROM DONATION ORDER BY DONATEID DESC");  
+                        int count = 1;  
+                        while (rs.next()) {  
+                %>  
+                <!-- Sample Data - Replace with dynamic data from your backend -->  
+                <tr>  
+                    <td class="border px-4 py-2"><%= count++ %></td>  
+                    <td class="border px-4 py-2"><%= rs.getString("DONATIONDATE") %></td>  
+                    <td class="border px-4 py-2">DUMMY</td>  
+                    <td class="border px-4 py-2"><%= rs.getString("BANKNAME") %></td>  
+                    <td class="border px-4 py-2"><%= rs.getString("AMOUNT") %></td>  
+                    <td class="border px-4 py-2"><%= rs.getString("NOTE") %></td>
+                    <td class="border px-4 py-2">  
+                        <span class="status-pending">Pending</span>  
+                    </td>  
+                </tr>
+                <%  
+                        }  
+                    } catch (SQLException e) {  
+                        out.println("<tr><td colspan='7' class='border px-4 py-2 text-center text-red-600'>SQL Error: " + e.getMessage() + "</td></tr>");  
+                    } catch (Exception e) {  
+                        out.println("<tr><td colspan='7' class='border px-4 py-2 text-center text-red-600'>Error: " + e.getMessage() + "</td></tr>");  
+                    } finally {  
+                        // Close resources  
+                        if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                        if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                        if (con != null) try { con.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                    }
+                %> 
+            </tbody>  
+        </table>  
+        
+        <div class="mt-4">  
+            <h3 class="text-lg font-semibold text-white">Jumlah Zakat Terkumpul: 
+                    <%
+                        double totalZakat = 0.0;
+                        try {
+                            con = DBConnection.getConnection();
+                            PreparedStatement ps = con.prepareStatement("SELECT SUM(AMOUNT) AS total FROM DONATION");
+                            ResultSet r = ps.executeQuery();
+                            if (r.next()) {
+                                totalZakat = r.getDouble("total");
+                            }
+                            r.close();
+                            ps.close();
+                        } catch (SQLException e) {
+                            out.println("Error retrieving data: " + e.getMessage());
+                        } catch (Exception e) {
+                            out.println("Error: " + e.getMessage());
+                        }
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        out.print(df.format(totalZakat));
+                    %></h3>  
+        </div>  
+    </div>
+</div>
+        <jsp:include page="Footer.jsp"></jsp:include> 
 </body>  
 </html>
