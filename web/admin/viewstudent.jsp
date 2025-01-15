@@ -13,7 +13,7 @@
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Zakat Application Management</title>  
+    <title>View Student</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
     <style>  
         .bg-custom {  
@@ -40,7 +40,7 @@
 %>  
 
 <div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-white">Zakat Application Management</h1>  
+    <h1 class="text-4xl font-bold text-center mb-6 text-white">View Student</h1>  
 
     <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
         <h2 class="text-2xl font-semibold mb-4 text-white">Zakat Applications List</h2>  
@@ -52,8 +52,7 @@
                     <th class="py-2 px-4">No Matrik</th>  
                     <th class="py-2 px-4">Nama</th>  
                     <th class="py-2 px-4">Email</th>  
-                    <th class="py-2 px-4">Kata Laluan</th>   
-                    <th class="py-2 px-4">Status</th>   
+                    <th class="py-2 px-4">Kata Laluan</th>      
                     <th class="py-2 px-4">Actions</th>  
                 </tr>  
             </thead>  
@@ -67,8 +66,7 @@
                     <td class="border px-4 py-2"><%= rs.getString("MATRICNO") %></td>  
                     <td class="border px-4 py-2"><%= rs.getString("NAME") %></td>   
                     <td class="border px-4 py-2"><%= rs.getString("EMAIL") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("PASSWORD") %></td>   
-                    <td class="border px-4 py-2 status-pending">PENDING</td>   
+                    <td class="border px-4 py-2"><%= rs.getString("PASSWORD") %></td>     
                     <td class="border px-4 py-2">  
                         <form action="actionStudentServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this student?');">  
                             <input type="hidden" name="STUDENTID" value='<%= rs.getString("STUDENTID") %>' />  
