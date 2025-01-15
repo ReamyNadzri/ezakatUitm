@@ -24,6 +24,7 @@
         try{
         Connection con = DBConnection.getConnection();
 
+        String staff = (String) session.getAttribute("USERNAME");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT BANKNAME, AMOUNT, TO_CHAR(DONATIONDATE, 'YYYY-MM-DD') AS DONATIONDATE, NOTE FROM DONATION WHERE ROWNUM = 1 ORDER BY DONATEID DESC");
         while (rs.next()) {
@@ -44,7 +45,7 @@
         <div class="w3-row-padding w3-margin-top">
             <div class="w3-half">
                 <p>Date: <strong><%= rs.getString("DONATIONDATE") %></strong></p>
-                <p>Invoice from:</p>
+                <p>Invoice from: <%= staff %></p>
             </div>
             <div class="w3-half w3-right-align">
                 <p>Pay to:</p>
