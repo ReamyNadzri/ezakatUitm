@@ -19,6 +19,16 @@
                     <p>Terima kasih atas sumbangan anda</p>
                     <a href="index.jsp" class="w3-button w3-purple w3-round-large">Kembali ke Laman Utama</a>
                 </c:when>
+                <c:when test="${status == 'successD'}">
+                    <img src="sources/1check.png" class="w3-image w3-round-large" style="width:40%; max-width:300px;">
+                    <p>Profil anda berjaya dikemaskini !</p>
+                    <a href="donatorProfile.jsp" class="w3-button w3-purple w3-round-large">Kembali ke Profil</a>
+                </c:when>
+                <c:when test="${status == 'failedD'}">
+                    <img src="sources/1seru.png" class="w3-image w3-round-large" style="width:40%; max-width:300px;">
+                    <p>Profil anda gagal dikemaskini !</p>
+                    <a href="donatorProfile.jsp" class="w3-button w3-purple w3-round-large">Kembali ke Profil</a>
+                </c:when>
                 <c:otherwise>
                     <img src="sources/1seru.png" class="w3-image w3-round-large" style="width:40%; max-width:300px;">
                     <p>Pembayaran Zakat anda gagal dilakukan !</p>

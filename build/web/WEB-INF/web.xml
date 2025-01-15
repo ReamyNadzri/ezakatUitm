@@ -103,6 +103,10 @@
         <servlet-class>com.zakat.controller.actionApplicationServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>donatorUpdServlet</servlet-name>
+        <servlet-class>com.zakat.controller.donatorUpdServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>actionDonatorServlet</servlet-name>
         <servlet-class>com.zakat.controller.actionDonatorServlet</servlet-class>
     </servlet>
@@ -181,6 +185,10 @@
     <servlet-mapping>
         <servlet-name>form</servlet-name>
         <url-pattern>/form</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>donatorUpdServlet</servlet-name>
+        <url-pattern>/donatorUpdServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>checkLoginAdminStaff</servlet-name>
