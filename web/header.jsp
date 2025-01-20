@@ -48,8 +48,8 @@
     <div class="w3-top w3-card-4" style="z-index:999">
         <div class="header-container">
             <!-- Logo on the left -->
-            <a href="index.jsp" class="w3-bar-item w3-button w3-padding-large">
-                <img src="sources/1ZakatLogoBR.png" alt="Logo" style="height:40px;">
+            <a href="index.jsp" class="w3-bar-item">
+                <img src="sources/1ZakatLogoBRwhite.png" alt="Logo" style="height:40px;">
             </a>
             <!-- Right side links -->
             <div class="w3-right w3-hide-small">

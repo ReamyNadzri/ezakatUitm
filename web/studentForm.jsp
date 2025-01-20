@@ -7,104 +7,125 @@
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <title>Register Form</title>  
     <style>  
         body {  
-            display: flex;  
+            background-size: cover;  
+            background-position: center;  
+            background-repeat: no-repeat;  
+            background-attachment: fixed;  
             justify-content: center;  
             align-items: center;  
             height: 100vh;  
             margin: 0;  
-            background-color: #f8f9fa;  
         }  
-        .modal {  
-            display: block; /* Show modal by default */  
-            position: fixed;  
-            top: 0;  
-            left: 0;  
-            width: 100%;  
-            height: 100%;  
-            background-color: rgba(0, 0, 0, 0.5);  
-            z-index: 1;  
-        }  
-        .modal-content {  
-            position: absolute;  
-            top: 50%;  
-            left: 50%;  
-            transform: translate(-50%, -50%);  
-            background-color: #fff; /* White background */  
+
+        .container {  
+            width: 80%;  
+            max-width: 1000px;  
             padding: 20px;  
-            margin-top: 3%;  
-            border-radius: 8px;  
-            width: 100%; /* Increased width */  
-            max-width: 1000px; /* Limit maximum width */  
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  
+            background-color: #fff;  
+            border-radius: 10px;  
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+            border: 8px solid #800080; /* Thicker purple border */  
+            margin: auto;  
+            margin-top: 5%;  
         }  
-        h2 {  
+
+        .title {  
             text-align: center;  
-            color: #333;  
-            margin-bottom: 20px; /* Add margin below the heading for spacing */  
+            margin-bottom: 20px;  
+            font-size: 24px;  
+            font-weight: bold;  
+            color: #000;  
         }  
-        table {  
-            width: 100%;  
-            border-collapse: collapse;  
+
+        .form-row {  
+            display: flex;  
+            justify-content: space-between;  
+            margin-bottom: 15px;  
         }  
-        td {  
-            padding: 10px;  
-            vertical-align: top;  
+
+        .form-column {  
+            width: 48%;  
         }  
+
+        label {  
+            display: block;  
+            margin-bottom: 15px; /* Increased gap between label and input */  
+            font-weight: bold;  
+        }  
+
         input, select {  
-            width: 100%; /* Make inputs wider */  
+            width: 100%;  
             padding: 10px;  
-            border: 1px solid #ccc;  
-            border-radius: 4px;  
             font-size: 14px;  
+            border: 1px solid #ccc;  
+            border-radius: 5px;  
+            box-sizing: border-box;  
+            margin-bottom: 20px; /* Increased gap between input fields */  
         }  
-        button {  
-            padding: 10px;  
-            background-color: #6a00ff; /* Purple background */  
+
+        .register-button {  
+            background-color: #800080; /* Purple color */  
             color: white;  
             border: none;  
-            border-radius: 4px;  
-            cursor: pointer;  
+            padding: 10px;  
+            border-radius: 5px;  
             font-size: 16px;  
+            cursor: pointer;  
+            width: 100%;  
+        }  
+
+        .register-button:hover {  
+            background-color: #550055; /* Darker purple on hover */  
+        }  
+
+        .back-button {  
             margin-top: 10px;  
-            margin-right: 10px; /* Space between buttons */  
+            width: 100%;  
+            padding: 10px;  
+            background-color: #666;  
+            color: white;  
+            border: none;  
+            border-radius: 5px;  
+            font-size: 14px;  
+            cursor: pointer;  
         }  
-        button:hover {  
-            background-color: #5000d1; /* Darker purple on hover */  
-        }  
-        .close-btn {  
-            background-color: gray;  
-        }  
-        .close-btn:hover {  
+
+        .back-button:hover {  
             background-color: #444;  
         }  
-        /* New styles for button container */  
+
         .button-container {  
-            display: flex; /* Use flexbox for alignment */  
-            justify-content: space-between; /* Space between buttons */  
-            margin-top: 10px; /* Add some margin above the buttons */  
-        }  
-        .button-container button {  
-            width: 48%; /* Set width to allow space between buttons */  
-        }  
-        /* New styles for side-by-side fields */  
-        .side-by-side {  
-            display: flex; /* Use flexbox for alignment */  
-            justify-content: space-between; /* Space between fields */  
-        }  
-        .side-by-side select {  
-            width: 48%; /* Set width to allow space between selects */  
-        }  
-        /* New styles for button selection */  
-        .button-selection {  
-            display: flex; /* Use flexbox for alignment */  
-            justify-content: center; /* Center the buttons */  
+            display: flex;  
+            justify-content: space-between;  
             margin-bottom: 20px;  
         }  
-        .button-selection button {  
-            margin-right: 20px; /* Space between buttons */  
+
+        .button-container button {  
+            width: 48%;  
+            padding: 10px;  
+            font-size: 16px;  
+            cursor: pointer;  
+            border: none;  
+            border-radius: 5px;  
+        }  
+
+        .button-container button:first-child {  
+            background-color: #800080; /* Purple color */  
+            color: white;  
+        }  
+
+        .button-container button:last-child {  
+            background-color: #666; /* Gray color */  
+            color: white;  
+        }  
+
+        .button-container button:hover {  
+            opacity: 0.9;  
         }  
     </style>  
 </head>  
@@ -126,111 +147,83 @@
     <c:set var="password" value="${param.password}" />  
     <c:set var="address" value="${param.address}" />    
 
-    <div class="modal">  
-        <div class="modal-content">   
-
-            <!-- Button selection for registration type -->  
-            <div class="button-selection">  
-                <button type="button" onclick="showStudentForm()" id="studentButton">Daftar Sebagai Pelajar</button>  
-                <button type="button" onclick="showDonorForm()" id="donorButton">Daftar Sebagai Penyumbang</button>  
-            </div>   
-            <h2 id="formTitle">Daftar Sebagai Pelajar Sekarang</h2>   
-
-            <!-- Student Registration Form -->  
-            <form method="post" action="successRegisterStudent.jsp">  
-                <div id="studentForm"> <!-- Student form section -->  
-                    <table>  
-                        <tr>  
-                            <td><label for="matricno">No. Matrik:</label></td>  
-                            <td><input type="text" id="matricno" name="matricno" required></td>  
-                        </tr>  
-                        <tr>  
-                            <td><label for="name">Nama Penuh:</label></td>  
-                            <td><input type="text" id="name" name="name" required></td>  
-                        </tr>  
-                        <tr>  
-                            <td><label for="phoneNum">Nombor Telefon:</label></td>  
-                            <td><input type="text" id="phoneNum" name="phoneNum" required></td>  
-                        </tr>  
-                        <tr>  
-                            <td><label for="income">Pendapatan Ibu Bapa:</label></td>  
-                            <td><input type="number" id="income" name="income" required></td>  
-                        </tr>  
-                        <tr>  
-                            <td><label for="courseCode">Pilih Kod Program:</label></td>  
-                            <td>  
-                                <div class="side-by-side">  
-                                    <select id="courseCode" name="courseCode" required>  
-                                        <option value="" disabled selected>Pilih Kod Program Pengajian Anda...</option>  
-                                        <option value="CDCS110">CDCS110</option>  
-                                        <option value="CDCS230">CDCS230</option>  
-                                        <option value="CDCS264">CDCS264</option>  
-                                        <option value="CDCS267">CDCS267</option>  
-                                        <option value="CDCS270">CDCS270</option>  
-                                    </select>  
-                                    <select name="courseName" required>  
-                                        <option value="" disabled selected>Pilih Nama Program Pengajian Anda...</option>  
-                                        <option value="Diploma Sains Komputer">CDCS110 - Diploma Sains Komputer</option>  
-                                        <option value="Sarjana Muda Sains Komputer (Kepujian)">CDCS230 - Sarjana Muda Sains Komputer (Kepujian)</option>  
-                                        <option value="Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan">CDCS264 - Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>  
-                                        <option value="Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik">CDCS267 - Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>  
-                                        <option value="Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih">CDCS270 - Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>  
-                                    </select>  
-                                </div>  
-                            </td>  
-                        </tr>  
-                        <tr>  
-                            <td><label for="campus">Pilih Kampus:</label></td>  
-                            <td>  
-                                <select id="campus" name="campus" required>  
-                                    <option value="" disabled selected>Pilih Kampus Anda...</option>  
-                                    <option value="UiTM Kuala Terengganu">UiTM Kuala Terengganu</option>  
-                                    <option value="UiTM Dungun">UiTM Dungun</option>  
-                                    <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>  
-                                </select>  
-                            </td>  
-                        </tr>    
-                        <tr>  
-                            <td><label for="address">Alamat:</label></td>  
-                            <td><input type="text" id="address" name="address" required></td>  
-                        </tr>  
-                        <tr>  
-                            <td><label for="email">Email:</label></td>  
-                            <td><input type="email" id="email" name="email" required></td>  
-                        </tr>  
-                        <tr>  
-                            <td><label for="password">Password:</label></td>  
-                            <td><input type="password" id="password" name="password" required></td>  
-                        </tr>  
-                    </table>  
-                </div>   
-                <div class="button-container">  
-                    <button type="submit" class="register-btn">Daftar</button>  
-                    <button type="button" class="close-btn" id="closeModal">Kembali</button>  
-                </div>   
-            </form>  
+    <div class="container">  
+        <!-- Button Container for Donator and Student Registration -->  
+        <div class="button-container ml-2">  
+            <button type="button" onclick="window.location.href='RegisterDonitor.jsp'">Daftar Sebagai Penyumbang</button>  
         </div>  
+
+        <h2 class="title">Daftar Sebagai Pelajar</h2>  
+        <form class="w3-container" method="post" action="studentRegisterServlet">  
+            <div class="form-row">  
+                <!-- Left Column -->  
+                <div class="form-column">  
+                    <label for="matricno">No. Matrik:</label>  
+                    <input type="text" id="matricno" name="matricno" required>  
+                    
+                    <label for="name">Nama Penuh:</label>  
+                    <input type="text" id="name" name="name" required>  
+
+                    <label for="phoneNum">Nombor Telefon:</label>  
+                    <input type="text" id="phoneNum" name="phoneNum" required>  
+
+                    <label for="email">Email:</label>  
+                    <input type="email" id="email" name="email" required>  
+
+                    <label for="password">Password:</label>  
+                    <input type="password" id="password" name="password" required>  
+                </div>  
+
+                <!-- Right Column -->  
+                <div class="form-column">  
+                    <label for="income">Pendapatan Ibu Bapa:</label>  
+                    <input type="number" id="income" name="income" required>  
+
+                    <label for="courseCode">Kod Program:</label>  
+                    <select id="courseCode" name="courseCode" required>  
+                        <option value="" disabled selected>Pilih Kod Program Pengajian Anda...</option>  
+                        <option value="CDCS110">CDCS110</option>  
+                        <option value="CDCS230">CDCS230</option>  
+                        <option value="CDCS264">CDCS264</option>  
+                        <option value="CDCS267">CDCS267</option>  
+                        <option value="CDCS270">CDCS270</option>  
+                    </select>  
+
+                    <label for="courseName">Nama Program:</label>  
+                    <select id="courseName" name="courseName" required>  
+                        <option value="" disabled selected>Pilih Nama Program Pengajian Anda...</option>  
+                        <option value="Diploma Sains Komputer">Diploma Sains Komputer</option>  
+                        <option value="Sarjana Muda Sains Komputer (Kepujian)">Sarjana Muda Sains Komputer (Kepujian)</option>  
+                        <option value="Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan">Sarjana Muda Sistem Maklumat (Kepujian) Pengkomputeran Perniagaan</option>  
+                        <option value="Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik">Sarjana Muda Sains (Kepujian) Matematik Pemodelan dan Analitik</option>  
+                        <option value="Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih">Sarjana Muda Sains Komputer (Kepujian) Pengkomputeran Mudah Alih</option>  
+                    </select>  
+
+                    <label for="campus">Kampus:</label>  
+                    <select id="campus" name="campus" required>  
+                        <option value="" disabled selected>Pilih Kampus Anda...</option>  
+                        <option value="UiTM Kuala Terengganu">UiTM Kuala Terengganu</option>  
+                        <option value="UiTM Dungun">UiTM Dungun</option>  
+                        <option value="UiTM Bukit Besi">UiTM Bukit Besi</option>  
+                    </select>  
+
+                    <label for="address">Alamat:</label>  
+                    <input type="text" id="address" name="address" required>  
+                </div>  
+            </div>  
+
+            <div class="g-recaptcha" data-sitekey="6Lfgv70qAAAAAK23Mjj-gfPwpHt10S6CRTtlFMao"></div>
+            <br/>
+            <button type="submit" class="register-button">Daftar</button>  
+            <button type="button" onclick="window.location.href='index.jsp'" class="back-button">Kembali</button>  
+        </form>  
     </div>  
-
-    <script>  
-        const closeModalBtn = document.getElementById('closeModal');  
-        closeModalBtn.onclick = function () {  
-            // Logic to close the modal (if needed)  
-            window.location.href = 'index.jsp'; // Redirect to previous page  
-        };  
-
-        function showStudentForm() {  
-            document.getElementById('studentForm').style.display = 'block';  
-            document.getElementById('donorForm').style.display = 'none';  
-            document.getElementById('formTitle').style.display = 'block'; // Show student form title  
-            document.getElementById('formTitleDonor').style.display = 'none'; // Hide donor form title  
-            document.querySelector('form').action = 'successRegisterStudent.jsp'; // Set action for student form  
-        }  
-
-        function showDonorForm() {  
-            // Redirect to the donor registration page  
-            window.location.href = 'RegisterDonitor.jsp'; // Change this to your desired page  
-        }  
-    </script>  
+    <script type="text/javascript">
+        var onloadCallback = function() {
+          alert("grecaptcha is ready!");
+        };
+      </script>
+    
+    <jsp:include page="Footer.jsp"></jsp:include>  
 </body>  
 </html>

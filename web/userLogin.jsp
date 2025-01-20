@@ -17,9 +17,7 @@
         background-position: center; /* Centers the image */
         background-repeat: no-repeat; /* Prevents tiling of the image */
         background-attachment: fixed; /* Keeps the image fixed while scrolling */
-        
   
- 
         justify-content: center;
         align-items: center;
         height: 100vh;

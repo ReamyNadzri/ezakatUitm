@@ -52,46 +52,20 @@ public class donatorRegisterServlet extends HttpServlet {
 
             // Check if row insertion was successful  
             if (rows > 0) {  
-                successMessage = "Account successfully registered!";  
-                out.println("<html><body style='font-family: Arial, sans-serif; text-align: center;'>");  
-                out.println("<h3 style='color: green;'>" + successMessage + "</h3>");  
-                out.println("<p>Your account has been registered successfully.</p>");  
-                out.println("<a href='loginDonator.jsp' style='margin-right: 10px; text-decoration: none; color: white; background-color: green; padding: 10px 20px; border-radius: 5px;'>Login</a>");  
-                out.println("<a href='index.jsp' style='text-decoration: none; color: white; background-color: blue; padding: 10px 20px; border-radius: 5px;'>Back to Home</a>");  
-                out.println("</body></html>");  
+                pst.close();
+                conn.close();
+                response.getWriter().println("<script>alert('Pendaftaran anda berjaya. Sila log masuk');</script>");
+                response.sendRedirect("successRegister.jsp"); // Redirect with success flag
             } else {  
-                errorMessage = "Error in registration. Please try again.";  
-                out.println("<html><body style='font-family: Arial, sans-serif; text-align: center;'>");  
-                out.println("<h3 style='color: red;'>" + errorMessage + "</h3>");  
-                out.println("<p>Unfortunately, we couldn't register your account. Please ensure all details are correct and try again.</p>");  
-                out.println("<a href='index.jsp' style='text-decoration: none; color: white; background-color: red; padding: 10px 20px; border-radius: 5px;'>Back to Home</a>");  
-                out.println("</body></html>");  
+                 // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
+                        request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
+                        request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
             }
             } catch (SQLException e) {  
-            errorMessage = "Database error: " + e.getMessage();  
-            out.println("<html><body><h3 style='color: red;'>" + errorMessage + "</h3></body></html>");  
-        } finally {  
-            if (pst != null) {  
-                try {  
-                    pst.close();  
-                } catch (SQLException e) {  
-                    e.printStackTrace();  
-                }  
-            }  
-            if (conn != null) {  
-                try {  
-                    conn.close();  
-                } catch (SQLException e) {  
-                    e.printStackTrace();  
-                }  
-            }  
-            out.close();  
-        }  
-    }  
+                errorMessage = "Database error: " + e.getMessage();  
+                out.println("<html><body><h3 style='color: red;'>" + errorMessage + "</h3></body></html>");  
+            }
+    }
+      
+}  
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)  
-            throws ServletException, IOException {  
-        // Redirect to index.html on GET request  
-        response.sendRedirect("index.jsp");  
-    }  
-}

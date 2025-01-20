@@ -118,6 +118,14 @@
         <servlet-name>actionAdminServlet</servlet-name>
         <servlet-class>com.zakat.controller.actionAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecaptchaServlet</servlet-name>
+        <servlet-class>com.zakat.controller.RecaptchaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>studentRegisterServlet</servlet-name>
+        <servlet-class>com.zakat.controller.studentRegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
@@ -225,6 +233,14 @@
     <servlet-mapping>
         <servlet-name>actionAdminServlet</servlet-name>
         <url-pattern>/actionAdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecaptchaServlet</servlet-name>
+        <url-pattern>/verifyRecaptcha</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>studentRegisterServlet</servlet-name>
+        <url-pattern>/studentRegisterServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,39 +1,85 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="com.zakat.model.DBConnection"%>
+<%@page import="java.sql.Connection"%>
 <head>
     <title>Zakat UiTM</title>
     <meta name="viewport">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
 </head>
+<%  
+                                    double donateday = 0;
+                                    double donatemonth = 0;
+                                    double donateyear = 0;
+              
+                                    try {  
+                                        Connection connection = DBConnection.getConnection();  //untuk retrieve data dari database dan display dalam form jumlah pemberi zakat
+                                        String sql = "SELECT SUM(AMOUNT) AS MONTH FROM DONATION WHERE TRUNC(DONATIONDATE) = TRUNC(SYSDATE)";  
+                                        PreparedStatement stmt = connection.prepareStatement(sql);  
+                                        ResultSet rs = stmt.executeQuery();  
+                                        if (rs.next()) {  
+                                            donateday = rs.getDouble("MONTH");  
+                                        }  
+                                         sql = "SELECT SUM(AMOUNT) AS DAY FROM DONATION WHERE TO_CHAR(DONATIONDATE, 'MM-YYYY') = TO_CHAR(SYSDATE, 'MM-YYYY')";  
+                                         stmt = connection.prepareStatement(sql);  
+                                         rs = stmt.executeQuery();  
+                                        if (rs.next()) {  
+                                            donatemonth = rs.getDouble("DAY");  
+                                        } 
+                                        sql = "SELECT SUM(AMOUNT) AS YEAR FROM DONATION WHERE EXTRACT(YEAR FROM DONATIONDATE) = EXTRACT(YEAR FROM SYSDATE)";  
+                                         stmt = connection.prepareStatement(sql);  
+                                         rs = stmt.executeQuery();  
+                                        if (rs.next()) {  
+                                            donateyear = rs.getDouble("YEAR");  
+                                        }
+                                        
+                                        rs.close();  
+                                        stmt.close();  
+                                        connection.close();  
+                                    } catch (SQLException e) {  
+                                        e.printStackTrace();  
+                                        out.println("Error retrieving donor count: " + e.getMessage());  
+                                    }  
 
+                                %> 
 
 <body>
     
     <style>
         .mySlides {display:none;}
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            }
-
-        .card {
-            flex: 1;
-            
-            
-            background-size: cover;
-            background-position: center;
+    
+  
+        div {
+            font-family: 'Product Sans', sans-serif;
+        }
+        .background-container {
             position: relative;
- 
-            justify-content: center;
-            align-items: center;
-            }
+            height: 35vh;
+            background: url('sources/zakat.jpg') no-repeat center;
+            background-size: cover;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0.8;
+        }
+        .background-container1 {
+            position: relative;
+            height: 25vh;
 
-        .content {
+        }
+        .background-container .content {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -10%);
             text-align: center;
             color: white;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
-            padding: 20px;
-            border-radius: 8px;
-            }
+        }
 
 
     </style>
@@ -41,13 +87,13 @@
         <jsp:include page="header.jsp"></jsp:include>
         </div>
     
-    <div class="w3-container w3-row">
+    <div class="w3-row">
         <div class="w3-container w3-col" style="width: 10%; height: 120px;">
 
         </div>
 
-    
-        <div class="w3-container w3-col" style="width: 80%; height: auto">
+        <br><br><br><br>
+        <div class="w3-border w3-animate-top" style="height: auto">
             <!--<div class="w3-section w3-display-container" style="height: 300px; margin-top: 1%;">
                 
                 <img class="mySlides w3-image" src="sources/1.jpg" style="width:100%;opacity:80%;height: 300px; object-fit: cover;">
@@ -55,27 +101,62 @@
                 <img class="mySlides w3-image" src="sources/3.jpg" style="width:100%;opacity:80%;height: 300px; object-fit: cover;">
                 <img class="mySlides w3-image" src="sources/4.jpg" style="width:100%;opacity:80%;height: 300px; object-fit: cover;">
             </div>-->
-            <br><BR><br><br>
-            <div class="w3-container w3-col w3-center w3-border card content w3-animate-zoom" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:28%; background-image: url('sources/zakat.jpg');">
-
-                <h1 class="w3-center ">Jom Bayar Zakat Dengan Mudah!!</h1><br>
-                <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,
-                Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, </p>
-                <a href="BayarZakat.jsp">
-                    <button class="w3-button w3-border w3-light-grey">Lunaskan Tanggungjawab Anda</button>
-                </a>
-
+            
+            <div class="background-container">
+                <div class="content">
+                    <h1 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Jom Bayar Zakat Dengan Mudah!</h1>
+                    <p style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+                    Dengan platform pembayaran zakat online, anda boleh menunaikan kewajipan agama tanpa perlu keluar rumah.
+                    Proses yang selamat, pantas, dan telus memastikan zakat anda disalurkan kepada asnaf yang berhak. Jom tunaikan tanggungjawab kita dengan mudah dan tepat pada masanya!
+                    Bayar zakat sekarang, ringankan beban mereka yang memerlukan.</p>
+                    <a href="BayarZakat.jsp">
+                        <button class="w3-button w3-border w3-light-grey">Lunaskan Tanggungjawab Anda</button>
+                    </a>
+                </div>
             </div>
+            
+        </div>
+        <div class="" style="background-color: #f8f0ff;">
+            <div class="container w3-center" style="background-color: #f8f0ff;">
+                <div class="row p-4">
+                    <div class="col-md-4 d-flex flex-column align-items-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <p><b>Kutipan Zakat Hari Ini</b></p>
+                                <h3 class="num"><% out.print(donateday);%></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex flex-column align-items-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <p><b>Kutipan Zakat Bulan Ini</b></p>
+                                <h3 class="num"><% out.print(donatemonth);%></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex flex-column align-items-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <p><b>Kutipan Zakat Tahun Ini</b></p>
+                                <h3 class="num"><% out.print(donateyear);%></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-            <div class="w3-container w3-col w3-center w3-border w3-animate" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:28%">
-
-                <h1 class="w3-center">Masih Belum Memohon Zakat?</h1>
-                <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,
-                Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy, </p>
-            <%
+        <div class="background-container1 w3-center w3-border" style="height:32%; padding-top:3%">
+            <div class="content">
+                <h1>Masih Belum Memohon Zakat?</h1>
+                <p>Jangan lepaskan peluang untuk mendapatkan bantuan yang berhak anda terima! Jika anda tergolong dalam asnaf yang layak,<br>segeralah memohon zakat untuk meringankan beban hidup.
+                    Zakat adalah hak anda yang disediakan untuk membantu dalam pelbagai keperluan seperti pendidikan<br>
+                Ayuh, mohon zakat sekarang dan manfaatkan bantuan yang disediakan!</p>
+                <%
                 String staff = (String) session.getAttribute("USERNAME");
                 if(staff!=null) {
-            %>
+                %>
                 <a href="mohonzakat.jsp">
                     <button class="w3-button w3-border w3-light-grey" disabled>Permohonan Zakat Hanya Untuk Pelajar</button>
                 </a>
@@ -85,106 +166,41 @@
                 </a>
                 <%}%>
             </div>
-            
-            
-            
-            
-            <div class="w3-container w3-col w3-border w3-animate" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:40%">
-
-                <h1 class="w3-center">Kategori Zakat Yang Anda Perlu Tahu</h1><hr>
-                <div class="w3-container w3-cell">
-                    <h2 style="margin-top:3%">Zakat Kolej</h2>
-                    <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,<br> Dummy texy, 
-                        Dummy texy, Dummy texy, Dummy texy, 
-                    </p>
-                </div>
-                <div class="w3-container w3-cell" style="width: 20%;">
-                    <h4 style="padding-top: 30px;">Mohon Sekarang Di Bawah!</h4><br>
-                    <button class="w3-button w3-border">Pautan Permohonan Zakat Kolej</button><br><br>
-                    
-                </div>
-
-            </div>
-            <div class="w3-container w3-col w3-border w3-animate" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:30%">
-
-                <div class="w3-container w3-cell"  style="width: 20%;">
-                    <h4 style="padding-top: 30px;">Mohon Sekarang Di Bawah!</h4><br>
-                    <button class="w3-button w3-border">Pautan Permohonan Zakat Musibah</button><br><br>
-                    <button class="w3-button w3-border w3-light-grey">Ketahui Lebih Lanjut</button>
-                    
-                </div>
-                <div class="w3-container w3-cell" style="text-align: right;">
-                    <h2>Zakat Musibah</h2>
-                    <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,<br> Dummy texy, 
-                        Dummy texy, Dummy texy, Dummy texy, 
-                    </p>
-                </div>
-
-            </div>
-            <div class="w3-container w3-col w3-border w3-animate" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:30%">
-
-                <div class="w3-container w3-cell " >
-                    <h2>Zakat Yuran</h2>
-                    <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,<br> Dummy texy, 
-                        Dummy texy, Dummy texy, Dummy texy, 
-                    </p>
-                </div>
-                <div class="w3-container w3-cell" style="width: 20%;">
-                    <h4 style="padding-top: 30px;">Mohon Sekarang Di Bawah!</h4><br>
-                    <button class="w3-button w3-border">Pautan Permohonan Zakat Yuran</button><br><br>
-                    <button class="w3-button w3-border w3-light-grey">Ketahui Lebih Lanjut</button>
-                </div>
-
-            </div>
-            <div class="w3-container w3-col w3-border w3-animate" style="padding-left: 10%; padding-right: 10%; padding-top:20px; height:30%">
-
-                <div class="w3-container w3-cell"  style="width: 20%;">
-                    <h4 style="padding-top: 30px;">Mohon Sekarang Di Bawah!</h4><br>
-                    <button class="w3-button w3-border">Pautan Permohonan Zakat Makanan</button><br><br>
-                    <button class="w3-button w3-border w3-light-grey">Ketahui Lebih Lanjut</button>
-                    
-                </div>
-                <div class="w3-container w3-cell" style="text-align: right;">
-                    <h2>Zakat Makanan</h2>
-                    <p>Dummy texy, Dummy texy, Dummy texy, Dummy texy, Dummy texy,<br> Dummy texy, 
-                        Dummy texy, Dummy texy, Dummy texy, 
-                    </p>
-                </div>
-
-            </div>
-
         </div>
+    
 
-
-        <div class="w3-container w3-col w3-right" style="width: 10%; height: 100px;">
+        <div class="container mt-5 p-3" style="width: 80%; background-color: #f0f0f0;">
+            <div class="row">
+                <div class="col-md-4 d-flex flex-column align-items-center mb-4">
+                    <img src="sources/iklan1.png" class="img-fluid" alt="Image 1">
+                    <h3 class="mt-3" style="color: purple; font-weight: bold;">BAYAR</h3>
+                    <p>Jom bayar zakat dan bantu golongan asnaf</p>
+                    <button class="btn btn-primary">BAYAR SEKARANG</button>
+                </div>
                 
-        </div>
+                <div class="col-md-4 d-flex flex-column align-items-center mb-4">
+                    <img src="sources/iklan2.jpg" class="img-fluid" alt="Image 2">
+                    <h3 class="mt-3" style="color: purple; font-weight: bold;">SEMAK</h3>
+                    <p>Semak profil anda dgn cepat</p>
+                    <button class="btn btn-primary">SEMAK MAKLUMAT PERIBADI</button>
+                </div>
+                <div class="col-md-4 d-flex flex-column align-items-center mb-4">
+                    <img src="sources/iklan3.jpg" class="img-fluid" alt="Image 3">
+                    <h3 class="mt-3" style="color: purple; font-weight: bold;">TERIMA</h3>
+                    <p>Mohon zakat jika anda adalah golongan asnaf</p>
+                    <button class="btn btn-primary">MOHON SEKARANG</button>
+                </div>
+            </div>
+        </div><br>
    </div>
     <jsp:include page="Footer.jsp"></jsp:include>
     
-
-
-      <!--- image ads animation--->
-<script>
-    var myIndex = 0;
-    carousel();
-    
-    function carousel() {
-      var i;
-      var x = document.getElementsByClassName("mySlides");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";  
-      }
-      myIndex++;
-      if (myIndex > x.length) {myIndex = 1}    
-      x[myIndex-1].style.display = "block";  
-      setTimeout(carousel, 5000); // Change image every 2 seconds
-    }
-    // Check if the URL contains the loggedOut query parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('loggedOut')) {
-            alert("You have been logged out");
-        }
+    <script type="text/javascript">
+      $(".num").counterUp({
+        delay: 15,
+        time: 3000
+      });
     </script>
+
        
 </body>
