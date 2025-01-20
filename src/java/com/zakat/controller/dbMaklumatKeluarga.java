@@ -1,5 +1,6 @@
 package com.zakat.controller;  
 
+import com.zakat.model.DBConnection;
 import java.io.IOException;  
 import java.io.PrintWriter;  
 import java.sql.Connection;  
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpServletResponse;  
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/dbMaklumatKeluarga")  
 public class dbMaklumatKeluarga extends HttpServlet {  
@@ -35,47 +37,45 @@ public class dbMaklumatKeluarga extends HttpServlet {
         String address = request.getParameter("address");  
         String postcode = request.getParameter("postcode");  
         int grossIncomeM = Integer.parseInt(request.getParameter("grossIncomeM"));  
-        int grossIncomeF = Integer.parseInt(request.getParameter("grossIncomeF"));  
+        int grossIncomeF = Integer.parseInt(request.getParameter("grossIncomeF")); 
+        
+        HttpSession session = request.getSession();
+        String stdid = (String) session.getAttribute("STUDENTID");
 
         Connection conn = null;  
         PreparedStatement pstmt = null;  
-
         try {  
-            // Load Oracle JDBC Driver  
-            Class.forName("oracle.jdbc.driver.OracleDriver");  
-
-            // Establish connection  
-            String dbURL = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your DB URL  
-            String username = "zakatdb"; // Update with your DB username  
-            String password = "zakatdb"; // Update with your DB password  
-            conn = DriverManager.getConnection(dbURL, username, password);  
+            
+            conn =DBConnection.getConnection();  
 
             // Insert data into the STUDENTS table  
-            String sql = "INSERT INTO family (NAME, FNAME, FWORK, FPHONENUM, "  
+            String sql = "INSERT INTO FAMILY (STUDENTID, FNAME, FWORK, FPHONENUM, "  
                        + "MNAME, MWORK, MPHONENUM, GUARDIANRELAY, GUARDIANWORK, GUARDIANPHONENUM, "  
                        + "MARITALSTATUS, ADDRESS, POSTCODE, GROSSINCOMEM, GROSSINCOMEF) "  
-                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";  
+                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    
             pstmt = conn.prepareStatement(sql);    
-            pstmt.setString(1, name);  
-            pstmt.setString(2, fName);  
-            pstmt.setString(3, fWork);  
-            pstmt.setString(4, fPhoneNum);  
-            pstmt.setString(5, mName);  
-            pstmt.setString(6, mWork);  
-            pstmt.setString(7, mPhoneNum);  
-            pstmt.setString(8, guardianRelay);  
-            pstmt.setString(9, guardianWork);  
-            pstmt.setString(10, guardianPhoneNum);  
-            pstmt.setString(11, maritalStatus);  
-            pstmt.setString(12, address);  
-            pstmt.setString(13, postcode);  
-            pstmt.setInt(14, grossIncomeM);  
-            pstmt.setInt(15, grossIncomeF);  
+            pstmt.setInt(15, Integer.parseInt(stdid));  
+            pstmt.setString(1, fName);  
+            pstmt.setString(2, fWork);  
+            pstmt.setString(3, fPhoneNum);  
+            pstmt.setString(4, mName);  
+            pstmt.setString(5, mWork);  
+            pstmt.setString(6, mPhoneNum);  
+            pstmt.setString(7, guardianRelay);  
+            pstmt.setString(8, guardianWork);  
+            pstmt.setString(9, guardianPhoneNum);  
+            pstmt.setString(10, maritalStatus);  
+            pstmt.setString(11, address);  
+            pstmt.setString(12, postcode);  
+            pstmt.setInt(13, grossIncomeM);  
+            pstmt.setInt(14, grossIncomeF); 
+          
             pstmt.executeUpdate();  
 
                 out.println("<html><body style='font-family: Arial, sans-serif; text-align: center;'>");    
                 out.println("<p>Your maklumat keluarga has been registered successfully.</p>");  
-                out.println("<a href='studentDashboard.jsp' style='margin-right: 10px; text-decoration: none; color: white; background-color: green; padding: 10px 20px; border-radius: 5px;'>Login</a>");  
+                out.println("<a href='studentDashboard.jsp' style='margin-right: 10px; text-decoration: none; color: white; background-color: green; padding: 10px 20px; border-radius: 5px;'>Dashboard</a>");  
                 out.println("<a href='index.jsp' style='text-decoration: none; color: white; background-color: blue; padding: 10px 20px; border-radius: 5px;'>Back to Home</a>");  
                 out.println("</body></html>");  
         } catch (Exception e) {  
@@ -91,4 +91,8 @@ public class dbMaklumatKeluarga extends HttpServlet {
             }  
         }  
     }  
+
+    private Object DBConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

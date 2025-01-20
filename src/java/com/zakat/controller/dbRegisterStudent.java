@@ -58,7 +58,7 @@ public class dbRegisterStudent extends HttpServlet {
             String sql = "INSERT INTO STUDENT (name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
-            String sql1 = "INSERT INTO STUDENT (name)";
+            
             pstmt = conn.prepareStatement(sql1);
 
             pstmt.setString(1, name);
