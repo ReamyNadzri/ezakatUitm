@@ -36,7 +36,8 @@
             int rowsUpdated = stmt.executeUpdate();  
 
             if (rowsUpdated > 0) {  
-                response.sendRedirect("popupTrueUpdateStudent.jsp");  
+                %> <script>alert('Data baru telah dikemaskini');</script> <%
+                response.sendRedirect("studentDashboard.jsp?update=true");  
             } else {  
                 out.println("<p>Error updating profile. Please try again.</p>");  
             }  
@@ -53,6 +54,6 @@
         out.println("<p>No student ID found.</p>");  
     }  
 %>  
-<a href="studentProfile.jsp">Back to Profile</a>  
+<a href="studentDashboard.jsp">Back to Profile</a>  
 </body>  
 </html>

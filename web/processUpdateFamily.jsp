@@ -1,3 +1,4 @@
+<%@page import="com.zakat.model.DBConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
 <%@ page import="java.sql.*" %>  
 <!DOCTYPE html>  
@@ -7,10 +8,7 @@
 </head>  
 <body>  
 <%  
-    String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
-    String dbUser = "zakatdb"; // Your Oracle username  
-    String dbPassword = "zakatdb"; // Your Oracle password  
-
+ 
     // Retrieve form data  
     String name = request.getParameter("STUDENTID");  
     String fName = request.getParameter("fName");  
@@ -25,8 +23,8 @@
 
         try {  
             // Load Oracle JDBC Driver  
-            Class.forName("oracle.jdbc.OracleDriver");  
-            conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
+           
+            conn = DBConnection.getConnection();
             String sql = "UPDATE family SET fName = ?, fWork = ?, mName = ?,  mWork = ?, guardianRelay = ? WHERE STUDENTID = ?";  
             stmt = conn.prepareStatement(sql);  
             stmt.setString(1, fName);  
@@ -38,14 +36,12 @@
             int rowsUpdated = stmt.executeUpdate();  
 
             if (rowsUpdated > 0) {  
-                response.sendRedirect("popupTrueUpdateFamily.jsp");  
+                response.sendRedirect("studentDashboard.jsp?update=true");  
             } else {  
                 out.println("<p>Error updating profile. Please try again.</p>");  
             }  
         } catch (SQLException e) {  
             out.println("<p>Error updating profile: " + e.getMessage() + "</p>");  
-        } catch (ClassNotFoundException e) {  
-            out.println("<p>Database driver not found: " + e.getMessage() + "</p>");  
         } finally {  
             // Close resources  
             if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
@@ -55,6 +51,6 @@
         out.println("<p>No student ID found.</p>");  
     }  
 %>  
-<a href="studentProfile.jsp">Back to Profile</a>  
+<a href="studentDashboard.jsp">Back to Profile</a>  
 </body>  
 </html>

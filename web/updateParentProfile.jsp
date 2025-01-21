@@ -2,36 +2,105 @@
 <%@ page import="java.sql.*" %>  
 <!DOCTYPE html>  
 <html>  
-<head>  
+<head>  <jsp:include page="header.jsp"></jsp:include>  
     <title>Kemaskini Profile Keluarga - Zakat UiTM</title>  
     <jsp:include page="header.jsp"></jsp:include>  
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
     <style>  
-        
-        .main-content {  
-            flex: 1;  
+   
+        .container {  
+            width: 80%; /* Increased width to accommodate side-by-side inputs */  
             padding: 20px;  
-            background-color: #f8f9fa;  
+            background-color: #fff;  
+            border-radius: 10px;  
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+            border: 8px solid #800080; /* Thicker purple border */  
+            text-align: center;  
+            margin: auto;  
         }  
-        .form-group {  
+
+        .title {  
+            text-align: center;  
+            margin-bottom: 20px;  
+            font-size: 24px;  
+            font-weight: bold;  
+            color: #000;  
+        }  
+
+        .form {  
+            display: flex;  
+            flex-direction: column;  
+            align-items: center;  
+        }  
+
+        .form-row {  
+            display: flex;  
+            justify-content: space-between;  
+            width: 100%;  
             margin-bottom: 15px;  
         }  
-        input[type="text"] {  
-            width: 100%; /* Make input fields take full width */  
-            padding: 10px; /* Add some padding for better appearance */  
-            border: 1px solid #ccc; /* Add a border */  
-            border-radius: 4px; /* Rounded corners */  
-            box-sizing: border-box; /* Include padding and border in element's total width and height */  
+
+        .form-group {  
+            width: 48%; /* Each input field takes 48% of the row width */  
+            text-align: left;  
         }  
-    </style> 
-    
-</head>  <br><br><br><br>
-<body class="w3-row ">  
-    <div class="w3-container w3-cell"  style="width:20%"></div>
-    <div class="main-content w3-cell w3-container w3-panel w3-card w3-round-xlarge" style="">  
-        <h1>Update Profile</h1>  
+
+        label {  
+            margin-bottom: 5px;  
+            font-weight: bold;  
+            display: block; /* Ensure labels are on their own line */  
+        }  
+
+        input, textarea {  
+            width: 100%; /* Full width */  
+            padding: 10px;  
+            font-size: 14px;  
+            border: 1px solid #ccc;  
+            border-radius: 5px;  
+            box-sizing: border-box; /* Include padding and border in element's total width */  
+        }  
+
+        textarea {  
+            height: 100px; /* Set a fixed height for the address textarea */  
+        }  
+
+        .update-button {  
+            background-color: #800080; /* Purple color */  
+            color: white;  
+            border: none;  
+            padding: 10px;  
+            border-radius: 5px;  
+            font-size: 16px;  
+            cursor: pointer;  
+            width: 100%; /* Full width */  
+        }  
+
+        .update-button:hover {  
+            background-color: #550055; /* Darker purple on hover */  
+        }  
+
+        .back-button {  
+            margin-top: 10px;  
+            width: 100%;  
+            padding: 10px;  
+            background-color: #666;  
+            color: white;  
+            border: none;  
+            border-radius: 5px;  
+            font-size: 14px;  
+            cursor: pointer;  
+        }  
+
+        .back-button:hover {  
+            background-color: #444;  
+        }  
+    </style>  
+</head>  
+<body>  <br><br><br><br>
+    <div class="container">  
+        <h2 class="title">Kemaskini Profile Keluarga</h2>  
         <%  
             String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
             String dbUser = "zakatdb"; // Your Oracle username  
@@ -53,90 +122,103 @@
                     rs = stmt.executeQuery();  
 
                     if (rs.next()) {   
-                        String fName = rs.getString("fName");
-                         String fWork = rs.getString("fWork");
-                          String grossIncomeF = rs.getString("grossIncomeF");
-                           String fPhoneNum = rs.getString("fPhoneNum");
-                            String mName = rs.getString("mName");
-                             String mWork = rs.getString("mWork");
-                              String grossIncomeM = rs.getString("grossIncomeM");
-                               String mPhoneNum = rs.getString("mPhoneNum");
-                                String maritalStatus = rs.getString("maritalStatus");
-                                 String guardianRelay = rs.getString("guardianRelay");
-                                  String guardianWork = rs.getString("guardianWork");
-                                   String guardianPhoneNum = rs.getString("guardianPhoneNum");
-                                    String address = rs.getString("address");
-                                     String postcode = rs.getString("postcode");  
+                        String fName = rs.getString("fName");  
+                        String fWork = rs.getString("fWork");  
+                        String grossIncomeF = rs.getString("grossIncomeF");  
+                        String fPhoneNum = rs.getString("fPhoneNum");  
+                        String mName = rs.getString("mName");  
+                        String mWork = rs.getString("mWork");  
+                        String grossIncomeM = rs.getString("grossIncomeM");  
+                        String mPhoneNum = rs.getString("mPhoneNum");  
+                        String maritalStatus = rs.getString("maritalStatus");  
+                        String guardianRelay = rs.getString("guardianRelay");  
+                        String guardianWork = rs.getString("guardianWork");  
+                        String guardianPhoneNum = rs.getString("guardianPhoneNum");  
+                        String address = rs.getString("address");  
+                        String postcode = rs.getString("postcode");  
         %>  
-                        <form action="processUpdateFamily.jsp" class="" method="post">  
-                            <div class="form-group">  
-                                <label for="fName">Nama Bapa:</label>  
-                                <input type="text" id="fName" name="fName" value="<%= fName %>" required>  
+                        <form action="processUpdateFamily.jsp" method="post">  
+                            <div class="form-row">  
+                                <div class="form-group">  
+                                    <label for="fName">Nama Bapa:</label>  
+                                    <input type="text" id="fName" name="fName" value="<%= fName %>" required>  
+                                </div>  
+                                <div class="form-group">  
+                                    <label for="fWork">Pekerjaan Bapa:</label>  
+                                    <input type="text" id="fWork" name="fWork" value="<%= fWork %>" required>  
+                                </div>  
                             </div>  
-                            <div class="form-group">  
-                                <label for="fWork">Pekerjaan Bapa:</label>  
-                                <input type="text" id="fWork" name="fWork" value="<%= fWork %>" required>  
-                            </div>   
-                            <div class="form-group">  
-                                <label for="grossIncomeF">Gaji Kasar Bapa (RM):</label>  
-                                <input type="number" id="grossIncomeF" name="grossIncomeF" value="<%= grossIncomeF %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="fPhoneNum">No Telefon Bapa:</label>  
-                                <input type="tel" id="fPhoneNum" name="fPhoneNum" value="<%= fPhoneNum %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="mName">Nama Ibu:</label>  
-                                <input type="text" id="mName" name="mName" value="<%= mName %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="mWork">Pekerjaan Ibu:</label>  
-                                <input type="text" id="mWork" name="mWork" value="<%= mWork %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="grossIncomeM">Gaji Kasar Ibu (RM):</label>  
-                                <input type="number" id="grossIncomeM" name="grossIncomeM" value="<%= grossIncomeM %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="mPhoneNum">No Telefon Ibu:</label>  
-                                <input type="tel" id="mPhoneNum" name="mPhoneNum" value="<%= mPhoneNum %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="maritalStatus">Status Perkahwinan Ibu Bapa:</label>  
-                                <input type="text" id="maritalStatus" name="maritalStatus" value="<%= maritalStatus %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="guardianRelay">Nama Waris Terdekat:</label>  
-                                <input type="text" id="guardianRelay" name="guardianRelay" value="<%= guardianRelay %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="guardianWork">Pekerjaan Waris Terdekat:</label>  
-                                <input type="text" id="guardianWork" name="guardianWork" value="<%= guardianWork %>" required>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="guardianPhoneNum">No Telefon Waris Terdekat:</label>  
-                                <input type="tel" id="guardianPhoneNum" name="guardianPhoneNum" value="<%= guardianPhoneNum %>" required>  
-                            </div>
+                            <div class="form-row">  
+                                <div class="form-group">  
+                                    <label for="grossIncomeF">Gaji Kasar Bapa (RM):</label>  
+                                    <input type="number" id="grossIncomeF" name="grossIncomeF" value="<%= grossIncomeF %>" required>  
+                                </div>  
+                                <div class="form-group">  
+                                    <label for="fPhoneNum">No Telefon Bapa:</label>  
+                                    <input type="tel" id="fPhoneNum" name="fPhoneNum" value="<%= fPhoneNum %>" required>  
+                                </div>  
+                            </div>  
+                            <div class="form-row">  
+                                <div class="form-group">  
+                                    <label for="mName">Nama Ibu:</label>  
+                                    <input type="text" id="mName" name="mName" value="<%= mName %>" required>  
+                                </div>  
+                                <div class="form-group">  
+                                    <label for="mWork">Pekerjaan Ibu:</label>  
+                                    <input type="text" id="mWork" name="mWork" value="<%= mWork %>" required>  
+                                </div>  
+                            </div>  
+                            <div class="form-row">  
+                                <div class="form-group">  
+                                    <label for="grossIncomeM">Gaji Kasar Ibu (RM):</label>  
+                                    <input type="number" id="grossIncomeM" name="grossIncomeM" value="<%= grossIncomeM %>" required>  
+                                </div>  
+                                <div class="form-group">  
+                                    <label for="mPhoneNum">No Telefon Ibu:</label>  
+                                    <input type="tel" id="mPhoneNum" name="mPhoneNum" value="<%= mPhoneNum %>" required>  
+                                </div>  
+                            </div>  
+                            <div class="form-row">  
+                                <div class="form-group">  
+                                    <label for="maritalStatus">Status Perkahwinan Ibu Bapa:</label>  
+                                    <input type="text" id="maritalStatus" name="maritalStatus" value="<%= maritalStatus %>" required>  
+                                </div>  
+                                <div class="form-group">  
+                                    <label for="guardianRelay">Nama Waris Terdekat:</label>  
+                                    <input type="text" id="guardianRelay" name="guardianRelay" value="<%= guardianRelay %>" required>  
+                                </div>  
+                            </div>  
+                            <div class="form-row">  
+                                <div class="form-group">  
+                                    <label for="guardianWork">Pekerjaan Waris Terdekat:</label>  
+                                    <input type="text" id="guardianWork" name="guardianWork" value="<%= guardianWork %>" required>  
+                                </div>  
+                                <div class="form-group">  
+                                    <label for="guardianPhoneNum">No Telefon Waris Terdekat:</label>  
+                                    <input type="tel" id="guardianPhoneNum" name="guardianPhoneNum" value="<%= guardianPhoneNum %>" required>  
+                                </div>  
+                            </div>  
                             <div class="form-group">  
                                 <label for="address">Alamat:</label>  
                                 <textarea id="address" name="address" required><%= address %></textarea>  
-                            </div>
-                            <div class="form-group">  
-                                <label for="postcode">Poskod:</label>  
-                                <input type="text" id="postcode" name="postcode" value="<%= postcode %>" required>  
-                            </div>
-
+                            </div>  
+                            <div class="form-row">  
+                                <div class="form-group">  
+                                    <label for="postcode">Poskod:</label>  
+                                    <input type="text" id="postcode" name="postcode" value="<%= postcode %>" required>  
+                                </div>  
+                            </div>  
                             <input type="hidden" name="STUDENTID" value="<%= name %>">  
-                            <button type="submit" class="w3-button w3-purple">Update</button>  
+                            <button type="submit" class="update-button">Update</button>  
                         </form>  
         <%  
                     } else {  
-                        out.println("<p>No student found with the provided ID.</p>");  
+                        out.println("<p class='text-danger'>No student found with the provided ID.</p>");  
                     }  
                 } catch (SQLException e) {  
-                    out.println("<p>Error retrieving profile information: " + e.getMessage() + "</p>");  
+                    out.println("<p class='text-danger'>Error retrieving profile information: " + e.getMessage() + "</p>");  
                 } catch (ClassNotFoundException e) {  
-                    out.println("<p>Database driver not found: " + e.getMessage() + "</p>");  
+                    out.println("<p class='text-danger'>Database driver not found: " + e.getMessage() + "</p>");  
                 } finally {  
                     // Close resources  
                     if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
@@ -144,9 +226,12 @@
                     if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }  
                 }  
             } else {  
-                out.println("<p>No student ID found in session.</p>");  
+                out.println("<p class='text-danger'>No student ID found in session.</p>");  
             }  
         %>  
+        <br>  
+        <a href="index.jsp" class="back-button">Back</a>  
     </div>  
 </body>  
+<jsp:include page="Footer.jsp"></jsp:include>  
 </html>
