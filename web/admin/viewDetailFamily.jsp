@@ -63,70 +63,70 @@
 </head>  
 <body class="bg-gray-100">  
 
-<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">  
+<div class="container mx-auto mt-10 p-6 bg-purple-800 rounded-lg shadow-md">  
     <h1 class="text-3xl font-bold mb-4">Family Details</h1>  
 
     <table class="min-w-full">  
         <tbody>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Student ID:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getStudentId() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Student ID:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getStudentId() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Father's Name:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getFName() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Father's Name:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getFName() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Father's Work:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getFWork() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Father's Work:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getFWork() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Father's Phone Number:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getFPhoneNum() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Father's Phone Number:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getFPhoneNum() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Mother's Name:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getMName() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Mother's Name:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getMName() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Mother's Work:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getMWork() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Mother's Work:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getMWork() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Mother's Phone Number:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getMPhoneNum() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Mother's Phone Number:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getMPhoneNum() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Guardian's Relationship:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getGuardianRelay() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Guardian's Relationship:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getGuardianRelay() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Guardian's Work:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getGuardianWork() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Guardian's Work:</td>  
+                <td class="border px-4 py-2 bg-white "><%= family != null ? family.getGuardianWork() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Guardian's Phone Number:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getGuardianPhoneNum() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Guardian's Phone Number:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getGuardianPhoneNum() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Marital Status:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getMaritalStatus() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Marital Status:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getMaritalStatus() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Address:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getAddress() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Address:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getAddress() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Postcode:</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getPostcode() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Postcode:</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getPostcode() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Gross Income (Mother):</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getGrossIncomeM() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Gross Income (Mother):</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getGrossIncomeM() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Gross Income (Father):</td>  
-                <td class="border px-4 py-2"><%= family != null ? family.getGrossIncomeF() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Gross Income (Father):</td>  
+                <td class="border px-4 py-2 bg-white"><%= family != null ? family.getGrossIncomeF() : "Not Found" %></td>  
             </tr>  
         </tbody>  
     </table>  
