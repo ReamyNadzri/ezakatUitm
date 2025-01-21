@@ -204,76 +204,96 @@
         </div>
                                 
         <div id="donate" class="tab-content">   
-                    <%
+                <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
+                    <h2 class="text-2xl font-semibold mb-4 text-white">Jumlah Sumbangan Zakat</h2>  
+                    <table class="min-w-full bg-white rounded-lg shadow-md">  
+                        <thead>  
+                            <tr class="bg-purple-600 text-white">  
+                                <th class="py-2 px-4">Bil.</th>  
+                                <th class="py-2 px-4">Tarikh</th>  
+                                <th class="py-2 px-4">Nama</th>  
+                                <th class="py-2 px-4">Nama Bank</th>  
+                                <th class="py-2 px-4">Amaun</th>  
+                                <th class="py-2 px-4">Nota</th>  
+                                <th class="py-2 px-4">Status</th>  
+                            </tr>  
+                        </thead>  
+                        <tbody>
+                            <% 
+                                Connection con = null;  
+                                PreparedStatement stmt = null;  
+                                ResultSet rs = null;  
+                                try {  
+                                    con = DBConnection.getConnection();  
+                                    String query = "SELECT D.DONATEID, D.BANKNAME, D.AMOUNT, TO_CHAR(D.DONATIONDATE, 'YYYY-MM-DD') AS DONATIONDATE, D.NOTE, D.DONATIONSTATUS, COALESCE(S.NAME, DO.USERNAME) AS NAME FROM DONATION D LEFT OUTER JOIN STUDENT S ON D.STUDENTID = S.STUDENTID LEFT OUTER JOIN DONATOR DO ON D.DONATORID = DO.DONATORID ORDER BY DONATEID DESC";
+                                    stmt = con.prepareStatement(query);  
+                                    rs = stmt.executeQuery();  
+                                    int count = 1;  
+                                    while (rs.next()) {  
+                                        String status = rs.getString("DONATIONSTATUS");
+                                        String statusClass = "";
+                                        if ("disemak".equalsIgnoreCase(status)) {
+                                            statusClass = "status-disemak";
+                                        } else if ("dalam proses".equalsIgnoreCase(status)) {
+                                            statusClass = "status-dalam-proses";
+                                        }
+                            %>  
+                            <tr>  
+                                <td class="border px-4 py-2"><%= count++ %></td>  
+                                <td class="border px-4 py-2"><%= rs.getString("DONATIONDATE") %></td>  
+                                <td class="border px-4 py-2"><%= rs.getString("NAME") %></td>  
+                                <td class="border px-4 py-2"><%= rs.getString("BANKNAME") %></td>  
+                                <td class="border px-4 py-2"><%= rs.getString("AMOUNT") %></td>  
+                                <td class="border px-4 py-2"><%= rs.getString("NOTE") %></td>
+                                <td class="border px-4 py-2 <%= statusClass %>"><%= status %></td>  
+                            </tr>
+                            <%  
+                                    }  
+                                } catch (SQLException e) {  
+                                    out.println("<tr><td colspan='7' class='border px-4 py-2 text-center text-red-600'>SQL Error: " + e.getMessage() + "</td></tr>");  
+                                } catch (Exception e) {  
+                                    out.println("<tr><td colspan='7' class='border px-4 py-2 text-center text-red-600'>Error: " + e.getMessage() + "</td></tr>");  
+                                } finally {  
+                                    // Close resources  
+                                    if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                                    if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                                    if (con != null) try { con.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                                }
+                            %> 
+                        </tbody>  
+                    </table>  
 
-                try{
-                Connection connection = DBConnection.getConnection();
-                String sql = "SELECT A.APPLYID, S.NAME AS STUDENT_NAME,A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  Z.ZAKATNAME AS ZAKAT_CATEGORY, TO_CHAR(Z.DESCRIPTION,'DD-MON-YYYY') AS DESCRIPTION  FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID  JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID WHERE A.STUDENTID = ? ORDER BY A.APPLYID DESC";
-                PreparedStatement pstmt = connection.prepareStatement(sql);
-                pstmt.setInt(1, Integer.parseInt(stdid));
-
-                ResultSet rs = pstmt.executeQuery();
-                %>
-
-           
-                <div class="profile-header">  
-                    <div class=" rounded-lg p-8">  
-                        <h2 class="text-2xl font-semibold mb-4">Pembayaran Zakat</h2>  
-                        <table class="min-w-full bg-white rounded-lg shadow-md">  
-                            <thead>  
-                                <tr class="bg-purple-600 text-white">  
-                                    <th class="py-2 px-4">Bil.</th>  
-                                    <th class="py-2 px-4">Tarikh</th>  
-                                    <th class="py-2 px-4">No Matrik</th>  
-                                    <th class="py-2 px-4">Nama</th>  
-                                    <th class="py-2 px-4">Permohonan</th>  
-                                    <th class="py-2 px-4">Status</th>  
-                                    <th class="py-2 px-4">Actions</th>  
-                                </tr>  
-                            </thead>  
-                            <tbody>  
-                                <!-- Sample Data - Replace with dynamic data from your backend -->  
+                    <div class="mt-4">  
+                        <h1 class="font-semibold text-white num" style="font-size:30px; text-align: center;">Jumlah Zakat Terkumpul: 
+                            <span class="counter">
                                 <%
-                                    while (rs.next()){
-                                    %>
-                                <tr>  
-                                    <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
-                                    <td class="border px-4 py-2"><%=rs.getString("APPLYID")%></td>  
-                                    <td class="border px-4 py-2"><%=rs.getString("DESCRIPTION")%></td>  
-                                    <td class="border px-4 py-2"><%=rs.getString("MATRICNO")%></td>  
-                                    <td class="border px-4 py-2"><%=rs.getString("STUDENT_NAME")%></td>   
-                                    <td class="border px-4 py-2"><%=rs.getString("ZAKATNAME")%></td>   
-                                    <% if(rs.getString("STATUS").equals("BERJAYA")){%>
-                                        <td class="border px-4 py-2 status-approved"><%=rs.getString("STATUS")%></td>
-                                        <%
-                                        }else if(rs.getString("STATUS").equals("DISEMAK")){ %>
-                                        <td class="border px-4 py-2 status-pending"><%=rs.getString("STATUS")%></td> <%
-                                        }else if(rs.getString("STATUS").equals("DITOLAK")){ %>
-                                        <td class="border px-4 py-2 status-rejected"><%=rs.getString("STATUS")%></td> <%
-                                        }%>
-                                    <td class="border px-4 py-2">  
-                                        <button type="submit" name="action" value="view" class=" bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button> 
-
-
-                                        </form>  
-                                    </td>  
-                                </tr>
-                                <%
+                                    double totalZakat = 0.0;
+                                    Connection con2 = null;
+                                    PreparedStatement ps = null;
+                                    ResultSet r = null;
+                                    try {
+                                        con2 = DBConnection.getConnection();
+                                        ps = con2.prepareStatement("SELECT TO_CHAR(SUM(AMOUNT), '99999999999.00') AS total FROM DONATION");
+                                        r = ps.executeQuery();
+                                        if (r.next()) {
+                                            totalZakat = r.getDouble("total");
+                                        }
+                                    } catch (SQLException e) {
+                                        out.println("Error retrieving data: " + e.getMessage());
+                                    } catch (Exception e) {
+                                        out.println("Error: " + e.getMessage());
+                                    } finally {
+                                        // Close resources
+                                        if (r != null) try { r.close(); } catch (SQLException e) { e.printStackTrace(); }
+                                        if (ps != null) try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
+                                        if (con2 != null) try { con2.close(); } catch (SQLException e) { e.printStackTrace(); }
                                     }
-                                        rs.close();
-                                        pstmt.close();
-                                    }catch (SQLException e){
-                                        out.println(e.getMessage());
-
-                                    }catch(Exception e){
-                                        out.println(e.getMessage());
-                                    }
-                                    %>
-
-                                <!-- Add more application rows as needed -->  
-                            </tbody>  
-                        </table>  
-                    </div> 
+                                    out.print(String.format("%.2f",totalZakat));
+                                %>
+                            </span>
+                            .00
+                        </h1>  
+                    </div>  
                 </div>  
             </div>
         
@@ -291,8 +311,8 @@
 
                 if (matricno != null) {  
                     Connection conn = null;  
-                    PreparedStatement stmt = null;  
-                    ResultSet rs = null;  
+                    stmt = null;  
+                    rs = null;  
 
                     try {  
                         // Load Oracle JDBC Driver  
@@ -365,8 +385,8 @@
 
                 if (name != null) {  
                     Connection conn = null;  
-                    PreparedStatement stmt = null;  
-                    ResultSet rs = null;  
+                     stmt = null;  
+                     rs = null;  
 
                     try {  
                         // Load Oracle JDBC Driver  
