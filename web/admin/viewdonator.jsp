@@ -16,7 +16,6 @@
     <title>Donor Management</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
     <style>  
-     
         .bg-custom {  
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
         }  
@@ -33,8 +32,7 @@
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
     
-<div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-white">Donor Management</h1>  
+<div class="container mx-auto flex-grow mt-10 px-4">    
 
     <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
         <h2 class="text-2xl font-semibold mb-4 text-white">Donor List</h2>  
@@ -70,10 +68,11 @@
                     <td class="border px-4 py-2"><%= rs.getString("EMAIL") %></td>  
                     <td class="border px-4 py-2">[hidden]</td> <!-- Password should not be displayed -->  
                     <td class="border px-4 py-2">  
-                        <form action="actionDonatorServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this Donator?');">  
+                        <form action="actionDonatorServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Donator?');">  
                             <input type="hidden" name="DONATORID" value='<%=rs.getString("DONATORID")%>' />   
                             <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
                         </form>  
+                        <a href="viewDetailDonator.jsp?DONATORID=<%= rs.getString("DONATORID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">View</a>  
                     </td>  
                 </tr>  
                 <%  
@@ -91,11 +90,7 @@
                 %>  
             </tbody>  
         </table>  
-    </div>  
-
-    <div class="mt-6 text-center">  
-        <a href="dashboard.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Dashboard</a>  
-    </div>  
+    </div>    
 </div>  
 
 </body>  

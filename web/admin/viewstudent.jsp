@@ -6,7 +6,7 @@
 <%@page import="java.sql.PreparedStatement"%>  
 <%@page import="com.zakat.model.DBConnection"%>  
 <%@page import="java.sql.Connection"%>  
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>  
+<%@page contentType="text/html;charset=UTF-8" language="java" %>  
 <jsp:include page="admin_header.jsp"></jsp:include>  
 <!DOCTYPE html>  
 <html lang="en">  
@@ -31,7 +31,7 @@
     </style>  
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
-    
+
 <%  
     try {  
         Connection connection = DBConnection.getConnection();  
@@ -39,8 +39,7 @@
         ResultSet rs = stmt.executeQuery("SELECT STUDENTID, COURSECODE, MATRICNO, NAME, EMAIL, PASSWORD FROM STUDENT");  
 %>  
 
-<div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-white">View Student</h1>  
+<div class="container mx-auto flex-grow mt-10 px-4">   
 
     <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
         <h2 class="text-2xl font-semibold mb-4 text-white">Zakat Applications List</h2>  
@@ -68,11 +67,13 @@
                     <td class="border px-4 py-2"><%= rs.getString("EMAIL") %></td>  
                     <td class="border px-4 py-2"><%= rs.getString("PASSWORD") %></td>     
                     <td class="border px-4 py-2">  
-                        <form action="actionStudentServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this student?');">  
-                            <input type="hidden" name="STUDENTID" value='<%= rs.getString("STUDENTID") %>' />  
-                            <button type="submit" name="action" value="view" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button>  
-                            <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
-                        </form>  
+                       <div class="flex space-x-2">  
+                            <form action="actionStudentServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Admin?');">  
+                                <input type="hidden" name="STUDENTID" value='<%= rs.getString("STUDENTID") %>' />  
+                                <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                            </form>  
+                            <a href="viewDetailStudent.jsp?STUDENTID=<%= rs.getString("STUDENTID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">View</a>  
+                        </div>   
                     </td>  
                 </tr>  
                 <%  
@@ -87,10 +88,12 @@
                 %>  
             </tbody>  
         </table>  
-    </div>  
+    </div>    
 
-    <div class="mt-6 text-center">  
-        <a href="dashboard.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Dashboard</a>  
+    <!-- Next and Previous Buttons -->  
+    <div class="mt-6 flex justify-between">  
+        <a href="previousPage.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Previous</a>  
+        <a href="nextPage.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Next</a>  
     </div>  
 </div>  
 
