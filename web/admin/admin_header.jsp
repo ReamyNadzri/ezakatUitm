@@ -21,11 +21,11 @@
   <!--------Banner -->
 
   <div class="w3-row">
-    <div class="w3-col w3-container" style="width:16%">
-      <img class="w3-col w3-margin w3-row-padding" style="width: 155px;" src='../sources/1ZakatLogoBR.png'>
+    <div class="w3-col w3-container" style="width: 18%">
+      <img class="w3-col w3-row-padding" style="width: 150px; margin-left: 120px; margin-top: 15px;" src='../sources/1ZakatLogoBR.png'>
     </div>
     <div class="w3-col" style="width:80%; padding-top: 20px">
-      <h2 style=" font-size: 35px;position:relative;bottom:10px">Admin<b>Dashboard</b></h2>
+        <h2 style=" font-size:35px; position:relative; bottom:10px">Admin<b>Dashboard</b></h2>
     </div>
     <div class="w3-col w3-container" style="width:10%"></div>
   </div>
