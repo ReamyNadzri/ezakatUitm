@@ -32,8 +32,7 @@
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
 
-<div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-black">Admin Management</h1>  
+<div class="container mx-auto flex-grow mt-10 px-4">   
 
     <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
         <h2 class="text-2xl font-semibold mb-4 text-white">Admin List</h2>  
@@ -87,10 +86,6 @@
                 %>  
             </tbody>  
         </table>  
-    </div>  
-
-    <div class="mt-6 text-center">  
-        <a href="dashboard.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Dashboard</a>  
     </div>  
 </div>  
 
