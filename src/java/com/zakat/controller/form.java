@@ -80,6 +80,7 @@ public class form extends HttpServlet {
                     String storedPassword = resultSetStaff.getString("PASSWORD");
                     String storedNOIC = resultSetStaff.getString("NOIC");
                     String storedPHONENUM = resultSetStaff.getString("PHONENUM");
+                    String storedDONATORID = resultSetStaff.getString("DONATORID");
                    
                 
                     if (storedPassword.equals(password)) {
@@ -90,6 +91,7 @@ public class form extends HttpServlet {
                         session.setAttribute("PASSWORD", storedPassword);
                         session.setAttribute("NOIC", storedNOIC);
                         session.setAttribute("PHONENUM", storedPHONENUM);
+                        session.setAttribute("DONATORID", storedDONATORID);
                         response.sendRedirect("successLoginStaff.jsp");
                     } else {
                         // If password is incorrect, set error message and redirect to errorLoginStudent.jsp

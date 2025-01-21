@@ -61,18 +61,18 @@
                         while (rs.next()) {  
                 %>  
                 <tr>  
-                    <td class="border px-4 py-2"><%= count++ %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("PHONENUM") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("NOIC") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("USERNAME") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("EMAIL") %></td>  
-                    <td class="border px-4 py-2">[hidden]</td> <!-- Password should not be displayed -->  
-                    <td class="border px-4 py-2">  
-                        <form action="actionDonatorServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Donator?');">  
+                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("PHONENUM") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("NOIC") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("USERNAME") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("EMAIL") %></td>  
+                    <td class="border px-4 py-2 text-center">[hidden]</td> <!-- Password should not be displayed -->  
+                    <td class="border px-4 py-2 text-center">  
+                        <form action="actionDonatorServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Donator?');" style="display:inline-block;">  
                             <input type="hidden" name="DONATORID" value='<%=rs.getString("DONATORID")%>' />   
-                            <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                            <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-2 rounded-md hover:bg-red-700">Delete</button>  
                         </form>  
-                        <a href="viewDetailDonator.jsp?DONATORID=<%= rs.getString("DONATORID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">View</a>  
+                        <a href="viewDetailDonator.jsp?DONATORID=<%= rs.getString("DONATORID") %>" class="bg-blue-600 text-white font-semibold py-1 px-2 rounded-md hover:bg-blue-700">View</a>  
                     </td>  
                 </tr>  
                 <%  
