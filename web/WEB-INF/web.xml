@@ -228,11 +228,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>actionDonationServlet</servlet-name>
-        <url-pattern>/actionDonationServlet</url-pattern>
+        <url-pattern>/admin/actionDonationServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>actionAdminServlet</servlet-name>
-        <url-pattern>/actionAdminServlet</url-pattern>
+        <url-pattern>/admin/actionAdminServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RecaptchaServlet</servlet-name>
