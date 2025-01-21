@@ -57,7 +57,7 @@
 <body class="bg-gray-100">
     <div class="container mx-auto p-8">
         <div class="text-center mb-8">
-            <p class="text-gray-600 underline">Segalanya Bermula Disini.</p>
+            <p class="text-gray-600 underline">Kata Mutiara Untuk Hari ini</p>
             <p id="quote" class="text-gray-500 mt-1 italic"></p>
         </div>
         

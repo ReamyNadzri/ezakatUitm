@@ -43,14 +43,13 @@
     + "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID ORDER BY A.APPLYID DESC");
     %>
 
-<div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-white">Zakat Application Management</h1>  
+<div class="container mx-auto flex-grow mt-8 px-4">
 
-    <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Zakat Applications List</h2>  
+    <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
+        <h2 class="text-2xl font-semibold mb-4 text-white">Permohonan Zakat</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
-                <tr class="bg-purple-600 text-white">  
+                <tr class="bg-purple-500 text-white">  
                     <th class="py-2 px-4">Bil.</th>  
                     <th class="py-2 px-4">Tarikh</th>  
                     <th class="py-2 px-4">No Matrik</th>  
@@ -67,18 +66,18 @@
                     %>
                 <tr>  
                     <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
-                    <td class="border px-4 py-2"><%=rs.getString("APPLYID")%></td>  
-                    <td class="border px-4 py-2"><%=rs.getString("DESCRIPTION")%></td>  
-                    <td class="border px-4 py-2"><%=rs.getString("MATRICNO")%></td>  
-                    <td class="border px-4 py-2"><%=rs.getString("STUDENT_NAME")%><button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button> </td>   
-                    <td class="border px-4 py-2"><%=rs.getString("ZAKATNAME")%></td>   
+                    <td class="border px-4 py-2 text-center"><%=rs.getString("APPLYID")%></td>  
+                    <td class="border px-4 py-2 text-center"><%=rs.getString("DESCRIPTION")%></td>  
+                    <td class="border px-4 py-2 text-center"><%=rs.getString("MATRICNO")%></td>  
+                    <td class="border px-4 py-2 text-center"><%=rs.getString("STUDENT_NAME")%><button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button> </td>   
+                    <td class="border px-4 py-2 text-center"><%=rs.getString("ZAKATNAME")%></td>   
                     <% if(rs.getString("STATUS").equals("BERJAYA")){%>
-                        <td class="border px-4 py-2 status-approved"><%=rs.getString("STATUS")%></td>
+                        <td class="border px-4 py-2 status-approved text-center"><%=rs.getString("STATUS")%></td>
                         <%
                         }else if(rs.getString("STATUS").equals("DISEMAK")){ %>
-                        <td class="border px-4 py-2 status-pending"><%=rs.getString("STATUS")%></td> <%
+                        <td class="border px-4 py-2 status-pending text-center"><%=rs.getString("STATUS")%></td> <%
                         }else if(rs.getString("STATUS").equals("DITOLAK")){ %>
-                        <td class="border px-4 py-2 status-rejected"><%=rs.getString("STATUS")%></td> <%
+                        <td class="border px-4 py-2 status-rejected text-center"><%=rs.getString("STATUS")%></td> <%
                         }%>
                     <td class="border px-4 py-2">  
                         
@@ -105,11 +104,12 @@
                 <!-- Add more application rows as needed -->  
             </tbody>  
         </table>  
-    </div>  
-
-    <div class="mt-6 text-center">  
-        <a href="dashboard.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Dashboard</a>  
-    </div>  
+    </div>
+          <!-- Next and Previous Buttons -->  
+    <div class="mt-6 flex justify-between">  
+        <a href="previousPage.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Previous</a>  
+        <a href="nextPage.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Next</a>  
+    </div> 
 </div>  
 
 </body>  

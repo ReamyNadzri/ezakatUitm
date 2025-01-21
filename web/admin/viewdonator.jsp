@@ -32,13 +32,13 @@
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
     
-<div class="container mx-auto flex-grow mt-10 px-4">    
+<div class="container mx-auto flex-grow mt-8 px-4">    
 
-    <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Donor List</h2>  
+    <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
+        <h2 class="text-2xl font-semibold mb-4 text-white">Jumlah Penyumbang</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
-                <tr class="bg-purple-600 text-white">  
+                <tr class="bg-purple-500 text-white">  
                     <th class="py-2 px-4">Bil.</th>  
                     <th class="py-2 px-4">No Tel</th>  
                     <th class="py-2 px-4">No IC</th>  
@@ -90,7 +90,12 @@
                 %>  
             </tbody>  
         </table>  
-    </div>    
+    </div>
+    <!-- Next and Previous Buttons -->  
+    <div class="mt-6 flex justify-between">  
+        <a href="previousPage.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Previous</a>  
+        <a href="nextPage.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Next</a>  
+    </div>
 </div>  
 
 </body>  

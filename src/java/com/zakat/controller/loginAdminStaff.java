@@ -56,13 +56,18 @@ boolean adminaccess = false;
                 String storedname = resultSetStaff.getString("NAME");
                 String storedemail = resultSetStaff.getString("EMAIL");
                 String storedcampus = resultSetStaff.getString("CAMPUS");
+                String storedstaffid = resultSetStaff.getString("STAFFID");
+                String storedphonenum = resultSetStaff.getString("PHONENUM");
                 
                 if (storedpassword.equals(pass)) {
                     // If password matches, redirect to successLoginStudent.jsp
                     HttpSession session = request.getSession();
+                    session.setAttribute("STAFFID", storedstaffid);
                     session.setAttribute("STAFFNO", storedstaffno);
                     session.setAttribute("STAFFNAME", storedname);
+                    session.setAttribute("PASSWORD", storedpassword);
                     session.setAttribute("STAFFEMAIL", storedemail);
+                    session.setAttribute("PHONENUM", storedphonenum);
                     session.setAttribute("STAFFCAMPUS", storedcampus);
                     response.sendRedirect("dashboard.jsp");
                 } else {

@@ -63,7 +63,7 @@
 </head>  
 <body class="bg-gray-100">  
 
-<div class="container mx-auto mt-10 p-6 bg-purple-800 rounded-lg shadow-md">  
+<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md" style="background: #7C3AED;">  
     <h1 class="text-3xl font-bold mb-4">Family Details</h1>  
 
     <table class="min-w-full">  
@@ -132,7 +132,7 @@
     </table>  
 
     <div class="mt-6 text-center">  
-        <a href="viewstudent.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Student List</a>  
+        <a href="viewstudent.jsp" class="bg-purple-800 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Kembali</a>  
     </div>  
 </div>  
 

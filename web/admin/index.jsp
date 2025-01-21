@@ -10,6 +10,12 @@
             margin: 0;
             display: flex;
             flex-direction: column;
+/*            justify-content: center;  Center content vertically 
+            align-items: center;  Center content horizontally 
+            background-image: url(../sources/zakat1.jpg);  Path to your background image 
+            background-size: cover;  Ensure the image covers the entire background 
+            background-position: center;  Center the background image 
+            background-repeat: no-repeat;  Prevent the image from repeating */
         }
         .content {
             flex: 1;

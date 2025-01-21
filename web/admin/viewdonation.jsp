@@ -26,37 +26,51 @@
         .status-dalam-proses {  
             color: orange;  
         }
+        .status-gagal {  
+            color: red;  
+        }
         .status-disemak::before {  
             content: '\f00c'; /* Font Awesome check icon */
             font-family: 'Font Awesome 5 Free';  
             font-weight: 900;  
             margin-right: 8px;
-        }  
-
+        }
         .status-dalam-proses::before {  
             content: '\f110'; /* Font Awesome spinner icon */
             font-family: 'Font Awesome 5 Free';  
             font-weight: 900;  
             margin-right: 8px;
         } 
+        .status-gagal::before {  
+            content: '\f00d'; /* Font Awesome times icon */
+            font-family: 'Font Awesome 5 Free';  
+            font-weight: 900;  
+            margin-right: 8px;
+        }
     </style>  
 </head>  
-<body class="bg-custom flex flex-col justify-between">  
-
+<body class="bg-custom flex flex-col justify-between">
+    
 <div class="container mx-auto flex-grow mt-8 px-4"> 
 
-    <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
+    <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
         <h2 class="text-2xl font-semibold mb-4 text-white">Jumlah Sumbangan Zakat</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
-                <tr class="bg-purple-600 text-white">  
+                <tr class="bg-purple-500 text-white">  
                     <th class="py-2 px-4">Bil.</th>  
                     <th class="py-2 px-4">Tarikh</th>  
                     <th class="py-2 px-4">Nama</th>  
                     <th class="py-2 px-4">Nama Bank</th>  
                     <th class="py-2 px-4">Amaun</th>  
                     <th class="py-2 px-4">Nota</th>  
-                    <th class="py-2 px-4">Status</th>  
+                    <th class="py-2 px-4">Status</th>
+                    <% 
+                        String staffNo = (String) session.getAttribute("STAFFNO");
+                        if (staffNo != null) {
+                    %>
+                    <th class="py-2 px-4">Tindakan</th>
+                    <% } %>
                 </tr>  
             </thead>  
             <tbody>
@@ -77,16 +91,31 @@
                                 statusClass = "status-disemak";
                             } else if ("dalam proses".equalsIgnoreCase(status)) {
                                 statusClass = "status-dalam-proses";
-                            }
+                            } else {
+                                statusClass = "status-gagal";
+                            }           
                 %>  
                 <tr>  
-                    <td class="border px-4 py-2"><%= count++ %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("DONATIONDATE") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("NAME") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("BANKNAME") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("AMOUNT") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("NOTE") %></td>
-                    <td class="border px-4 py-2 <%= statusClass %>"><%= status %></td>  
+                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("DONATIONDATE") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("NAME") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("BANKNAME") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("AMOUNT") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("NOTE") %></td>
+                    <td class="border px-4 py-2 text-center <%= statusClass %>"><%= status %></td>
+                    <% 
+                        if (staffNo != null) {
+                    %>
+                    <td class="border px-4 py-2">
+                        <div class="flex space-x-2">  
+                            <form action="actionDonationServlet" method="post" onsubmit="return confirm('Are you sure you want to approve this donation?');">
+                                <input type="hidden" name="DONATEID" value='<%= rs.getString("DONATEID") %>' />
+                                <button type="submit" name="action" value="update" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">approve</button>
+                                <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">reject</button>
+                            </form> 
+                        </div> 
+                    </td>
+                    <% } %>
                 </tr>
                 <%  
                         }  
@@ -134,9 +163,15 @@
                 </span>
                 .00
             </h1>  
-        </div>  
-    </div> 
-</div>  
+        </div>
+    </div>
+    <!-- Next and Previous Buttons -->  
+    <div class="mt-6 flex justify-between">  
+        <a href="#" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Previous</a>  
+        <a href="#" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Next</a>  
+    </div>
+</div>
+    
 
 <script type="text/javascript">
     $(document).ready(function(){

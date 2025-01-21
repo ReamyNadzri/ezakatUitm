@@ -49,50 +49,50 @@
     <title>Donator Details</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
 </head>  
-<body class="bg-gray-100">  
+<body class="bg-purple-800">  
 
-<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">  
-    <h1 class="text-3xl font-bold mb-4">Donator Details</h1>  
+<div class="container mx-auto mt-10 p-6 rounded-lg shadow-md" style="background: #7C3AED;">  
+    <h1 class="text-3xl font-bold mb-4">Tentang Penyumbang</h1>  
 
     <table class="min-w-full">  
         <tbody>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Donator ID:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getDonatorID() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Donator ID:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getDonatorID() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Username:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getUsername() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Username:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getUsername() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Email:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getEmail() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Email:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getEmail() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Phone Number:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getPhoneNum() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Phone Number:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getPhoneNum() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">No IC:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getNoic() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">No IC:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getNoic() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">State:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getState() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">State:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getState() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">City:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getCity() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">City:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getCity() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Password:</td>  
-                <td class="border px-4 py-2"><%= donator != null ? donator.getPassword() : "Not Found" %></td> <!-- Typically should not display the password -->  
+                <td class="border px-4 py-2 font-semibold bg-white">Password:</td>  
+                <td class="border px-4 py-2 bg-white"><%= donator != null ? donator.getPassword() : "Not Found" %></td> <!-- Typically should not display the password -->  
             </tr>  
         </tbody>  
     </table>  
 
     <div class="mt-6 text-center">  
-        <a href="viewdonator.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Donor List</a>  
+        <a href="viewdonator.jsp" class="bg-purple-800 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Kembali</a>  
     </div>  
 </div>  
 

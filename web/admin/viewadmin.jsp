@@ -34,11 +34,11 @@
 
 <div class="container mx-auto flex-grow mt-10 px-4">   
 
-    <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Admin List</h2>  
+    <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
+        <h2 class="text-2xl font-semibold mb-4 text-white">Info Admin</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
-                <tr class="bg-purple-600 text-white">  
+                <tr class="bg-purple-500 text-white">  
                     <th class="py-2 px-4">Bil.</th>  
                     <th class="py-2 px-4">Username</th>  
                     <th class="py-2 px-4">Nombor Telefon</th>  
@@ -58,9 +58,9 @@
                         while (rs.next()) {  
                 %>  
                 <tr>  
-                    <td class="border px-4 py-2"><%= count++ %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("USERNAME") %></td>  
-                    <td class="border px-4 py-2"><%= rs.getString("PHONENUM") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("USERNAME") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("PHONENUM") %></td>  
                     <td class="border px-4 py-2">  
                         <div class="flex space-x-2">  
                             <form action="actionAdminServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Admin?');">  

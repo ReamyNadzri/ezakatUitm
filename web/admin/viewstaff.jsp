@@ -1,4 +1,9 @@
-
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="com.zakat.model.DBConnection"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
 <jsp:include page="admin_header.jsp"></jsp:include>
 <!DOCTYPE html>  
@@ -9,7 +14,6 @@
     <title>Staff Management</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
     <style>  
-  
         .bg-custom {  
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
         }  
@@ -17,61 +21,74 @@
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
 
-<div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-white">Staff Management</h1>  
+<div class="container mx-auto flex-grow mt-8 px-4">
 
-    <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Staff List</h2>  
-        <table class="min-w-full bg-white rounded-lg shadow-md">  
+    <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
+        <h2 class="text-2xl font-semibold mb-4 text-white">Ahli Kakitangan</h2>  
+        <table class="min-w-full bg-white rounded-lg shadow-md">
             <thead>  
-                <tr class="bg-purple-600 text-white">  
+                <tr class="bg-purple-500 text-white">  
                     <th class="py-2 px-4">Bil.</th>  
-                    <th class="py-2 px-4">No. Tel</th>  
                     <th class="py-2 px-4">No. Staff</th>  
+                    <th class="py-2 px-4">No. Telefon</th>  
                     <th class="py-2 px-4">Nama</th>  
                     <th class="py-2 px-4">Email</th>  
-                    <th class="py-2 px-4">Kata Laluan</th>  
+                    <th class="py-2 px-4">Kata Laluan</th>
+                    <th class="py-2 px-4">Kampus</th>
                     <th class="py-2 px-4">Actions</th>  
                 </tr>  
             </thead>  
             <tbody>  
-                <!-- Sample Data - Replace with dynamic data from your backend -->  
+                <%  
+                    Connection connection = null;  
+                    Statement stmt = null;  
+                    ResultSet rs = null;  
+                    try {  
+                        connection = DBConnection.getConnection();  
+                        stmt = connection.createStatement();  
+                        rs = stmt.executeQuery("SELECT STAFFID, STAFFNO, PASSWORD, NAME, PHONENUM, EMAIL, CAMPUS FROM STAFF ORDER BY STAFFID DESC");  
+                        int count = 1;  
+                        while (rs.next()) {  
+                %>  
                 <tr>  
-                    <td class="border px-4 py-2">1</td>  
-                    <td class="border px-4 py-2">012-3456789</td>  
-                    <td class="border px-4 py-2">S001</td>  
-                    <td class="border px-4 py-2">Ali</td>  
-                    <td class="border px-4 py-2">ali@example.com</td>  
-                    <td class="border px-4 py-2">password123</td>  
-                    <td class="border px-4 py-2">  
-                        <form action="deleteStaff" method="post" onsubmit="return confirm('Are you sure you want to delete this staff?');">  
-                            <input type="hidden" name="staffId" value="1" />  
-                            <button type="submit" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
-                        </form>  
+                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("STAFFNO") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("PHONENUM") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("NAME") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("EMAIL") %></td>
+                    <td class="border px-4 py-2 text-center">[ HIDDEN ]</td>
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("CAMPUS") %></td> 
+                    <td class="border px-4 py-2 text-center">
+                            <form action="actionStaffServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Staff?');" style="display:inline-block;">  
+                                <input type="hidden" name="STAFFID" value='<%=rs.getString("STAFFID")%>' />   
+                                <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-2 rounded-md hover:bg-red-700">Delete</button>  
+                            </form>  
+                            <a href="viewDetailStaff.jsp?STAFFID=<%= rs.getString("STAFFID") %>" class="bg-blue-600 text-white font-semibold py-1 px-2 rounded-md hover:bg-blue-700">View</a>
                     </td>  
                 </tr>  
-                <tr>  
-                    <td class="border px-4 py-2">2</td>  
-                    <td class="border px-4 py-2">013-9876543</td>  
-                    <td class="border px-4 py-2">S002</td>  
-                    <td class="border px-4 py-2">Siti</td>  
-                    <td class="border px-4 py-2">siti@example.com</td>  
-                    <td class="border px-4 py-2">password456</td>  
-                    <td class="border px-4 py-2">  
-                        <form action="deleteStaff" method="post" onsubmit="return confirm('Are you sure you want to delete this staff?');">  
-                            <input type="hidden" name="staffId" value="2" />  
-                            <button type="submit" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
-                        </form>  
-                    </td>  
-                </tr>  
-                <!-- Add more staff rows as needed -->  
+                <%  
+                        }  
+                    } catch (SQLException e) {  
+                        e.printStackTrace();
+                        out.println("<tr><td colspan='8' class='border px-4 py-2 text-center text-red-600'>SQL Error: " + e.getMessage() + "</td></tr>");  
+                    } catch (Exception e) {  
+                        e.printStackTrace();
+                        out.println("<tr><td colspan='8' class='border px-4 py-2 text-center text-red-600'>Error: " + e.getMessage() + "</td></tr>");  
+                    } finally {  
+                        // Close resources  
+                        if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                        if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                        if (connection != null) try { connection.close(); } catch (SQLException e) { e.printStackTrace(); }  
+                    }  
+                %> 
             </tbody>  
         </table>  
-    </div>  
-
-    <div class="mt-6 text-center">  
-        <a href="dashboard.jsp" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Dashboard</a>  
-    </div>  
+    </div>
+    <!-- Next and Previous Buttons -->  
+    <div class="mt-6 flex justify-between">  
+        <a href="#" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Previous</a>  
+        <a href="#" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Next</a>  
+    </div>
 </div>  
 
 </body>  
