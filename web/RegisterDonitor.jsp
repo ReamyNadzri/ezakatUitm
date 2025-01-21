@@ -138,7 +138,7 @@
             <div class="form-row">  
                 <!-- Left Column -->  
                 <div class="form-column">  
-                    <label for="username">Username:</label>  
+                    <label for="username">Full Name:</label>  
                     <input type="text" id="username" name="username" required>  
 
                     <label for="noic">IC Number:</label>  

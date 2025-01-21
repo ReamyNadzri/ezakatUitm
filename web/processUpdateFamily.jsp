@@ -8,14 +8,22 @@
 </head>  
 <body>  
 <%  
- 
     // Retrieve form data  
-    String name = request.getParameter("STUDENTID");  
+    String name = (String) session.getAttribute("STUDENTID");  
     String fName = request.getParameter("fName");  
-    String fWork = request.getParameter("fWork");   
-    String mName = request.getParameter("mName");
-     String mWork = request.getParameter("mWork");
-      String guardianRelay = request.getParameter("guardianRelay");
+    String fWork = request.getParameter("fWork");  
+    String grossIncomeF = request.getParameter("grossIncomeF");  
+    String fPhoneNum = request.getParameter("fPhoneNum");  
+    String mName = request.getParameter("mName");  
+    String mWork = request.getParameter("mWork");  
+    String grossIncomeM = request.getParameter("grossIncomeM");  
+    String mPhoneNum = request.getParameter("mPhoneNum");  
+    String maritalStatus = request.getParameter("maritalStatus");  
+    String guardianRelay = request.getParameter("guardianRelay");  
+    String guardianWork = request.getParameter("guardianWork");  
+    String guardianPhoneNum = request.getParameter("guardianPhoneNum");  
+    String address = request.getParameter("address");  
+    String postcode = request.getParameter("postcode");  
 
     if (name != null) {  
         Connection conn = null;  
@@ -23,16 +31,26 @@
 
         try {  
             // Load Oracle JDBC Driver  
-           
-            conn = DBConnection.getConnection();
-            String sql = "UPDATE family SET fName = ?, fWork = ?, mName = ?,  mWork = ?, guardianRelay = ? WHERE STUDENTID = ?";  
-            stmt = conn.prepareStatement(sql);  
-            stmt.setString(1, fName);  
-            stmt.setString(2, fWork);   
-            stmt.setString(3, mName);  
-            stmt.setString(4, mWork);
-            stmt.setString(5, guardianRelay);
-            stmt.setString(6, name);
+            conn = DBConnection.getConnection();  
+            String sql = "INSERT INTO family (STUDENTID, FNAME, FWORK, GROSSINCOMEF, FPHONENUM, MNAME, MWORK, GROSSINCOMEM, MPHONENUM, MARITALSTATUS, GUARDIANRELAY, GUARDIANWORK, GUARDIANPHONENUM, ADDRESS, POSTCODE) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";  
+            stmt = conn.prepareStatement(sql); 
+            stmt.setInt(1, Integer.parseInt(name));  
+            stmt.setString(2, fName);  
+            stmt.setString(3, fWork);  
+            stmt.setDouble(4, Double.parseDouble(grossIncomeF));  
+            stmt.setString(5, fPhoneNum);  
+            stmt.setString(6, mName);  
+            stmt.setString(7, mWork);  
+            stmt.setDouble(8, Double.parseDouble(grossIncomeM));  
+            stmt.setString(9, mPhoneNum);  
+            stmt.setString(10, maritalStatus);  
+            stmt.setString(11, guardianRelay);  
+            stmt.setString(12, guardianWork);  
+            stmt.setString(13, guardianPhoneNum);  
+            stmt.setString(14, address);  
+            stmt.setString(15, postcode);  
+
             int rowsUpdated = stmt.executeUpdate();  
 
             if (rowsUpdated > 0) {  

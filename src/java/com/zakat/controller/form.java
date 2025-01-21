@@ -75,6 +75,7 @@ public class form extends HttpServlet {
             
                 if (resultSetStaff.next()) {
                     // If matric number exists, check password
+                    String DONATORID = resultSetStaff.getString("DONATORID");
                     String storedUsername = resultSetStaff.getString("USERNAME");
                     String storedPassword = resultSetStaff.getString("PASSWORD");
                     String storedNOIC = resultSetStaff.getString("NOIC");
@@ -84,6 +85,7 @@ public class form extends HttpServlet {
                     if (storedPassword.equals(password)) {
                         // If password matches, redirect to successLoginStudent.jsp
                         HttpSession session = request.getSession();
+                        session.setAttribute("DONATORID", DONATORID);
                         session.setAttribute("USERNAME", storedUsername);
                         session.setAttribute("PASSWORD", storedPassword);
                         session.setAttribute("NOIC", storedNOIC);

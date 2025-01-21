@@ -213,7 +213,83 @@
                         </form>  
         <%  
                     } else {  
-                        out.println("<p class='text-danger'>No student found with the provided ID.</p>");  
+                        %>
+                        <form action='processUpdateFamily.jsp' method='post'>  
+                            <div class='form-row'>  
+                            <div class='form-group'>  
+                                <label for='fName'>Nama Bapa:</label>  
+                                <input type='text' id='fName' name='fName' required>  
+                            </div>  
+                            <div class='form-group'>  
+                                <label for='fWork'>Pekerjaan Bapa:</label>  
+                                <input type='text' id='fWork' name='fWork' required>  
+                            </div>  
+                        </div>  
+                        <div class='form-row'>  
+                            <div class='form-group'>  
+                                <label for='grossIncomeF'>Gaji Kasar Bapa (RM):</label>  
+                                <input type='number' id='grossIncomeF' name='grossIncomeF' required>  
+                            </div>  
+                            <div class='form-group'>  
+                                <label for='fPhoneNum'>No Telefon Bapa:</label>  
+                                <input type='tel' id='fPhoneNum' name='fPhoneNum' required>  
+                            </div>  
+                        </div>  
+                        <div class='form-row'>  
+                            <div class='form-group'>  
+                                <label for='mName'>Nama Ibu:</label>  
+                                <input type='text' id='mName' name='mName' required>  
+                            </div>  
+                            <div class='form-group'>  
+                                <label for='mWork'>Pekerjaan Ibu:</label>  
+                                <input type='text' id='mWork' name='mWork' required>  
+                            </div>  
+                        </div>  
+                        <div class='form-row'>  
+                            <div class='form-group'>  
+                                <label for='grossIncomeM'>Gaji Kasar Ibu (RM):</label>  
+                                <input type='number' id='grossIncomeM' name='grossIncomeM' required>  
+                            </div>  
+                            <div class='form-group'>  
+                                <label for='mPhoneNum'>No Telefon Ibu:</label>  
+                                <input type='tel' id='mPhoneNum' name='mPhoneNum' required>  
+                            </div>  
+                        </div>  
+                        <div class='form-row'>  
+                            <div class='form-group'>  
+                                <label for='maritalStatus'>Status Perkahwinan Ibu Bapa:</label>  
+                                <input type='text' id='maritalStatus' name='maritalStatus' required>  
+                            </div>  
+                            <div class='form-group'>  
+                                <label for='guardianRelay'>Nama Waris Terdekat:</label>  
+                                <input type='text' id='guardianRelay' name='guardianRelay' required>  
+                            </div>  
+                        </div>  
+                        <div class='form-row'>  
+                            <div class='form-group'>  
+                                <label for='guardianWork'>Pekerjaan Waris Terdekat:</label>  
+                                <input type='text' id='guardianWork' name='guardianWork' required>  
+                            </div>  
+                            <div class='form-group'>  
+                                <label for='guardianPhoneNum'>No Telefon Waris Terdekat:</label>  
+                                <input type='tel' id='guardianPhoneNum' name='guardianPhoneNum' required>  
+                            </div>  
+                        </div>  
+                        <div class='form-group'>  
+                            <label for='address'>Alamat:</label>  
+                            <textarea id='address' name='address'></textarea>  
+                        </div>  
+                        <div class='form-row'>  
+                            <div class='form-group'>  
+                                <label for='postcode'>Poskod:</label>  
+                                <input type='text' id='postcode' name='postcode' required>  
+                            </div>  
+                        </div>  
+                        <input type='hidden' name='STUDENTID' value="<%= name %>">  
+                        <button type='submit' class='update-button'>Update</button>  
+                        </form>
+                        
+                        <% 
                     }  
                 } catch (SQLException e) {  
                     out.println("<p class='text-danger'>Error retrieving profile information: " + e.getMessage() + "</p>");  

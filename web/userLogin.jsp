@@ -105,7 +105,7 @@
     <div class="w3-container container w3-center" style="margin-left: 40%; margin-bottom:2%; margin-top: 2%">
     <h2 class="title">Log Masuk</h2>
     <form class="form" action="form" method="post">
-      <label for="username">Username:</label>
+      <label for="username">No. Matric or IC:</label>
       <input type="text" id="username" name="matricno" placeholder="Masukkan Nombor Matrik/Pengenalan" required>
       
       <label for="password">Password:</label>

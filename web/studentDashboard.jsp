@@ -228,8 +228,9 @@
                                     <th class="py-2 px-4">Tarikh</th>  
                                     <th class="py-2 px-4">Nama</th>  
                                     <th class="py-2 px-4">Nama Bank</th>  
-                                    <th class="py-2 px-4">Nota</th>  
+                                    <th class="py-2 px-4">Amaun</th>  
                                     <th class="py-2 px-4">Status</th>  
+                                    <th class="py-2 px-4">Resit</th> 
                                 </tr>  
                             </thead>  
                             <tbody>  
@@ -243,7 +244,7 @@
                                     <td class="border px-4 py-2"><%=rs.getString("DONATIONDATE")%></td>  
                                     <td class="border px-4 py-2"><%=rs.getString("NAME")%></td>  
                                     <td class="border px-4 py-2"><%=rs.getString("BANKNAME")%></td>   
-                                    <td class="border px-4 py-2"><%=rs.getString("NOTE")%></td>   
+                                    <td class="border px-4 py-2"><%=rs.getString("AMOUNT")%></td>   
                                     <% if(rs.getString("DONATIONSTATUS").equals("BERJAYA")){%>
                                         <td class="border px-4 py-2 status-approved"><%=rs.getString("DONATIONSTATUS")%></td>
                                         <%
@@ -252,7 +253,7 @@
                                         }else if(rs.getString("DONATIONSTATUS").equals("DITOLAK")){ %>
                                         <td class="border px-4 py-2 status-rejected"><%=rs.getString("DONATIONSTATUS")%></td> <%
                                         }%>
-                                    
+                                    <td class="border px-4 py-2"><a href='Receipt.jsp'  name='action' class=' bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700'>KEMAS KINI</a></td>  
                                         </form>  
                                     
                                 </tr>
@@ -441,7 +442,9 @@
                             </div>  
             <%  
                         } else {  
-                            out.println("<p>No student found with the provided ID.</p>");  
+                            out.println("<p>Anda tidak mengemas kini data keluarga!. Kemas kini SEKARANG!</p>");  
+                            out.println("<a href='updateParentProfile.jsp'  name='action' class=' bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700'>KEMAS KINI</a>");  
+
                         }  
                     } catch (SQLException e) {  
                         out.println("<p>Error retrieving profile information: " + e.getMessage() + "</p>");  
@@ -452,7 +455,9 @@
                         if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }  
                     }  
                 } else {  
-                    out.println("<p>No student ID found in session.</p>");  
+                    out.println("<p>Anda tidak mengemas kini data keluarga!. Kemas kini SEKARANG!</p>");  
+                   
+
                 }  
             %>  
         </div>    
