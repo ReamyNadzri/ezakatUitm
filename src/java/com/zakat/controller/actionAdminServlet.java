@@ -4,7 +4,9 @@ import com.zakat.model.DBConnection;
 import java.io.IOException;  
 import java.sql.Connection;  
 import java.sql.PreparedStatement;  
+import java.sql.ResultSet;  
 import java.sql.SQLException;  
+import javax.servlet.RequestDispatcher;  
 import javax.servlet.ServletException;  
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
@@ -23,33 +25,59 @@ public class actionAdminServlet extends HttpServlet {
         processRequest(request, response);  
 
         String action = request.getParameter("action");  
+        int adminID = Integer.parseInt(request.getParameter("ADMINID")); // Ensure consistent casing  
+
         if ("update".equals(action)) {  
-            int adminID = Integer.parseInt(request.getParameter("ADMINID"));  
-            String username = request.getParameter("USERNAME");  
-            String phonenum = request.getParameter("PHONENUM");  
-            String password = request.getParameter("PASSWORD");  
+            // Process the update form submission  
+            String username = request.getParameter("username");  
+            String password = request.getParameter("password");  
+            String phoneNum = request.getParameter("phoneNum");  
 
             try (Connection conn = DBConnection.getConnection()) {  
-                String sql = "UPDATE ADMIN SET USERNAME = ?, PHONENUM = ?, PASSWORD = ? WHERE ADMINID = ?";  
+                String sql = "UPDATE ZAKATDB.ADMIN SET USERNAME = ?, PHONENUM = ?, PASSWORD = ? WHERE ADMINID = ?";  
                 PreparedStatement stmt = conn.prepareStatement(sql);  
                 stmt.setString(1, username);  
-                stmt.setString(2, phonenum);  
-                stmt.setString(3, password); // Ensure to hash the password before storing it  
+                stmt.setString(2, phoneNum);  
+                stmt.setString(3, password);  
                 stmt.setInt(4, adminID);  
 
                 int rowsUpdated = stmt.executeUpdate();  
                 if (rowsUpdated > 0) {  
-                    response.sendRedirect("viewadmin.jsp"); // Redirect to the admin list page  
+                    request.setAttribute("message", "Admin details updated successfully.");  
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("viewadmin.jsp"); // Redirect to the admin view page  
+                    dispatcher.forward(request, response);  
                 } else {  
-                    response.getWriter().println("Error updating admin details.");  
+                    request.setAttribute("errorMessage", "Error updating admin details, admin not found.");  
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("viewadmin.jsp");  
+                    dispatcher.forward(request, response);  
                 }  
             } catch (SQLException e) {  
                 e.printStackTrace();  
-                response.getWriter().println("SQL Error: " + e.getMessage());  
-            } catch (Exception e) {  
+                request.setAttribute("errorMessage", "Database error: " + e.getMessage());  
+                RequestDispatcher dispatcher = request.getRequestDispatcher("viewadmin.jsp");  
+                dispatcher.forward(request, response);  
+            }  
+        } else if ("delete".equals(action)) {  
+            try (Connection conn = DBConnection.getConnection()) {  
+                String sql = "DELETE FROM ADMIN WHERE ADMINID = ?";  
+                PreparedStatement stmt = conn.prepareStatement(sql);  
+                stmt.setInt(1, adminID);  
+                int r = stmt.executeUpdate();  
+                if (r > 0) {  
+                    response.sendRedirect("viewadmin.jsp"); // Redirect to viewadmin.jsp on successful deletion  
+                } else {  
+                    response.sendRedirect("index.jsp"); // Redirect to index.jsp if admin not found  
+                }  
+            } catch (SQLException e) {  
                 e.printStackTrace();  
-                response.getWriter().println("Error: " + e.getMessage());  
+                request.getSession().setAttribute("errorMessage", "Database error: " + e.getMessage()); // Store error message in session  
+                response.sendRedirect("index.jsp"); // Redirect to index.jsp on error  
             }  
         }  
+    }  
+
+    @Override  
+    public String getServletInfo() {  
+        return "Servlet for handling admin actions such as update and delete.";  
     }  
 }

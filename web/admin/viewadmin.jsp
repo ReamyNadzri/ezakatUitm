@@ -4,6 +4,8 @@
 <%@ page import="java.sql.ResultSet" %>  
 <%@ page import="java.sql.SQLException" %>  
 <%@ page import="com.zakat.model.DBConnection" %>  
+<%@ page import="java.util.List" %>  
+<%@ page import="com.zakat.model.Admin" %>  
 
 <jsp:include page="admin_header.jsp"></jsp:include>  
 <!DOCTYPE html>  
@@ -17,12 +19,21 @@
         .bg-custom {  
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
         }  
+        .status-approved {  
+            color: green;  
+        }  
+        .status-rejected {  
+            color: red;  
+        }  
+        .status-pending {  
+            color: orange;  
+        }  
     </style>  
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
 
 <div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-white">Admin Management</h1>  
+    <h1 class="text-4xl font-bold text-center mb-6 text-black">Admin Management</h1>  
 
     <div class="bg-purple-800 shadow-lg rounded-lg p-8">  
         <h2 class="text-2xl font-semibold mb-4 text-white">Admin List</h2>  
@@ -31,7 +42,7 @@
                 <tr class="bg-purple-600 text-white">  
                     <th class="py-2 px-4">Bil.</th>  
                     <th class="py-2 px-4">Username</th>  
-                    <th class="py-2 px-4">Phone Number</th>  
+                    <th class="py-2 px-4">Nombor Telefon</th>  
                     <th class="py-2 px-4">Actions</th>  
                 </tr>  
             </thead>  
@@ -52,10 +63,13 @@
                     <td class="border px-4 py-2"><%= rs.getString("USERNAME") %></td>  
                     <td class="border px-4 py-2"><%= rs.getString("PHONENUM") %></td>  
                     <td class="border px-4 py-2">  
-                        <form action="updateAdmin.jsp" method="get">  
-                            <input type="hidden" name="ADMINID" value='<%=rs.getString("ADMINID")%>' />   
-                            <button type="submit" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Update</button>  
-                        </form>  
+                        <div class="flex space-x-2">  
+                            <form action="actionAdminServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Admin?');">  
+                                <input type="hidden" name="ADMINID" value='<%= rs.getString("ADMINID") %>' />  
+                                <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                            </form>  
+                            <a href="updateAdmin.jsp?ADMINID=<%= rs.getString("ADMINID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Update</a>  
+                        </div>  
                     </td>  
                 </tr>  
                 <%  
