@@ -52,56 +52,56 @@
     <title>Student Details</title>  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
 </head>  
-<body class="bg-gray-100">  
+<body class="bg-purple-800">  
 
-<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">  
+<div class="container mx-auto mt-10 p-6 bg-purple-800 rounded-lg shadow-md">  
     <h1 class="text-3xl font-bold mb-4">Student Details</h1>  
 
     <table class="min-w-full">  
         <tbody>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Student ID:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getStudentId() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Student ID:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getStudentId() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Password:</td>  
-                <td class="border px-4 py-2">[hidden]</td> <!-- Typically should not display the password -->  
+                <td class="border px-4 py-2 font-semibold bg-white">Password:</td>  
+                <td class="border px-4 py-2 bg-white">[hidden]</td> <!-- Typically should not display the password -->  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Matrik No:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getMatricno() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Matrik No:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getMatricno() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Name:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getName() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Name:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getName() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Income:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getIncome() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Income:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getIncome() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Course Code:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getCourceCode() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Course Code:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getCourceCode() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Course Name:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getCourseName() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Course Name:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getCourseName() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Campus:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getCampus() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Campus:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getCampus() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Email:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getEmail() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Email:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getEmail() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Phone Number:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getPhoneNum() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Phone Number:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getPhoneNum() : "Not Found" %></td>  
             </tr>  
             <tr>  
-                <td class="border px-4 py-2 font-semibold">Address:</td>  
-                <td class="border px-4 py-2"><%= student != null ? student.getAddress() : "Not Found" %></td>  
+                <td class="border px-4 py-2 font-semibold bg-white">Address:</td>  
+                <td class="border px-4 py-2 bg-white"><%= student != null ? student.getAddress() : "Not Found" %></td>  
             </tr>  
         </tbody>  
     </table>  
