@@ -36,7 +36,8 @@
         <h4>Now you are in the admin zakat uitmct site.</h4>
         <h4>Please enter your information down below.</h4><br>
 
-        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-purple w3-large w3-round-large">Login</button>
+        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-purple w3-large w3-round-large">Login</button> <br>
+        <button onclick="window.location.href='../index.jsp'" class="w3-button w3-purple w3-large w3-round-large w3-margin">Back to Homepage</button> <!-- New button -->
 
         <div id="id01" class="w3-modal">
             <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
