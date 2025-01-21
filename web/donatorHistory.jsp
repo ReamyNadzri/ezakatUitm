@@ -7,29 +7,46 @@
 <%@page import="java.sql.SQLException"%>
 <%@page import="com.zakat.model.DBConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %> 
-<jsp:include page="header.jsp"></jsp:include>
+
 <!DOCTYPE html>  
 <html lang="en">  
-<head>  
+<head>
+    <jsp:include page="header.jsp"></jsp:include> 
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Donation Zakat</title>  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
-    <style>    
-        .status-approved {  
+    <title>Donation Zakat Admin</title>  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <style> 
+        .status-disemak {  
             color: green;  
         }  
-        .status-pending {  
+        .status-dalam-proses {  
             color: orange;  
+        }
+        .status-disemak::before {  
+            content: '\f00c'; /* Font Awesome check icon */
+            font-family: 'Font Awesome 5 Free';  
+            font-weight: 900;  
+            margin-right: 8px;
         }  
+
+        .status-dalam-proses::before {  
+            content: '\f110'; /* Font Awesome spinner icon */
+            font-family: 'Font Awesome 5 Free';  
+            font-weight: 900;  
+            margin-right: 8px;
+        } 
     </style>  
-</head>  
-<body class="flex flex-col justify-between">  
+</head> 
+<body class="bg-custom flex flex-col justify-between">  
 
-<div class="container mx-auto flex-grow mt-10 px-4">  
-    <h1 class="text-4xl font-bold text-center mb-6 text-black">Sumbangan Zakat</h1>  
+<div class="container mx-auto flex-grow mt-8 px-4"> 
 
-    <div class="bg-purple-800 shadow-lg rounded-lg p-8 w3-margin-bottom">  
+    <div class="bg-purple-800 shadow-lg rounded-lg p-8 mt-20 mb-10">  
         <h2 class="text-2xl font-semibold mb-4 text-white">Jumlah Sumbangan Zakat</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
@@ -46,26 +63,31 @@
             <tbody>
                 <% 
                     Connection con = null;  
-                    Statement stmt = null;  
+                    PreparedStatement stmt = null;  
                     ResultSet rs = null;  
                     try {  
                         con = DBConnection.getConnection();  
-                        stmt = con.createStatement();  
-                        rs = stmt.executeQuery("SELECT DONATEID, BANKNAME, AMOUNT, TO_CHAR(DONATIONDATE, 'YYYY-MM-DD') AS DONATIONDATE, NOTE, DONATIONSTATUS FROM DONATION ORDER BY DONATEID DESC");  
+                        String query = "SELECT D.DONATEID, D.BANKNAME, D.AMOUNT, TO_CHAR(D.DONATIONDATE, 'YYYY-MM-DD') AS DONATIONDATE, D.NOTE, D.DONATIONSTATUS, COALESCE(S.NAME, DO.USERNAME) AS NAME FROM DONATION D LEFT OUTER JOIN STUDENT S ON D.STUDENTID = S.STUDENTID LEFT OUTER JOIN DONATOR DO ON D.DONATORID = DO.DONATORID ORDER BY DONATEID DESC";
+                        stmt = con.prepareStatement(query);  
+                        rs = stmt.executeQuery();  
                         int count = 1;  
                         while (rs.next()) {  
+                            String status = rs.getString("DONATIONSTATUS");
+                            String statusClass = "";
+                            if ("disemak".equalsIgnoreCase(status)) {
+                                statusClass = "status-disemak";
+                            } else if ("dalam proses".equalsIgnoreCase(status)) {
+                                statusClass = "status-dalam-proses";
+                            }
                 %>  
-                <!-- Sample Data - Replace with dynamic data from your backend -->  
                 <tr>  
                     <td class="border px-4 py-2"><%= count++ %></td>  
                     <td class="border px-4 py-2"><%= rs.getString("DONATIONDATE") %></td>  
-                    <td class="border px-4 py-2">DUMMY</td>  
+                    <td class="border px-4 py-2"><%= rs.getString("NAME") %></td>  
                     <td class="border px-4 py-2"><%= rs.getString("BANKNAME") %></td>  
                     <td class="border px-4 py-2"><%= rs.getString("AMOUNT") %></td>  
                     <td class="border px-4 py-2"><%= rs.getString("NOTE") %></td>
-                    <td class="border px-4 py-2">  
-                        <span class="status-pending">Pending</span>  
-                    </td>  
+                    <td class="border px-4 py-2 <%= statusClass %>"><%= status %></td>  
                 </tr>
                 <%  
                         }  
@@ -84,29 +106,49 @@
         </table>  
         
         <div class="mt-4">  
-            <h3 class="text-lg font-semibold text-white">Jumlah Zakat Terkumpul: 
+            <h1 class="font-semibold text-white num" style="font-size:30px; text-align: center;">Jumlah Zakat Terkumpul: 
+                <span class="counter">
                     <%
                         double totalZakat = 0.0;
+                        Connection con2 = null;
+                        PreparedStatement ps = null;
+                        ResultSet r = null;
                         try {
-                            con = DBConnection.getConnection();
-                            PreparedStatement ps = con.prepareStatement("SELECT SUM(AMOUNT) AS total FROM DONATION");
-                            ResultSet r = ps.executeQuery();
+                            con2 = DBConnection.getConnection();
+                            ps = con2.prepareStatement("SELECT TO_CHAR(SUM(AMOUNT), '99999999999.00') AS total FROM DONATION");
+                            r = ps.executeQuery();
                             if (r.next()) {
                                 totalZakat = r.getDouble("total");
                             }
-                            r.close();
-                            ps.close();
                         } catch (SQLException e) {
                             out.println("Error retrieving data: " + e.getMessage());
                         } catch (Exception e) {
                             out.println("Error: " + e.getMessage());
+                        } finally {
+                            // Close resources
+                            if (r != null) try { r.close(); } catch (SQLException e) { e.printStackTrace(); }
+                            if (ps != null) try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
+                            if (con2 != null) try { con2.close(); } catch (SQLException e) { e.printStackTrace(); }
                         }
-                        DecimalFormat df = new DecimalFormat("0.00");
-                        out.print(df.format(totalZakat));
-                    %></h3>  
+                        out.print(String.format("%.2f",totalZakat));
+                    %>
+                </span>
+                .00
+            </h1>  
         </div>  
-    </div>
-</div>
-        <jsp:include page="Footer.jsp"></jsp:include> 
-</body>  
+    </div> 
+</div>  
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+    });
+</script>
+
+<jsp:include page="Footer.jsp"></jsp:include> 
+
+</body> 
 </html>
