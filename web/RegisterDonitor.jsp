@@ -6,6 +6,7 @@
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <title>Register Form Donator</title>  
     <style>  
         body {  
@@ -182,7 +183,7 @@
                     </select>  
                 </div>  
             </div>  
-
+            <div class="g-recaptcha" data-sitekey="6Lfgv70qAAAAAK23Mjj-gfPwpHt10S6CRTtlFMao"></div><br>
             <button type="submit" class="register-button">Daftar</button>  
             <button type="button" onclick="window.location.href='index.jsp'" class="back-button">Kembali</button>  
         </form>  

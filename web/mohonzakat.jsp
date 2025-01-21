@@ -150,19 +150,6 @@
         <%
         return;
     }
-    String sql = "SELECT * FROM FAMILY WHERE STUDENTID = ?";
-    PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql);
-    pstmt.setString(1,studentid);
-    ResultSet rs = pstmt.executeQuery();
-    if(!rs.next()){
-    // Redirect to login page if no session exists
-        %>
-        <script>alert('Sila Lengkapkan Maklumat Keluarga sebelum membuat permohonan!');
-        window.location.href = 'studentDashboard.jsp';
-        </script>
-        <%
-        return;
-    }
     
     %>
 <body class="bg-light" style="margin-top:4%">

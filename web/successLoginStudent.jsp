@@ -44,7 +44,7 @@
     <script>
         // Timer for automatic redirection
         setTimeout(function() {
-            window.location.href = "studentDashboard.jsp";
+            window.location.href = "index.jsp";
         }, 5000); // Redirect after 5 seconds
     </script>
 </head>

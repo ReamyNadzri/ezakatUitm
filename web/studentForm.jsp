@@ -11,6 +11,9 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <title>Register Form</title>  
     <style>  
+        div {
+            font-family: 'Product Sans', sans-serif;
+        }
         body {  
             background-size: cover;  
             background-position: center;  
@@ -127,6 +130,15 @@
         .button-container button:hover {  
             opacity: 0.9;  
         }  
+        .status-approved {  
+            color: green;  
+        }  
+        .status-rejected {  
+            color: red;  
+        }  
+        .status-pending {  
+            color: orange;  
+        } 
     </style>  
 </head>  
 <body>  

@@ -1,43 +1,106 @@
+<%@page import="com.zakat.model.DBConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
 <%@ page import="java.sql.*" %>  
 <!DOCTYPE html>  
 <html>  
 <head>  
-    <title>Update Profile - Zakat UiTM</title>  
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="style.css">  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+    <title>Update Profile - Zakat UiTM</title>  
     <style>  
         body {  
-            display: flex;  
-            flex-direction: column;  
+            background-size: cover;  
+            background-position: center;  
+            background-repeat: no-repeat;  
+            background-attachment: fixed;  
+            justify-content: center;  
+            align-items: center;  
             height: 100vh;  
             margin: 0;  
         }  
-        .main-content {  
-            flex: 1;  
+
+        .container {  
+            width: 350px;  
             padding: 20px;  
-            background-color: #f8f9fa;  
+            background-color: #fff;  
+            border-radius: 10px;  
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+            border: 8px solid #800080; /* Thicker purple border */  
+            text-align: center;  
+            margin: auto;  
+            margin-top: 5%;  
         }  
-        .form-group {  
+
+        .title {  
+            text-align: center;  
+            margin-bottom: 20px;  
+            font-size: 24px;  
+            font-weight: bold;  
+            color: #000;  
+        }  
+
+        .form {  
+            display: flex;  
+            flex-direction: column;  
+            align-items: center;  
+        }  
+
+        label {  
+            margin-bottom: 5px;  
+            font-weight: bold;  
+            width: 100%;  
+            text-align: left;  
+        }  
+
+        input {  
             margin-bottom: 15px;  
+            padding: 10px;  
+            font-size: 14px;  
+            border: 1px solid #ccc;  
+            border-radius: 5px;  
+            width: 100%; /* Full width */  
+            box-sizing: border-box;  
         }  
-        input[type="text"], input[type="email"] {  
-            width: 100%; /* Make input fields take full width */  
-            padding: 10px; /* Add some padding for better appearance */  
-            border: 1px solid #ccc; /* Add a border */  
-            border-radius: 4px; /* Rounded corners */  
-            box-sizing: border-box; /* Include padding and border in element's total width and height */  
+
+        .update-button {  
+            background-color: #800080; /* Purple color */  
+            color: white;  
+            border: none;  
+            padding: 10px;  
+            border-radius: 5px;  
+            font-size: 16px;  
+            cursor: pointer;  
+            width: 100%; /* Full width */  
+        }  
+
+        .update-button:hover {  
+            background-color: #550055; /* Darker purple on hover */  
+        }  
+
+        .back-button {  
+            margin-top: 10px;  
+            width: 100%;  
+            padding: 10px;  
+            background-color: #666;  
+            color: white;  
+            border: none;  
+            border-radius: 5px;  
+            font-size: 14px;  
+            cursor: pointer;  
+        }  
+
+        .back-button:hover {  
+            background-color: #444;  
         }  
     </style>  
 </head>  
 <body>  
-    <div class="main-content">  
-        <h1>Update Profile</h1>  
+    <div class="container">  
+        <h2 class="title">Update Profile</h2>  
         <%  
-            String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
-            String dbUser = "zakatdb"; // Your Oracle username  
-            String dbPassword = "zakatdb"; // Your Oracle password  
+           
             String matricno = (String) session.getAttribute("MATRICNO"); // Assume student ID is stored in session  
 
             if (matricno != null) {  
@@ -47,8 +110,8 @@
 
                 try {  
                     // Load Oracle JDBC Driver  
-                    Class.forName("oracle.jdbc.OracleDriver");  
-                    conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
+                    
+                    conn = DBConnection.getConnection();
                     String sql = "SELECT * FROM student WHERE matricno = ?";  
                     stmt = conn.prepareStatement(sql);  
                     stmt.setString(1, matricno);  
@@ -60,7 +123,7 @@
                         String phoneNum = rs.getString("phoneNum");  
                         String address = rs.getString("address");  
         %>  
-                        <form action="processUpdate.jsp" method="post">  
+                        <form class="form" action="processUpdate.jsp" method="post">  
                             <div class="form-group">  
                                 <label for="name">Name:</label>  
                                 <input type="text" id="name" name="name" value="<%= name %>" required>  
@@ -78,7 +141,7 @@
                                 <input type="text" id="address" name="address" value="<%= address %>" required>  
                             </div>  
                             <input type="hidden" name="matricno" value="<%= matricno %>">  
-                            <button type="submit" class="w3-button w3-purple">Update</button>  
+                            <button type="submit" class="update-button">Update</button>  
                         </form>  
         <%  
                     } else {  
@@ -86,18 +149,13 @@
                     }  
                 } catch (SQLException e) {  
                     out.println("<p>Error retrieving profile information: " + e.getMessage() + "</p>");  
-                } catch (ClassNotFoundException e) {  
-                    out.println("<p>Database driver not found: " + e.getMessage() + "</p>");  
-                } finally {  
-                    // Close resources  
-                    if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
-                    if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  
-                    if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }  
-                }  
+                } 
             } else {  
                 out.println("<p>No student ID found in session.</p>");  
             }  
         %>  
+        <br>  
+        <a href="index.jsp" class="back-button">Back</a>  
     </div>  
 </body>  
 </html>

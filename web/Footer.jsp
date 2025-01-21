@@ -12,13 +12,18 @@
         <div class="footer-container">
             <!-- First Column -->
             <div class="footer-section">
-                <h3>Belum Log Masuk ?</h3>
-                <ul>
-                    <li><a href="loginStudent.jsp">Pelajar</a></li>
-                    <li><a href="#">Donator</a></li>
-                    <li><a href="loginStaff.jsp">Staff</a></li>
-                    <li><a href="admin/dashboard.jsp">Administrator</a></li>
-                </ul>
+                <%
+                String user = (String) session.getAttribute("NAME");
+                String donator = (String) session.getAttribute("USERNAME");
+                    if(user == null && donator == null) { %>
+                        <h3>Belum Log Masuk ?</h3>
+                        <ul>
+                            <li><a href="loginStudent.jsp">Pelajar</a></li>
+                            <li><a href="#">Donator</a></li>
+                            <li><a href="loginStaff.jsp">Staff</a></li>
+                            <li><a href="admin/dashboard.jsp">Administrator</a></li>
+                        </ul>
+                <%}%>
             </div>
 
             <!-- Second Column -->
