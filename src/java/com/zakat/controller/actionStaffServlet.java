@@ -61,13 +61,13 @@ public class actionStaffServlet extends HttpServlet {
         } else if ("approve".equals(action) || "reject".equals(action)) {  
             String newStatus = "approve".equals(action) ? "approved" : "rejected";  
             try (Connection conn = DBConnection.getConnection()) {  
-                String sql = "UPDATE DONATOR SET DONATORSTATUS = ? WHERE DONATORID = ?";  
+                String sql = "UPDATE STAFF SET DONATORSTATUS = ? WHERE STAFFID = ?";  
                 PreparedStatement stmt = conn.prepareStatement(sql);  
                 stmt.setString(1, newStatus);  
                 stmt.setInt(2, staffid);  
                 int r = stmt.executeUpdate();  
                 if (r > 0) {  
-                    response.sendRedirect("viewdonator.jsp"); // Redirect to Donor Management page  
+                    response.sendRedirect("viewstaff.jsp"); // Redirect to Donor Management page  
                 } else {   
                     response.sendRedirect("index.jsp");   
                 }  
@@ -79,7 +79,7 @@ public class actionStaffServlet extends HttpServlet {
 
         } else if ("delete".equals(action)) {  
             try (Connection conn = DBConnection.getConnection()) {  
-                String sql = "DELETE FROM DONATOR WHERE STAFFID = ?";  
+                String sql = "DELETE FROM STAFF WHERE STAFFID = ?";  
                 PreparedStatement stmt = conn.prepareStatement(sql);  
                 stmt.setInt(1, staffid);  
                 int r = stmt.executeUpdate();  

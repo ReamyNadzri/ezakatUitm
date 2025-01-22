@@ -127,6 +127,10 @@
         <servlet-class>com.zakat.controller.actionDonationServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>actionStudentServlet</servlet-name>
+        <servlet-class>com.zakat.controller.actionStudentServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>actionStaffServlet</servlet-name>
         <servlet-class>com.zakat.controller.actionStaffServlet</servlet-class>
     </servlet>
@@ -231,6 +235,10 @@
         <url-pattern>/admin/actionDonatorServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>actionStudentServlet</servlet-name>
+        <url-pattern>/admin/actionStudentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>actionDonationServlet</servlet-name>
         <url-pattern>/admin/actionDonationServlet</url-pattern>
     </servlet-mapping>
@@ -248,7 +256,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>actionStaffServlet</servlet-name>
-        <url-pattern>/actionStaffServlet</url-pattern>
+        <url-pattern>/admin/actionStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
