@@ -31,7 +31,7 @@
                                          stmt = connection.prepareStatement(sql);  
                                          rs = stmt.executeQuery();  
                                         if (rs.next()) {  
-                                            donatemonth = rs.getDouble("DAY");  
+                                            donatemonth = rs.getDouble("MONTH");  
                                         } 
                                         sql = "SELECT SUM(AMOUNT) AS YEAR FROM DONATION WHERE EXTRACT(YEAR FROM DONATIONDATE) = EXTRACT(YEAR FROM SYSDATE)";  
                                          stmt = connection.prepareStatement(sql);  
@@ -55,10 +55,7 @@
     <style>
         .mySlides {display:none;}
     
-  
-        div {
-            font-family: 'Product Sans', sans-serif;
-        }
+ 
         .background-container {
             position: relative;
             height: 35vh;

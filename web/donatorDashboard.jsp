@@ -130,7 +130,7 @@
             %>  
         </div>   
       
-        <div id="donate" class="tab-content">   
+        <div id="donate" class="tab-content" style="display:block">   
             <table class="min-w-full bg-white rounded-lg shadow-md">  
                 <thead>  
                     <tr class="bg-purple-600 text-white">  

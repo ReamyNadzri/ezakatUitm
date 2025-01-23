@@ -33,6 +33,16 @@ public class donatorRegisterServlet extends HttpServlet {
             String password = request.getParameter("password");  
 
             conn = DBConnection.getConnection();  
+            
+            String check = "SELECT NOIC FROM DONATOR WHERE NOIC = ?";
+                    PreparedStatement checkpstmt = conn.prepareStatement(check);
+                    checkpstmt.setString(1, icNumber);
+                    int rowsInsertedcheck = checkpstmt.executeUpdate();
+                    
+                    if(rowsInsertedcheck > 0){
+                        request.setAttribute("errorMessage", "Maaf id ini telah didaftarkan!");
+                                request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
+                    }
 
             // Prepare SQL query for insertion  
             String sql = "INSERT INTO DONATOR (USERNAME, PASSWORD, EMAIL, PHONENUM, STATE, CITY, NOIC) VALUES (?, ?, ?, ?, ?, ?, ?)";  

@@ -32,34 +32,34 @@
         try {  
             // Load Oracle JDBC Driver  
             conn = DBConnection.getConnection();  
-            String sql = "UPDATE family SET FNAME = ?, FWORK = ?,GROSSINCOMEF = ?,FPHONENUM = ?,MNAME = ?,MWORK = ?,GROSSINCOMEM = ?,MPHONENUM = ?,MARITALSTATUS = ?,GUARDIANRELAY = ?,GUARDIANWORK = ?,GUARDIANPHONENUM = ?,ADDRESS = ?,POSTCODE = ? WHERE STUDENTID = ?";  
+            String sql = "INSERT INTO family (STUDENTID, FNAME, FWORK, GROSSINCOMEF, FPHONENUM, MNAME, MWORK, GROSSINCOMEM, MPHONENUM, MARITALSTATUS, GUARDIANRELAY, GUARDIANWORK, GUARDIANPHONENUM, ADDRESS, POSTCODE) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";  
             stmt = conn.prepareStatement(sql); 
-            
-            stmt.setString(1, fName);  
-            stmt.setString(2, fWork);  
-            stmt.setDouble(3, Double.parseDouble(grossIncomeF));  
-            stmt.setString(4, fPhoneNum);   
-            stmt.setString(5, mName);  
-            stmt.setString(6, mWork);  
-            stmt.setDouble(7, Double.parseDouble(grossIncomeM));  
-            stmt.setString(8, mPhoneNum);  
-            stmt.setString(9, maritalStatus);  
-            stmt.setString(10, guardianRelay);  
-            stmt.setString(11, guardianWork);  
-            stmt.setString(12, guardianPhoneNum);  
-            stmt.setString(13, address);  
-            stmt.setString(14, postcode);  
-            stmt.setInt(15, Integer.parseInt(name));  
+            stmt.setInt(1, Integer.parseInt(name));  
+            stmt.setString(2, fName);  
+            stmt.setString(3, fWork);  
+            stmt.setDouble(4, Double.parseDouble(grossIncomeF));  
+            stmt.setString(5, fPhoneNum);  
+            stmt.setString(6, mName);  
+            stmt.setString(7, mWork);  
+            stmt.setDouble(8, Double.parseDouble(grossIncomeM));  
+            stmt.setString(9, mPhoneNum);  
+            stmt.setString(10, maritalStatus);  
+            stmt.setString(11, guardianRelay);  
+            stmt.setString(12, guardianWork);  
+            stmt.setString(13, guardianPhoneNum);  
+            stmt.setString(14, address);  
+            stmt.setString(15, postcode);  
 
             int rowsUpdated = stmt.executeUpdate();  
 
             if (rowsUpdated > 0) {  
                 response.sendRedirect("studentDashboard.jsp?update=true");  
             } else {  
-                out.println("<p>Error updating profile. Please try again.</p>");  
+                out.println("<p>Error inserting profile. Please try again.</p>");  
             }  
         } catch (SQLException e) {  
-            out.println("<p>Error updating profile: " + e.getMessage() + "</p>");  
+            out.println("<p>Error inserting profile: " + e.getMessage() + "</p>");  
         } finally {  
             // Close resources  
             if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  

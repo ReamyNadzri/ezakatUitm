@@ -1,3 +1,4 @@
+<%@page import="com.zakat.model.DBConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
 <%@ page import="java.sql.*" %>  
 <!DOCTYPE html>  
@@ -102,9 +103,6 @@
     <div class="container">  
         <h2 class="title">Kemaskini Profile Keluarga</h2>  
         <%  
-            String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Update with your database details  
-            String dbUser = "zakatdb"; // Your Oracle username  
-            String dbPassword = "zakatdb"; // Your Oracle password  
             String name = (String) session.getAttribute("STUDENTID"); // Assume student ID is stored in session  
 
             if (name != null) {  
@@ -114,8 +112,8 @@
 
                 try {  
                     // Load Oracle JDBC Driver  
-                    Class.forName("oracle.jdbc.OracleDriver");  
-                    conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);  
+                    
+                    conn = DBConnection.getConnection();
                     String sql = "SELECT * FROM family WHERE STUDENTID = ?";  
                     stmt = conn.prepareStatement(sql);  
                     stmt.setString(1, name);  
@@ -209,12 +207,12 @@
                                 </div>  
                             </div>  
                             <input type="hidden" name="STUDENTID" value="<%= name %>">  
-                            <button type="submit" class="update-button">Update</button>  
+                            <button type="submit" class="update-button">Kemaskini</button>  
                         </form>  
         <%  
                     } else {  
                         %>
-                        <form action='processUpdateFamily.jsp' method='post'>  
+                        <form action='processInsertFamily.jsp' method='post'>  
                             <div class='form-row'>  
                             <div class='form-group'>  
                                 <label for='fName'>Nama Bapa:</label>  
@@ -286,16 +284,14 @@
                             </div>  
                         </div>  
                         <input type='hidden' name='STUDENTID' value="<%= name %>">  
-                        <button type='submit' class='update-button'>Update</button>  
+                        <button type='submit' class='update-button'>Simpan</button>  
                         </form>
                         
                         <% 
                     }  
                 } catch (SQLException e) {  
                     out.println("<p class='text-danger'>Error retrieving profile information: " + e.getMessage() + "</p>");  
-                } catch (ClassNotFoundException e) {  
-                    out.println("<p class='text-danger'>Database driver not found: " + e.getMessage() + "</p>");  
-                } finally {  
+                }finally {  
                     // Close resources  
                     if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }  
                     if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }  

@@ -38,7 +38,7 @@ public class studentRegisterServlet extends HttpServlet {
         
         
             // Retrieve form parameters
-        String studentId = request.getParameter("studentId");
+  
         String name = request.getParameter("name");
         String matricno = request.getParameter("matricno");
         String income = request.getParameter("income");
@@ -85,22 +85,32 @@ public class studentRegisterServlet extends HttpServlet {
                 
                 try(Connection conndb = DBConnection.getConnection()) {
 
+                    String check = "SELECT MATRICNO FROM STUDENT WHERE MATRICNO = ?";
+                    PreparedStatement checkpstmt = conndb.prepareStatement(check);
+                    checkpstmt.setString(1,matricno);
+                    int rowsInsertedcheck = checkpstmt.executeUpdate();
+                    
+                    if(rowsInsertedcheck > 0){
+                        request.setAttribute("errorMessage", "Maaf id ini telah didaftarkan!");
+                                request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
+                    }
+                    
                     // SQL query for inserting a student record
-                    String sql = "INSERT INTO STUDENT (studentId, name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
-                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    String sql = "INSERT INTO STUDENT ( name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
+                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement pstmt = conndb.prepareStatement(sql);
 
-                    pstmt.setString(1, studentId);
-                    pstmt.setString(2, name);
-                    pstmt.setString(3, matricno);
-                    pstmt.setString(4, income);
-                    pstmt.setString(5, courseCode);
-                    pstmt.setString(6, courseName);
-                    pstmt.setString(7, campus);
-                    pstmt.setString(8, phoneNum);
-                    pstmt.setString(9, address);
-                    pstmt.setString(10, email);
-                    pstmt.setString(11, password); // Optionally hash the password for security
+                    
+                    pstmt.setString(1, name);
+                    pstmt.setString(2, matricno);
+                    pstmt.setString(3, income);
+                    pstmt.setString(4, courseCode);
+                    pstmt.setString(5, courseName);
+                    pstmt.setString(6, campus);
+                    pstmt.setString(7, phoneNum);
+                    pstmt.setString(8, address);
+                    pstmt.setString(9, email);
+                    pstmt.setString(10, password); // Optionally hash the password for security
 
                     // Execute the SQL statement
                     int rowsInserted = pstmt.executeUpdate();

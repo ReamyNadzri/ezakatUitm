@@ -6,6 +6,15 @@
 <%@page import="com.zakat.model.DBConnection"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>  
 <jsp:include page="header.jsp"></jsp:include>  
+<%
+    String updateValue = request.getParameter("update");
+
+    // Check if the parameter exists and has a value
+    if (updateValue != null && !updateValue.isEmpty()) {
+%><script>alert('Kemaskini Berjaya!');</script><%
+    } 
+%>
+%>
 <!DOCTYPE html>  
 <html>  
 <head>  
@@ -78,6 +87,25 @@
         .status-pending {  
             color: orange;  
         } 
+        .pagination-controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination-controls button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .pagination-controls select {
+            padding: 5px;
+        }
+
+        .pagination-controls span {
+            margin-left: 10px;
+        }
+        
     </style>  
     <script>  
         function openTab(tabName) {  
@@ -93,6 +121,61 @@
             document.getElementById(tabName).style.display = "block";  
             event.currentTarget.className += " active";  
         }  
+        document.addEventListener("DOMContentLoaded", function () {
+            const table = document.querySelector("#zakat table tbody");
+            const rows = Array.from(table.querySelectorAll("tr"));
+            const prevButton = document.getElementById("prevButton");
+            const nextButton = document.getElementById("nextButton");
+            const rowsPerPageSelect = document.getElementById("rowsPerPage");
+            const pageInfo = document.getElementById("pageInfo");
+
+            let currentPage = 1;
+            let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+            function updateTable() {
+                // Hide all rows
+                rows.forEach(row => row.style.display = "none");
+
+                // Calculate start and end index for the current page
+                const startIndex = (currentPage - 1) * rowsPerPage;
+                const endIndex = startIndex + rowsPerPage;
+
+                // Show rows for the current page
+                for (let i = startIndex; i < endIndex && i < rows.length; i++) {
+                    rows[i].style.display = "";
+                }
+
+                // Update pagination controls
+                prevButton.disabled = currentPage === 1;
+                nextButton.disabled = endIndex >= rows.length;
+                pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(rows.length / rowsPerPage)}`;
+            }
+
+            // Event listeners for pagination controls
+            prevButton.addEventListener("click", () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateTable();
+                }
+            });
+
+            nextButton.addEventListener("click", () => {
+                if (currentPage * rowsPerPage < rows.length) {
+                    currentPage++;
+                    updateTable();
+                }
+            });
+
+            rowsPerPageSelect.addEventListener("change", () => {
+                rowsPerPage = parseInt(rowsPerPageSelect.value);
+                currentPage = 1; // Reset to the first page
+                updateTable();
+            });
+
+            // Initial table update
+            updateTable();
+        });
+        
     </script>  
 </head>  
 
@@ -110,12 +193,15 @@
             %>  
                 Welcome to your dashboard, <%= user %>!  
             <%  
-                } else {  
+                }else{
+%><script>
+    
+    alert('Sila daftar dahulu!');
+    window.location.href = 'userLogin.jsp';
+</script><%
+                }
             %>  
-                Welcome to the Student Dashboard!  
-            <%  
-                }  
-            %>  
+              
         </div>  
 
         <!-- Tab Container -->  
@@ -159,7 +245,7 @@
                                 <th class="py-2 px-4">Actions</th>  
                             </tr>  
                         </thead>  
-                        <tbody>  
+                        <tbody id="zakatTableBody">  
                             <!-- Sample Data - Replace with dynamic data from your backend -->  
                             <%
                                 while (rs.next()){
@@ -201,6 +287,16 @@
                             <!-- Add more application rows as needed -->  
                         </tbody>  
                     </table>  
+                                <div class="pagination-controls">
+                                        <button id="prevButton" disabled>Previous</button>
+                                        <button id="nextButton">Next</button>
+                                        <select id="rowsPerPage">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                        </select>
+                                        <span id="pageInfo"></span>
+                                    </div>
                 </div> 
             </div>  
         </div>
@@ -233,7 +329,7 @@
                                     <th class="py-2 px-4">Resit</th> 
                                 </tr>  
                             </thead>  
-                            <tbody>  
+                            <tbody id="zakatTableBody">  
                                 <!-- Sample Data - Replace with dynamic data from your backend -->  
                                 <%
                                     while (rs.next()){
@@ -253,7 +349,7 @@
                                         }else if(rs.getString("DONATIONSTATUS").equals("DITOLAK")){ %>
                                         <td class="border px-4 py-2 status-rejected"><%=rs.getString("DONATIONSTATUS")%></td> <%
                                         }%>
-                                    <td class="border px-4 py-2"><a href='Receipt.jsp'  name='action' class=' bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700'>KEMAS KINI</a></td>  
+                                    <td class="border px-4 py-2"><a href='Receipt.jsp'  name='action' class=' bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700'>Generate Receipt</a></td>  
                                         </form>  
                                     
                                 </tr>
@@ -272,6 +368,16 @@
                                 <!-- Add more application rows as needed -->  
                             </tbody>  
                         </table>  
+                                    <div class="pagination-controls">
+                                        <button id="prevButton" disabled>Previous</button>
+                                        <button id="nextButton">Next</button>
+                                        <select id="rowsPerPage">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                        </select>
+                                        <span id="pageInfo"></span>
+                                    </div>
                     </div> 
                 </div>  
             </div>
@@ -332,8 +438,8 @@
                             <div class="profile-info">  
                                 <strong>Address:</strong> <%= address %>  
                             </div>  
-                            <div class="update-button">  
-                                <a href="updateProfile.jsp" class="w3-button w3-purple">Update Profile</a>  
+                            <div class="update-button w3-center">  
+                                <a href="updateProfile.jsp" class="w3-button w3-purple">Kemaskini Profil</a>  
                             </div>  
             <%  
                         } else {  
@@ -437,8 +543,8 @@
                             <div class="profile-info">  
                                 <strong>Poskod:</strong> <%= postcode %>  
                             </div>  
-                            <div class="update-button">  
-                                <a href="updateParentProfile.jsp" class="w3-button w3-purple">Update Profile</a>  
+                            <div class="update-button w3-center">  
+                                <a href="updateParentProfile.jsp" class="w3-button w3-purple">Kemaskini Profil Keluarga</a>  
                             </div>  
             <%  
                         } else {  
