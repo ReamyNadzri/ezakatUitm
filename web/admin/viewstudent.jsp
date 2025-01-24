@@ -42,7 +42,7 @@
 <div class="container mx-auto flex-grow mt-8 px-4">   
 
     <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Jumlah Pelajar Terdaftar</h2>  
+        <h2 class="text-3xl font-semibold mb-4 text-white text-center">Jumlah Pelajar Terdaftar</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
                 <tr class="bg-purple-500 text-white">  
@@ -51,7 +51,7 @@
                     <th class="py-2 px-4">No Matrik</th>  
                     <th class="py-2 px-4">Nama</th>  
                     <th class="py-2 px-4">Email</th>  
-                    <th class="py-2 px-4">Kata Laluan</th>      
+                    <th class="py-2 px-4">Kata Laluan</th> 
                     <th class="py-2 px-4">Actions</th>  
                 </tr>  
             </thead>  
@@ -65,10 +65,10 @@
                     <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
                     <td class="border px-4 py-2 text-center"><%= rs.getString("NAME") %></td>   
                     <td class="border px-4 py-2 text-center"><%= rs.getString("EMAIL") %></td>  
-                    <td class="border px-4 py-2 text-center "><%= rs.getString("PASSWORD") %></td>     
+                    <td class="border px-4 py-2 text-center ">[ HIDDEN ]</td>
                     <td class="border px-4 py-2">  
                        <div class="flex space-x-2">  
-                            <form action="actionStudentServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Admin?');">  
+                            <form action="actionStudentServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Student?');">  
                                 <input type="hidden" name="STUDENTID" value='<%= rs.getString("STUDENTID") %>' />  
                                 <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
                             </form>  

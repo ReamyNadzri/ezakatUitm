@@ -35,7 +35,7 @@
 <div class="container mx-auto flex-grow mt-10 px-4">   
 
     <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Info Admin</h2>  
+        <h2 class="text-3xl font-semibold mb-4 text-white text-center">Tentang Admin</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
                 <tr class="bg-purple-500 text-white">  

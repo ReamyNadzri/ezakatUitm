@@ -64,7 +64,7 @@
 <body class="bg-gray-100">  
 
 <div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md" style="background: #7C3AED;">  
-    <h1 class="text-3xl font-bold mb-4">Family Details</h1>  
+    <h1 class="text-3xl font-bold mb-4 text-center text-white">Family Details</h1>  
 
     <table class="min-w-full">  
         <tbody>  

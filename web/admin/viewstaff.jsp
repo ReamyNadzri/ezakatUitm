@@ -24,17 +24,15 @@
 <div class="container mx-auto flex-grow mt-8 px-4">
 
     <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Ahli Kakitangan</h2>  
+        <h2 class="text-3xl font-semibold mb-4 text-white text-center">Ahli Kakitangan</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">
             <thead>  
                 <tr class="bg-purple-500 text-white">  
                     <th class="py-2 px-4">Bil.</th>  
                     <th class="py-2 px-4">No. Staff</th>  
-                    <th class="py-2 px-4">No. Telefon</th>  
                     <th class="py-2 px-4">Nama</th>  
                     <th class="py-2 px-4">Email</th>  
                     <th class="py-2 px-4">Kata Laluan</th>
-                    <th class="py-2 px-4">Kampus</th>
                     <th class="py-2 px-4">Actions</th>  
                 </tr>  
             </thead>  
@@ -46,18 +44,16 @@
                     try {  
                         connection = DBConnection.getConnection();  
                         stmt = connection.createStatement();  
-                        rs = stmt.executeQuery("SELECT STAFFID, STAFFNO, PASSWORD, NAME, PHONENUM, EMAIL, CAMPUS FROM STAFF ORDER BY STAFFID DESC");  
+                        rs = stmt.executeQuery("SELECT STAFFID, STAFFNO, PASSWORD, NAME, EMAIL FROM STAFF ORDER BY STAFFID DESC");  
                         int count = 1;  
                         while (rs.next()) {  
                 %>  
                 <tr>  
                     <td class="border px-4 py-2 text-center"><%= count++ %></td>  
-                    <td class="border px-4 py-2 text-center"><%= rs.getString("STAFFNO") %></td>  
-                    <td class="border px-4 py-2 text-center"><%= rs.getString("PHONENUM") %></td>  
+                    <td class="border px-4 py-2 text-center"><%= rs.getString("STAFFNO") %></td> 
                     <td class="border px-4 py-2 text-center"><%= rs.getString("NAME") %></td>  
                     <td class="border px-4 py-2 text-center"><%= rs.getString("EMAIL") %></td>
-                    <td class="border px-4 py-2 text-center">[ HIDDEN ]</td>
-                    <td class="border px-4 py-2 text-center"><%= rs.getString("CAMPUS") %></td> 
+                    <td class="border px-4 py-2 text-center">[ HIDDEN ]</td> 
                     <td class="border px-4 py-2 text-center">
                             <form action="actionStaffServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Staff?');" style="display:inline-block;">  
                                 <input type="hidden" name="STAFFID" value='<%=rs.getString("STAFFID")%>' />   

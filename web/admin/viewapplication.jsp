@@ -15,7 +15,8 @@
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Zakat Application Management</title>  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>  
   
         .bg-custom {  
@@ -29,7 +30,25 @@
         }  
         .status-pending {  
             color: orange;  
-        }  
+        }
+        .status-approved::before {  
+            content: '\f00c'; /* Font Awesome check icon */
+            font-family: 'Font Awesome 5 Free';  
+            font-weight: 900;  
+            margin-right: 8px;
+        }
+        .status-pending::before {  
+            content: '\f110'; /* Font Awesome spinner icon */
+            font-family: 'Font Awesome 5 Free';  
+            font-weight: 900;  
+            margin-right: 8px;
+        } 
+        .status-rejected::before {  
+            content: '\f00d'; /* Font Awesome times icon */
+            font-family: 'Font Awesome 5 Free';  
+            font-weight: 900;  
+            margin-right: 8px;
+        }
     </style>  
 </head>  
 <body class="bg-custom flex flex-col justify-between">  
@@ -46,7 +65,7 @@
 <div class="container mx-auto flex-grow mt-8 px-4">
 
     <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Permohonan Zakat</h2>  
+        <h2 class="text-3xl font-semibold mb-4 text-white text-center">Permohonan Zakat</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
                 <tr class="bg-purple-500 text-white">  
@@ -56,20 +75,21 @@
                     <th class="py-2 px-4">Nama</th>  
                     <th class="py-2 px-4">Permohonan</th>  
                     <th class="py-2 px-4">Status</th>  
-                    <th class="py-2 px-4">Actions</th>  
+                    <th class="py-2 px-4">Tindakan</th>  
                 </tr>  
             </thead>  
             <tbody>  
                 <!-- Sample Data - Replace with dynamic data from your backend -->  
                 <%
+                    int count = 1;
                     while (rs.next()){
-                    %>
+                %>
                 <tr>  
-                    <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
-                    <td class="border px-4 py-2 text-center"><%=rs.getString("APPLYID")%></td>  
+                    <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
+                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
                     <td class="border px-4 py-2 text-center"><%=rs.getString("DESCRIPTION")%></td>  
                     <td class="border px-4 py-2 text-center"><%=rs.getString("MATRICNO")%></td>  
-                    <td class="border px-4 py-2 text-center"><%=rs.getString("STUDENT_NAME")%><button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button> </td>   
+                    <td class="border px-4 py-2 text-center"><%=rs.getString("STUDENT_NAME")%><button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button> </td>   
                     <td class="border px-4 py-2 text-center"><%=rs.getString("ZAKATNAME")%></td>   
                     <% if(rs.getString("STATUS").equals("BERJAYA")){%>
                         <td class="border px-4 py-2 status-approved text-center"><%=rs.getString("STATUS")%></td>
@@ -80,12 +100,11 @@
                         <td class="border px-4 py-2 status-rejected text-center"><%=rs.getString("STATUS")%></td> <%
                         }%>
                     <td class="border px-4 py-2">  
-                        
                             <input type="hidden" name="APPLYID" value='<%=rs.getString("APPLYID")%>' />  
-                            <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Success</button>
-                            <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Pending</button>
-                            <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Reject</button>
-                            <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                            <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>
+                            <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>
+                            <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>
+                            <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>
                         </form>  
                     </td>  
                 </tr>

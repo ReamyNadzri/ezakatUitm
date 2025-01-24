@@ -51,7 +51,7 @@
 <body class="bg-purple-800">  
 
 <div class="container mx-auto mt-10 p-6 rounded-lg shadow-md" style="background: #7C3AED;">  
-    <h1 class="text-3xl font-bold mb-4">Tentang Penyumbang</h1>  
+    <h1 class="text-3xl font-bold mb-4 text-center text-white">Tentang Kakitangan</h1>  
 
     <table class="min-w-full">  
         <tbody>  

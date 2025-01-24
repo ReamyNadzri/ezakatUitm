@@ -48,11 +48,11 @@
   <div class="w3-bar w3-27374D" style="background-color: #AF65C2; font-weight: bold; margin:0 auto; width:80%;height:75px">
     <a href="dashboard.jsp" class="w3-bar-item w3-button" style="width:16.66%;height:auto">
     <div class="w3-left"><i class="fas fa-home w3-xlarge" style="padding: 10px 0px;position:relative;right:2px;top:10px;height:60px"></i></div><br>
-    MAIN PAGE</a>
+    HALAMAN UTAMA</a>
     <div class="w3-dropdown-hover" style="width: 16.66%;">
       <button class="w3-button" style="width: 100%;">
       <div class="w3-left"><i class="fas fa-book w3-xlarge" style="padding: 10px 0px;;position:relative;right:-10px;top:10px;height:60px"></i></div><br>
-      INFORMATION</button>
+      TENTANG</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4" >
         <a href='viewapplication.jsp' class="w3-bar-item w3-button">PERMOHONAN</a>
         <a href='viewdonation.jsp' class="w3-bar-item w3-button">SUMBANGAN</a>
@@ -64,12 +64,12 @@
     </div>
     <a href="analysis.php" class="w3-bar-item w3-button" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-chart-line w3-xlarge" style="padding: 10px 0px;;position:relative;right:-4px;top:10px;height:60px"></i></div><br>
-    LATEST APPLICATION</a>
+    PERMOHONAN TERKINI</a>
 
 <!--    <div class="w3-dropdown-hover" style="width: 16.66%;">
       <button class="w3-button" style="width: 100%;">
       <div class="w3-left"><i class="fas fa-cog w3-xlarge" style="padding: 10px 0px;;position:relative;right:-28px;top:10px;height:60px"></i></div><br>
-      SETTING</button>
+      TETAPAN</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
         <input name='reSize1' type='button' class="w3-bar-item w3-button" value='&nbsp;Reset&nbsp;'
           onclick="resizeText(2)" />
@@ -81,7 +81,7 @@
     </div>-->
     <a href='logoutAdminStaff' class="w3-bar-item w3-button w3-right" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-lock w3-xlarge" style="padding: 10px 0px;position:relative;right:-30px;top:10px;height:60px"></i></div><br>
-    LOG OUT</a>
+    LOG KELUAR</a>
   </div>
 </div>
   
@@ -92,11 +92,11 @@
   <div class="w3-bar w3-27374D" style="background-color: #AF65C2; font-weight: bold; margin:0 auto; width:80%;height:75px">
     <a href="dashboard.jsp" class="w3-bar-item w3-button" style="width:16.66%;height:auto">
     <div class="w3-left"><i class="fas fa-home w3-xlarge" style="padding: 10px 0px;position:relative;right:2px;top:10px;height:60px"></i></div><br>
-    MAIN PAGE</a>
+    HALAMAN UTAMA</a>
     <div class="w3-dropdown-hover" style="width: 16.66%;">
       <button class="w3-button" style="width: 100%;">
       <div class="w3-left"><i class="fas fa-book w3-xlarge" style="padding: 10px 0px;;position:relative;right:-10px;top:10px;height:60px"></i></div><br>
-      INFORMATION</button>
+      TENTANG</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4" >
         <a href='viewapplication.jsp' class="w3-bar-item w3-button">PERMOHONAN</a>
         <a href='viewdonation.jsp' class="w3-bar-item w3-button">SUMBANGAN</a>
@@ -108,12 +108,12 @@
     </div>
     <a href="analysis.php" class="w3-bar-item w3-button" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-chart-line w3-xlarge" style="padding: 10px 0px;;position:relative;right:-4px;top:10px;height:60px"></i></div><br>
-    LATEST APPLICATION</a>
+    PERMOHONAN TERKINI</a>
 
     <div class="w3-dropdown-hover" style="width: 16.66%;">
       <button class="w3-button" style="width: 100%;">
       <div class="w3-left"><i class="fas fa-cog w3-xlarge" style="padding: 10px 0px;;position:relative;right:-28px;top:10px;height:60px"></i></div><br>
-      SETTING</button>
+      TETAPAN</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
         <button class="w3-bar-item w3-button" onclick="resetText()">Reset</button>
         <button class="w3-bar-item w3-button" onclick="resizeText(1)">Zoom In</button>
@@ -122,7 +122,7 @@
     </div>
     <a href='logoutAdminStaff' class="w3-bar-item w3-button w3-right" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-lock w3-xlarge" style="padding: 10px 0px;position:relative;right:-30px;top:10px;height:60px"></i></div><br>
-    LOG OUT</a>
+    LOG KELUAR</a>
   </div>
 </div>
 <%}%>

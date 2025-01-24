@@ -1,17 +1,6 @@
-<%-- 
-    Document   : viewDetailApplication
-    Created on : 12 Jan 2025, 10:55:31 pm
-    Author     : rahim
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="admin_header.jsp"></jsp:include>
 <!DOCTYPE html>
-<%
-    
-    %>
-
-
 
 <head>
     <title>Permohonan Zakat</title>
@@ -19,7 +8,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
-   
     <style>
         #bantuankewangan {
             display: none; /* Hide inputs by default */
@@ -86,8 +74,20 @@
             background-color: #4CAF50;
             color: white;
         }
-   
-        
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .flex-item {
+            flex: 1;
+        }
+        .centered-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -135,134 +135,122 @@
   
     <div class="w3-container w3-row w3-white" style="background: #f3e8fd">
         <div class="w3-container w3-col" style="width: 10%; height: 100px;">
-            
         </div>
-        <!--applyID, studentID, zakatID, siblings, applyDate(current), totalIncome, studentLetter, transcriptDoc, icDoc, gradDate, entryDate, bankName, bankNum-->
         <div class="w3-container w3-col" style="width: 80%;">
-        
-            <div class="w3-container w3-round-large w3-margin w3-card w3-row" style="padding-left:50px ; padding-top:25px">
-                <div class="w3-container w3-cell">
-                    <div class="w3-panel w3-row w3-cell">
-                        <h3>Maklumat Terperinci Permohonan Zakat</h3>
-                        <HR>
-                        <div class="w3-cell">
-                            ID Permohonan
-                            <br>No. Matrik &emsp;&emsp;  <!--studentID-->
-                            <br>Nama
-                            <br>Email
-                            <br>Kampus
-                            <hr><!-- maklumat pelajar -->
-                            CGPA Terkini
-                            <br>GPA Terkini
-                            <br>Tahun Graduasi
-                            <hr><!-- maklumat bank -->
-                            Nombor Bank
-                            <br>Nama Bank
-                            <hr>
-                            Surat Transcript
-                            <br>Student Letter
-                            <br>Dokumen IC
-                        </div>
-                        <div class="w3-cell">  <!--select * from student where studentID = (name)-->
-                            &emsp;:&emsp; ${APPLYID}
-                            <br>&emsp;:&emsp; ${MATRICNO}
-                            <br>&emsp;:&emsp; ${NAME}
-                            <br>&emsp;:&emsp; ${EMAIL}
-                            <br>&emsp;:&emsp; ${CAMPUS}
-                            <hr><!-- maklumat pelajar -->
-                            &emsp;:&emsp; ${CGPA}
-                            <br>&emsp;:&emsp; ${GPA}
-                            <br>&emsp;:&emsp; ${GRADYEAR}
-                            <hr><!-- maklumat bank -->
-                            &emsp;:&emsp; ${BANKNO}
-                            <br>&emsp;:&emsp; ${BANKNAME}
-                            <hr>
-                            &emsp;:&emsp; <a href="<%=doc1%>" target="_blank">Download</a>
-                            <br>&emsp;:&emsp; <a href="<%=doc2%>" target="_blank">Download</a>
-                            <br>&emsp;:&emsp; <a href="<%=doc3%>" target="_blank">Download</a>
-                        </div>
+            <div class="w3-container w3-round-large w3-margin w3-card flex-container" style="padding-left:50px; padding-top:10px; box-shadow: 0 0px 15px rgba(128, 0, 128, 1.0);">
+                <!-- Maklumat Terperinci Permohonan Zakat -->
+                <div class="w3-panel w3-row w3-cell flex-item">
+                    <h3>Maklumat Terperinci Permohonan Zakat</h3>
+                    <hr>
+                    <div class="w3-cell">
+                        ID Permohonan
+                        <br>No. Matrik &emsp;&emsp;  <!--studentID-->
+                        <br>Nama
+                        <br>Email
+                        <br>Kampus
+                        <hr><!-- maklumat pelajar -->
+                        CGPA Terkini
+                        <br>GPA Terkini
+                        <br>Tahun Graduasi
+                        <hr><!-- maklumat bank -->
+                        Nombor Bank
+                        <br>Nama Bank
+                        <hr>
+                        Surat Transcript
+                        <br>Student Letter
+                        <br>Dokumen IC
+                    </div>
+                    <div class="w3-cell">
+                        &emsp;:&emsp; ${APPLYID}
+                        <br>&emsp;:&emsp; ${MATRICNO}
+                        <br>&emsp;:&emsp; ${NAME}
+                        <br>&emsp;:&emsp; ${EMAIL}
+                        <br>&emsp;:&emsp; ${CAMPUS}
+                        <hr><!-- maklumat pelajar -->
+                        &emsp;:&emsp; ${CGPA}
+                        <br>&emsp;:&emsp; ${GPA}
+                        <br>&emsp;:&emsp; ${GRADYEAR}
+                        <hr><!-- maklumat bank -->
+                        &emsp;:&emsp; ${BANKNO}
+                        <br>&emsp;:&emsp; ${BANKNAME}
+                        <hr>
+                        &emsp;:&emsp; <a href="<%=doc1%>" target="_blank">Download</a>
+                        <br>&emsp;:&emsp; <a href="<%=doc2%>" target="_blank">Download</a>
+                        <br>&emsp;:&emsp; <a href="<%=doc3%>" target="_blank">Download</a>
                     </div>
                 </div>
-                <hr>
-                <div class="w3-panel w3-row w3-cell">
-                    <div class="w3-container w3-cell">
-                        <h3>Maklumat Permohonan Zakat yang Dipilih</h3>
-                        <caption>ZAKAT KOLEJ</caption>
-                        <div class="w3-cell">
-                            Nama Kolej
-                            <br>Jumlah Bayaran
-                            <br>Borang Elektrik
-                            <br>Borang Kolej
-                        </div>
-                        <div class="w3-cell">  
-                            &emsp;:&emsp; ${KOLEJNAME != null && KOLEJNAME != '' ? KOLEJNAME : 'TIDAK MEMOHON'}
-                            <br>&emsp;:&emsp; ${TOTALKOLEJ != null && TOTALKOLEJ != '0.0' ? TOTALKOLEJ : 'TIDAK MEMOHON'}
-                            <% if(doc4 != "TIDAK MEMOHON"){%>
-                                <br>&emsp;:&emsp; <a href="<%=doc4%>" target="_blank">Download</a>
-                            <%}else{%><br><%}%>
-                            <% if(doc5 != null){%>
-                                <br>&emsp;:&emsp; <a href="<%=doc5%>" target="_blank">Download</a>
-                            <%}else{%><br><%}%>
-                        </div>
-                        <hr>
-                        <caption>ZAKAT YURAN</caption>
-                        <div class="w3-cell">
-                            Yuran Kolej
-                            <br>Borang Semester
-                            <br>Resit Yuran
-                        </div>
-                        <div class="w3-cell">  
-                            &emsp;:&emsp; ${TOTALYURAN != null && TOTALYURAN != '0.0' ? TOTALYURAN : 'TIDAK MEMOHON'}
-                            <% if(doc6 != null){%>
-                                <br>&emsp;:&emsp; <a href="<%=doc6%>" target="_blank">Download</a>
-                            <%}else{%><br><%}%>
-                            <% if(doc7 != null){%>
-                                <br>&emsp;:&emsp; <a href="<%=doc7%>" target="_blank">Download</a>
-                            <%}else{%><br><%}%>
-                        </div>
-                        <hr>
-                        <caption>ZAKAT MAKAN</caption>
-                        <div class="w3-cell">
-                            Nama Cafe
-                        </div>
-                        <div class="w3-cell">
-                            &emsp;&emsp;:&emsp;${CAFE != null && CAFE != '0.0' ? 
-                                                (CAFE.toLowerCase() == 'rrcafe' ? 'RR Cafe (Kiosk)' : 
-                                                (CAFE.toLowerCase() == 'cafelestari' ? 'Cafe Lestari' : CAFE)) 
-                                                : 'TIDAK MEMOHON'}
-                        </div>
-                        <hr>
-                        <caption>ZAKAT MUSIBAH</caption>
-                        <div class="w3-cell">
-                            Sebab-sebab
-                            <br>Tarikh Musibah
-                            <br>Jumlah Kerugian
-                            <br>Dokumen Kerugian
-                            <br>Surat Sebab
-                        </div>
-                        <div class="w3-cell">  
-                            &emsp;:&emsp; ${REASON != null && REASON != '' ? REASON : 'TIDAK MEMOHON'}
-                            <br>&emsp;:&emsp; ${MUSIBAHDATE != null && MUSIBAHDATE != '' ? MUSIBAHDATE : 'TIDAK MEMOHON'}
-                            <br>&emsp;:&emsp; ${TOTALCOST != null && TOTALCOST != '0.0' ? TOTALCOST : 'TIDAK MEMOHON'}
-                            <% if(doc8 != null){%>
-                                <br>&emsp;:&emsp; <a href="<%=doc8%>" target="_blank">Download</a>
-                            <%}else{%><br><%}%>
-                            <% if(doc9 != null){%>
-                                <br>&emsp;:&emsp; <a href="<%=doc9%>" target="_blank">Download</a>
-                            <%}else{%><br><%}%>
-                        </div>
+                <!-- Maklumat Permohonan Zakat yang Dipilih -->
+                <div class="w3-panel w3-row w3-cell flex-item">
+                    <h3>Maklumat Permohonan Zakat yang Dipilih</h3>
+                    <caption>ZAKAT KOLEJ</caption>
+                    <div class="w3-cell">
+                        Nama Kolej
+                        <br>Jumlah Bayaran
+                        <br>Borang Elektrik
+                        <br>Borang Kolej
                     </div>
-                        <br>
-                        <a class="w3-button w3-dark-grey w3-hover" href="viewapplication.jsp">KEMBALI</a>
-                        <br><br>
+                    <div class="w3-cell">
+                        &emsp;:&emsp; ${KOLEJNAME != null && KOLEJNAME != '' ? KOLEJNAME : 'TIDAK MEMOHON'}
+                        <br>&emsp;:&emsp; ${TOTALKOLEJ != null && TOTALKOLEJ != '0.0' ? TOTALKOLEJ : 'TIDAK MEMOHON'}
+                        <% if(doc4 != "TIDAK MEMOHON"){%>
+                            <br>&emsp;:&emsp; <a href="<%=doc4%>" target="_blank">Download</a>
+                        <%}else{%><br><%}%>
+                        <% if(doc5 != null){%>
+                            <br>&emsp;:&emsp; <a href="<%=doc5%>" target="_blank">Download</a>
+                        <%}else{%><br><%}%>
+                    </div>
+                    <hr>
+                    <caption>ZAKAT YURAN</caption>
+                    <div class="w3-cell">
+                        Yuran Kolej
+                        <br>Borang Semester
+                        <br>Resit Yuran
+                    </div>
+                    <div class="w3-cell">
+                        &emsp;:&emsp; ${TOTALYURAN != null && TOTALYURAN != '0.0' ? TOTALYURAN : 'TIDAK MEMOHON'}
+                        <% if(doc6 != null){%>
+                            <br>&emsp;:&emsp; <a href="<%=doc6%>" target="_blank">Download</a>
+                        <%}else{%><br><%}%>
+                        <% if(doc7 != null){%>
+                            <br>&emsp;:&emsp; <a href="<%=doc7%>" target="_blank">Download</a>
+                        <%}else{%><br><%}%>
+                    </div>
+                    <hr>
+                    <caption>ZAKAT MAKAN</caption>
+                    <div class="w3-cell">
+                        Nama Cafe
+                    </div>
+                    <div class="w3-cell">
+                        &emsp;&emsp;:&emsp;${CAFE != null && CAFE != '0.0' ? 
+                                            (CAFE.toLowerCase() == 'rrcafe' ? 'RR Cafe (Kiosk)' : 
+                                            (CAFE.toLowerCase() == 'cafelestari' ? 'Cafe Lestari' : CAFE)) 
+                                            : 'TIDAK MEMOHON'}
+                    </div>
+                    <hr>
+                    <caption>ZAKAT MUSIBAH</caption>
+                    <div class="w3-cell">
+                        Sebab-sebab
+                        <br>Tarikh Musibah
+                        <br>Jumlah Kerugian
+                        <br>Dokumen Kerugian
+                        <br>Surat Sebab
+                    </div>
+                    <div class="w3-cell">
+                        &emsp;:&emsp; ${REASON != null && REASON != '' ? REASON : 'TIDAK MEMOHON'}
+                        <br>&emsp;:&emsp; ${MUSIBAHDATE != null && MUSIBAHDATE != '' ? MUSIBAHDATE : 'TIDAK MEMOHON'}
+                        <br>&emsp;:&emsp; ${TOTALCOST != null && TOTALCOST != '0.0' ? TOTALCOST : 'TIDAK MEMOHON'}
+                        <% if(doc8 != null){%>
+                            <br>&emsp;:&emsp; <a href="<%=doc8%>" target="_blank">Download</a>
+                        <%}else{%><br><%}%>
+                        <% if(doc9 != null){%>
+                            <br>&emsp;:&emsp; <a href="<%=doc9%>" target="_blank">Download</a>
+                        <%}else{%><br><%}%>
+                    </div>
                 </div>
-                
-                
-                
             </div>
-        </div>
-        <div class="w3-container w3-col" style="width: 10%; height: 100px;">
-            
+            <div class="centered-button-container">
+                <a class="w3-button w3-purple w3-hover w3-round-large" href="viewapplication.jsp">KEMBALI</a>
+            </div>
         </div>
     </div>
 </body>

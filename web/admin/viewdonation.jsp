@@ -20,22 +20,22 @@
         .bg-custom {  
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
         }  
-        .status-disemak {  
+        .status-lulus {  
             color: green;  
         }  
-        .status-dalam-proses {  
+        .status-semak {  
             color: orange;  
         }
         .status-gagal {  
             color: red;  
         }
-        .status-disemak::before {  
+        .status-lulus::before {  
             content: '\f00c'; /* Font Awesome check icon */
             font-family: 'Font Awesome 5 Free';  
             font-weight: 900;  
             margin-right: 8px;
         }
-        .status-dalam-proses::before {  
+        .status-semak::before {  
             content: '\f110'; /* Font Awesome spinner icon */
             font-family: 'Font Awesome 5 Free';  
             font-weight: 900;  
@@ -54,7 +54,7 @@
 <div class="container mx-auto flex-grow mt-8 px-4"> 
 
     <div class="shadow-lg rounded-lg p-8" style="background: #7C3AED;">  
-        <h2 class="text-2xl font-semibold mb-4 text-white">Jumlah Sumbangan Zakat</h2>  
+        <h2 class="text-3xl font-semibold mb-4 text-white text-center">Jumlah Sumbangan Zakat</h2>  
         <table class="min-w-full bg-white rounded-lg shadow-md">  
             <thead>  
                 <tr class="bg-purple-500 text-white">  
@@ -65,12 +65,7 @@
                     <th class="py-2 px-4">Amaun</th>  
                     <th class="py-2 px-4">Nota</th>  
                     <th class="py-2 px-4">Status</th>
-                    <% 
-                        String staffNo = (String) session.getAttribute("STAFFNO");
-                        if (staffNo != null) {
-                    %>
                     <th class="py-2 px-4">Tindakan</th>
-                    <% } %>
                 </tr>  
             </thead>  
             <tbody>
@@ -87,10 +82,10 @@
                         while (rs.next()) {  
                             String status = rs.getString("DONATIONSTATUS");
                             String statusClass = "";
-                            if ("disemak".equalsIgnoreCase(status)) {
-                                statusClass = "status-disemak";
-                            } else if ("dalam proses".equalsIgnoreCase(status)) {
-                                statusClass = "status-dalam-proses";
+                            if ("BERJAYA".equalsIgnoreCase(status)) {
+                                statusClass = "status-lulus";
+                            } else if ("DISEMAK".equalsIgnoreCase(status)) {
+                                statusClass = "status-semak";
                             } else {
                                 statusClass = "status-gagal";
                             }           
@@ -103,19 +98,15 @@
                     <td class="border px-4 py-2 text-center"><%= rs.getString("AMOUNT") %></td>  
                     <td class="border px-4 py-2 text-center"><%= rs.getString("NOTE") %></td>
                     <td class="border px-4 py-2 text-center <%= statusClass %>"><%= status %></td>
-                    <% 
-                        if (staffNo != null) {
-                    %>
-                    <td class="border px-4 py-2">
-                        <div class="flex space-x-2">  
-                            <form action="actionDonationServlet" method="post" onsubmit="return confirm('Are you sure you want to approve this donation?');">
+                    <td class="border px-4 py-2"> 
+                            <form action="actionDonationServlet" method="post" onsubmit="return confirm('Are you sure you want to make changes for this donation?');">
                                 <input type="hidden" name="DONATEID" value='<%= rs.getString("DONATEID") %>' />
-                                <button type="submit" name="action" value="update" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">approve</button>
-                                <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">reject</button>
-                            </form> 
-                        </div> 
+                                <button type="submit" name="action" value="lulus" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>
+                                <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>
+                                <button type="submit" name="action" value="batal" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>
+                                <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-500">Buang</button>
+                            </form>
                     </td>
-                    <% } %>
                 </tr>
                 <%  
                         }  
