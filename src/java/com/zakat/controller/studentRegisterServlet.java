@@ -93,7 +93,8 @@ public class studentRegisterServlet extends HttpServlet {
                     if(rowsInsertedcheck > 0){
                         request.setAttribute("errorMessage", "Maaf id ini telah didaftarkan!");
                                 request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
-                    }
+                        
+                    }else{
                     
                     // SQL query for inserting a student record
                     String sql = "INSERT INTO STUDENT ( name, matricno, income, courseCode, courseName, campus, phoneNum, address, email, password) " +
@@ -125,6 +126,7 @@ public class studentRegisterServlet extends HttpServlet {
                                 // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
                                 request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
                                 request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
+                    }
                     }
                 } catch (SQLException e) {
                    e.printStackTrace();

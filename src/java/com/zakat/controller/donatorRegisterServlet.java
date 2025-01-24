@@ -42,7 +42,7 @@ public class donatorRegisterServlet extends HttpServlet {
                     if(rowsInsertedcheck > 0){
                         request.setAttribute("errorMessage", "Maaf id ini telah didaftarkan!");
                                 request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
-                    }
+                    }else{
 
             // Prepare SQL query for insertion  
             String sql = "INSERT INTO DONATOR (USERNAME, PASSWORD, EMAIL, PHONENUM, STATE, CITY, NOIC) VALUES (?, ?, ?, ?, ?, ?, ?)";  
@@ -71,6 +71,7 @@ public class donatorRegisterServlet extends HttpServlet {
                         request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
                         request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
             }
+                    }
             } catch (SQLException e) {  
                 errorMessage = "Database error: " + e.getMessage();  
                 out.println("<html><body><h3 style='color: red;'>" + errorMessage + "</h3></body></html>");  
