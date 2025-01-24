@@ -239,6 +239,10 @@
         <url-pattern>/admin/actionDonatorServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>latestApplicationServlet</servlet-name>
+        <url-pattern>/admin/latestApplicationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>actionStudentServlet</servlet-name>
         <url-pattern>/admin/actionStudentServlet</url-pattern>
     </servlet-mapping>
