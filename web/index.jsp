@@ -21,19 +21,19 @@
               
                                     try {  
                                         Connection connection = DBConnection.getConnection();  //untuk retrieve data dari database dan display dalam form jumlah pemberi zakat
-                                        String sql = "SELECT SUM(AMOUNT) AS MONTH FROM DONATION WHERE TRUNC(DONATIONDATE) = TRUNC(SYSDATE)";  
+                                        String sql = "SELECT SUM(AMOUNT) AS DAY FROM DONATION WHERE TRUNC(DONATIONDATE) = TRUNC(SYSDATE)";  
                                         PreparedStatement stmt = connection.prepareStatement(sql);  
                                         ResultSet rs = stmt.executeQuery();  
                                         if (rs.next()) {  
-                                            donateday = rs.getDouble("MONTH");  
+                                            donateday = rs.getDouble("DAY");  
                                         }  
-                                         sql = "SELECT SUM(AMOUNT) AS DAY FROM DONATION WHERE TO_CHAR(DONATIONDATE, 'MM-YYYY') = TO_CHAR(SYSDATE, 'MM-YYYY')";  
+                                         sql = "SELECT SUM(AMOUNT) AS MONTH FROM DONATION WHERE TO_CHAR(DONATIONDATE, 'MM-YYYY') = TO_CHAR(SYSDATE, 'MM-YYYY')";  
                                          stmt = connection.prepareStatement(sql);  
                                          rs = stmt.executeQuery();  
                                         if (rs.next()) {  
                                             donatemonth = rs.getDouble("MONTH");  
                                         } 
-                                        sql = "SELECT SUM(AMOUNT) AS YEAR FROM DONATION WHERE EXTRACT(YEAR FROM DONATIONDATE) = EXTRACT(YEAR FROM SYSDATE)";  
+                                        sql = "SELECT SUM(AMOUNT) AS YEAR FROM DONATION";  
                                          stmt = connection.prepareStatement(sql);  
                                          rs = stmt.executeQuery();  
                                         if (rs.next()) {  
