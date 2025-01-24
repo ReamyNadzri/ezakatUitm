@@ -123,6 +123,10 @@
         <servlet-class>com.zakat.controller.studentRegisterServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>latestApplicationServlet</servlet-name>
+        <servlet-class>com.zakat.controller.latestApplicationServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>actionStudentServlet</servlet-name>
         <servlet-class>com.zakat.controller.actionStudentServlet</servlet-class>
     </servlet>
