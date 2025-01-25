@@ -152,7 +152,7 @@
     }
     
     %>
-<body class="bg-light" style="margin-top:4%">
+<body class="" style="margin-top:4%">
 
     <div class="container py-5 w3-animate-zoom" style="height:85%">
         <form action="addzakat.do" method="POST" id="zakatForm" enctype="multipart/form-data">
@@ -501,7 +501,7 @@
                         <h5 class="mb-3 bold">SILA SEMAK DENGAN TELITI!</h5>
                         <p class="text-muted">Pihak UiTM tidak akan bertanggungjawab jikalau terdapat sebarang kesalahan teknikal atau kecuaian pelajar</p></p>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="termsCheck">
+                            <input class="form-check-input" type="checkbox" id="termsCheck" required>
                             <label class="form-check-label" for="termsCheck">
                             Saya mengesahkan bahawa semua butiran yang diberikan adalah tepat, dan saya memahami bahawa saya akan dikenakan denda sekiranya terdapat sebarang kesilapan dalam butiran tersebut.
                             </label>
