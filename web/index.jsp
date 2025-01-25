@@ -170,7 +170,7 @@
             
         </div>
         <div class="" style="background-color: #f8f0ff;">
-            <button id="showToast" class="btn btn-primary m-3">Show Notification</button>
+            
             <div class="container w3-center" style="background-color: #f8f0ff;">
                 <div class="row p-4">
                     <div class="col-md-4 d-flex flex-column align-items-center">
