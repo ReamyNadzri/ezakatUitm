@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/index.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/donatorUpdServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/donatorRegisterServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/studentRegisterServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/Footer.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/studentForm.jsp</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/addZakatServlet.java</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/form.java</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/mohonzakat.jsp</file>
             <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/index.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/dashboard.jsp</file>
         </group>
     </open-files>
 </project-private>

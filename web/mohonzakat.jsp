@@ -1,3 +1,5 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.zakat.model.DBConnection"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -137,7 +139,7 @@
 </head>
 <%
     String matricNumber = (String) session.getAttribute("MATRICNO");
-    String studentid = (String) session.getAttribute("studentid");
+    String studentid = (String) session.getAttribute("STUDENTID");
     String name = (String) session.getAttribute("NAME");
     String campus = (String) session.getAttribute("CAMPUS");
     String email = (String) session.getAttribute("EMAIL");
@@ -150,6 +152,45 @@
         <%
         return;
     }
+    
+try {
+    // Get database connection
+    Connection conn = DBConnection.getConnection();
+    String sql = "SELECT * FROM FAMILY WHERE STUDENTID = ?";
+    PreparedStatement pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, Integer.parseInt(studentid)); // Ensure studentid is valid
+    ResultSet rs = pstmt.executeQuery();
+
+    if (!rs.next()) {
+        // If no rows are returned, alert the user and redirect
+        %>
+        <script>
+            alert('Sila Lengkapkan Maklumat Keluarga sebelum membuat permohonan!');
+            window.location.href = 'studentDashboard.jsp';
+        </script>
+        <%
+    } else {
+        // If rows are returned, proceed with the logic
+        // Your logic here...
+    }
+} catch (SQLException e) {
+    e.printStackTrace(); // Log the exception for debugging
+    %>
+    <script>
+        alert('An error occurred while processing your request. Please try again.');
+        window.location.href = 'studentDashboard.jsp';
+    </script>
+    <%
+} catch (NumberFormatException e) {
+    e.printStackTrace(); // Log the exception for debugging
+    %>
+    <script>
+        alert('Invalid student ID. Please check your input.');
+        window.location.href = 'studentDashboard.jsp';
+    </script>
+    <%
+}
+%>
     
     %>
 <body class="" style="margin-top:4%">
