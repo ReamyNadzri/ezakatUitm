@@ -182,6 +182,7 @@
                 <!-- Maklumat Permohonan Zakat yang Dipilih -->
                 <div class="w3-panel w3-row w3-cell flex-item">
                     <h3>Maklumat Permohonan Zakat yang Dipilih</h3>
+                    <hr>
                     <caption>ZAKAT KOLEJ</caption>
                     <div class="w3-cell">
                         Nama Kolej

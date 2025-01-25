@@ -242,7 +242,7 @@
                                 <th class="py-2 px-4">Nama</th>  
                                 <th class="py-2 px-4">Permohonan</th>  
                                 <th class="py-2 px-4">Status</th>  
-                                <th class="py-2 px-4">Actions</th>  
+                                
                             </tr>  
                         </thead>  
                         <tbody id="zakatTableBody">  
@@ -251,7 +251,7 @@
                                 while (rs.next()){
                                 %>
                             <tr>  
-                                <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
+                                <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view this application?');">  
                                 <td class="border px-4 py-2"><%=rs.getString("APPLYID")%></td>  
                                 <td class="border px-4 py-2"><%=rs.getString("DESCRIPTION")%></td>  
                                 <td class="border px-4 py-2"><%=rs.getString("MATRICNO")%></td>  
@@ -265,8 +265,7 @@
                                     }else if(rs.getString("STATUS").equals("DITOLAK")){ %>
                                     <td class="border px-4 py-2 status-rejected"><%=rs.getString("STATUS")%></td> <%
                                     }%>
-                                <td class="border px-4 py-2">  
-                                    <button type="submit" name="action" value="view" class=" bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">View Details</button> 
+                                
 
                                        
                                     </form>  

@@ -113,7 +113,7 @@
         <!-- Toast Notification -->
         
     <div class="toast-container" id="toastContainer" style="display: none;">
-        <br><br><br><!-- comment -->        
+        <br><br><!-- comment -->        
         <a href="studentDashboard.jsp">
             <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
                 <div class="toast-header">
@@ -176,7 +176,7 @@
                     <div class="col-md-4 d-flex flex-column align-items-center">
                         <div class="row">
                             <div class="col-12">
-                                <p><b>Kutipan Zakat Hari Ini</b></p>
+                                <p><b>Kutipan Zakat Hari Ini (RM)</b></p>
                                 <h3 class="num"><% out.print(donateday);%></h3>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                     <div class="col-md-4 d-flex flex-column align-items-center">
                         <div class="row">
                             <div class="col-12">
-                                <p><b>Kutipan Zakat Bulan Ini</b></p>
+                                <p><b>Kutipan Zakat Bulan Ini (RM)</b></p>
                                 <h3 class="num"><% out.print(donatemonth);%></h3>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                     <div class="col-md-4 d-flex flex-column align-items-center">
                         <div class="row">
                             <div class="col-12">
-                                <p><b>Kutipan Zakat Tahun Ini</b></p>
+                                <p><b>Kutipan Zakat Tahun Ini (RM)</b></p>
                                 <h3 class="num"><% out.print(donateyear);%></h3>
                             </div>
                         </div>
@@ -222,7 +222,7 @@
             </div>
         </div>
     
-
+<button id="showToast" class="btn btn-primary m-3" style="display:none">Show Notification</button>
         <div class="container mt-5 p-3" style="width: 80%; background-color: #f0f0f0;">
             <div class="row">
                 <div class="col-md-4 d-flex flex-column align-items-center mb-4">

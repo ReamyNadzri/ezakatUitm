@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <footer>
         <!-- Copyright Section -->
-        <div class="footer-bottom" style="background">
+        <div class="footer-bottom w3-center" style="background">
             <p><b>Hak Cipta &copy AbeFiwan Expert Studios. Hak Cipta Terpelihara</b></p>
         </div>
     </footer>
