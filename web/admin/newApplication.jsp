@@ -106,21 +106,11 @@
                     <% } %>  
                     <td class="border px-4 py-2">  
                         <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">
-                            Lulus <i class="fas fa-check"></i>
-                        </button>  
-                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">
-                            Semak <i class="fas fa-search"></i>
-                        </button>  
-                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">
-                            Batal <i class="fas fa-times"></i>
-                        </button>  
-                        <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">
-                            Buang <i class="fas fa-trash"></i>
-                        </button>  
-                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">
-                            Belum Selesai <i class="fas fa-times"></i>
-                        </button>
+                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
+                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
+                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
+                        <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
+                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button> <!-- New button for Waiting List -->  
                     </form>  
                 </td>  
              </tr>               

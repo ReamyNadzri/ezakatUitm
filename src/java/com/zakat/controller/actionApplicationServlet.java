@@ -161,7 +161,7 @@ public class actionApplicationServlet extends HttpServlet {
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
-                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
+                response.sendRedirect("permohonanDash.jsp"); // Redirect to error page if needed
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -171,7 +171,7 @@ public class actionApplicationServlet extends HttpServlet {
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
-                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
+                response.sendRedirect("permohonanDash.jsp"); // Redirect to error page if needed
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -181,11 +181,21 @@ public class actionApplicationServlet extends HttpServlet {
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
-                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
+                response.sendRedirect("permohonanDash.jsp"); // Redirect to error page if needed
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+        } else if ("waiting".equals(action)) {  // New block for handling waiting status  
+            try (Connection conn = DBConnection.getConnection()) {  
+                String sql = "UPDATE APPLICATION SET STATUS = 'BELUM SELESAI' WHERE APPLYID = ?";  
+                PreparedStatement stmt = conn.prepareStatement(sql);  
+                stmt.setInt(1, id);  
+                stmt.executeUpdate();  
+                response.sendRedirect("permohonanDash.jsp"); // Redirect to view page if needed  
+            } catch (SQLException e) {  
+                e.printStackTrace();  
+            }  
+        }  
     }
 
     
