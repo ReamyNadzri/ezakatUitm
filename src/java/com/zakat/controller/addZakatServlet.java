@@ -61,7 +61,7 @@ public class addZakatServlet extends HttpServlet {
         String matricNumber = (String) session.getAttribute("MATRICNO");
         if (matricNumber == null) {
             // Redirect to login page if no session exists
-            response.sendRedirect("loginStudent.jsp");
+            response.sendRedirect("userLogin.jsp");
             return;
         }
     
@@ -82,8 +82,12 @@ public class addZakatServlet extends HttpServlet {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedDate = currentDate.format(formatter);
+        double salaryAll = 0;
+        String statusAPP = "BERJAYA"; // Default status
+        String reasonAPP = "Layak menerima bantuan. Sila tunggu peringkat seterusnya"; // Default reason
 
         try{
+
 
            // 1. Retrieve Text Input Fields
             String applyID = request.getParameter("applyID");
@@ -107,7 +111,7 @@ public class addZakatServlet extends HttpServlet {
             String totalKolej = request.getParameter("totalKolej");
             if(kolej.equals("kerawang") && totalKolej == "0"){kolej="TIDAK MEMOHON";}
             String cafe = request.getParameter("cafe");
-            String status = null;
+            boolean status = false;
             
 
             // 2. Retrieve File Uploads
@@ -131,7 +135,48 @@ public class addZakatServlet extends HttpServlet {
             String file9Name = null;
 
                  try{
-                    conn = DBConnection.getConnection();
+                     
+                      conn = DBConnection.getConnection();
+                    String sql = "SELECT f.GROSSINCOMEF, f.GROSSINCOMEM, s.INCOME  FROM FAMILY f JOIN STUDENT s ON s.STUDENTID = f.STUDENTID WHERE s.MATRICNO = ?";
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setString(1, matricNumber);
+
+                    ResultSet rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        double fatherIncome = rs.getDouble("GROSSINCOMEF");
+                        double motherIncome = rs.getDouble("GROSSINCOMEM");
+                        double studentIncome = rs.getDouble("INCOME");
+
+                        // Handle null values (if any)
+                        fatherIncome = (rs.wasNull()) ? 0.0 : fatherIncome;
+                        motherIncome = (rs.wasNull()) ? 0.0 : motherIncome;
+                        studentIncome = (rs.wasNull()) ? 0.0 : studentIncome;
+
+                        salaryAll = fatherIncome + motherIncome + studentIncome;
+                        
+                        // AUTO VALIDATION CHECKING
+                            
+                            
+                            // Check for rejection conditions
+                            if (Double.parseDouble(currentCgpa) < 3.0) {
+                                statusAPP = "DITOLAK";
+                                reasonAPP = "CGPA tidak melepasi tahap minimum";
+                            } else if (salaryAll > 3000) {
+                                statusAPP = "DITOLAK";
+                                reasonAPP = "Pendapatan melebihi had";
+                            } else if (Integer.parseInt(currentSemester) > 7) {
+                                statusAPP = "DITOLAK";
+                                reasonAPP = "Semester melepasi tahap maksimum";
+                            } else {
+                                // Check for manual review conditions
+                                if ((Double.parseDouble(currentCgpa) >= 3.0 && Double.parseDouble(currentCgpa) <= 3.2) &&
+                                    (salaryAll >= 2800 && salaryAll <= 4000) &&
+                                    (Integer.parseInt(currentSemester) >= 1 && Integer.parseInt(currentSemester) <= 7)) {
+                                    statusAPP = "DISEMAK";
+                                    reasonAPP = "Perlu semakan manual kerana berada di had kelayakan dan menerima bantuan luar";
+                                }
+                            }
+                    }
                       
                     file1Name = getFileName(request, "file1");
                     file1Path = handleFileUpload(request, "file1", uploadPath);
@@ -278,11 +323,11 @@ public class addZakatServlet extends HttpServlet {
 
 
                             // =======================================================================================================================
-                        String applicationZakatSQL = "INSERT INTO APPLICATION (STUDENTID, ZAKATID, BANTUANMAKAN, BANTUANKEWANGAN, BANTUANKEWANGANNAMA, BANTUANKEWANGANNILAI, GRADYEAR, CGPA, GPA, BANKNO, BANKNAME, STUDENTLETTER, TRANSCRIPTDOC, ICDOC, STATUS) " +
+                        String applicationZakatSQL = "INSERT INTO APPLICATION (STUDENTID, ZAKATID, BANTUANMAKAN, BANTUANKEWANGAN, BANTUANKEWANGANNAMA, BANTUANKEWANGANNILAI, GRADYEAR, CGPA, GPA, BANKNO, BANKNAME, STUDENTLETTER, TRANSCRIPTDOC, ICDOC, STATUS, REASON) " +
                                                      "VALUES ("
                                   + "(SELECT STUDENTID FROM STUDENT WHERE MATRICNO = ?),"
                                   + "(SELECT ZAKATID FROM (SELECT ZAKATID FROM ZAKAT_CATEGORY ORDER BY ZAKATID DESC) WHERE ROWNUM = 1),"
-                                  + "?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                                  + "?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                             pstmt = conn.prepareStatement(applicationZakatSQL);
                             
@@ -299,18 +344,22 @@ public class addZakatServlet extends HttpServlet {
                             pstmt.setString(11, file1Path);
                             pstmt.setString(12, file2Path);
                             pstmt.setString(13, file3Path);
-                            pstmt.setString(14, "DISEMAK");
-                            
+
+                            // Set the status and reason in the PreparedStatement
+                            pstmt.setString(14, statusAPP);
+                            pstmt.setString(15, reasonAPP);
 
                            rowsInserted = pstmt.executeUpdate();
                            
                             if (rowsInserted > 0) {
                                 System.out.println("A new application was inserted successfully!");
+                                success = true;
+                                request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
                              }else{
                                 System.out.println("Failed to save to database");
                                 request.setAttribute("errorMessage", "Failed to save to database APPLICATION, please try again!");
                                 request.getRequestDispatcher("/error.jsp").forward(request, response);
-                                return;
+                                success = false;
                             }
                 } catch (SQLException e) {
                         e.printStackTrace(); // Get the full SQL exception message
@@ -335,17 +384,8 @@ public class addZakatServlet extends HttpServlet {
             e.printStackTrace();
             response.getWriter().println("Error processing the form. Please try again.");
             
-        }finally {
-            
-                // CLOSE CONNECTION
         }
-        // Redirect to home page with a success flag
-            if (success) {
-                request.setAttribute("success", true); // Set success attribute
-                request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
-            } else {
-                response.sendRedirect("error.jsp"); // Redirect to error page if needed
-            }
+ 
     }
     
     private String handleFileUpload(HttpServletRequest request, String inputName, Path uploadPath)

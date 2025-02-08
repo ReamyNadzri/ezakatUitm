@@ -192,7 +192,7 @@ try {
 }
 %>
     
-    %>
+ 
 <body class="" style="margin-top:4%">
 
     <div class="container py-5 w3-animate-zoom" style="height:85%">
@@ -308,7 +308,7 @@ try {
                     <div class="w3-cell" style="width:30px"></div>
                     <div class="w3-cell">
                         <label for="" class="form-label fw-medium">Nombor Bank<span class="text-danger">*</span></label>
-                        <input class="form-control" style="width: 300px;" type="text" name="bankNo" id="" size="50%">
+                        <input class="form-control" style="width: 300px;" type="number" name="bankNo" id="" size="50%">
                     </div>
                 </div>
 

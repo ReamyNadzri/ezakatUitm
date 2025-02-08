@@ -222,7 +222,7 @@
             
             try{
             Connection connection = DBConnection.getConnection();
-            String sql = "SELECT A.APPLYID, S.NAME AS STUDENT_NAME,A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  Z.ZAKATNAME AS ZAKAT_CATEGORY, TO_CHAR(Z.DESCRIPTION,'DD-MON-YYYY') AS DESCRIPTION  FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID  JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID WHERE A.STUDENTID = ? ORDER BY A.APPLYID DESC";
+            String sql = "SELECT A.APPLYID, S.NAME AS STUDENT_NAME,A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, TO_CHAR(Z.DESCRIPTION,'DD-MON-YYYY') AS DESCRIPTION, A.REASON FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID  JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID WHERE A.STUDENTID = ? ORDER BY A.APPLYID DESC";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, Integer.parseInt(stdid));
            
@@ -239,9 +239,9 @@
                                 <th class="py-2 px-4">Bil.</th>  
                                 <th class="py-2 px-4">Tarikh</th>  
                                 <th class="py-2 px-4">No Matrik</th>  
-                                <th class="py-2 px-4">Nama</th>  
                                 <th class="py-2 px-4">Permohonan</th>  
                                 <th class="py-2 px-4">Status</th>  
+                                <th class="py-2 px-4">REASON</th>  
                                 
                             </tr>  
                         </thead>  
@@ -255,7 +255,6 @@
                                 <td class="border px-4 py-2"><%=rs.getString("APPLYID")%></td>  
                                 <td class="border px-4 py-2"><%=rs.getString("DESCRIPTION")%></td>  
                                 <td class="border px-4 py-2"><%=rs.getString("MATRICNO")%></td>  
-                                <td class="border px-4 py-2"><%=rs.getString("STUDENT_NAME")%></td>   
                                 <td class="border px-4 py-2"><%=rs.getString("ZAKATNAME")%></td>   
                                 <% if(rs.getString("STATUS").equals("BERJAYA")){%>
                                     <td class="border px-4 py-2 status-approved"><%=rs.getString("STATUS")%></td>
@@ -265,7 +264,7 @@
                                     }else if(rs.getString("STATUS").equals("DITOLAK")){ %>
                                     <td class="border px-4 py-2 status-rejected"><%=rs.getString("STATUS")%></td> <%
                                     }%>
-                                
+                                <td class="border px-4 py-2"><%=rs.getString("REASON")%></td>
 
                                        
                                     </form>  
