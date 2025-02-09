@@ -220,14 +220,15 @@
             %>  
               
         </div> 
-          <%  
-        try {  
-            Connection connection = DBConnection.getConnection();  
-            Statement stmt = connection.createStatement();  
-            ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION, A.REASON " +  
-                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-                "ORDER BY A.APPLYID DESC");  
-        %>  
+           <%
+    try{
+    Connection connection = DBConnection.getConnection();
+    
+    Statement stmt = connection.createStatement();
+    ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY,  TO_CHAR(Z.DESCRIPTION, 'DD-MM-YYYY') AS DESCRIPTION , A.REASON AS REASON " +  
+            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+            "ORDER BY A.APPLYID DESC");
+    %>
             
         <div id="permohonan" class="tab-content" style="display: block">  
             <div class="profile-header">  
@@ -310,13 +311,11 @@
        <div id="berjaya" class="tab-content">   
     <%  
     try {  
-        Connection connection = DBConnection.getConnection();  
-        Statement stmt = connection.createStatement();  
-        // Updated SQL query to include REASON  
-        ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION, A.REASON " +  
-            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-            "WHERE A.STATUS = 'BERJAYA' " + // Include only successful applications  
-            "ORDER BY A.APPLYID DESC");  
+                            Connection connection = DBConnection.getConnection();  
+                            Statement stmt = connection.createStatement();  
+                            ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  TO_CHAR(Z.DESCRIPTION, 'DD-MM-YYYY') AS DESCRIPTION , A.REASON AS REASON " +  
+                                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+                                "WHERE A.STATUS = 'BERJAYA' ORDER BY A.APPLYID DESC");  
     %>   
 
     <div class="profile-header">  
@@ -397,18 +396,15 @@
         <!-- Tab Content -->  
         
          <div id="batal" class="tab-content">   
+
     <%  
-    Connection connection = null; // Declare connection outside the try block  
-    Statement stmt = null; // Declare statement outside the try block  
-    ResultSet rs = null; // Declare result set outside the try block  
 
     try {  
-        connection = DBConnection.getConnection();  
-        stmt = connection.createStatement();  
-        // Updated SQL query to include REASON  
-        rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION, A.REASON " +  
-            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-            "WHERE A.STATUS = 'DITOLAK' ORDER BY A.APPLYID DESC");  
+                            Connection connection = DBConnection.getConnection();  
+                            Statement stmt = connection.createStatement();  
+                            ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  TO_CHAR(Z.DESCRIPTION, 'DD-MM-YYYY') AS DESCRIPTION , A.REASON AS REASON " +  
+                                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+                                "WHERE A.STATUS = 'DITOLAK' ORDER BY A.APPLYID DESC");  
     %>  
 
     <div class="profile-header">  
@@ -488,12 +484,11 @@
   <div id="semak" class="tab-content">   
     <%  
     try {  
-        connection = DBConnection.getConnection();  
-        stmt = connection.createStatement();  
-        // Updated SQL query to include REASON  
-        rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION, A.REASON " +  
-            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-            "WHERE A.STATUS = 'DISEMAK' ORDER BY A.APPLYID DESC");  
+                            Connection connection = DBConnection.getConnection();  
+                            Statement stmt = connection.createStatement();  
+                            ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO,  TO_CHAR(Z.DESCRIPTION, 'DD-MM-YYYY') AS DESCRIPTION , A.REASON AS REASON " +  
+                                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+                                "WHERE A.STATUS = 'DISEMAK' ORDER BY A.APPLYID DESC");  
     %>  
 
     <div class="profile-header">  
@@ -574,11 +569,14 @@
         
   <div id="belum dikemaskini" class="tab-content">   
     <%  
-    try {  
+    try {
+        
+        Connection connection = DBConnection.getConnection();  
+        Statement stmt = connection.createStatement();
         connection = DBConnection.getConnection();  
         stmt = connection.createStatement();  
         // Updated SQL query to include REASON  
-        rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION, A.REASON " +  
+        ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, TO_CHAR(Z.DESCRIPTION, 'DD-MM-YYYY') AS DESCRIPTION , A.REASON AS REASON " +  
             "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
             "WHERE A.STATUS = 'BELUM SELESAI' ORDER BY A.APPLYID DESC");  
     %>  

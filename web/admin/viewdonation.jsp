@@ -75,7 +75,7 @@
                     ResultSet rs = null;  
                     try {  
                         con = DBConnection.getConnection();  
-                        String query = "SELECT D.DONATEID, D.BANKNAME, D.AMOUNT, TO_CHAR(D.DONATIONDATE, 'YYYY-MM-DD') AS DONATIONDATE, D.NOTE, D.DONATIONSTATUS, COALESCE(S.NAME, DO.USERNAME) AS NAME FROM DONATION D LEFT OUTER JOIN STUDENT S ON D.STUDENTID = S.STUDENTID LEFT OUTER JOIN DONATOR DO ON D.DONATORID = DO.DONATORID ORDER BY DONATEID DESC";
+                        String query = "SELECT D.DONATEID, D.BANKNAME, D.AMOUNT, TO_CHAR(D.DONATIONDATE, 'DD-MM-YYYY') AS DONATIONDATE, D.NOTE, D.DONATIONSTATUS, COALESCE(S.NAME, DO.USERNAME) AS NAME FROM DONATION D LEFT OUTER JOIN STUDENT S ON D.STUDENTID = S.STUDENTID LEFT OUTER JOIN DONATOR DO ON D.DONATORID = DO.DONATORID ORDER BY DONATEID DESC";
                         stmt = con.prepareStatement(query);  
                         rs = stmt.executeQuery();  
                         int count = 1;  
