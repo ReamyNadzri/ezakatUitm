@@ -213,25 +213,25 @@
                 <div class="tab" onclick="openTab('berjaya')"><i class="fas fa-user"></i>  BERJAYA</div>  
                 <div class="tab" onclick="openTab('batal')"><i class="fas fa-user"></i>  BATAL</div>  
                 <div class="tab" onclick="openTab('semak')"><i class="fas fa-user"></i>  DISEMAK</div>
+                <div class="tab" onclick="openTab('belum dikemaskini')"><i class="fas fa-user"></i>  BELUM SELESAI</div>
              
             <%  
                 } 
             %>  
               
         </div> 
-           <%
-    try{
-    Connection connection = DBConnection.getConnection();
-    
-    Statement stmt = connection.createStatement();
-    ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION " +  
-            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-            "ORDER BY A.APPLYID DESC");
-    %>
+          <%  
+        try {  
+            Connection connection = DBConnection.getConnection();  
+            Statement stmt = connection.createStatement();  
+            ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION, A.REASON " +  
+                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+                "ORDER BY A.APPLYID DESC");  
+        %>  
             
         <div id="permohonan" class="tab-content" style="display: block">  
             <div class="profile-header">  
-                <div class=" rounded-lg p-8">  
+                <div class="rounded-lg p-8">  
                     <h2 class="text-2xl font-semibold mb-4">PERMOHONAN ZAKAT</h2>  
                     <table class="min-w-full bg-white rounded-lg shadow-md">  
                        <thead>  
@@ -243,160 +243,153 @@
                             <th class="py-2 px-4">Permohonan</th>  
                             <th class="py-2 px-4">Status</th>  
                             <th class="py-2 px-4">Tindakan</th>  
+                            <th class="py-2 px-4">Sebab</th> <!-- Added column for "Sebab" -->  
                         </tr>  
                     </thead>  
-                        <tbody id="zakatTableBody">  
-                            <!-- Sample Data - Replace with dynamic data from your backend -->  
-                            <%
-                               int count = 1;
-                                while (rs.next()){
-                                %>
-                           <tr>  
-                <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
-                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
-                    <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
-                    <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
-                    <td class="border px-4 py-2 text-center">  
-                        <%= rs.getString("STUDENT_NAME") %>  
-                        <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>   
-                    </td>   
-                    <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
-                    <% if (rs.getString("STATUS").equals("BERJAYA")) { %>  
-                        <td class="border px-4 py-2 status-approved text-center"><%= rs.getString("STATUS") %></td>  
-                    <% } else if (rs.getString("STATUS").equals("DISEMAK")) { %>  
-                        <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("DITOLAK")) { %>  
-                        <td class="border px-4 py-2 status-rejected text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("BELUM SELESAI")) { %>  
-                        <td class="border px-4 py-2 text-center status-pending"><%= rs.getString("STATUS") %></td>  
-                    <% } %>  
-                    <td class="border px-4 py-2">  
-                        <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i></button>
-                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i></button>
-                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-times"></i></button>
-                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i></button>
-                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-clock"></i></button>
-                    </form>  
-                </td>  
-             </tr>               
-                         <%
-                    }
-                        rs.close();
-                        stmt.close();
-                    }catch (SQLException e){
-                        out.println(e.getMessage());
-
-                    }catch(Exception e){
-                        out.println(e.getMessage());
-                    }
-                    %>
-
-                            <!-- Add more application rows as needed -->  
-                        </tbody>  
+                    <tbody id="zakatTableBody">  
+                        <%  
+                        int count = 1;  
+                        while (rs.next()) {  
+                        %>  
+                        <tr>  
+                            <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
+                                <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
+                                <td class="border px-4 py-2 text-center">  
+                                    <%= rs.getString("STUDENT_NAME") %>  
+                                    <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>   
+                                </td>   
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
+                                <% if (rs.getString("STATUS").equals("BERJAYA")) { %>  
+                                    <td class="border px-4 py-2 status-approved text-center"><%= rs.getString("STATUS") %></td>  
+                                <% } else if (rs.getString("STATUS").equals("DISEMAK")) { %>  
+                                    <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>   
+                                <% } else if (rs.getString("STATUS").equals("DITOLAK")) { %>  
+                                    <td class="border px-4 py-2 status-rejected text-center"><%= rs.getString("STATUS") %></td>   
+                                <% } else if (rs.getString("STATUS").equals("BELUM SELESAI")) { %>  
+                                    <td class="border px-4 py-2 text-center status-pending"><%= rs.getString("STATUS") %></td>  
+                                <% } %>  
+                               <td class="border px-4 py-2">  
+                                    <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
+                                    <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i></button>  
+                                    <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i></button>  
+                                    <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-times"></i></button>  
+                                    <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i></button>  
+                                    <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-clock"></i></button>  
+                                </td>
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->
+                            </form>  
+                        </tr>               
+                        <%  
+                        }  
+                        rs.close();  
+                        stmt.close();  
+                    } catch (SQLException e) {  
+                        out.println(e.getMessage());  
+                    } catch(Exception e) {  
+                        out.println(e.getMessage());  
+                    }  
+                    %>  
+                    </tbody>  
                     </table>  
-                                <div class="pagination-controls">
-                                        <button id="prevButton" disabled>Previous</button>
-                                        <button id="nextButton">Next</button>
-                                        <select id="rowsPerPage">
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                        </select>
-                                        <span id="pageInfo"></span>
-                                    </div>
-                </div> 
+                    <div class="pagination-controls">  
+                        <button id="prevButton" disabled>Previous</button>  
+                        <button id="nextButton">Next</button>  
+                        <select id="rowsPerPage">  
+                            <option value="5">5</option>  
+                            <option value="10">10</option>  
+                            <option value="15">15</option>  
+                        </select>  
+                        <span id="pageInfo"></span>  
+                    </div>  
+                </div>   
             </div>  
         </div>
                                 
-        <div id="berjaya" class="tab-content">   
-                  <%  
-                        try {  
-                            Connection connection = DBConnection.getConnection();  
-                            Statement stmt = connection.createStatement();  
-                            ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION " +  
-                                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-                                "WHERE A.STATUS = 'BERJAYA' ORDER BY A.APPLYID DESC");  
+       <div id="berjaya" class="tab-content">   
+    <%  
+    try {  
+        Connection connection = DBConnection.getConnection();  
+        Statement stmt = connection.createStatement();  
+        // Updated SQL query to include REASON  
+        ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION, A.REASON " +  
+            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+            "WHERE A.STATUS = 'BERJAYA' " + // Include only successful applications  
+            "ORDER BY A.APPLYID DESC");  
+    %>   
+
+    <div class="profile-header">  
+        <div class="rounded-lg p-8">  
+            <h2 class="text-2xl font-semibold mb-4">BERJAYA PERMOHONAN</h2>  
+            <table class="min-w-full bg-white rounded-lg shadow-md">  
+               <thead>  
+                    <tr class="bg-purple-500 text-white">  
+                        <th class="py-2 px-4">Bil.</th>  
+                        <th class="py-2 px-4">Tarikh</th>  
+                        <th class="py-2 px-4">No Matrik</th>  
+                        <th class="py-2 px-4">Nama</th>  
+                        <th class="py-2 px-4">Permohonan</th>  
+                        <th class="py-2 px-4">Status</th>  
+                        <th class="py-2 px-4">Tindakan</th>  
+                        <th class="py-2 px-4">Sebab</th> <!-- Added column for "Sebab" -->  
+                    </tr>  
+                </thead>  
+                <tbody id="zakatTableBody">  
+                    <%  
+                        int count = 1;   
+                        while (rs.next()) {   
+                    %>  
+                            <tr>  
+                                <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
+                                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
+                                    <td class="border px-4 py-2 text-center">  
+                                        <%= rs.getString("STUDENT_NAME") %>  
+                                        <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>  
+                                    </td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
+                                    <td class="border px-4 py-2 status-approved text-center"><%= rs.getString("STATUS") %></td>  <!-- Assuming only 'BERJAYA' will be shown here -->  
+                                    
+                                    <td class="border px-4 py-2">  
+                                        <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
+                                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
+                                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
+                                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
+                                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
+                                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button> <!-- New button for Waiting List -->  
+                                    </td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                                </form>  
+                            </tr>  
+                    <%  
+                        }  
+                        rs.close();  
+                        stmt.close();  
+                    } catch (SQLException e) {  
+                        out.println(e.getMessage());  
+                    } catch (Exception e) {  
+                        out.println(e.getMessage());  
+                    }  
                     %>  
 
-           
-                <div class="profile-header">  
-                    <div class=" rounded-lg p-8">  
-                        <h2 class="text-2xl font-semibold mb-4">BERJAYA PERMOHONAN</h2>  
-                        <table class="min-w-full bg-white rounded-lg shadow-md">  
-                           <thead>  
-                                <tr class="bg-purple-500 text-white">  
-                                    <th class="py-2 px-4">Bil.</th>  
-                                    <th class="py-2 px-4">Tarikh</th>  
-                                    <th class="py-2 px-4">No Matrik</th>  
-                                    <th class="py-2 px-4">Nama</th>  
-                                    <th class="py-2 px-4">Permohonan</th>  
-                                    <th class="py-2 px-4">Status</th>  
-                                    <th class="py-2 px-4">Tindakan</th>  
-                                </tr>  
-                            </thead>  
-                            <tbody id="zakatTableBody">  
-                                <!-- Sample Data - Replace with dynamic data from your backend -->  
-                                <%
-                                    int count = 1;   
-                                    while (rs.next()) {   
-                                    %>
-                                            <tr>  
-                                 <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
-                                 <td class="border px-4 py-2 text-center"><%= count++ %></td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
-                                 <td class="border px-4 py-2 text-center">  
-                                     <%= rs.getString("STUDENT_NAME") %>  
-                                     <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>  
-                                 </td>  
-                                <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
-                    <% if (rs.getString("STATUS").equals("BERJAYA")) { %>  
-                        <td class="border px-4 py-2 status-approved text-center"><%= rs.getString("STATUS") %></td>  
-                    <% } else if (rs.getString("STATUS").equals("DISEMAK")) { %>  
-                        <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("DITOLAK")) { %>  
-                        <td class="border px-4 py-2 status-rejected text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("BELUM SELESAI")) { %>  
-                        <td class="border px-4 py-2 text-center status-pending"><%= rs.getString("STATUS") %></td>  
-                    <% } %>  
-                    <td class="border px-4 py-2">  
-                        <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>
-                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>
-                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>
-                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>
-                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button> <!-- New button for Waiting List -->  
-                    </form>  
-                </td>  
-                             </tr>  
-                                 <%  
-                                    }  
-                                    rs.close();  
-                                    stmt.close();  
-                                } catch (SQLException e) {  
-                                    out.println(e.getMessage());  
-                                } catch (Exception e) {  
-                                    out.println(e.getMessage());  
-                                }  
-                                %>  
-
-                                <!-- Add more application rows as needed -->  
-                            </tbody>  
-                        </table>  
-                                    <div class="pagination-controls">
-                                        <button id="prevButton" disabled>Previous</button>
-                                        <button id="nextButton">Next</button>
-                                        <select id="rowsPerPage">
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                        </select>
-                                        <span id="pageInfo"></span>
-                                    </div>
-                    </div> 
-                </div>  
-            </div>
+                    <!-- Add more application rows as needed -->  
+                </tbody>  
+            </table>  
+            <div class="pagination-controls">  
+                <button id="prevButton" disabled>Previous</button>  
+                <button id="nextButton">Next</button>  
+                <select id="rowsPerPage">  
+                    <option value="5">5</option>  
+                    <option value="10">10</option>  
+                    <option value="15">15</option>  
+                </select>  
+                <span id="pageInfo"></span>  
+            </div>  
+        </div>   
+    </div>  
+</div>
         
                                 
                                 
@@ -404,184 +397,263 @@
         <!-- Tab Content -->  
         
          <div id="batal" class="tab-content">   
-                  <%  
-                        try {  
-                            Connection connection = DBConnection.getConnection();  
-                            Statement stmt = connection.createStatement();  
-                            ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION " +  
-                                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-                                "WHERE A.STATUS = 'DITOLAK' ORDER BY A.APPLYID DESC");  
+    <%  
+    Connection connection = null; // Declare connection outside the try block  
+    Statement stmt = null; // Declare statement outside the try block  
+    ResultSet rs = null; // Declare result set outside the try block  
+
+    try {  
+        connection = DBConnection.getConnection();  
+        stmt = connection.createStatement();  
+        // Updated SQL query to include REASON  
+        rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION, A.REASON " +  
+            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+            "WHERE A.STATUS = 'DITOLAK' ORDER BY A.APPLYID DESC");  
+    %>  
+
+    <div class="profile-header">  
+        <div class="rounded-lg p-8">  
+            <h2 class="text-2xl font-semibold mb-4">BATAL PERMOHONAN</h2>  
+            <table class="min-w-full bg-white rounded-lg shadow-md">  
+               <thead>  
+                    <tr class="bg-purple-500 text-white">  
+                        <th class="py-2 px-4">Bil.</th>  
+                        <th class="py-2 px-4">Tarikh</th>  
+                        <th class="py-2 px-4">No Matrik</th>  
+                        <th class="py-2 px-4">Nama</th>  
+                        <th class="py-2 px-4">Permohonan</th>  
+                        <th class="py-2 px-4">Status</th>  
+                        <th class="py-2 px-4">Tindakan</th>  
+                        <th class="py-2 px-4">Sebab</th> <!-- Added column for "Sebab" -->  
+                    </tr>  
+                </thead>  
+                <tbody id="zakatTableBody">  
+                    <%  
+                        int count = 1;   
+                        while (rs.next()) {   
+                    %>  
+                            <tr>  
+                                <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
+                                    <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
+                                    <td class="border px-4 py-2 text-center">  
+                                        <%= rs.getString("STUDENT_NAME") %>  
+                                        <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>  
+                                    </td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
+                                    <td class="border px-4 py-2 status-rejected text-center"><%= rs.getString("STATUS") %></td>  
+
+                                    <td class="border px-4 py-2">  
+                                        <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
+                                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
+                                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
+                                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
+                                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
+                                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button>  
+                                    </td>  
+                                    <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                                </form>  
+                            </tr>  
+                    <%  
+                        }  
+                        rs.close();  
+                        stmt.close();  
+                    } catch (SQLException e) {  
+                        out.println(e.getMessage());  
+                    } catch (Exception e) {  
+                        out.println(e.getMessage());  
+                    }  
                     %>  
 
-           
-                <div class="profile-header">  
-                    <div class=" rounded-lg p-8">  
-                        <h2 class="text-2xl font-semibold mb-4">BATAL PERMOHONAN</h2>  
-                        <table class="min-w-full bg-white rounded-lg shadow-md">  
-                           <thead>  
-                                <tr class="bg-purple-500 text-white">  
-                                    <th class="py-2 px-4">Bil.</th>  
-                                    <th class="py-2 px-4">Tarikh</th>  
-                                    <th class="py-2 px-4">No Matrik</th>  
-                                    <th class="py-2 px-4">Nama</th>  
-                                    <th class="py-2 px-4">Permohonan</th>  
-                                    <th class="py-2 px-4">Status</th>  
-                                    <th class="py-2 px-4">Tindakan</th>  
-                                </tr>  
-                            </thead>  
-                            <tbody id="zakatTableBody">  
-                                <!-- Sample Data - Replace with dynamic data from your backend -->  
-                                <%
-                                    int count = 1;   
-                                    while (rs.next()) {   
-                                    %>
-                                            <tr>  
-                                 <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
-                                 <td class="border px-4 py-2 text-center"><%= count++ %></td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
-                                 <td class="border px-4 py-2 text-center">  
-                                     <%= rs.getString("STUDENT_NAME") %>  
-                                     <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>  
-                                 </td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
-                    <% if (rs.getString("STATUS").equals("BERJAYA")) { %>  
-                        <td class="border px-4 py-2 status-approved text-center"><%= rs.getString("STATUS") %></td>  
-                    <% } else if (rs.getString("STATUS").equals("DISEMAK")) { %>  
-                        <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("DITOLAK")) { %>  
-                        <td class="border px-4 py-2 status-rejected text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("BELUM SELESAI")) { %>  
-                        <td class="border px-4 py-2 text-center status-pending"><%= rs.getString("STATUS") %></td>  
-                    <% } %>  
-                    <td class="border px-4 py-2">  
-                        <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                         <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>
-                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>
-                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>
-                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>
-                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button> <!-- New button for Waiting List -->  
-                    </form>  
-                </td>  
-                             </tr>  
-                                 <%  
-                                    }  
-                                    rs.close();  
-                                    stmt.close();  
-                                } catch (SQLException e) {  
-                                    out.println(e.getMessage());  
-                                } catch (Exception e) {  
-                                    out.println(e.getMessage());  
-                                }  
-                                %>  
-
-                                <!-- Add more application rows as needed -->  
-                            </tbody>  
-                        </table>  
-                                    <div class="pagination-controls">
-                                        <button id="prevButton" disabled>Previous</button>
-                                        <button id="nextButton">Next</button>
-                                        <select id="rowsPerPage">
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                        </select>
-                                        <span id="pageInfo"></span>
-                                    </div>
-                    </div> 
-                </div>  
-            </div>
+                    <!-- Add more application rows as needed -->  
+                </tbody>  
+            </table>  
+            <div class="pagination-controls">  
+                <button id="prevButton" disabled>Previous</button>  
+                <button id="nextButton">Next</button>  
+                <select id="rowsPerPage">  
+                    <option value="5">5</option>  
+                    <option value="10">10</option>  
+                    <option value="15">15</option>  
+                </select>  
+                <span id="pageInfo"></span>  
+            </div>  
+        </div>   
+    </div>  
+</div>
                                 
      <!-- Tab Content -->  
         
-         <div id="semak" class="tab-content">   
-                  <%  
-                        try {  
-                            Connection connection = DBConnection.getConnection();  
-                            Statement stmt = connection.createStatement();  
-                            ResultSet rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION " +  
-                                "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-                                "WHERE A.STATUS = 'DISEMAK' ORDER BY A.APPLYID DESC");  
+  <div id="semak" class="tab-content">   
+    <%  
+    try {  
+        connection = DBConnection.getConnection();  
+        stmt = connection.createStatement();  
+        // Updated SQL query to include REASON  
+        rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION, A.REASON " +  
+            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+            "WHERE A.STATUS = 'DISEMAK' ORDER BY A.APPLYID DESC");  
+    %>  
+
+    <div class="profile-header">  
+        <div class="rounded-lg p-8">  
+            <h2 class="text-2xl font-semibold mb-4">DISEMAK PERMOHONAN</h2>  
+            <table class="min-w-full bg-white rounded-lg shadow-md">  
+                <thead>  
+                    <tr class="bg-purple-500 text-white">  
+                        <th class="py-2 px-4">Bil.</th>  
+                        <th class="py-2 px-4">Tarikh</th>  
+                        <th class="py-2 px-4">No Matrik</th>  
+                        <th class="py-2 px-4">Nama</th>  
+                        <th class="py-2 px-4">Permohonan</th>  
+                        <th class="py-2 px-4">Status</th>  
+                        <th class="py-2 px-4">Tindakan</th>  
+                        <th class="py-2 px-4">Sebab</th> <!-- Added column for "Sebab" -->  
+                    </tr>  
+                </thead>  
+                <tbody id="zakatTableBody">  
+                    <%  
+                        int count = 1;   
+                        while (rs.next()) {   
+                    %>  
+                        <tr>  
+                            <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
+                                <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
+                                <td class="border px-4 py-2 text-center">  
+                                    <%= rs.getString("STUDENT_NAME") %>  
+                                    <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>  
+                                </td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
+                                <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>  
+
+                                <td class="border px-4 py-2">  
+                                    <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
+                                    <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
+                                    <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
+                                    <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
+                                    <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
+                                    <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button>  
+                                </td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                            </form>  
+                        </tr>  
+                    <%  
+                        }  
+                        rs.close();  
+                        stmt.close();  
+                    } catch (SQLException e) {  
+                        out.println(e.getMessage());  
+                    } catch (Exception e) {  
+                        out.println(e.getMessage());  
+                    }  
                     %>  
 
-           
-                <div class="profile-header">  
-                    <div class=" rounded-lg p-8">  
-                        <h2 class="text-2xl font-semibold mb-4">DISEMAK PERMOHONAN</h2>  
-                        <table class="min-w-full bg-white rounded-lg shadow-md">  
-                           <thead>  
-                                <tr class="bg-purple-500 text-white">  
-                                    <th class="py-2 px-4">Bil.</th>  
-                                    <th class="py-2 px-4">Tarikh</th>  
-                                    <th class="py-2 px-4">No Matrik</th>  
-                                    <th class="py-2 px-4">Nama</th>  
-                                    <th class="py-2 px-4">Permohonan</th>  
-                                    <th class="py-2 px-4">Status</th>  
-                                    <th class="py-2 px-4">Tindakan</th>  
-                                </tr>  
-                            </thead>  
-                            <tbody id="zakatTableBody">  
-                                <!-- Sample Data - Replace with dynamic data from your backend -->  
-                                <%
-                                    int count = 1;   
-                                    while (rs.next()) {   
-                                    %>
-                                            <tr>  
-                                 <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
-                                 <td class="border px-4 py-2 text-center"><%= count++ %></td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
-                                 <td class="border px-4 py-2 text-center">  
-                                     <%= rs.getString("STUDENT_NAME") %>  
-                                     <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>  
-                                 </td>  
-                                 <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
-                    <% if (rs.getString("STATUS").equals("BERJAYA")) { %>  
-                        <td class="border px-4 py-2 status-approved text-center"><%= rs.getString("STATUS") %></td>  
-                    <% } else if (rs.getString("STATUS").equals("DISEMAK")) { %>  
-                        <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("DITOLAK")) { %>  
-                        <td class="border px-4 py-2 status-rejected text-center"><%= rs.getString("STATUS") %></td>   
-                    <% } else if (rs.getString("STATUS").equals("BELUM SELESAI")) { %>  
-                        <td class="border px-4 py-2 text-center status-pending"><%= rs.getString("STATUS") %></td>  
-                    <% } %>  
-                    <td class="border px-4 py-2">  
-                        <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                         <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>
-                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>
-                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>
-                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>
-                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button> <!-- New button for Waiting List -->
-                    </form>  
-                </td>  
-                             </tr>  
-                                 <%  
-                                    }  
-                                    rs.close();  
-                                    stmt.close();  
-                                } catch (SQLException e) {  
-                                    out.println(e.getMessage());  
-                                } catch (Exception e) {  
-                                    out.println(e.getMessage());  
-                                }  
-                                %>  
+                    <!-- Add more application rows as needed -->  
+                </tbody>  
+            </table>  
+            <div class="pagination-controls">  
+                <button id="prevButton" disabled>Previous</button>  
+                <button id="nextButton">Next</button>  
+                <select id="rowsPerPage">  
+                    <option value="5">5</option>  
+                    <option value="10">10</option>  
+                    <option value="15">15</option>  
+                </select>  
+                <span id="pageInfo"></span>  
+            </div>  
+        </div>   
+    </div>  
+</div>
+                    
+                    
 
-                                <!-- Add more application rows as needed -->  
-                            </tbody>  
-                        </table>  
-                                    <div class="pagination-controls">
-                                        <button id="prevButton" disabled>Previous</button>
-                                        <button id="nextButton">Next</button>
-                                        <select id="rowsPerPage">
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                        </select>
-                                        <span id="pageInfo"></span>
-                                    </div>
-                    </div> 
-                </div>  
-            </div>
+     <!-- Tab Content -->  
+        
+  <div id="belum dikemaskini" class="tab-content">   
+    <%  
+    try {  
+        connection = DBConnection.getConnection();  
+        stmt = connection.createStatement();  
+        // Updated SQL query to include REASON  
+        rs = stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.DESCRIPTION, A.REASON " +  
+            "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
+            "WHERE A.STATUS = 'BELUM SELESAI' ORDER BY A.APPLYID DESC");  
+    %>  
+
+    <div class="profile-header">  
+        <div class="rounded-lg p-8">  
+            <h2 class="text-2xl font-semibold mb-4">PERMOHONAN BELUM SELESAI</h2>  
+            <table class="min-w-full bg-white rounded-lg shadow-md">  
+                <thead>  
+                    <tr class="bg-purple-500 text-white">  
+                        <th class="py-2 px-4">Bil.</th>  
+                        <th class="py-2 px-4">Tarikh</th>  
+                        <th class="py-2 px-4">No Matrik</th>  
+                        <th class="py-2 px-4">Nama</th>  
+                        <th class="py-2 px-4">Permohonan</th>  
+                        <th class="py-2 px-4">Status</th>  
+                        <th class="py-2 px-4">Tindakan</th>  
+                        <th class="py-2 px-4">Sebab</th> <!-- Added column for "Sebab" -->  
+                    </tr>  
+                </thead>  
+                <tbody id="zakatTableBody">  
+                    <%  
+                        int count = 1;   
+                        while (rs.next()) {   
+                    %>  
+                        <tr>  
+                            <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Adakah anda pasti untuk melakukan perubahan ini?');">  
+                                <td class="border px-4 py-2 text-center"><%= count++ %></td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("DESCRIPTION") %></td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("MATRICNO") %></td>  
+                                <td class="border px-4 py-2 text-center">  
+                                    <%= rs.getString("STUDENT_NAME") %>  
+                                    <button type="submit" name="action" value="view" class="w3-right bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lihat Lebih Teliti</button>  
+                                </td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
+                                <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>  
+
+                                <td class="border px-4 py-2">  
+                                    <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
+                                    <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
+                                    <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
+                                    <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
+                                    <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
+                                    <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button>  
+                                </td>  
+                                <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                            </form>  
+                        </tr>  
+                    <%  
+                        }  
+                        rs.close();  
+                        stmt.close();  
+                    } catch (SQLException e) {  
+                        out.println(e.getMessage());  
+                    } catch (Exception e) {  
+                        out.println(e.getMessage());  
+                    }  
+                    %>  
+
+                    <!-- Add more application rows as needed -->  
+                </tbody>  
+            </table>  
+            <div class="pagination-controls">  
+                <button id="prevButton" disabled>Previous</button>  
+                <button id="nextButton">Next</button>  
+                <select id="rowsPerPage">  
+                    <option value="5">5</option>  
+                    <option value="10">10</option>  
+                    <option value="15">15</option>  
+                </select>  
+                <span id="pageInfo"></span>  
+            </div>  
+        </div>   
+    </div>  
+</div>
                                 
          
         
