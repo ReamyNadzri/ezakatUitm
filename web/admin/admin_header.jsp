@@ -1,3 +1,4 @@
+<%@ page buffer="16kb" %>
 <!DOCTYPE html>
 <html>
 <title>eZAKAT UiTM Admin Page</title>

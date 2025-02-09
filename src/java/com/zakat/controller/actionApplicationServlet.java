@@ -151,7 +151,7 @@ public class actionApplicationServlet extends HttpServlet {
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
-                response.sendRedirect("viewapplication.jsp"); // Redirect to error page if needed
+                response.sendRedirect("permohonanDash.jsp"); // Redirect to error page if needed
             } catch (SQLException e) {
                 e.printStackTrace();
             }

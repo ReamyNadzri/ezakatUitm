@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -102,20 +103,20 @@ boolean adminaccess = false;
                         session.setAttribute("ADMPHONENUM", storedPHONENUM);
                         session.setAttribute("ADMIN", adminaccess);
                         response.sendRedirect("dashboard.jsp");
+                        return;
+                        //request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                    
                     } else {
                         // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
                         request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
                         request.getRequestDispatcher("errorLoginStaff.jsp").forward(request, response);
             
                     }
-                }else {
-                        // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
-                        request.setAttribute("errorMessage", "Incorrect id or password. Please try again.");
-                        request.getRequestDispatcher("errorLoginStaff.jsp").forward(request, response);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            response.sendRedirect("dashboard.jsp");
+            return;
+        } catch (IOException | SQLException | ServletException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred.");
         }
     }
