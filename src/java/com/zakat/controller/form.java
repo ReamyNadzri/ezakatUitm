@@ -99,12 +99,18 @@ public class form extends HttpServlet {
                         request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
             
                     }
+                }else{
+                    // If password is incorrect, set error message and redirect to errorLoginStudent.jsp
+                        request.setAttribute("errorMessage", "Invalid login details. Please verify and retry.");
+                        request.getRequestDispatcher("errorLoginStudent.jsp").forward(request, response);
                 }
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred.");
         }
+        
     }
    
     @Override

@@ -48,7 +48,7 @@
                                         if(studentApp != null){
                                         String notiSql = "SELECT *"
                                                             +"FROM (SELECT A.STATUS FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID WHERE A.STUDENTID = ? AND A.STATUS = 'BERJAYA' ORDER BY A.APPLYID DESC)"
-                                                            +"WHERE ROWNUM = 1 ORDER BY A.APPLYID DESC";
+                                                            +"WHERE ROWNUM = 1";
                                          PreparedStatement pstmt = connection.prepareStatement(notiSql);
                                          pstmt.setInt(1,Integer.parseInt(studentApp));
                                          rs = pstmt.executeQuery();
