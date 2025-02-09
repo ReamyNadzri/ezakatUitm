@@ -58,9 +58,9 @@
     Connection connection = DBConnection.getConnection();
     
     Statement stmt = connection.createStatement();
-    ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, Z.DESCRIPTION " +  
+    ResultSet rs =  stmt.executeQuery("SELECT A.APPLYID, S.NAME AS STUDENT_NAME, A.STATUS, Z.ZAKATNAME AS ZAKATNAME, S.MATRICNO AS MATRICNO, Z.ZAKATNAME AS ZAKAT_CATEGORY, TO_CHAR(Z.DESCRIPTION, 'DD-MM-YYYY') AS DESCRIPTION " +  
             "FROM APPLICATION A JOIN STUDENT S ON A.STUDENTID = S.STUDENTID JOIN ZAKAT_CATEGORY Z ON A.ZAKATID = Z.ZAKATID " +  
-            "ORDER BY A.APPLYID DESC");
+            "ORDER BY A.APPLYID DESC ");
     %>
 
 <div class="container mx-auto flex-grow mt-8 px-4">
