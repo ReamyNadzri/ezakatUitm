@@ -208,8 +208,8 @@
                     Zakat adalah hak anda yang disediakan untuk membantu dalam pelbagai keperluan seperti pendidikan<br>
                 Ayuh, mohon zakat sekarang dan manfaatkan bantuan yang disediakan!</p>
                 <%
-                String staff = (String) session.getAttribute("USERNAME");
-                if(staff!=null) {
+                String donor = (String) session.getAttribute("USERNAME");
+                if(donor!=null) {
                 %>
                 <a href="mohonzakat.jsp">
                     <button class="w3-button w3-border w3-light-grey" disabled>Permohonan Zakat Hanya Untuk Pelajar</button>
@@ -236,14 +236,25 @@
                     <img src="sources/iklan2.jpg" class="img-fluid" alt="Image 2">
                     <h3 class="mt-3" style="color: purple; font-weight: bold;">SEMAK</h3>
                     <p>Semak profil anda dgn cepat</p>
-                    <a class="btn btn-primary" href="studentDashboard.jsp">SEMAK MAKLUMAT PERIBADI</a>
-                    
+                    <%
+                    if(donor!=null) {
+                    %>
+                    <a class="btn btn-primary" href="donatorUpdProfile.jsp">SEMAK MAKLUMAT PERIBADI</a>
+                    <%}else{%>
+                    <a class="btn btn-primary" href="updateProfile.jsp">SEMAK MAKLUMAT PERIBADI</a>
+                    <%}%>
                 </div>
                 <div class="col-md-4 d-flex flex-column align-items-center mb-4">
                     <img src="sources/iklan3.jpg" class="img-fluid" alt="Image 3">
                     <h3 class="mt-3" style="color: purple; font-weight: bold;">TERIMA</h3>
                     <p>Mohon zakat jika anda adalah golongan asnaf</p>
+                    <%
+                    if(donor!=null) {
+                    %>
+                    <a class="btn btn-primary disabled" href="#">Permohonan Zakat Hanya Untuk Pelajar</a>
+                    <%}else{%>
                     <a class="btn btn-primary" href="mohonzakat.jsp">MOHON SEKARANG</a>
+                    <%}%>
                 </div>
             </div>
         </div><br>

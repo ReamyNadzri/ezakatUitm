@@ -18,10 +18,10 @@
                     if(user == null && donator == null) { %>
                         <h3>Belum Log Masuk ?</h3>
                         <ul>
-                            <li><a href="loginStudent.jsp">Pelajar</a></li>
-                            <li><a href="#">Donator</a></li>
-                            <li><a href="loginStaff.jsp">Staff</a></li>
-                            <li><a href="admin/dashboard.jsp">Administrator</a></li>
+                            <li><a href="userLogin.jsp">Pelajar</a></li>
+                            <li><a href="userLogin.jsp">Donator</a></li>
+                            <li><a href="admin/index.jsp">Staff</a></li>
+                            <li><a href="admin/index.jsp">Administrator</a></li>
                         </ul>
                 <%}%>
             </div>
@@ -63,6 +63,7 @@
     padding: 20px 0;
     font-family: google sans, sans-serif;
     font-size: 14px;
+    margin-top: 20px;
 }
 
 .footer-container {

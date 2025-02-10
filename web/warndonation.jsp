@@ -28,7 +28,7 @@
                 <input type="hidden" name="tarikh" value="${param.tarikh}">
                 <input type="hidden" name="nota" value="${param.nota}">
                 <div class="button">
-                    <a href="BayarZakat.jsp" class="w3-button w3-border w3-border-purple w3-round-large">Kembali</a>
+                    <button type="button" onclick="window.history.back();" class="w3-button w3-border w3-border-purple w3-round-large">Kembali</button>
                     <button type="submit" class="w3-button w3-green w3-round-large">Hantar !</button>
                 </div>
             </form>

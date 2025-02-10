@@ -36,8 +36,8 @@
     }
     %>
 
-<body class="w3-light-grey">
-    <div class="w3-container w3-center w3-panel w3-light-grey">
+<body>
+    <div class="w3-container w3-center w3-panel">
         <div class="outer-container w3-card-4" style="margin-left:20%; margin-top:6%; margin-bottom:2%; width:60%;">
             <div class="w3-white w3-padding-large w3-round-large w3-center w3-card-4">
                 <h1 class="w3-text-black"><b>Pembayaran Zakat</b></h1>
@@ -69,7 +69,7 @@
                             <input type="file" name="fileUpload" class="w3-input w3-border w3-round-large w3-light-grey">
                             <p class="w3-text-black">Pembayaran boleh dilakukan pada bank:</p>
                             <img src="sources/1qr.jpg" class="w3-image w3-border w3-border-purple w3-round-large" style="width:100%; max-width:300px;">
-                            <p class="w3-text-black"><b>XXXXXXXXXXXXXX <br> (Bank Islam)</b></p>
+                            <p class="w3-text-black"><b>5505-1076-0026 <br> (Maybank Islamic Bank)</b></p>
                         </div>
                     </div>
                     <div class="button">
@@ -86,7 +86,5 @@
         document.getElementById('tarikh').value = new Date().toISOString().slice(0, 10);
     </script>
 </body>
-<div class="w3-border">
     <jsp:include page="Footer.jsp"></jsp:include>
-</div>
 </html>

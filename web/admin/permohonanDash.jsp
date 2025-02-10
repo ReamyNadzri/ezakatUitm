@@ -33,7 +33,7 @@
             padding: 20px;
             background-color: #ffffff; /* Changed to white */
             align-self: center;
-            width: 70%; /* Set width to 70% */
+            width: 90%; /* Set width to 70% */
             margin: 0 auto; /* Center the content */
             height:110vh
         } 
@@ -183,30 +183,11 @@
     <!-- Main Content -->  
     <div class="main-content"><br>
 
-        <div class="welcome-message">  
-            <%  
-             
-
-                String adminusername = (String) session.getAttribute("ADMUSERNAME"); 
-                String adminID = (String) session.getAttribute("ADMNOIC");
-                if (adminusername != null) {  
-            %>  
-                Welcome to your dashboard, <%= adminusername %>!  
-            <%  
-                }else{
-            %><script>
-    
-    alert('Sila daftar dahulu!');
-    window.location.href = 'index.jsp';
-</script><%
-                }
-            %>  
-              
-        </div>  
-
         <!-- Tab Container -->  
         <div class="tab-container">  
             <%  
+                String adminusername = (String) session.getAttribute("ADMUSERNAME"); 
+                String adminID = (String) session.getAttribute("ADMNOIC");
                 if (adminusername != null) {  
             %>    
                <div class="tab" onclick="openTab('permohonan')"><i class="fas fa-user"></i> PERMOHONAN ZAKAT</div>  
@@ -271,7 +252,7 @@
                                 <% } else if (rs.getString("STATUS").equals("BELUM SELESAI")) { %>  
                                     <td class="border px-4 py-2 text-center status-pending"><%= rs.getString("STATUS") %></td>  
                                 <% } %>  
-                               <td class="border px-4 py-2">  
+                               <td class="border px-4 py-4 flex justify-center items-center space-x-2">  
                                     <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
                                     <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i></button>  
                                     <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i></button>  
@@ -279,7 +260,7 @@
                                     <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i></button>  
                                     <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-clock"></i></button>  
                                 </td>
-                                <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->
+                                <td class="border px-4 py-2 text-center w-48"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->
                             </form>  
                         </tr>               
                         <%  
@@ -351,15 +332,15 @@
                                     <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
                                     <td class="border px-4 py-2 status-approved text-center"><%= rs.getString("STATUS") %></td>  <!-- Assuming only 'BERJAYA' will be shown here -->  
                                     
-                                    <td class="border px-4 py-2">  
+                                    <td class="border px-4 py-4 flex justify-center items-center space-x-2">  
                                         <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
-                                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
-                                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
-                                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
-                                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button> <!-- New button for Waiting List -->  
+                                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i></button>  
+                                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i></button>  
+                                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-times"></i></button>  
+                                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i></button>  
+                                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-clock"></i></button> <!-- New button for Waiting List -->  
                                     </td>  
-                                    <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                                    <td class="border px-4 py-2 text-center w-64"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
                                 </form>  
                             </tr>  
                     <%  
@@ -440,15 +421,15 @@
                                     <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
                                     <td class="border px-4 py-2 status-rejected text-center"><%= rs.getString("STATUS") %></td>  
 
-                                    <td class="border px-4 py-2">  
+                                    <td class="border px-4 py-4 flex justify-center items-center space-x-2">  
                                         <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
-                                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
-                                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
-                                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
-                                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button>  
+                                        <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i></button>  
+                                        <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i></button>  
+                                        <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-times"></i></button>  
+                                        <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i></button>  
+                                        <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-clock"></i></button>  
                                     </td>  
-                                    <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                                    <td class="border px-4 py-2 text-center w-64"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
                                 </form>  
                             </tr>  
                     <%  
@@ -524,15 +505,15 @@
                                 <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
                                 <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>  
 
-                                <td class="border px-4 py-2">  
+                                <td class="border px-4 py-4 flex justify-center items-center space-x-2">  
                                     <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                                    <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
-                                    <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
-                                    <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
-                                    <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
-                                    <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button>  
+                                    <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i></button>  
+                                    <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i></button>  
+                                    <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-times"></i></button>  
+                                    <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i></button>  
+                                    <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-clock"></i></button>  
                                 </td>  
-                                <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                                <td class="border px-4 py-2 text-center w-64"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
                             </form>  
                         </tr>  
                     <%  
@@ -614,15 +595,15 @@
                                 <td class="border px-4 py-2 text-center"><%= rs.getString("ZAKATNAME") %></td>   
                                 <td class="border px-4 py-2 status-pending text-center"><%= rs.getString("STATUS") %></td>  
 
-                                <td class="border px-4 py-2">  
+                                <td class="border px-4 py-4 flex justify-center items-center space-x-2">  
                                     <input type="hidden" name="APPLYID" value='<%= rs.getString("APPLYID") %>' />  
-                                    <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>  
-                                    <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>  
-                                    <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>  
-                                    <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Buang</button>  
-                                    <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Belum Selesai</button>  
+                                    <button type="submit" name="action" value="success" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i></button>  
+                                    <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i></button>  
+                                    <button type="submit" name="action" value="reject" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-times"></i></button>  
+                                    <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i></button>  
+                                    <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-clock"></i></button>  
                                 </td>  
-                                <td class="border px-4 py-2 text-center"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
+                                <td class="border px-4 py-2 text-center w-64"><%= rs.getString("REASON") %></td> <!-- Displaying the reason -->  
                             </form>  
                         </tr>  
                     <%  
@@ -656,8 +637,7 @@
          
         
      
-    </div>  
-    <jsp:include page="Footer.jsp"></jsp:include>  
+    </div>
 </body>  
 
 

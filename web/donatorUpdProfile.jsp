@@ -63,7 +63,7 @@
                                     <input type="text" id="city" name="city" value="<%= city %>" class="w3-input w3-border w3-round-large" required>  
                                 </div>  
                                 <div class="w3-margin-top w3-center">  
-                                    <a href="donatorProfile.jsp" class="w3-button w3-border w3-border-purple w3-round-large">Kembali</a>  
+                                    <a href="donatorDashboard.jsp" class="w3-button w3-border w3-border-purple w3-round-large">Kembali</a>  
                                     <button type="submit" class="w3-button w3-purple w3-round-large">Simpan !</button>  
                                 </div>  
                             </form>  

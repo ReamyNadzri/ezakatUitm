@@ -44,7 +44,7 @@
 <%
     if(staff!=null) {
 %>
-  <!-- Bar utk admin -->
+  <!-- Bar utk staff -->
 <div style="background-color: #AF65C2">
   <div class="w3-bar w3-27374D" style="background-color: #AF65C2; font-weight: bold; margin:0 auto; width:80%;height:75px">
     <a href="dashboard.jsp" class="w3-bar-item w3-button" style="width:16.66%;height:auto">
@@ -55,7 +55,7 @@
       <div class="w3-left"><i class="fas fa-book w3-xlarge" style="padding: 10px 0px;;position:relative;right:-10px;top:10px;height:60px"></i></div><br>
       TENTANG</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4" >
-        <a href='viewapplication.jsp' class="w3-bar-item w3-button">PERMOHONAN</a>
+        <!--<a href='viewapplication.jsp' class="w3-bar-item w3-button">PERMOHONAN</a>-->
         <a href='viewdonation.jsp' class="w3-bar-item w3-button">SUMBANGAN</a>
         <!--<a href='viewstaff.jsp' class="w3-bar-item w3-button">KAKITANGAN</a>-->
         <a href='viewstudent.jsp' class="w3-bar-item w3-button">PELAJAR</a>
@@ -63,7 +63,17 @@
         <!--<a href='viewadmin.jsp' class="w3-bar-item w3-button">ADMIN</a>-->
       </div>
     </div>
-   
+      
+      <div class="w3-dropdown-hover" style="width: 16.66%;">  
+           <a href="viewapplication.jsp" style="width: 100%; text-decoration: none;">  
+               <button class="w3-button" style="width: 100%;">  
+                   <div class="w3-left">  
+                       <i class="fas fa-clipboard w3-xlarge" style="padding: 10px 0; position: relative; right: -5px; top: 10px; height: 60px;"></i>  
+                   </div><br>  
+                   PERMOHONAN TERKINI  
+               </button>  
+           </a>  
+       </div>  
 
 <!--    <div class="w3-dropdown-hover" style="width: 16.66%;">
       <button class="w3-button" style="width: 100%;">
@@ -78,6 +88,7 @@
           onclick="resizeText(-1)" />
       </div>
     </div>-->
+
     <a href='logoutAdminStaff' class="w3-bar-item w3-button w3-right" style="width: 16.66%;">
     <div class="w3-left"><i class="fas fa-lock w3-xlarge" style="padding: 10px 0px;position:relative;right:-30px;top:10px;height:60px"></i></div><br>
     LOG KELUAR</a>
@@ -86,7 +97,7 @@
   
   <%} else {%>
   
-  <!-- Bar utk staff -->
+  <!-- Bar utk admin -->
   <div style="background-color: #AF65C2">
   <div class="w3-bar w3-27374D" style="background-color: #AF65C2; font-weight: bold; margin:0 auto; width:80%;height:75px">
     <a href="dashboard.jsp" class="w3-bar-item w3-button" style="width:16.66%;height:auto">
@@ -120,7 +131,7 @@
            <a href="viewapplication.jsp" style="width: 100%; text-decoration: none;">  
                <button class="w3-button" style="width: 100%;">  
                    <div class="w3-left">  
-                       <i class="fas fa-file w3-xlarge" style="padding: 10px 0; position: relative; right: -10px; top: 10px; height: 60px;"></i>  
+                       <i class="fas fa-clipboard w3-xlarge" style="padding: 10px 0; position: relative; right: -5px; top: 10px; height: 60px;"></i>  
                    </div><br>  
                    PERMOHONAN TERKINI  
                </button>  

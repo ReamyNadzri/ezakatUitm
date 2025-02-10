@@ -252,19 +252,19 @@
                                 %>
                             <tr>  
                                 <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view this application?');">  
-                                <td class="border px-4 py-2"><%=rs.getString("APPLYID")%></td>  
-                                <td class="border px-4 py-2"><%=rs.getString("DESCRIPTION")%></td>  
-                                <td class="border px-4 py-2"><%=rs.getString("MATRICNO")%></td>  
-                                <td class="border px-4 py-2"><%=rs.getString("ZAKATNAME")%></td>   
+                                <td class="border px-4 py-2 text-center"><%=rs.getString("APPLYID")%></td>  
+                                <td class="border px-4 py-2 text-center"><%=rs.getString("DESCRIPTION")%></td>  
+                                <td class="border px-4 py-2 text-center"><%=rs.getString("MATRICNO")%></td>  
+                                <td class="border px-4 py-2 text-center"><%=rs.getString("ZAKATNAME")%></td>   
                                 <% if(rs.getString("STATUS").equals("BERJAYA")){%>
-                                    <td class="border px-4 py-2 status-approved"><%=rs.getString("STATUS")%></td>
+                                    <td class="border px-4 py-2 status-approved text-center"><%=rs.getString("STATUS")%></td>
                                     <%
                                     }else if(rs.getString("STATUS").equals("DISEMAK")){ %>
-                                    <td class="border px-4 py-2 status-pending"><%=rs.getString("STATUS")%></td> <%
+                                    <td class="border px-4 py-2 status-pending text-center"><%=rs.getString("STATUS")%></td> <%
                                     }else if(rs.getString("STATUS").equals("DITOLAK")){ %>
-                                    <td class="border px-4 py-2 status-rejected"><%=rs.getString("STATUS")%></td> <%
+                                    <td class="border px-4 py-2 status-rejected text-center"><%=rs.getString("STATUS")%></td> <%
                                     }%>
-                                <td class="border px-4 py-2"><%=rs.getString("REASON")%></td>
+                                <td class="border px-4 py-2 text-center"><%=rs.getString("REASON")%></td>
 
                                        
                                     </form>  
@@ -334,20 +334,20 @@
                                     %>
                                 <tr>  
                                     <form action="actionApplicationServlet" method="post" onsubmit="return confirm('Are you sure you want to view or delete this application?');">  
-                                    <td class="border px-4 py-2"><%=rs.getString("DONATEID")%></td>  
-                                    <td class="border px-4 py-2"><%=rs.getString("DONATIONDATE")%></td>  
-                                    <td class="border px-4 py-2"><%=rs.getString("NAME")%></td>  
-                                    <td class="border px-4 py-2"><%=rs.getString("BANKNAME")%></td>   
-                                    <td class="border px-4 py-2"><%=rs.getString("AMOUNT")%></td>   
+                                    <td class="border px-4 py-2 text-center"><%=rs.getString("DONATEID")%></td>  
+                                    <td class="border px-4 py-2 text-center"><%=rs.getString("DONATIONDATE")%></td>  
+                                    <td class="border px-4 py-2 text-center"><%=rs.getString("NAME")%></td>  
+                                    <td class="border px-4 py-2 text-center"><%=rs.getString("BANKNAME")%></td>   
+                                    <td class="border px-4 py-2 text-center"><%=rs.getString("AMOUNT")%></td>   
                                     <% if(rs.getString("DONATIONSTATUS").equals("BERJAYA")){%>
-                                        <td class="border px-4 py-2 status-approved"><%=rs.getString("DONATIONSTATUS")%></td>
+                                        <td class="border px-4 py-2 status-approved text-center"><%=rs.getString("DONATIONSTATUS")%></td>
                                         <%
                                         }else if(rs.getString("DONATIONSTATUS").equals("DISEMAK")){ %>
-                                        <td class="border px-4 py-2 status-pending"><%=rs.getString("DONATIONSTATUS")%></td> <%
+                                        <td class="border px-4 py-2 status-pending text-center"><%=rs.getString("DONATIONSTATUS")%></td> <%
                                         }else if(rs.getString("DONATIONSTATUS").equals("DITOLAK")){ %>
-                                        <td class="border px-4 py-2 status-rejected"><%=rs.getString("DONATIONSTATUS")%></td> <%
+                                        <td class="border px-4 py-2 status-rejected text-center"><%=rs.getString("DONATIONSTATUS")%></td> <%
                                         }%>
-                                    <td class="border px-4 py-2"><a href='Receipt.jsp'  name='action' class=' bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700'>Generate Receipt</a></td>  
+                                        <td class="border px-4 py-2 text-center"><a href='Receipt.jsp'  name='action' class=' bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700'><i class="fa-solid fa-file-invoice mr-2"></i>Cetak Resit</a></td>  
                                         </form>  
                                     
                                 </tr>

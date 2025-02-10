@@ -107,7 +107,7 @@
     </table>  
 
     <div class="mt-6 text-center">  
-        <a href="viewstudent.jsp" class="bg-purple-800 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Back to Student List</a>  
+        <a href="viewstudent.jsp" class="bg-purple-800 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700">Kembali</a>  
         <a href="viewDetailFamily.jsp?STUDENTID=<%= student != null ? student.getStudentId() : "" %>" class="bg-green-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 ml-4">Tentang Keluarga</a>  
     </div>  
 </div>  

@@ -52,7 +52,7 @@
                     <th class="py-2 px-4">Nama</th>  
                     <th class="py-2 px-4">Email</th>  
                     <th class="py-2 px-4">Kata Laluan</th> 
-                    <th class="py-2 px-4">Actions</th>  
+                    <th class="py-2 px-4">Tindakan</th>  
                 </tr>  
             </thead>  
             <tbody>  
@@ -70,9 +70,9 @@
                        <div class="flex space-x-2">  
                             <form action="actionStudentServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Student?');">  
                                 <input type="hidden" name="STUDENTID" value='<%= rs.getString("STUDENTID") %>' />  
-                                <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                                <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i> Delete</button>  
                             </form>  
-                            <a href="viewDetailStudent.jsp?STUDENTID=<%= rs.getString("STUDENTID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">View</a>  
+                            <a href="viewDetailStudent.jsp?STUDENTID=<%= rs.getString("STUDENTID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fa fa-eye"></i> View</a>  
                         </div>   
                     </td>  
                 </tr>  

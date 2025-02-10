@@ -200,7 +200,6 @@ try {
         <div class="card p-4">
             <h2 class="text-center mb-4">Permohonan Zakat Bagi Sesi OKT2024/FEB2025</h2>
             
-            <!-- Progress Steps -->
             <div class="d-flex justify-content-center align-items-center mb-5">
                 <div class="position-relative">
                     <div class="progress-step active" data-step="1">1
@@ -553,14 +552,14 @@ try {
                 <!-- Navigation Buttons -->
                 <div class="d-flex justify-content-between mt-4">
                     <button type="button" class="btn btn-outline-secondary" id="prevBtn" onclick="prevStep()">Previous</button>
-                    <button type="button" class="btn btn-success" id="nextBtn" onclick="nextStep()">Next</button>
+                    <button type="button" class="btn btn-success" style='' id="nextBtn" onclick="nextStep()">Next</button>
                 </div>
             </div>
         </div>
         </form>
     </div>
    
-        <div class="" style="margin-top: 3%">
+        <div class="" style="margin-top: 10%">
             <jsp:include page="Footer.jsp"></jsp:include>
         </div>
 

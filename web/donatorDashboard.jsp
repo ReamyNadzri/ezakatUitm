@@ -13,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>  
         div {  
             font-family: 'Product Sans', sans-serif;  
@@ -180,7 +181,7 @@
                         <td class="border px-4 py-2"><%= rs.getString("NOTE") %></td>  
                         <td class="border px-4 py-2 <%= statusClass %>"><%= status %></td>  
                         <td class="border px-4 py-2">  
-                            <a href="Receipt.jsp?donateId=<%= rs.getString("DONATEID") %>" class="text-blue-500 hover:underline">Lihat Resit</a>  
+                            <a href="Receipt.jsp?donateId=<%= rs.getString("DONATEID") %>" class="text-blue-500 hover:underline flex items-center gap-1"><i class="fa-solid fa-receipt"></i>Lihat Resit</a>  
                         </td>  
                     </tr>  
                     <%  

@@ -42,7 +42,7 @@
                     <th class="py-2 px-4">Bil.</th>  
                     <th class="py-2 px-4">Username</th>  
                     <th class="py-2 px-4">Nombor Telefon</th>  
-                    <th class="py-2 px-4">Actions</th>  
+                    <th class="py-2 px-4">Tindakan</th>  
                 </tr>  
             </thead>  
             <tbody>  
@@ -61,14 +61,12 @@
                     <td class="border px-4 py-2 text-center"><%= count++ %></td>  
                     <td class="border px-4 py-2 text-center"><%= rs.getString("USERNAME") %></td>  
                     <td class="border px-4 py-2 text-center"><%= rs.getString("PHONENUM") %></td>  
-                    <td class="border px-4 py-2">  
-                        <div class="flex space-x-2">  
+                    <td class="border px-4 py-2 flex justify-center items-center space-x-2"> 
                             <form action="actionAdminServlet" method="post" onsubmit="return confirm('Are you sure you want to delete this Admin?');">  
                                 <input type="hidden" name="ADMINID" value='<%= rs.getString("ADMINID") %>' />  
-                                <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Delete</button>  
+                                <button type="submit" name="action" value="delete" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-trash"></i> Delete</button>  
                             </form>  
-                            <a href="updateAdmin.jsp?ADMINID=<%= rs.getString("ADMINID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">Update</a>  
-                        </div>  
+                            <a href="updateAdmin.jsp?ADMINID=<%= rs.getString("ADMINID") %>" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700"><i class="fas fa-search"></i> Update</a> 
                     </td>  
                 </tr>  
                 <%  

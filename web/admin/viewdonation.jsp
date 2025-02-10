@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>-->
     <style>   
         .bg-custom {  
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
@@ -101,10 +101,10 @@
                     <td class="border px-4 py-2"> 
                             <form action="actionDonationServlet" method="post" onsubmit="return confirm('Are you sure you want to make changes for this donation?');">
                                 <input type="hidden" name="DONATEID" value='<%= rs.getString("DONATEID") %>' />
-                                <button type="submit" name="action" value="lulus" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700">Lulus</button>
-                                <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700">Semak</button>
-                                <button type="submit" name="action" value="batal" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700">Batal</button>
-                                <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-500">Buang</button>
+                                <button type="submit" name="action" value="lulus" class="bg-green-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-green-700"><i class="fas fa-check"></i> Lulus</button>
+                                <button type="submit" name="action" value="semak" class="bg-yellow-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-yellow-700"><i class="fas fa-search"></i> Semak</button>
+                                <button type="submit" name="action" value="batal" class="bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-700"><i class="fas fa-times"></i> Batal</button>
+                                <button type="submit" name="action" value="delete" class="w3-right bg-red-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-red-500"><i class="fas fa-trash"></i> Buang</button>
                             </form>
                     </td>
                 </tr>
@@ -152,7 +152,7 @@
                         out.print(String.format("%.2f",totalZakat));
                     %>
                 </span>
-                .00
+                
             </h1>  
         </div>
     </div>
@@ -168,7 +168,8 @@
     $(document).ready(function(){
         $('.counter').counterUp({
             delay: 10,
-            time: 1000
+            time: 1000,
+            once: true
         });
     });
 </script>

@@ -108,7 +108,7 @@
 
         <!-- Button -->
         <div class="w3-center w3-margin-top w3-margin-bottom">
-            <a href="index.jsp" class="w3-button w3-dark-grey w3-round-large">Kembali</a>
+            <button type="button" onclick="window.history.back();" class="w3-button w3-dark-grey w3-round-large">Kembali</button>
             <button class="w3-button w3-purple w3-round-large" onclick="printPage()">Cetak</button>
         </div>
     </div>

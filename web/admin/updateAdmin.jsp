@@ -18,10 +18,10 @@
             background: linear-gradient(to bottom right, #6a0dad, #4b0082);  
         } 
 </style>
-<body class="bg-gray-100">  
+<body class="">  
 
-<div class="bg-purple-800 shadow-lg rounded-lg p-8">  
-    <h2 class="text-4xl font-bold text-center mb-6 text-black">Update Admin Details</h2>  
+<div class="container mx-auto shadow-lg rounded-lg p-6 mt-10" style="background: #7C3AED;">  
+    <h2 class="text-4xl font-bold text-center mb-6 text-white">Kemaskini Info Admin</h2>  
 
     <%  
         int adminId = Integer.parseInt(request.getParameter("ADMINID")); // Get the admin ID from the request  
@@ -43,20 +43,20 @@
         <input type="hidden" name="ADMINID" value="<%= rs.getInt("ADMINID") %>">  
 
         <div class="mb-4">  
-            <label class="block text-gray-700">Username:</label>  
+            <label class="block text-gray-700 mb-2"><b>Username:</b></label>  
             <input type="text" name="username" value="<%= rs.getString("USERNAME") %>" required class="border rounded w-full py-2 px-3">  
         </div>  
         <div class="mb-4">  
-            <label class="block text-gray-700">Phone Number:</label>  
+            <label class="block text-gray-700 mb-2"><b>Phone Number:</b></label>  
             <input type="text" name="phoneNum" value="<%= rs.getString("PHONENUM") %>" required class="border rounded w-full py-2 px-3">  
         </div>  
         <div class="mb-4">  
-            <label class="block text-gray-700">Password:</label>  
+            <label class="block text-gray-700 mb-2"><b>Password:</b></label>  
             <input type="password" name="password" required class="border rounded w-full py-2 px-3">  
         </div>  
-        <button type="submit" class="bg-blue-500 text-white rounded py-2 px-4">Update Admin</button>  
-        <a href="viewadmin.jsp" class="ml-4 text-blue-500">Cancel</a>  
-    </form>  
+        <button type="submit" class="bg-purple-600 text-white rounded py-2 px-4 transition hover:bg-purple-500">Kemaskini Admin</button>  
+        <a href="viewadmin.jsp" class="ml-6 px-4 py-2 text-purple-600 border border-purple-600 rounded transition hover:text-black">Cancel</a>  
+    </form>
     <%  
             } else {  
                 out.println("<p>Admin not found!</p>");  

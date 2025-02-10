@@ -119,7 +119,7 @@
                             Buang <i class="fas fa-trash"></i>
                         </button>  
                         <button type="submit" name="action" value="waiting" class="bg-blue-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-700">
-                            Belum Selesai <i class="fas fa-times"></i>
+                            Belum Selesai <i class="fas fa-clock"></i>
                         </button>
                     </form>  
                 </td>  
