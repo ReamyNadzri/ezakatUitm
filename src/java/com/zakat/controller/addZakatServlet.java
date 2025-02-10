@@ -161,7 +161,7 @@ public class addZakatServlet extends HttpServlet {
                             if (Double.parseDouble(currentCgpa) < 3.0) {
                                 statusAPP = "DITOLAK";
                                 reasonAPP = "CGPA tidak melepasi tahap minimum";
-                            } else if (salaryAll > 3000) {
+                            } else if (salaryAll > 4000) {
                                 statusAPP = "DITOLAK";
                                 reasonAPP = "Pendapatan melebihi had";
                             } else if (Integer.parseInt(currentSemester) > 7) {
