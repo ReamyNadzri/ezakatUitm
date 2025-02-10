@@ -147,7 +147,9 @@
                         <br>No. Matrik &emsp;&emsp;  <!--studentID-->
                         <br>Nama
                         <br>Email
-                        <br>Kampus
+                        <br>Kampus<br>
+                        <a href="viewDetailStudent.jsp?STUDENTID=${STUDENTID}">Maklumat Pelajar</a><br>
+                        <a href="viewDetailFamily.jsp?STUDENTID=${STUDENTID}">Maklumat Keluarga</a>
                         <hr><!-- maklumat pelajar -->
                         CGPA Terkini
                         <br>GPA Terkini
@@ -165,7 +167,7 @@
                         <br>&emsp;:&emsp; ${MATRICNO}
                         <br>&emsp;:&emsp; ${NAME}
                         <br>&emsp;:&emsp; ${EMAIL}
-                        <br>&emsp;:&emsp; ${CAMPUS}
+                        <br>&emsp;:&emsp; ${CAMPUS}<br><br><br>
                         <hr><!-- maklumat pelajar -->
                         &emsp;:&emsp; ${CGPA}
                         <br>&emsp;:&emsp; ${GPA}
