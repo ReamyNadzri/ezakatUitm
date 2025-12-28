@@ -12,9 +12,9 @@ import java.sql.Statement;
 
 
 public class DBConnection {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String URL = "jdbc:oracle:thin:@zakatdb:1521:xe";
     private static final String USER = "zakatdb";
-    private static final String PASSWORD = "zakatdb";
+    private static final String PASSWORD = "zakat123";
 
     // Kaedah untuk mendapatkan sambungan
     public static Connection getConnection() throws SQLException {

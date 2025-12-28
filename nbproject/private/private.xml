@@ -5,10 +5,8 @@
         <group>
             <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/permohonanDash.jsp</file>
             <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/addZakatServlet.java</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/viewDetailApplication.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/viewDetailStudent.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/error.jsp</file>
-            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/controller/actionApplicationServlet.java</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/WEB-INF/glassfish-web.xml</file>
+            <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/src/java/com/zakat/model/DBConnection.java</file>
             <file>file:/C:/Users/rahim/Documents/NetBeansProjects/ezakatUitm/web/admin/viewDetailFamily.jsp</file>
         </group>
     </open-files>
